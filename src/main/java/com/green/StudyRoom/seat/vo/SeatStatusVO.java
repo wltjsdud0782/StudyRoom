@@ -7,11 +7,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class SeatVO {
-    private int seatNum;
-    private String seatPower;
-    private int seatFloor;
-    private int memberCode;
+public class SeatStatusVO {
     private int statusNum;
-    private int ageCode;
+    private String statusName;
+
 }
