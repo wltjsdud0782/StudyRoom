@@ -12,4 +12,5 @@ public class ChargeVO {
     private int chargeCode;
     private int chargeFee;
     private String chargeDate;
+    private String chargeName;
 }

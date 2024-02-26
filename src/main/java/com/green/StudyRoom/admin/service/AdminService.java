@@ -6,4 +6,7 @@ public interface AdminService {
 
     //유저 메세지 저장
     void insertMessage(MessageVO messageVO);
+
+    //유저 메세지 보여주기
+    void selectMessage();
 }
