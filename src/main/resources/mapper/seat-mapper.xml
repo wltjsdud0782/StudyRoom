@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="seatMapper">
+    <resultMap id="seat" type="com.green.StudyRoom.seat.vo.SeatVO">
+        <id     column="SEAT_NUM"       property="seatNum"/>
+        <result column="SEAT_POWER"     property="seatPower"/>
+        <result column="SEAT_FLOOR"     property="seatFloor"/>
+        <result column="MEMBER_CODE"    property="memberCode"/>
+        <result column="STATUS_NUM"     property="statusNum"/>
+        <result column="AGE_CODE"       property="ageCode"/>
+    </resultMap>
+
+    <resultMap id="seatStatus" type="com.green.StudyRoom.seat.vo.SeatStatusVO">
+        <id     column="STATUS_NUM"     property="statusNum"/>
+        <result column="STATUS_NAME"    property="statusName"/>
+    </resultMap>
+
+    <resultMap id="floorAge" type="com.green.StudyRoom.seat.vo.FloorAgeVO">
+        <id     column="AGE_CODE" property="ageCode"/>
+        <result column="AGE_NAME" property="ageName"/>
+    </resultMap>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
