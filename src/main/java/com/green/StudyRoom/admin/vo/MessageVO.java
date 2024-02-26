@@ -13,4 +13,9 @@ public class MessageVO {
     private String messageContent;
     private String messageDate;
 
+    //FK
+    private int memberCode;
+    private int seatNum;
+
+
 }
