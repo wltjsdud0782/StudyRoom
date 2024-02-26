@@ -1,7 +1,6 @@
 package com.green.StudyRoom.admin.controller;
 
-import com.green.StudyRoom.admin.service.MessageService;
-import com.green.StudyRoom.admin.service.MessageServiceImpl;
+import com.green.StudyRoom.admin.service.AdminServiceImpl;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     @Resource(name="messageService")
-    private MessageServiceImpl messageService;
+    private AdminServiceImpl messageService;
 
     // ////////////////////////////////////////////////////// //
 }
