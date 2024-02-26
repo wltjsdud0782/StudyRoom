@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Resource(name="messageService")
-    private AdminServiceImpl messageService;
+    @Resource(name="adminService")
+    private AdminServiceImpl adminService;
+
+    // ////////////////////////////////////////////////////// //
+
+
+
 
     // ////////////////////////////////////////////////////// //
 }
