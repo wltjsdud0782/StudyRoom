@@ -14,6 +14,6 @@ public class SeatController {
 
     @GetMapping("/seatLive")
     public String seatLive(){
-        return "content/seat_live";
+        return "content/seat/seat_live";
     }
 }
