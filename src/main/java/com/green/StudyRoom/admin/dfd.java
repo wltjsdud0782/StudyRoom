@@ -1,2 +1,4 @@
-package com.green.StudyRoom.admin;public class dfd {
+package com.green.StudyRoom.admin;
+
+public class dfd {
 }
