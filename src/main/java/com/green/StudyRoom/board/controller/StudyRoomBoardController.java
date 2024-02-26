@@ -9,7 +9,7 @@ public class StudyRoomBoardController {
     @GetMapping("/")
     public String StudyRoomBoard(){
 
-        return "main_layout.html" +
-                "";
+        return "main_layout";
+
     }
 }
