@@ -22,4 +22,8 @@ public class AdminServiceImpl implements AdminService {
     public void selectMessage() {
         sqlSession.selectList("adminMapper.selectMessage");
     }
+
+    //요금제 설정하기
+
+    //만든 요금제 보여주기
 }

@@ -9,4 +9,8 @@ public interface AdminService {
 
     //유저 메세지 보여주기
     void selectMessage();
+
+    //요금제 설정하기
+
+    //만든 요금제 보여주기
 }
