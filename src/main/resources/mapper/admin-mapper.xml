@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="adminMapper">
+
+    <!-- message(이용자메세지) -->
+    <resultMap id="message" type="com.green.StudyRoom.admin.vo.MessageVO">
+        <id column="MESSAGE_CODE" property="messageCode"/>
+        <result column="MESSAGE_CONTENT" property="messageContent"/>
+        <result column="MESSAGE_DATE" property="messageDate"/>
+    </resultMap>
+
+    <!-- charge(요금) -->
+    <resultMap id="charge" type="com.green.StudyRoom.admin.vo.ChargeVO">
+        <id column="CHARGE_CODE" property="chargeCode"/>
+        <result column="CHARGE_FEE" property="chargeFee"/>
+        <result column="CHARGE_DATE" property="chargeDate"/>
+    </resultMap>
+
+    <insert id="insertMessage">
+        INSERT INTO STUDYROOM_MESSAGE (
+        MESSAGE_CONTENT
+        , MEMBER_CODE
+        , SEAT_NUM
+        ) VALUES (
+        #{messageContent}
+        , #{memberCode}
+        , #{seatNum}
+        )
+    </insert>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
