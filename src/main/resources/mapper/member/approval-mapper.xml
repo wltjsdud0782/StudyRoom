@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="approvalMapper">
+    <resultMap id="approval" type="com.green.StudyRoom.member.vo.ApprovalVO">
+        <id column="APPROVAL_CODE" property="approvalCode"/>
+        <result column="MEMBER_CODE" property="memberCode"/>
+        <result column="CARD" property="card"/>
+    </resultMap>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
