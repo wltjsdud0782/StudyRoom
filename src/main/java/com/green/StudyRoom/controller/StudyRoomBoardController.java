@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class StudyRoomBoardController {
 
-    @GetMapping("/")
+    @GetMapping("/main")
     public String StudyRoomBoard(){
 
-        return "main_layout.html" +
-                "";
+        return "content/2_content";
     }
 }
