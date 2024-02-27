@@ -2,18 +2,27 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="menuFragment">
-    <div class="menu">
-      <ul>
-        <li><a href="#">홈</a></li>
-        <li><a href="#">매장소개</a></li>
-        <li><a href="#">좌석예약</a></li>
-        <li><a href="#">리뷰</a></li>
-        <li><a href="#">문의</a></li>
-        <li><a href="#">오시는길</a></li>
-        <li style="margin-left: 470px;"><a href="#">회원가입</a></li>
-        <li><a href="#">로그인</a></li>
-      </ul>
+    <div class="row">
+      <div class="col menu">
+        <ul>
+          <li style="margin-right: 20px; 
+                     border-right: 1px solid #ccc; 
+                     padding: 10px 30px">
+                     <span>그린독서실</span>
+          </li>
+          <li><a onclick="location.href='/board/mainHomepage'">홈</a></li>
+          <li><a href="#">매장소개</a></li>
+          <li><a onclick="location.href='/seat/seatLive'">좌석예약</a></li>
+          <li><a href="#">리뷰</a></li>
+          <li><a onclick="location.href='/board/inquiry'">문의</a></li>
+          <li><a href="#">오시는길</a></li>
+          <li style="margin-left: 350px;"><a href="#">회원가입</a></li>
+          <li><a href="#">로그인</a></li>
+        </ul>
+      </div>
     </div>
+
+    
 </th:block>
 
-</html>
+</html> 

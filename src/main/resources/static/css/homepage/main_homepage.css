@@ -1,0 +1,27 @@
+.mainContainer {
+    height: 800px;
+    position: relative;
+}
+.subMain {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -30%);
+    text-align: center;
+}
+.navText{
+    width: 600px;
+    font-size: 30px;
+    font-weight: lighter;
+    padding: 20px 20px;
+    border-bottom: 1px solid #ccc ;
+}
+.mainText {
+    /* width: 1200px; */
+    margin-top: 50px;
+    font-size: 70px;
+}
+.footerText {
+    margin-top: 20px;
+    font-size: 24px;
+}

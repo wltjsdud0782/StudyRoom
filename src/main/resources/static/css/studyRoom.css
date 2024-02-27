@@ -19,7 +19,7 @@ a {
     padding: 0;
 }
 .menu {
-    width: 1200px;
+ 
     border-bottom: 1px solid #ccc;
 }
 .menu > ul {
@@ -30,8 +30,12 @@ a {
 .menu > ul > li {
     padding: 10px;
 }
+.menu > ul > li > span {
+    font-size: 20px;
+}
 .menu > ul > li > a {
-    padding: 10px;
+    margin-top: 10px;
+    padding: 11px;
 }
 .menu > ul > li > a:hover {
     border-bottom: 1px solid #000;
