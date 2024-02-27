@@ -39,7 +39,43 @@
         <result column="MEMBER_CODE" property="memberCode"/>
         <result column="IN_OUT" property="InOut"/>
     </resultMap>
+
+<!-- 회원 가입 -->
+    <insert id="joinInsert">
+        INSERT INTO STUDYROOM_MEMBER(
+            MEMBER_CODE
+            , MEMBER_ID
+            , MEMBER_PW
+            , MEMBER_NAME
+            , MEMBER_TEL
+            , MEMBER_BIRTH
+            , MEMBER_ADDR
+            , MEMBER_DETAIL
+            , MEMBER_GENDER
+        ) VALUES (
+            #{memberCode}
+            , #{memberId}
+            , #{memberPw}
+            , #{memberName}
+            , #{memberTel}
+            , #{memberBirth}
+            , #{memberAddr}
+            , #{memberDetail}
+            , #{memberGender}
+        );
+    </insert>
+
+    <select id="login" resultMap="member">
+        SELECT
+            MEMBER_CODE
+            , MEMBER_ID
+            , MEMBER_PW
+        FROM STUDYROOM_MEMBER
+        WHERE MEMBER_ID=#{memberId}
+        AND MEMBER_PW=#{memberPw}
+    </select>
 </mapper>
+
 
 
 
