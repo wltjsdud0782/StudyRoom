@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="memberMapper">
+<!-- 회원가입     -->
+	<resultMap id="member" type="com.green.StudyRoom.member.vo.MemberVO">
+        <id column="MEMBER_CODE" property="memberCode"/>
+        <result column="MEMBER_ID" property="memberId"/>
+        <result column="MEMBER_PW" property="memberPw"/>
+        <result column="MEMBER_NAME" property="memberName"/>
+        <result column="MEMBER_TEL" property="memberTel"/>
+        <result column="MEMBER_BIRTH" property="memberBirth"/>
+        <result column="MEMBER_ADDR" property="memberAddr"/>
+        <result column="MEMBER_DETAIL" property="memberDetail"/>
+        <result column="MEMBER_GENDER" property="memberGender"/>
+        <result column="IS_ADMIN" property="isAdmin"/>
+    </resultMap>
+
+<!-- 결재 -->
+    <resultMap id="approval" type="com.green.StudyRoom.member.vo.ApprovalVO">
+        <id column="APPROVAL_CODE" property="approvalCode"/>
+        <result column="MEMBER_CODE" property="memberCode"/>
+        <result column="CARD" property="card"/>
+    </resultMap>
+
+<!--  예약      -->
+    <resultMap id="reservation" type="com.green.StudyRoom.member.vo.ReservationVO">
+        <id column="RESERVATION_CODE" property="reservationCode"/>
+        <result column="MEMBER_CODE" property="memberCode"/>
+        <result column="SEAT_NUM" property="seat_num"/>
+        <result column="RESERVATION_DATE" property="ReservationDate"/>
+        <result column="IS_RESERVATION" property="isReservation"/>
+    </resultMap>
+
+<!--  입실, 퇴실      -->
+    <resultMap id="studyRoomInOut" type="com.green.StudyRoom.member.vo.StudyRoomInOutVO">
+        <id column="DAY_INPUT" property="dayInput"/>
+        <result column="MEMBER_CODE" property="memberCode"/>
+        <result column="IN_OUT" property="InOut"/>
+    </resultMap>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
