@@ -5,7 +5,7 @@
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴 때 같이 실행되는 css -->
-    <!-- <link rel="stylesheet" href="/"> -->
+    <link rel="stylesheet" href="/css/seat/seat_live.css">
 </th:block>
 
 <th:block layout:fragment="contentFragment">
@@ -13,7 +13,7 @@
     <div class="container text-center">
         실시간 좌석 확인 html
         <div class="floorBtn mt-3">
-            <div class="row">
+            <div class="row mb-4">
                 <div class="col">
                     <button type="button" class="btn btn-light">1층</button>
                     <button type="button" class="btn btn-light">2층</button>
@@ -23,14 +23,45 @@
             
         <div class="seatLive">
             <div class="row">
-                <div class="col">
-                    
+                <div class="col-2">
+                    <div class="rest">
+                        <p>
+                            휴
+                        </p>
+                        <p>
+                            게
+                        </p>
+                        <p>
+                            실
+                        </p>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="row">
+                        <div class="offset-1 col-5 room up-room">
+                            <div>
+                            제 1열람실
+                            </div>
+                        </div>
+                        <div class="offset-1 col-5 room up-room">
+                            <div>
+                                제 2열람실
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-1 col room down-room">
+                                <div>
+                                    제 3열람실
+                                </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
         </div>
 
-        <div class="reservationBtn mt-3">
+        <div class="reservationBtn mt-4">
             <div class="row">
                 <div class="col">
                     <button type="button" class="btn btn-danger">예약하기</button>

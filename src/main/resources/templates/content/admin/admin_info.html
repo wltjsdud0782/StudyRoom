@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/admin/admin_layout}">
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴 때 같이 실행되는 css -->
+    <!-- <link rel="stylesheet" href="/"> -->
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+
+    <body>
+        <div class="adminContainer" style="padding: 2vh;">
+            <div>
+                <h2>회원 관리</h2>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table style="width: 90%; 
+                                    border: 1px solid black;">
+                        <tr>
+                            <td>
+                                <div class="row mb-3">
+                                    <div class="col-4">
+                                        ID<input type="text">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row mb-3">
+                                    <div class="col-4">
+                                        이름<input type="text">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row mb-3">
+                                    <div class="col-4">
+                                        성별<input type="text">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row mb-3">
+                                    <div class="col-3">
+                                        전화번호<input type="text">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row mb-3">
+                                    <div class="col-3">
+                                        주소<input type="text">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row mb-3">
+                                    <div class="col-3">
+                                        권한<input type="text">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</th:block>
+
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴 때 같이 실행되는 js -->
+    <!-- <script src="/"></script> -->
+</th:block>
+
+</html>

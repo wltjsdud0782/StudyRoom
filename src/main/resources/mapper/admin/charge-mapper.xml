@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="chargeMapper">
+
     <!-- charge(요금) -->
     <resultMap id="charge" type="com.green.StudyRoom.admin.vo.ChargeVO">
         <id column="CHARGE_CODE" property="chargeCode"/>
