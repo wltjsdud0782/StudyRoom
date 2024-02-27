@@ -1,0 +1,13 @@
+.inquiry_title{
+    margin-top: 150px;
+    margin-bottom:30px;
+    border-bottom:1px solid #ccc ;
+    width: 100%;
+    height: 30px;
+}
+.inquiry_title h3 {
+    margin-left: 50px;
+}
+.inquiry_table {
+    margin-top: 40px;
+}
