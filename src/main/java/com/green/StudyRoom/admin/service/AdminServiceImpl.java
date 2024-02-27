@@ -14,13 +14,13 @@ public class AdminServiceImpl implements AdminService {
     //유저 메세지 저장
     @Override
     public void insertMessage(MessageVO messageVO) {
-        sqlSession.insert("adminMapper.insertMessage", messageVO);
+        sqlSession.insert("messageMapper.insertMessage", messageVO);
     }
 
     //유저 메세지 보여주기
     @Override
     public void selectMessage() {
-        sqlSession.selectList("adminMapper.selectMessage");
+        sqlSession.selectList("messageMapper.selectMessage");
     }
 
     //요금제 설정하기

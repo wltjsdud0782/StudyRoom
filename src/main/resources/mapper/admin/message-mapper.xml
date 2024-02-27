@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 해당 파일에 모든 쿼리문을 작성 -->
-<mapper namespace="adminMapper">
+<mapper namespace="messageMapper">
 
-    <!-- message(이용자메세지) -->
+    <!-- message(이용자 메세지) -->
     <!-- SELECT에서 MEMBER_CODE로 여러개 INNER JOIN -->
     <!-- FK 오류 안나는지 확인하기 -->
     <resultMap id="message" type="com.green.StudyRoom.admin.vo.MessageVO">
@@ -13,14 +12,6 @@
         <result column="MESSAGE_DATE" property="messageDate"/>
         <result column="MEMBER_CODE" property="memberCode"/>
         <result column="SEAT_NUM" property="seatNum"/>
-    </resultMap>
-
-    <!-- charge(요금) -->
-    <resultMap id="charge" type="com.green.StudyRoom.admin.vo.ChargeVO">
-        <id column="CHARGE_CODE" property="chargeCode"/>
-        <result column="CHARGE_FEE" property="chargeFee"/>
-        <result column="CHARGE_DATE" property="chargeDate"/>
-        <result column="CHARGE_NAME" property="chargeName"/>
     </resultMap>
 
     <!-- 사용자 메세지 IN -->
@@ -53,32 +44,7 @@
         ON MESSAGE.MEMBER_CODE = MEMBER.MEMBER_CODE
     </select>
 
-    <!-- 요금 IN -->
-    <!-- 설정할 요금제의 이름 -->
-    <!-- 설정할 요금제의 금액 -->
-    <!-- 설정할 요금제의 지정시간 -->
-    <insert id="insertCharge">
-        INSERT INTO STUDYROOM_CHARGE (
-            CHARGE_NAME
-            , CHARGE_FEE
-            , CHARGE_DATE
-        ) VALUES (
-            #{chargeName}
-            , #{chargeFee}
-            , #{chargeDate}
-        )
-    </insert>
 
-    <!-- 요금 OUT -->
-    <!-- 설정된 요금제의 이름 -->
-    <!-- 설정된 요금제의 금액 -->
-    <!-- 설정된 요금제의 지정시간 -->
-    <select id="selectCharge" resultMap="charge">
-        SELECT CHARGE_NAME
-                , CHARGE_FEE
-                , CHARGE_DATE
-        FROM STUDYROOM_CHARGE
-    </select>
 
 
 </mapper>
