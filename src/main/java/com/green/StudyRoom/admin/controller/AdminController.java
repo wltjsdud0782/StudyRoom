@@ -21,16 +21,16 @@ public class AdminController {
 //    private SeatServiceImpl seatService;
 
     //(1)////////////////////////////////////////////////////// //
-    @GetMapping("/message")
+    @GetMapping("/msg")
     public String adminMessage(){
-        return "content/admin_message_content";
+        return "content/admin/admin_message_content";
     }
 
-    @PostMapping("/sendMessage")
+    @PostMapping("/sendMsg")
     public String sendMessage(MessageVO messageVO){
         adminService.insertMessage(messageVO);
         System.out.println(messageVO);
-        return "redirect:/admin/message";
+        return "redirect:/admin/msg";
     }
     // ////////////////////////////////////////////////////// //
 }
