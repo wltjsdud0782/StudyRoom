@@ -1,6 +1,12 @@
 .seatLive {
     margin: 0 auto;
-    width: 90%;
+    width: 100%;
+}
+
+.seat-title {
+    text-align: start;
+    font-size: 23pt;
+    margin-left: 60px;
 }
 
 .rest {
@@ -19,4 +25,11 @@
 .down-room {
     height: 280px;
     margin-top: 40px;
+}
+
+.one-seat {
+    border: 1px solid black;
+    margin: 2px auto;
+    width: 105px;
+    height: 90px;
 }
