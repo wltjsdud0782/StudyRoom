@@ -11,63 +11,98 @@
 <th:block layout:fragment="contentFragment">
     
     <div class="container text-center">
-        실시간 좌석 확인 html
-        <div class="floorBtn mt-3">
-            <div class="row mb-4">
-                <div class="col">
-                    <button type="button" class="btn btn-light">1층</button>
-                    <button type="button" class="btn btn-light">2층</button>
-                </div>
-            </div>
-        </div>
-            
-        <div class="seatLive">
-            <div class="row">
-                <div class="col-2">
-                    <div class="rest">
-                        <p>
-                            휴
-                        </p>
-                        <p>
-                            게
-                        </p>
-                        <p>
-                            실
-                        </p>
+        <div class="row">
+            <div class="col">
+                
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="seat-title">실시간 좌석 예약</div>
                     </div>
                 </div>
-                <div class="col-10">
-                    <div class="row">
-                        <div class="offset-1 col-5 room up-room">
-                            <div>
-                            제 1열람실
-                            </div>
-                        </div>
-                        <div class="offset-1 col-5 room up-room">
-                            <div>
-                                제 2열람실
-                            </div>
+                
+                <div class="floorBtn">
+                    <div class="row mb-4">
+                        <div class="col">
+                            <button type="button" class="btn btn-light">1층</button>
+                            <button type="button" class="btn btn-light" onclick="twofloor()">2층</button>
                         </div>
                     </div>
+                </div>
+                    
+                <div class="seatLive">
                     <div class="row">
-                        <div class="offset-1 col room down-room">
-                                <div>
-                                    제 3열람실
+                        <div class="col-2">
+                            <div class="rest">
+                                <p>
+                                    휴
+                                </p>
+                                <p>
+                                    게
+                                </p>
+                                <p>
+                                    실
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="offset-1 col-5 room up-room">
+                                    <div>
+                                    제 1열람실
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3 one-seat">1</div>
+                                        <div class="col-3 one-seat">2</div>
+                                        <div class="col-3 one-seat">3</div>
+                                        <div class="col-3 one-seat">4</div>
+                                    </div>
+                                    <div class="row mt-5">
+                                        <div class="col-3 one-seat">5</div>
+                                        <div class="col-3 one-seat">6</div>
+                                        <div class="col-3 one-seat">7</div>
+                                        <div class="col-3"></div>
+                                    </div>
                                 </div>
+                                <div class="offset-1 col-5 room up-room">
+                                    <div>
+                                        제 2열람실
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3 one-seat">8</div>
+                                        <div class="col-3 one-seat">9</div>
+                                        <div class="col-3 one-seat">10</div>
+                                        <div class="col-3 one-seat">11</div>
+                                    </div>
+                                    <div class="row mt-5">
+                                        <div class="col-3"></div>
+                                        <div class="col-3 one-seat">12</div>
+                                        <div class="col-3 one-seat">13</div>
+                                        <div class="col-3 one-seat">14</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="offset-1 col room down-room">
+                                        <div>
+                                            제 3열람실
+                                        </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-
-        <div class="reservationBtn mt-4">
-            <div class="row">
-                <div class="col">
-                    <button type="button" class="btn btn-danger">예약하기</button>
+                <div class="reservationBtn mt-4">
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-danger">예약하기</button>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
+
     </div>
 
 </th:block>
@@ -75,6 +110,6 @@
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
-    <!-- <script src="/"></script> -->
+    <script src="/js/seat/seat_live.js"></script>
 </th:block>
 </html>
