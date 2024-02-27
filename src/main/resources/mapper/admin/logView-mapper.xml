@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="logMapper">
+
+    <!-- LOG(로그) 조회하기 -->
+    <!-- 사용자 이름, 사용자 이용시간(시작, 종료, 사용시간), 결제내역, 좌석번호, 예약정보, 메세지 -->
+	<resultMap id="logView" type="com.green.StudyRoom.admin.vo.LogViewVO">
+        <result column="MEMBER_CODE" property="memberCode"/>
+        <result column="MEMBER_NAME" property="memberName"/>
+        <result column="RESERVATION_CODE" property="reservationCode"/>
+        <result column="RESERVATION_DATE" property="reservationDate"/>
+        <result column="IS_RESERVATION" property="isReservation"/>
+        <result column="APPROVAL_CODE" property="approvalCode"/>
+        <result column="DAY_INPUT" property="dayInput"/>
+        <result column="IN_OUT" property="inOut"/>
+        <result column="SEAT_CODE" property="seatCode"/>
+        <result column="SEAT_POWER" property="seatPower"/>
+        <result column="SEAT_FLOOR" property="seatFloor"/>
+        <result column="MESSAGE_CODE" property="messageCode"/>
+        <result column="MESSAGE_CONTENT" property="messageContent"/>
+        <result column="MESSAGE_DATE" property="messageDate"/>
+    </resultMap>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
