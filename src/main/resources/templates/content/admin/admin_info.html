@@ -4,7 +4,7 @@
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴 때 같이 실행되는 css -->
-    <!-- <link rel="stylesheet" href="/"> -->
+    <link rel="stylesheet" href="/css/admin/admin.css">
 </th:block>
 
 <th:block layout:fragment="contentFragment">
@@ -13,30 +13,50 @@
         <div class="adminContainer" style="padding: 2vh;">
             <div>
                 <h2>회원 관리</h2>
+                <div style="padding: 1vh;"></div>
             </div>
             <div class="row">
                 <div class="col">
-                    <table style="width: 90%; 
-                                    border: 1px solid black;">
+                    <table class="adminContainer-table">
+                        <colgroup>
+                            <col width="33%">
+                            <col width="33%">
+                            <col width="*">
+                        </colgroup>
                         <tr>
                             <td>
                                 <div class="row mb-3">
-                                    <div class="col-4">
-                                        ID<input type="text">
+                                    <div class="col">
+                                        &ensp;아이디 : NONE
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="row mb-3">
-                                    <div class="col-4">
-                                        이름<input type="text">
+                                    <div class="col">
+                                        &ensp;이름 : NONE
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="row mb-3">
-                                    <div class="col-4">
-                                        성별<input type="text">
+                                    <div class="col">
+                                        &ensp;성별 : NONE
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        &ensp;전화번호 : NONE
+                                    </div>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        &ensp;주소 : NONE
                                     </div>
                                 </div>
                             </td>
@@ -44,22 +64,29 @@
                         <tr>
                             <td>
                                 <div class="row mb-3">
-                                    <div class="col-3">
-                                        전화번호<input type="text">
+                                    <div class="col">
+                                        &ensp;권한 : NONE
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="row mb-3">
-                                    <div class="col-3">
-                                        주소<input type="text">
+                                    <div class="col">
+                                        &ensp;권한 변경
+                                        <select>
+                                            <option value="USER">USER</option>
+                                            <option value="ARBEIT">ARBEIT</option>
+                                            <option value="ADMIN">ADMIN</option>
+                                        </select>
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="row mb-3">
-                                    <div class="col-3">
-                                        권한<input type="text">
+                                    <div class="col">
+                                        <div class="btn d-grid">
+                                            <button type="button">변경</button>
+                                        </div>
                                     </div>
                                 </div>
                             </td>

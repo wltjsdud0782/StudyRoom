@@ -4,51 +4,76 @@
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴 때 같이 실행되는 css -->
-    <!-- <link rel="stylesheet" href="/"> -->
+    <link rel="stylesheet" href="/css/admin/admin.css">
 </th:block>
 
 <th:block layout:fragment="contentFragment">
+
     <body>
         <div class="adminContainer" style="padding: 2vh;">
-            <form action="/admin/sendMsg" method="post">
+            <div>
                 <div>
                     <h2>메세지</h2>
+                    <div style="padding: 1vh;"></div>
                 </div>
                 <div>
-                    <label>memberCode</label>
-                    <input type="number" name="memberCode">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne">
+                                    20XX년 X월 X일 2시
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    [37번] 잼민이 : 이 자리 비워주세요
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                    aria-controls="flush-collapseTwo">
+                                    20XX년 X월 X일 3시
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    [2번] 잼민이 : 이 자리 비워주세요
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                    aria-controls="flush-collapseThree">
+                                    20XX년 X월 X일 4시
+                                </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    [51번] 잼민이 : 이 자리 비워주세요
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label>seatNum</label>
-                    <input type="number" name="seatNum">
-                </div>
-                <div>
-                    <label>메세지를 입력해주세요</label>
-                    <input type="text" name="comentMessage">
-                </div>
-                <div>
-                    <input type="submit" value="전송">
-                </div>
-            </form>
-            <table>
-                <thead>
-                    <tr>
-                        <td>member /</td>
-                        <td>seat /</td>
-                        <td>message</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>memberName /</td>
-                        <td>seatNum /</td>
-                        <td>
-                            받은 메세지
-                            <input type="text" name="sendMessage">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                <div style="padding: 1vh;"></div>
+                <form action="/admin/sendMsg" method="post">
+                    <div>
+                        <label>메세지를 입력해주세요&ensp;</label>
+                        <input type="text" name="comentMessage">&ensp;
+                        <input type="submit" value="전송">
+                    </div>
+                </form>
+            </div>
         </div>
     </body>
 </th:block>
