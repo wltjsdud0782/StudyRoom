@@ -9,7 +9,7 @@ public class StudyRoomBoardController {
 
     @GetMapping("/")
     public String StudyRoomBoard(){
-        return "content/1_content" ;
+        return "content/homepage/main_homepage" ;
 
     }
 }
