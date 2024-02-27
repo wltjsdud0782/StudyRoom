@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/admin/admin_layout}">
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴 때 같이 실행되는 css -->
+    <!-- <link rel="stylesheet" href="/"> -->
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <body>
+        <div class="adminContainer" style="padding: 2vh;">
+            <form action="/admin/sendMsg" method="post">
+                <div>
+                    <h2>메세지</h2>
+                </div>
+                <div>
+                    <label>memberCode</label>
+                    <input type="number" name="memberCode">
+                </div>
+                <div>
+                    <label>seatNum</label>
+                    <input type="number" name="seatNum">
+                </div>
+                <div>
+                    <label>메세지를 입력해주세요</label>
+                    <input type="text" name="comentMessage">
+                </div>
+                <div>
+                    <input type="submit" value="전송">
+                </div>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <td>member /</td>
+                        <td>seat /</td>
+                        <td>message</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>memberName /</td>
+                        <td>seatNum /</td>
+                        <td>
+                            받은 메세지
+                            <input type="text" name="sendMessage">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴 때 같이 실행되는 js -->
+    <!-- <script src="/"></script> -->
+</th:block>
+
+</html>

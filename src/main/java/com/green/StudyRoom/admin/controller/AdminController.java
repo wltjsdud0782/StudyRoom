@@ -20,10 +20,16 @@ public class AdminController {
 //    @Resource(name="seatService")
 //    private SeatServiceImpl seatService;
 
-    //(1)////////////////////////////////////////////////////// //
+    //(회원 관리)///////////////////////////////////////////// //
+    @GetMapping("/info")
+    public String adminInfo(){
+        return "content/admin/admin_Info";
+    }
+
+    //(메세지)//////////////////////////////////////////////// //
     @GetMapping("/msg")
     public String adminMessage(){
-        return "content/admin/admin_message_content";
+        return "content/admin/admin_message";
     }
 
     @PostMapping("/sendMsg")
@@ -32,5 +38,32 @@ public class AdminController {
         System.out.println(messageVO);
         return "redirect:/admin/msg";
     }
+
+    //(좌석 관리)///////////////////////////////////////////// //
+    @GetMapping("/seat")
+    public String adminSeat(){
+        return "content/admin/admin_seat";
+    }
+
+    //(요금 변경)///////////////////////////////////////////// //
+    @GetMapping("/charge")
+    public String adminCharge(){
+        return "content/admin/admin_charge";
+    }
+
+    //(로그 확인)///////////////////////////////////////////// //
+    @GetMapping("/log")
+    public String adminLog(){
+        return "content/admin/admin_log";
+    }
+
+    //(매출 관리)///////////////////////////////////////////// //
+    @GetMapping("/sales")
+    public String adminSales(){
+        return "content/admin/admin_sales";
+    }
+
     // ////////////////////////////////////////////////////// //
+    // ////////////////////////////////////////////////////// //
+
 }

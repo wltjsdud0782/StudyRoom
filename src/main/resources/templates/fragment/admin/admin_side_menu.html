@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <th:block th:fragment="adminSideFragment">
+        <div class="list-group">
+            <div style="padding-top: 2vh;"></div> <!-- 띄우기 -->
+            <a href="#" class="list-group-item list-group-item-action active" onclick="location.href='/admin/info'">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">회원 관리</h5>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="location.href='/admin/msg'">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">메세지</h5>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="location.href='/admin/seat'">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">좌석 관리</h5>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="location.href='/admin/charge'">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">요금 변경</h5>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="location.href='/admin/log'">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">로그 확인</h5>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="location.href='/admin/sales'">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">매출 관리</h5>
+                </div>
+            </a>
+        </div>
+    </th:block>
+</body>
+
+</html>
