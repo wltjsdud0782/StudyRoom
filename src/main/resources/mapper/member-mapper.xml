@@ -33,7 +33,7 @@
         <result column="IS_RESERVATION" property="isReservation"/>
     </resultMap>
 
-<!--  입실, 퇴실      -->
+    <!--  입실, 퇴실      -->
     <resultMap id="studyRoomInOut" type="com.green.StudyRoom.member.vo.StudyRoomInOutVO">
         <id column="DAY_INPUT" property="dayInput"/>
         <result column="MEMBER_CODE" property="memberCode"/>
