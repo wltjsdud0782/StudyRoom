@@ -1,0 +1,22 @@
+.seatLive {
+    margin: 0 auto;
+    width: 70%;
+}
+
+.rest {
+    border: 1px solid black;
+    height: 300px;
+}
+
+.room {
+    border: 1px solid black;
+}
+
+.up-room {
+    height: 140px;
+}
+
+.down-room {
+    height: 140px;
+    
+}
