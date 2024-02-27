@@ -1,11 +1,11 @@
 .seatLive {
     margin: 0 auto;
-    width: 70%;
+    width: 90%;
 }
 
 .rest {
     border: 1px solid black;
-    height: 300px;
+    height: 600px;
 }
 
 .room {
@@ -13,10 +13,10 @@
 }
 
 .up-room {
-    height: 140px;
+    height: 280px;
 }
 
 .down-room {
-    height: 140px;
-    
+    height: 280px;
+    margin-top: 40px;
 }
