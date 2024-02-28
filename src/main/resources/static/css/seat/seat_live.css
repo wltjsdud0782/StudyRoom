@@ -1,17 +1,18 @@
 .seatLive {
     margin: 0 auto;
     width: 100%;
+    font-size: 11pt;
 }
 
 .seat-title {
     text-align: start;
     font-size: 23pt;
-    margin-left: 60px;
+    margin-left: 20px;
 }
 
 .rest {
     border: 1px solid black;
-    height: 600px;
+    height: 650px;
 }
 
 .room {
@@ -23,7 +24,7 @@
 }
 
 .down-room {
-    height: 280px;
+    height: 330px;
     margin-top: 40px;
 }
 
@@ -32,4 +33,12 @@
     margin: 2px auto;
     width: 105px;
     height: 90px;
+}
+
+.floor-title {
+    font-size: 20pt;
+}
+
+.floor-btn {
+    width: 100px;
 }
