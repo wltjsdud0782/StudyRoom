@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
 
@@ -32,10 +34,8 @@ public class AdminServiceImpl implements AdminService {
 
     //만든 요금제 보여주기
     @Override
-    public void selectCharge() {
-        sqlSession.selectList("chargeMapper.selectCharge");
+    public List<ChargeVO> selectCharge() {
+        return sqlSession.selectList("chargeMapper.selectCharge");
     }
 
-
-    //만든 요금제 보여주기
 }

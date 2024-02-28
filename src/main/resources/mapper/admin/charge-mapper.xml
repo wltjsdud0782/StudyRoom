@@ -7,7 +7,6 @@
     <resultMap id="charge" type="com.green.StudyRoom.admin.vo.ChargeVO">
         <id column="CHARGE_CODE" property="chargeCode"/>
         <result column="CHARGE_FEE" property="chargeFee"/>
-        <result column="CHARGE_DATE" property="chargeDate"/>
         <result column="CHARGE_NAME" property="chargeName"/>
     </resultMap>
 
@@ -19,11 +18,9 @@
         INSERT INTO STUDYROOM_CHARGE (
         CHARGE_NAME
         , CHARGE_FEE
-        , CHARGE_DATE
         ) VALUES (
         #{chargeName}
         , #{chargeFee}
-        , #{chargeDate}
         )
     </insert>
 
@@ -34,8 +31,8 @@
     <select id="selectCharge" resultMap="charge">
         SELECT CHARGE_NAME
         , CHARGE_FEE
-        , CHARGE_DATE
         FROM STUDYROOM_CHARGE
+        ORDER BY CHARGE_FEE DESC
     </select>
 
 </mapper>
