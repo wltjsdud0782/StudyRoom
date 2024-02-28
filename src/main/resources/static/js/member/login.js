@@ -35,7 +35,7 @@ function login(){
         }
         else{
             alert(`${data}님 반갑습니다!`);
-            location.href = '/member/first';
+            location.href = '/board/mainHomepage';
         }
 
     })
