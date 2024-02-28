@@ -3,6 +3,8 @@ package com.green.StudyRoom.admin.service;
 import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.admin.vo.MessageVO;
 
+import java.util.List;
+
 public interface AdminService {
 
     //유저 메세지 저장
@@ -15,5 +17,5 @@ public interface AdminService {
     void insertCharge(ChargeVO chargeVO);
 
     //만든 요금제 보여주기
-    void selectCharge();
+    List<ChargeVO> selectCharge();
 }

@@ -20,58 +20,54 @@
                     <h4>Charge</h4>
                     <table class="table table-hover adminContainer-table">
                         <tbody class="adminContainer-table-tbody5">
-                            <tr>
-                                <td>[chargeName] : 요금제 등록</td>
-                            </tr>
-                            <tr>
-                                <td>30일</td>
-                            </tr>
-                            <tr>
-                                <td>21일</td>
-                            </tr>
-                            <tr>
-                                <td>14일</td>
-                            </tr>
-                            <tr>
-                                <td>7일</td>
+                            <tr th:each="charge, state : ${chargeList}">
+                                <td th:onclick="changeCharge([[${charge.chargeCode}]])">
+                                    <div>[[${charge.chargeName}]]</div>
+                                    <div>[[${charge.chargeFee}]]원</div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                     <div style="padding: 2vh;"></div>
                     <h4>Register</h4>
-                    <table class="adminContainer-table">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            【요금명】 : chargeName
+                    <form action="/admin/setCharge" method="post">
+                        <table class="adminContainer-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="40%">
+                                <col width="10%">
+                                <col width="40%">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col">
+                                                【요금명】
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            【시간】 : chargeDate
+                                    </td>
+                                    <td class="chargeInput">
+                                        <input type="text" name="chargeName">
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col">
+                                                【가격】
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col">
-                                            【가격】 : chargeFee
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div style="padding: 2vh;"></div>
-                    <div class="text-start">
-                        <input type="button" value="등록">
-                    </div>
+                                    </td>
+                                    <td class="chargeInput">
+                                        <input type="text" name="chargeFee">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="padding: 2vh;"></div>
+                        <div class="text-start">
+                            <input type="submit" value="등록">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -80,7 +76,7 @@
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
-    <!-- <script src="/"></script> -->
+    <script src="/js/admin/admin.js"></script>
 </th:block>
 
 </html>
