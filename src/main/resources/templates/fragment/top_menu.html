@@ -16,8 +16,16 @@
           <li><a href="#">리뷰</a></li>
           <li><a onclick="location.href='/board/inquiry'">문의</a></li>
           <li><a href="#">오시는길</a></li>
-          <li style="margin-left: 350px;"><a onclick="location.href='/member/join'">회원가입</a></li>
-          <li><a onclick="location.href='/member/loginForm'">로그인</a></li>
+          <th:block th:if="${session.loginInfo == null }">
+              <li style="margin-left: 350px;"><a onclick="location.href='/member/join'">회원가입</a></li>
+              <li><a onclick="location.href='/member/loginForm'">로그인</a></li>
+          </th:block>
+          <th:block th:if="${session.loginInfo != null}">
+              <li style="margin-left: 190px;"><span style="font-size: 17px;">[[${session.loginInfo.memberId}]]님</span></li>
+              <li ><a href="" style="padding: 1px;">마이페이지</a></li>
+              <li ><a href="" style="padding: 1px;">정액권구매</a></li>
+              <li ><a href="" style="padding: 1px;">로그아웃</a></li>
+          </th:block>
         </ul>
       </div>
     </div>
