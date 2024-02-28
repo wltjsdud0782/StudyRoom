@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{fragment/member/member_layout}" >
+    layout:decorate="~{fragment/main_layout}" >
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴 때 같이 실행되는 css -->
@@ -52,7 +52,7 @@
                     <tr>
                         <td>성별</td>
                         <td>
-                            <input type="radio" name="memberGender" value="W">여&nap;
+                            <input type="radio" name="memberGender" value="W">여
                             <input type="radio" name="memberGender" value="M">남
                         </td>
                     </tr>

@@ -2,16 +2,35 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="menuFragment">
-   <div class="row">
+  <div class="row">
+    <!-- 오른쪽 정렬 -->
+    <div class="col text-end">
+        <th:block th:if="${session.loginInfo == null}">
+            <span  onclick="location.href='/member/loginForm'">로그인</span>
+            <span onclick="location.href = '/member/join'">회원가입</span>
+            <!-- <span class="poiter-span" data-bs-toggle="modal" data-bs-target="#join-modal">회원가입</span>    -->
+        </th:block>
+        <th:block th:if="${session.loginInfo != null}">
+            [[${session.loginInfo.memberId}]]님 반갑습니다.
+            <!-- <th:block th:if="${session.loginInfo.memberRoll eq 'ADMIN'}">
+                <span class="poiter-span" onclick="location.href='/admin/appForm';">관리자메뉴</span>
+            </th:block>  -->
+            <span class="pointer-span" onclick="logout()">LOGOUT</span>
+        </th:block>                            
+    </div>
+</div>
+   <!-- <div class="row">
       <div class="col">
         <span onclick="location.href='/member/loginForm'">로그인</span>
       </div>
       <div class="col">
         <span onclick="location.href = '/member/join'">회원가입</span>
       </div>
-   </div>
+   </div> -->
 
-   
+   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+   <script src="/js/member/login.js"></script>
+  
 </th:block>
 
 </html>
