@@ -240,3 +240,7 @@ function twofloor(){
         console.log(err);
     });
 }
+
+function reservation(){
+    location.href="/seat/seatReservation"
+}

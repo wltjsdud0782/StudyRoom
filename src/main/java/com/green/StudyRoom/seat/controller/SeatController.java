@@ -24,5 +24,9 @@ public class SeatController {
     public void seat2Floor(@RequestBody int floor){
     }
 
+    @GetMapping("/seatReservation")
+    public String seatReservation(){
+        return "/content/seat/seat_reservation";
+    }
 
 }
