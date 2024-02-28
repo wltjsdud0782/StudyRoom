@@ -5,9 +5,40 @@
     width: 100%;
     height: 30px;
 }
-.inquiry_title h3 {
-    margin-left: 50px;
+.inquiry_title h5 {
+    margin-left: 20px;
 }
 .inquiry_table {
     margin-top: 40px;
+}
+.inquiry_btn {
+    margin-top: 20px;
+    float: right;
+}
+.inquiry_btn input{
+    width: 100px;
+    height: 40px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #000;
+}
+.inquiry_serch {
+    text-align: center;
+    margin-top: 20px;
+}
+.inquiry_serch select {
+    width: 90px;
+    height: 38.5px;
+    border: 1px solid #ccc;
+}
+.inquiry_serch [type=text]{
+    width: 250px;
+    height: 38.5px;
+    border: 1px solid #ccc;
+}
+.inquiry_serch [type=submit]{
+    width: 90px;
+    height: 39.3px;
+    border: 1px solid #ccc;
+    background-color: #fff;
 }
