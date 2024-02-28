@@ -11,6 +11,5 @@ public class ChargeVO {
     //요금제VO
     private int chargeCode;
     private int chargeFee;
-    private String chargeDate;
     private String chargeName;
 }
