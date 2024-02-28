@@ -1,5 +1,6 @@
 package com.green.StudyRoom.admin.service;
 
+import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.admin.vo.MessageVO;
 
 public interface AdminService {
@@ -11,6 +12,8 @@ public interface AdminService {
     void selectMessage();
 
     //요금제 설정하기
+    void insertCharge(ChargeVO chargeVO);
 
     //만든 요금제 보여주기
+    void selectCharge();
 }

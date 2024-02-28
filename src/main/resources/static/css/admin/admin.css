@@ -1,6 +1,73 @@
-/* 적용이 안됨 */
-.adminContainer-table {
-    width: 90%;
-    border: 1px solid black;
+body {
+    vertical-align: middle;
 }
 
+.adminContainer {
+    width: 93%;
+}
+
+.text-start input {
+    width: 120px;
+    height: 40px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.etc {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+/* (Info)----------------------------------------------- */
+
+.adminContainer-table {
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.adminContainer-table tr td {
+    padding: 10px;
+}
+
+.adminContainer-table-tbody {
+    display: block;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.adminContainer-table-tbody tr {
+    display: table;
+    width: 100%;
+}
+
+/* (Message)----------------------------------------------- */
+
+.adminContainer-table-tbody2 {
+    display: block;
+    height: 60vh;
+    overflow-y: scroll;
+}
+
+.adminContainer-table-tbody2 tr {
+    display: table;
+    width: 100%;
+}
+
+.adminContainer-table-tbody2 .topMsg {
+    font-size: smaller;
+    font-style: italic;
+    color: rgb(150, 150, 150);
+}
+
+/* (Charge)----------------------------------------------- */
+
+.adminContainer-table-tbody5 {
+    display: block;
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.adminContainer-table-tbody5 tr {
+    display: table;
+    width: 100%;
+}

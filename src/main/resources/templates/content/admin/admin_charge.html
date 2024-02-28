@@ -8,22 +8,72 @@
 </th:block>
 
 <th:block layout:fragment="contentFragment">
+
     <body>
         <div class="adminContainer" style="padding: 2vh;">
             <div>
                 <h2>요금 변경</h2>
                 <div style="padding: 1vh;"></div>
             </div>
-            <div>
-                <table class="adminContainer-table">
-                    <colgroup>
-                        <col width="">
-                        <col width="">
-                        <col width="">
-                    </colgroup>
-                </table>
+            <div class="row">
+                <div class="col">
+                    <h4>Charge</h4>
+                    <table class="table table-hover adminContainer-table">
+                        <tbody class="adminContainer-table-tbody5">
+                            <tr>
+                                <td>[chargeName] : 요금제 등록</td>
+                            </tr>
+                            <tr>
+                                <td>30일</td>
+                            </tr>
+                            <tr>
+                                <td>21일</td>
+                            </tr>
+                            <tr>
+                                <td>14일</td>
+                            </tr>
+                            <tr>
+                                <td>7일</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="padding: 2vh;"></div>
+                    <h4>Register</h4>
+                    <table class="adminContainer-table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col">
+                                            【요금명】 : chargeName
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col">
+                                            【시간】 : chargeDate
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col">
+                                            【가격】 : chargeFee
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="padding: 2vh;"></div>
+                    <div class="text-start">
+                        <input type="button" value="등록">
+                    </div>
+                </div>
             </div>
-            
         </div>
     </body>
 </th:block>
