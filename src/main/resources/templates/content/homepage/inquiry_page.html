@@ -43,13 +43,15 @@
 
     <div class="row justify-content-center">
         <div class="col-10">
-            <th:bolck th:if>
+            <th:bolck th:if="${session.loginInfo == null}">
 
             </th:bolck>
-            <div class="inquiry_btn">
-                <input type="button" value="내가 쓴글">
-                <input type="button" value="글쓰기" onclick="goWriting()">
-            </div>
+            <th:bolck th:if="${session.loginInfo != null}">
+                <div class="inquiry_btn">
+                    <input type="button" value="내가 쓴글">
+                    <input type="button" value="글쓰기" onclick="goWriting()">
+                </div>
+            </th:bolck>
         </div>
     </div>
 
