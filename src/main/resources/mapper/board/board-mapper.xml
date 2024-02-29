@@ -3,20 +3,35 @@
 
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="boardMapper">
+    <resultMap id="board" type="com.green.StudyRoom.board.vo.BoardVO">
+        <result  column="BOARD_CODE"        property="boardCode"/>
+        <result  column="BOARD_TITLE"       property="boardTitle"/>
+        <result  column="BOARD_WRITER"      property="boardWriter"/>
+        <result  column="BOARD_DATE"        property="boardDate"/>
+        <result  column="BOARD_CONTENT"     property="boardContent"/>
+        <result  column="BOARD_SECRET"      property="boardSecret"/>
+        <result  column="READ_CNT"          property="readCnt"/>
+    </resultMap>
 
     <insert id="insertBoard">
         INSERT INTO STUDYROOM_BOARD (
-            BOARD_CODE
-            , BOARD_TITLE
+            BOARD_TITLE
             , BOARD_WRITER
             , BOARD_CONTENT
         ) VALUES (
-            #{boardCode}
-            , {#boardTitle}
-            , {#boardWriter}
-            , {#boardContent}
+            #{boardTitle}
+            , #{boardWriter}
+            , #{boardContent}
         )
     </insert>
+
+    <select id="selectBoard" resultMap="board">
+        SELECT BOARD_CODE
+            , BOARD_TITLE
+            , DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') BOARD_DATE
+            , BOARD_WRITER
+        FROM STUDYROOM_BOARD
+    </select>
 </mapper>
 
 
