@@ -40,3 +40,15 @@ a {
 .menu > ul > li > a:hover {
     border-bottom: 1px solid #000;
 }
+.sideMenu {
+    margin-top: 30px;
+    width: 100%;
+}
+.sideMenu > ul {
+    text-align: center;
+    width: 100%;
+}
+.sideMenu > ul > li {
+    padding: 20px 20px;
+    border-bottom: 1px solid #ccc;
+}
