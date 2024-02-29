@@ -31,13 +31,13 @@ function login(){
     .then((data) => {//data -> controller에서 리턴되는 데이터!
         if(data == ''){
             alert('ID혹은 PW를 확인하세요.');
-            document.querySelector('#loginInfo').reset();
+            document.querySelector('#memberId').value='';
+            document.querySelector('#memberPw').value='';
         }
         else{
             alert(`${data}님 반갑습니다!`);
             location.href = '/board/mainHomepage';
         }
-
     })
     //fetch 통신 실패 시 실행 영역
     .catch(err=>{

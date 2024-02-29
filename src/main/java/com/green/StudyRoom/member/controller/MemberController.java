@@ -16,16 +16,12 @@ public class MemberController {
     @Resource(name="memberService")
     private MemberServiceImpl memberService;
 
-    @GetMapping("/first")
-    public String first(){
-        return "content/member/first";
-    }
     @GetMapping("/join")
     public String join(){
-        return "content/member/join";
-//        return "content/homepage/main_homepage";
+        return "content/homepage/main_homepage";
  }
-    //회원가입
+
+    //회원 등록
     @PostMapping("/join")
     public String joinInsert(MemberVO memberVO){
         memberService.joinInsert(memberVO);
@@ -64,7 +60,7 @@ public class MemberController {
     //로그아웃
     @GetMapping("/logout")
     public String logout(HttpSession session){
-        session.removeAttribute("loginInfo");
+            session.removeAttribute("loginInfo");
         return "redirect:/board/mainHomepage";
     }
 }
