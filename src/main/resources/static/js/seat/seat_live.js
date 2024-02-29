@@ -241,6 +241,18 @@ function twofloor(){
     });
 }
 
+// 예약하기 Modal
+const modal_open = new bootstrap.Modal('#buy-detail-modal');
+
 function reservation(){
-    location.href="/seat/seatReservation"
+    document.querySelector('.modal-body').innerHTML = '';
+
+    let str = '';
+
+    str = `안녕하세요`;
+
+    document.querySelector('.modal-body').insertAdjacentHTML('afterbegin', str);
+
+    modal_open.show();
+
 }
