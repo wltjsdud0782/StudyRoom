@@ -10,55 +10,68 @@
 
 <th:block layout:fragment="contentFragment">
     <!-- html 코드 작성 -->
+
+    <div class="row mt-5">
+        <div class="col">
+            <span class="seat-title">
+            이용권구매
+            </span>
+        </div>
+    </div>
+    
     <div class="container text-center">
         <div class="row">
-            <div class="col">
 
-                <div class="row mt-4">
+            <div class="col-6">
+                <div class="row text-start mt-4">
                     <div class="col">
-                        <div class="seat-title">
-                            정액권구매
+                        <h3>이용권 종류 및 선택</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="text-end" style="font-size: 11pt; color: red;">
+                        * 총 <span>123124124</span>개의 상품이 등록되어 있습니다.
                         </div>
                     </div>
                 </div>
-                
-                <div class="row line-height">
+                <div class="row scrollbar" style="height: 70%; overflow: auto;">
                     <div class="col">
-                        <div class="row">
-                            <div class="col-5 text-end">선택한 좌석</div>
-                            <div class="offset-1 col text-start">{seatFloor}층 {seatNum}번</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5 text-end">예약자 아이디</div>
-                            <div class="offset-1 col text-start">${loginInfo.memberId} </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5 text-end">예약자명</div>
-                            <div class="offset-1 col text-start">${loginInfo.memberName}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5 text-end">예약자번호</div>
-                            <div class="offset-1 col text-start">${loginInfo.memberTel}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5 text-end">보유한 정액권</div>
-                            <div class="offset-1 col text-start">
-                                <select name="">
-                                    <option value="">30일권(남은기간:28일)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <div class="row">
-                                <div class="col">
-                                    <button type="button" class="btn btn-danger mb-4" onclick="">구매하기</button>
-                                </div>
-                            </div>
-                        </div>
+                        <table class="table table-hover text-center align-middle table-bordered" style="font-size: 12pt;">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="15%">
+                                <col width="50%">
+                                <col width="10%">
+                                <col width="15%">
+                            </colgroup>
+                            <thead>
+                                <tr class="table-success">
+                                    <td>No</td>
+                                    <td>상품코드</td>
+                                    <td>상품명</td>
+                                    <td>재고</td>
+                                    <td>상태</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="pointer-span" th:onclick="buyDetail()">
+                                    <td>1</td>
+                                    <td>123</td>
+                                    <td>ㄴㅇㄻ</td>
+                                    <td>12324</td>
+                                    <td>ㅇㄴㄹ</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
             </div>
+
+            <div class="col-6 buyDetail">
+                <!-- 자바스크립트 -->
+            </div>
+
         </div>
     </div>
 

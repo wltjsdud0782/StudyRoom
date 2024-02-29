@@ -36,4 +36,10 @@ public class SeatController {
         return "/content/seat/charge_buy";
     }
 
+
+    @ResponseBody
+    @PostMapping("buyDetail")
+    public void buyDetail(){
+
+    }
 }
