@@ -31,7 +31,7 @@ function login(){
     .then((data) => {//data -> controller에서 리턴되는 데이터!
         if(data == ''){
             alert('ID혹은 PW를 확인하세요.');
-            document.querySelector('#login-form').reset();
+            document.querySelector('#loginInfo').reset();
         }
         else{
             alert(`${data}님 반갑습니다!`);

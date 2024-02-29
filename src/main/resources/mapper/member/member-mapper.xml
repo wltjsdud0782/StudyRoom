@@ -67,9 +67,7 @@
 
     <select id="login" resultMap="member">
         SELECT
-            MEMBER_CODE
-            , MEMBER_ID
-            , MEMBER_PW
+            *
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_ID=#{memberId}
         AND MEMBER_PW=#{memberPw}

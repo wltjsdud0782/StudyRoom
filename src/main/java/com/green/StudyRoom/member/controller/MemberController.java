@@ -30,7 +30,7 @@ public class MemberController {
     public String joinInsert(MemberVO memberVO){
         memberService.joinInsert(memberVO);
         System.out.println(memberVO);
-        return "content/member/first";
+        return "content/board/mainHomepage";
     }
     //로그인 화면-top에서 로그인 눌렀을 때
     @GetMapping("/loginForm")
