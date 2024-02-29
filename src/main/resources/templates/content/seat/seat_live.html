@@ -38,7 +38,7 @@
                 <div class="reservationBtn mt-4">
                     <div class="row">
                         <div class="col">
-                            <button type="button" class="btn btn-danger mb-4" onclick="reservation()">예약하기</button>
+                            <button type="button" class="btn btn-danger mb-4" th:onclick="reservation([[${session.loginInfo}]])">예약하기</button>
                         </div>
                     </div>
                 </div>
@@ -47,14 +47,14 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="buy-detail-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal" id="seat-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content detail-modal">
                     <div class="modal-header">
                         <h5 class="modal-title">좌석 예약하기</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body text-center">
                         <!-- 자바스크립트로 내용 채우기 -->
                     </div>
                 </div>
