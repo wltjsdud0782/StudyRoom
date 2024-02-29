@@ -60,11 +60,11 @@ public class MemberController {
         }
         return loginInfo == null ? "" : loginInfo.getMemberId();
     }
-    //로그 아웃
+
+    //로그아웃
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("loginInfo");
-
-        return "redirect:/member/first";
+        return "redirect:/";
     }
 }

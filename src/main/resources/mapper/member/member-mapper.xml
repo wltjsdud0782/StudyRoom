@@ -72,6 +72,8 @@
         WHERE MEMBER_ID=#{memberId}
         AND MEMBER_PW=#{memberPw}
     </select>
+
+
 </mapper>
 
 
