@@ -9,10 +9,12 @@ rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAs
 crossorigin="anonymous">
 <link rel="stylesheet" href="/css/studyRoom.css">
 <th:block layout:fragment="content_css"></th:block>
+
 </head>
 <body>
 
-<div class="container-fluid">
+<div class="container">
+
     <!-- @@@@상단메뉴@@@@ -->
     <div class="row">
         <div class="col">
@@ -21,6 +23,15 @@ crossorigin="anonymous">
             </th:block>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col">
+            <th:block th:replace="~{fragment/user_side::sideFragment}">
+
+            </th:block>
+        </div>
+    </div>
+
     <!-- @@@@밑@@@@ -->
     <div class="row">
         <div class="col">
