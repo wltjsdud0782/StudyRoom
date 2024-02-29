@@ -1,7 +1,11 @@
 package com.green.StudyRoom.seat.controller;
 
+import com.green.StudyRoom.member.service.MemberServiceImpl;
+import com.green.StudyRoom.member.vo.MemberVO;
+import com.green.StudyRoom.seat.service.SeatService;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +15,14 @@ import org.springframework.web.bind.annotation.*;
 public class SeatController {
     @Resource(name = "seatService")
     private SeatServiceImpl seatService;
+    @Resource(name = "memberService")
+    private MemberServiceImpl memberService;
 
     @GetMapping("/seatLive")
     public String seatLive(@RequestParam(name = "floor", required = false, defaultValue = "1")int floor
                         , Model model){
         model.addAttribute("floor", floor);
+
         return "content/seat/seat_live";
     }
 
@@ -24,9 +31,9 @@ public class SeatController {
     public void seat2Floor(@RequestBody int floor){
     }
 
-    @GetMapping("/seatReservation")
-    public String seatReservation(){
-        return "/content/seat/seat_reservation";
+    @GetMapping("/chargeBuy")
+    public String chargeBuy(){
+        return "/content/seat/charge_buy";
     }
 
 }

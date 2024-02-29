@@ -30,12 +30,14 @@
                         <td>글쓴이</td>
                         <td>작성일</td>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
+                    <th:block th:each="board , state : ${boardList}">
+                        <tr>
+                            <td>[[${#lists.size(boardList) - state.index}]]</td>
+                            <td>[[${board.boardTitle}]]</td>
+                            <td>[[${board.boardWriter}]]</td>
+                            <td>[[${board.boardDate}]]</td>
+                        </tr>
+                    </th:block>
                 </table>
             </div>
         </div>

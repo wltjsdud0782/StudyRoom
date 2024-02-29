@@ -21,6 +21,8 @@
         <id     column="AGE_CODE" property="ageCode"/>
         <result column="AGE_NAME" property="ageName"/>
     </resultMap>
+
+
 </mapper>
 
 

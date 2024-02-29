@@ -10,7 +10,7 @@ function onefloor(){
         //컨트롤러로 전달할 데이터
         body: JSON.stringify({
            // 데이터명 : 데이터값
-           floor : 1
+            floor : 1
         })
     })
     .then((response) => {
@@ -134,7 +134,7 @@ function twofloor(){
         //컨트롤러로 전달할 데이터
         body: JSON.stringify({
            // 데이터명 : 데이터값
-           floor : 2
+            floor : 2
         })
     })
     .then((response) => {
@@ -143,7 +143,6 @@ function twofloor(){
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
-        console.log(data)
         document.querySelector(".seatLive").innerHTML = '';
         let str = '';
         str = `
@@ -241,6 +240,67 @@ function twofloor(){
     });
 }
 
-function reservation(){
-    location.href="/seat/seatReservation"
+// 예약하기 Modal
+const modal_open = new bootstrap.Modal('#seat-modal');
+
+function reservation(loginInfo){
+    if(loginInfo == null){ // 로그인 X
+        alert("로그인이 필요한 기능입니다.");
+        location.href = "/member/loginForm"
+    }
+    
+    if(loginInfo != null){ // 로그인 O
+        console.log(loginInfo)
+
+        document.querySelector('.modal-body').innerHTML = '';
+
+        let str = '';
+
+        str = `
+        <div class="row">
+                                <div class="col text-end">선택한 좌석</div>
+                                <div class="col text-start">{seatFloor}층 {seatNum}번</div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-end">예약자 아이디</div>
+                                <div class="col text-start">${loginInfo.memberId} </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-end">예약자명</div>
+                                <div class="col text-start">${loginInfo.memberName}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-end">예약자번호</div>
+                                <div class="col text-start">${loginInfo.memberTel}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-end">보유한 정액권</div>
+                                <div class="col text-start">
+                                    <select name="">
+                                        <option value="">30일권(남은기간:28일)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <button type="button" class="btn btn-danger mt-4" onclick="oneMore()">예약하기</button>
+                                </div>
+                            </div>
+        `;
+
+        document.querySelector('.modal-body').insertAdjacentHTML('afterbegin', str);
+
+        modal_open.show();
+    }
+}
+
+function oneMore(){
+    const result = confirm('등록된 정보로 예약하시겠습니까?')
+    if(result){
+        alert('예약이 완료되었습니다.')
+        location.href = "/seat/seatLive";
+    }
+    else{
+        return ;
+    }
 }
