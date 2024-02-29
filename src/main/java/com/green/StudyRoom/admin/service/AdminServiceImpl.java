@@ -38,4 +38,22 @@ public class AdminServiceImpl implements AdminService {
         return sqlSession.selectList("chargeMapper.selectCharge");
     }
 
+    //요금제 조회하기(비동기)
+    @Override
+    public ChargeVO getCharge(int chargeCode) {
+        return sqlSession.selectOne("chargeMapper.getCharge", chargeCode);
+    }
+
+    //요금제 업데이트하기
+    @Override
+    public void uptCharge(ChargeVO chargeVO) {
+        sqlSession.update("chargeMapper.uptCharge", chargeVO);
+    }
+
+    //요금제 삭제하기
+    @Override
+    public void delCharge(ChargeVO chargeVO) {
+        sqlSession.delete("chargeMapper.delCharge", chargeVO);
+    }
+
 }

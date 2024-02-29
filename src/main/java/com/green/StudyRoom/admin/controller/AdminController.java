@@ -8,9 +8,7 @@ import com.green.StudyRoom.seat.service.SeatServiceImpl;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -61,18 +59,32 @@ public class AdminController {
     @PostMapping("/setCharge")
     public String setCharge(ChargeVO chargeVO){
         adminService.insertCharge(chargeVO);
-        System.out.println(chargeVO);
         return "redirect:/admin/charge";
     }
 
-    // 요금 변경하기 (비동기 fetch2. 하다말음)
-    @PostMapping("/changeCharge")
-    public String changeCharge(){
-        System.out.println("받았다");
+    // 요금 변경 조회하기 (비동기, fetch1)
+    @ResponseBody
+    @PostMapping("/getCharge")
+    public ChargeVO changeCharge(@RequestParam(name = "chargeCode") int chargeCode){
+        //Charge의 List 받아오기
+        ChargeVO chargeVO = adminService.getCharge(chargeCode);
+        return chargeVO;
+    }
+
+    // 요금 변경사항 업데이트
+    @PostMapping("/uptCharge")
+    public String uptCharge(ChargeVO chargeVO){
+        //Charge의 List 받아오기
+        adminService.uptCharge(chargeVO);
         return "redirect:/admin/charge";
     }
 
-
+    // 요금 삭제하기
+    @GetMapping("/delCharge")
+    public String delCharge(ChargeVO chargeVO){
+        adminService.delCharge(chargeVO);
+        return "redirect:/admin/charge";
+    }
 
     //(로그 확인)///////////////////////////////////////////// //
     @GetMapping("/log")

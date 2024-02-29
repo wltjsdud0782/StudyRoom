@@ -16,11 +16,11 @@
     <!-- 설정할 요금제의 지정시간 -->
     <insert id="insertCharge">
         INSERT INTO STUDYROOM_CHARGE (
-        CHARGE_NAME
-        , CHARGE_FEE
+            CHARGE_NAME
+            , CHARGE_FEE
         ) VALUES (
-        #{chargeName}
-        , #{chargeFee}
+            #{chargeName}
+            , #{chargeFee}
         )
     </insert>
 
@@ -30,10 +30,35 @@
     <!-- 설정된 요금제의 지정시간 -->
     <select id="selectCharge" resultMap="charge">
         SELECT CHARGE_NAME
-        , CHARGE_FEE
+            , CHARGE_FEE
+            , CHARGE_CODE
         FROM STUDYROOM_CHARGE
         ORDER BY CHARGE_FEE DESC
     </select>
+
+    <!-- 요금제 input 조회하기 / 비동기 조회 -->
+    <select id="getCharge" resultMap="charge">
+        SELECT CHARGE_NAME
+            , CHARGE_FEE
+        FROM STUDYROOM_CHARGE
+        WHERE CHARGE_CODE = #{chargeCode}
+    </select>
+
+    <!-- 요금제 input 업데이트 -->
+    <update id="uptCharge">
+        UPDATE STUDYROOM_CHARGE
+        SET
+        CHARGE_NAME = #{chargeName}
+        , CHARGE_FEE = #{chargeFee}
+        WHERE CHARGE_CODE = #{chargeCode}
+    </update>
+
+    <!-- 요금제 input 삭제하기 -->
+    <delete id="delCharge">
+        DELETE FROM STUDYROOM_CHARGE
+        WHERE CHARGE_CODE = #{chargeCode}
+    </delete>
+
 
 </mapper>
 

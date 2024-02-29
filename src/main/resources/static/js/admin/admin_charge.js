@@ -1,38 +1,34 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{fragment/admin/admin_layout}">
+//비동기로 charge의 value값 불러오고, 변경하기
+function changeCharge(chargeCode) {
+    fetch('/admin/getCharge', { //요청경로
+        method: 'POST',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        //컨트롤러로 전달할 데이터
+        body: new URLSearchParams({
+            // 데이터명 : 데이터값
+            'chargeCode': chargeCode
+        })
+    })
+        .then((response) => {
+            if (!response.ok) {
+                alert('fetch error!\n컨트롤러로 통신중에 오류가 발생했습니다.');
+                return;
+            }
 
-<th:block layout:fragment="content_css">
-    <!-- html 파일이 열릴 때 같이 실행되는 css -->
-    <link rel="stylesheet" href="/css/admin/admin.css">
-</th:block>
-
-<th:block layout:fragment="contentFragment">
-
-    <body>
-        <div class="adminContainer" style="padding: 2vh;">
-            <label class="title">
-                <h2>요금 변경</h2>
-            </label>
-            <div style="padding: 2vh;"></div>
-            <div class="row">
-                <div class="col">
-                    <h4>Charge</h4>
-                    <table class="table table-hover adminContainer-table">
-                        <tbody class="adminContainer-table-tbody5">
-                            <tr th:each="charge : ${chargeList}">
-                                <!-- 클릭하면 해당 요금의 chargeCode 보내기 -->
-                                <td th:onclick="changeCharge([[${charge.chargeCode}]])">
-                                    <div>【[[${charge.chargeName}]]】</div>
-                                    <div>[[${charge.chargeFee}]]원</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div style="padding: 2vh;"></div>
-                    <h4>Register</h4>
-                    <div id="charge-container">
-                        <form action="/admin/setCharge" method="post">
+            //return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
+            return response.json(); //나머지 경우에 사용
+        })
+        //fetch 통신 후 실행 영역
+        .then((data) => {//data -> controller에서 리턴되는 데이터!
+            const reCharge = document.querySelector('#charge-container');
+            reCharge.replaceChildren();
+            let str = '';
+            str += `
+            <form action="/admin/uptCharge" method="post">
+            <input type="hidden" name="chargeCode" value="${chargeCode}">
                             <table class="adminContainer-table">
                                 <colgroup>
                                     <col width="10%">
@@ -59,7 +55,7 @@
                                             </div>
                                         </td>
                                         <td class="charge-td">
-                                            <input type="text" name="chargeName" class="nameInput" placeholder="입력해주세요.">
+                                            <input type="text" name="chargeName" value="${data.chargeName}" class="nameInput" placeholder="입력해주세요.">
                                         </td>
                                         <td>
                                             <div class="row">
@@ -76,7 +72,7 @@
                                             </div>
                                         </td>
                                         <td class="charge-td">
-                                            <input type="text" name="chargeFee" class="chargeInput" placeholder="입력해주세요.">
+                                            <input type="text" name="chargeFee" value="${data.chargeFee}" class="chargeInput" placeholder="입력해주세요.">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -84,21 +80,38 @@
                             <div style="padding: 2vh;"></div>
                             <div>
                                 <div class="text-start">
-                                    <input type="submit" value="요금 등록" class="not-null-btn">&nbsp;
+                                    <input type="submit" value="업데이트" class="not-null-btn">&nbsp;                                   
                                     <input type="button" value="삭제" class="not-null-btn" onclick="deleteCharge()">&nbsp;
+                                    <input type="button" value="취소" onclick="window.location.reload()">
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-</th:block>
+            </form>
+            `;
+            reCharge.insertAdjacentHTML('afterbegin', str)
+        })
+        //fetch 통신 실패 시 실행 영역
+        .catch(err => {
+            alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+            console.log(err);
+        });
+}
 
-<th:block layout:fragment="content_js">
-    <!-- html 파일이 열릴 때 같이 실행되는 js -->
-    <script src="/js/admin/admin_charge.js"></script>
-</th:block>
 
-</html>
+//빈값 입력 방지
+document.querySelector('.not-null-btn').addEventListener('click', function (e) {
+    //만약 id 있는 input태그의 value가 공백이라면
+    if (document.querySelector('.nameInput').value == '') {
+        e.preventDefault() //빈값 방지
+        alert('빈칸에 값을 입력해주세요!')
+    }
+    else if (document.querySelector('.chargeInput').value == '') {
+        e.preventDefault() //빈값 방지
+        alert('빈칸에 값을 입력해주세요!')
+    }
+});
+
+
+//charge 삭제
+function deleteCharge() {
+    alert('삭제하기 만들자');
+}
