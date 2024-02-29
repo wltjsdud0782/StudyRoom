@@ -42,3 +42,8 @@
 .floor-btn {
     width: 100px;
 }
+
+.line-height {
+    line-height: 4;
+    font-size: 15pt;
+}

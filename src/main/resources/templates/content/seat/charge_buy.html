@@ -10,10 +10,54 @@
 
 <th:block layout:fragment="contentFragment">
     <!-- html 코드 작성 -->
-    <div class="container">
+    <div class="container text-center">
         <div class="row">
             <div class="col">
-                정액권 구입화면
+
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="seat-title">
+                            정액권구매
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row line-height">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-5 text-end">선택한 좌석</div>
+                            <div class="offset-1 col text-start">{seatFloor}층 {seatNum}번</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 text-end">예약자 아이디</div>
+                            <div class="offset-1 col text-start">${loginInfo.memberId} </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 text-end">예약자명</div>
+                            <div class="offset-1 col text-start">${loginInfo.memberName}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 text-end">예약자번호</div>
+                            <div class="offset-1 col text-start">${loginInfo.memberTel}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 text-end">보유한 정액권</div>
+                            <div class="offset-1 col text-start">
+                                <select name="">
+                                    <option value="">30일권(남은기간:28일)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="row">
+                                <div class="col">
+                                    <button type="button" class="btn btn-danger mb-4" onclick="">구매하기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
