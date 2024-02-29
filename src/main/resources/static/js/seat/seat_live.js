@@ -250,6 +250,7 @@ function reservation(loginInfo){
     }
     
     if(loginInfo != null){ // 로그인 O
+        console.log(loginInfo)
 
         document.querySelector('.modal-body').innerHTML = '';
 
