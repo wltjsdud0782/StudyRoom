@@ -3,7 +3,7 @@
 
 <th:block th:fragment="menuFragment">
     <div class="row">
-      <div class="col menu">
+      <div class="col-9 menu">
         <ul>
           <li style="margin-right: 20px; 
                      border-right: 1px solid #ccc; 
@@ -16,17 +16,22 @@
           <li><a href="#">리뷰</a></li>
           <li><a onclick="location.href='/board/inquiry'">문의</a></li>
           <li><a href="#">오시는길</a></li>
+        </ul>
+      </div>
+
+      <div class="col-3 menu">
+        <ul>
           <th:block th:if="${session.loginInfo == null }">
-              <li style="margin-left: 350px;"><a onclick="location.href='/member/join'">회원가입</a></li>
+              <li style="margin-left: 150px;"><a onclick="location.href='/member/join'">회원가입</a></li>
               <li><a onclick="location.href='/member/loginForm'">로그인</a></li>
           </th:block>
           <th:block th:if="${session.loginInfo != null}">
-              <li style="margin-left: 190px;"><span style="font-size: 17px;">[[${session.loginInfo.memberId}]]님</span></li>
-              <li ><a href="" style="padding: 1px;">마이페이지</a></li>
+              <li ><span style="font-size: 17px;">[[${session.loginInfo.memberId}]]님</span></li>
+              <li ><a onclick="location.href='/board/myPage'" style="padding: 1px;">마이페이지</a></li>
               <li ><a onclick="location.href='/seat/chargeBuy'" style="padding: 1px;" >정액권구매</a></li>
-              <li ><a href="" style="padding: 1px;">로그아웃</a></li>
+              <li ><a onclick="logout()" style="padding: 1px;">로그아웃</a></li>
           </th:block>
-        </ul>
+        </ul> 
       </div>
     </div>
 

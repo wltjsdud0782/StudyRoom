@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.xml.crypto.KeySelector;
 import java.util.List;
 
 @Controller
@@ -52,5 +53,14 @@ public class StudyRoomBoardController {
         boardVO.setBoardWriter(loginInfo.getMemberId());
         boardService.insertBoard(boardVO);
         return "redirect:/board/inquiry";
+    }
+
+    //MY PAGE로 이동
+    @GetMapping("/myPage")
+    public String myPage(HttpSession session){
+
+        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+
+        return "content/homepage/myPage";
     }
 }

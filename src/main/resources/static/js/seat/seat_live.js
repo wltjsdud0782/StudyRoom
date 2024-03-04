@@ -257,35 +257,42 @@ function reservation(loginInfo){
         let str = '';
 
         str = `
-        <div class="row">
-                                <div class="col text-end">선택한 좌석</div>
-                                <div class="col text-start">{seatFloor}층 {seatNum}번</div>
-                            </div>
-                            <div class="row">
-                                <div class="col text-end">예약자 아이디</div>
-                                <div class="col text-start">${loginInfo.memberId} </div>
-                            </div>
-                            <div class="row">
-                                <div class="col text-end">예약자명</div>
-                                <div class="col text-start">${loginInfo.memberName}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col text-end">예약자번호</div>
-                                <div class="col text-start">${loginInfo.memberTel}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col text-end">보유한 정액권</div>
-                                <div class="col text-start">
-                                    <select name="">
-                                        <option value="">30일권(남은기간:28일)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <button type="button" class="btn btn-danger mt-4" onclick="oneMore()">예약하기</button>
-                                </div>
-                            </div>
+            <div class="row line-height">
+                <div class="col">
+                    <div class="row">
+                        <div class="col text-end">선택한 좌석</div>
+                        <div class="col text-start">1층 10번</div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-end">예약자 아이디</div>
+                        <div class="col text-start">${loginInfo.memberId} </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-end">예약자명</div>
+                        <div class="col text-start">${loginInfo.memberName}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-end">예약자번호</div>
+                        <div class="col text-start">${loginInfo.memberTel}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-end">보유한 이용권</div>
+                        <div class="col text-start">
+                            <select name="">
+                                <option value="">30일권(남은기간:28일)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col text-end">
+                            <button type="button" class="btn btn-danger mb-4" onclick="changeSeat()">좌석변경</button>
+                        </div>
+                        <div class="col text-start">
+                            <button type="button" class="btn btn-danger mb-4" onclick="oneMore()">예약하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         `;
 
         document.querySelector('.modal-body').insertAdjacentHTML('afterbegin', str);
@@ -298,6 +305,16 @@ function oneMore(){
     const result = confirm('등록된 정보로 예약하시겠습니까?')
     if(result){
         alert('예약이 완료되었습니다.')
+        location.href = "/seat/seatLive";
+    }
+    else{
+        return ;
+    }
+}
+
+function changeSeat(){
+    const result = confirm('좌석을 다시 선택하시겠습니까?')
+    if(result){
         location.href = "/seat/seatLive";
     }
     else{

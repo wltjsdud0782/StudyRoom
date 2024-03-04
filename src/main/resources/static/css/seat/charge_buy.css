@@ -1,0 +1,11 @@
+.seat-title {
+    text-align: start;
+    font-size: 23pt;
+    margin-left: 190px;
+    background-color: yellowgreen;
+}
+
+.line-height {
+    line-height: 4;
+    font-size: 15pt;
+}

@@ -18,4 +18,13 @@ public interface AdminService {
 
     //만든 요금제 보여주기
     List<ChargeVO> selectCharge();
+
+    //요금제 조회하기(비동기)
+    ChargeVO getCharge(int chargeCode);
+
+    //요금제 업데이트하기
+    void uptCharge(ChargeVO chargeVO);
+
+    //요금제 삭제하기
+    void delCharge(ChargeVO chargeVO);
 }
