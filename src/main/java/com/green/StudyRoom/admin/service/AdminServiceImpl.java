@@ -2,6 +2,7 @@ package com.green.StudyRoom.admin.service;
 
 import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.admin.vo.MessageVO;
+import com.green.StudyRoom.member.vo.MemberVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,8 +53,27 @@ public class AdminServiceImpl implements AdminService {
 
     //요금제 삭제하기
     @Override
-    public void delCharge(ChargeVO chargeVO) {
-        sqlSession.delete("chargeMapper.delCharge", chargeVO);
+    public void delCharge(int chargeCode) {
+        sqlSession.delete("chargeMapper.delCharge", chargeCode);
     }
+
+    //회원정보 조회하기 (이름, 아이디)
+    @Override
+    public List<MemberVO> selectMemberInfo() {
+        return sqlSession.selectList("adminMapper.selectMemberInfo");
+    }
+
+    //회원정보 상세조회하기 (비동기)
+    @Override
+    public MemberVO selectMemberDetailInfo(int memberCode) {
+        return sqlSession.selectOne("adminMapper.selectMemberDetailInfo", memberCode);
+    }
+
+    //회원정보/회원권한 업데이트
+    @Override
+    public void uptMemberInfo(MemberVO memberVO) {
+        sqlSession.update("adminMapper.uptMemberInfo", memberVO);
+    }
+
 
 }

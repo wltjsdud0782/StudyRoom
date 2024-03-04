@@ -24,7 +24,7 @@
                                 <!-- 클릭하면 해당 요금의 chargeCode 보내기 -->
                                 <td th:onclick="changeCharge([[${charge.chargeCode}]])">
                                     <div>【[[${charge.chargeName}]]】</div>
-                                    <div>[[${charge.chargeFee}]]원</div>
+                                    <div style="font-style: oblique; font-size: larger;">[[${charge.chargeFee}]]원</div>
                                 </td>
                             </tr>
                         </tbody>
@@ -35,12 +35,12 @@
                         <form action="/admin/setCharge" method="post">
                             <table class="adminContainer-table">
                                 <colgroup>
-                                    <col width="10%">
+                                    <col width="9%">
                                     <col width="5%">
-                                    <col width="35%">
-                                    <col width="10%">
+                                    <col width="*">
+                                    <col width="15%">
                                     <col width="5%">
-                                    <col width="35%">
+                                    <col width="30%">
                                 </colgroup>
                                 <tbody>
                                     <tr>
@@ -59,12 +59,13 @@
                                             </div>
                                         </td>
                                         <td class="charge-td">
-                                            <input type="text" name="chargeName" class="nameInput" placeholder="입력해주세요.">
+                                            <input type="text" name="chargeName" class="nameInput" placeholder="입력해주세요."
+                                                style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
                                                 <div class="col text-end">
-                                                    【가격】
+                                                    【가격(원)】
                                                 </div>
                                             </div>
                                         </td>
@@ -76,7 +77,8 @@
                                             </div>
                                         </td>
                                         <td class="charge-td">
-                                            <input type="text" name="chargeFee" class="chargeInput" placeholder="입력해주세요.">
+                                            <input type="text" name="chargeFee" class="chargeInput"
+                                                placeholder="입력해주세요." style="font-style: oblique;">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -85,7 +87,8 @@
                             <div>
                                 <div class="text-start">
                                     <input type="submit" value="요금 등록" class="not-null-btn">&nbsp;
-                                    <input type="button" value="삭제" class="not-null-btn" onclick="deleteCharge()">&nbsp;
+                                    <input type="button" value="삭제" class="not-null-btn" disabled>&nbsp;
+                                    <input type="button" value="취소" onclick="window.location.reload()">
                                 </div>
                             </div>
                         </form>
