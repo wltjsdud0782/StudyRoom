@@ -1,4 +1,4 @@
-function buyDetail(){
+function buyDetail(chargeCode, loginInfo){
     const buyDetail = document.querySelector('.buyDetail');
     fetch('/seat/buyDetail', { //요청경로
         method: 'POST',
@@ -9,6 +9,7 @@ function buyDetail(){
         //컨트롤러로 전달할 데이터
         body: new URLSearchParams({
            // 데이터명 : 데이터값
+           chargeCode : chargeCode
         })
     })
     .then((response) => {
@@ -17,8 +18,8 @@ function buyDetail(){
             return ;
         }
     
-        return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
-        //return response.json(); //나머지 경우에 사용
+        //return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
+        return response.json(); //나머지 경우에 사용
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
@@ -26,48 +27,74 @@ function buyDetail(){
         let str = '';
         str = `
             <div class="row text-start mt-4">
-                <div class="col">
-                    <h3>선택한 이용권 구매</h3>
+            <div class="col">
+                <h3>선택한 이용권 구매</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="text-end" style="font-size: 11pt; color: red;">
+                * 구매 후 교환 및 환불이 불가능합니다.
                 </div>
             </div>
-            <div class="row">
+        </div>
+        <div class="row mt-4">
+            <div class="col">
+                <table class="table table-borderless text-center align-middle" style="font-size: 13pt;">
+                    <colgroup>
+                        <col width="40%">
+                        <col width="60%">
+                    </colgroup>
+                    <tr>
+                        <td class="text-end">상품명</td>
+                        <td>${data.chargeName}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-end">가격</td>
+                        <td>${data.chargeFee}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-end">구매자ID</td>
+                        <td>${loginInfo.memberId}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-end">구매자명</td>
+                        <td>${loginInfo.memberName}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-end">구매자번호</td>
+                        <td>${loginInfo.memberTel}</td>
+                    </tr>
+                </table>
+                <div class="row mt-5" style="font-size: 18pt;">
                     <div class="col">
-                        <div class="text-end" style="font-size: 11pt; color: red;">
-                        * 구매 후 교환 및 환불이 불가능합니다.
-                        </div>
+                        결제수단 선택
                     </div>
                 </div>
-                <div class="row scrollbar" style="height: 70%; overflow: auto;">
+                <div class="row">
                     <div class="col">
-                        <table class="table table-hover text-center align-middle table-bordered" style="font-size: 12pt;">
-                            <colgroup>
-                                <col width="10%">
-                                <col width="15%">
-                                <col width="50%">
-                                <col width="10%">
-                                <col width="15%">
-                            </colgroup>
-                            <thead>
-                                <tr class="table-success">
-                                    <td>No</td>
-                                    <td>상품코드</td>
-                                    <td>상품명</td>
-                                    <td>재고</td>
-                                    <td>상태</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="pointer-span" th:onclick="buyDetail()">
-                                    <td>1</td>
-                                    <td>123</td>
-                                    <td>ㄴㅇㄻ</td>
-                                    <td>12324</td>
-                                    <td>ㅇㄴㄹ</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <button type="button" class="btn btn-outline-danger mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"></path>
+                            <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"></path>
+                            </svg>
+                            카드 결제
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-danger mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8m5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0"></path>
+                            <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195z"></path>
+                            <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083q.088-.517.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1z"></path>
+                            <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 6 6 0 0 1 3.13-1.567"></path>
+                            </svg>
+                            계좌 이체
+                        </button>
                     </div>
                 </div>
+            </div>
+        </div>
         `;
         
 
