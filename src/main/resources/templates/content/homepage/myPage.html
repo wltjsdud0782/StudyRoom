@@ -5,15 +5,49 @@
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴 때 같이 실행되는 css -->
-    <!-- <link rel="stylesheet" href="/"> -->
+    <link rel="stylesheet" href="/css/homepage/myPage.css">
 </th:block>
 
 <th:block layout:fragment="contentFragment">
-    <!-- html 코드 작성 -->
+    <div class="row">
+        <div class="col">
+            <div class="myPage-header">
+                <h3>개인 정보 수정</h3>
+
+                <div>비밀번호 재확인</div>
+                <p>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</p>
+            </div>
+        </div>
+    </div>    
+    
+    <div class="row">
+        <div class="col">
+            <div class="myPage-content">
+                <table class="table myPage-table align-middle">
+                    <colgroup>
+                        <col width="15%">
+                        <col width="*">
+                    </colgroup>
+                    <tr>
+                        <td>아이디</td>
+                        <td><input type="text" th:value="${session.loginInfo.memberId}" class="memberId"></td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호</td>
+                        <td><input type="password" class="memberPw"></td>
+                    </tr>
+                </table>
+
+                <div class="myPage-btn">
+                    <button type="button" th:onclick="loginCheck([[${session.loginInfo.memberId}]])">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </th:block>
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
-    <!-- <script src="/"></script> -->
+    <script src="/js/board/myPage.js"></script>
 </th:block>
 </html>

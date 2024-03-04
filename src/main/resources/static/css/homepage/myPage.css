@@ -1,0 +1,48 @@
+.myPage-header {
+    width: 100%;
+    border-bottom: 3px solid #000 ;
+}
+.myPage-header h3 {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+.myPage-header div{
+    font-size: 18px;
+    font-weight: lighter;
+}
+.myPage-header p {
+    font-size: 14;
+    font-weight: 300;
+    margin-bottom: 50px;
+}
+.myPage-content {
+    margin: 0 auto;
+    width: 70%;
+    margin-top: 60px;
+}
+.myPage-table tr,td {
+    border: none;
+}
+.myPage-table td {
+    height: 100px;
+}
+.myPage-table input{
+    width: 70%;
+    height: 45px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.myPage-btn {
+    margin-top: 60px;
+    text-align: center;
+}
+.myPage-btn button {
+    width: 200px;
+    height: 50px;
+    border: 1px solid;
+    background-color: #013d09;
+    color: #fff;
+}
+.myPage-table span {
+    color: red;
+}
