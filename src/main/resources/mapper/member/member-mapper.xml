@@ -30,7 +30,7 @@
         <result column="MEMBER_CODE" property="memberCode"/>
         <result column="SEAT_NUM" property="seat_num"/>
         <result column="RESERVATION_DATE" property="ReservationDate"/>
-        <result column="IS_RESERVATION" property="isReservation"/>
+        <result column="CHARGE_CODE" property="chargeCode"/>
     </resultMap>
 
     <!--  입실, 퇴실      -->
