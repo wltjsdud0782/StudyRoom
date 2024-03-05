@@ -31,12 +31,13 @@ function changeCharge(chargeCode) {
             <input type="hidden" name="chargeCode" value="${chargeCode}">
                             <table class="adminContainer-table">
                                 <colgroup>
-                                    <col width="9%">
+                                    <col width="6%">
                                     <col width="5%">
+                                    <col width="28%">
+                                    <col width="7%">
+                                    <col width="5%">
+                                    <col width="28%">
                                     <col width="*">
-                                    <col width="15%">
-                                    <col width="5%">
-                                    <col width="30%">
                                 </colgroup>
                                 <tbody>
                                     <tr>
@@ -74,15 +75,23 @@ function changeCharge(chargeCode) {
                                         <td class="charge-td">
                                             <input type="text" name="chargeFee" value="${data.chargeFee}" class="chargeInput" placeholder="입력해주세요." style="font-style: oblique;">
                                         </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <div class="btnDiv">
+                                                        <input type="submit" value="요금 변경" class="not-null-btn">&nbsp;
+                                                        <input type="button" value="취소" onclick="window.location.reload()">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div style="padding: 2vh;"></div>
                             <div>
-                                <div class="text-start">
-                                    <input type="submit" value="요금 변경" class="not-null-btn">&nbsp;                                   
-                                    <input type="button" value="삭제" class="not-null-btn" onclick="deleteCharge(${chargeCode})">&nbsp;
-                                    <input type="button" value="취소" onclick="window.location.reload()">
+                                <div class="btnDiv">                                           
+                                    <input type="button" value="삭제" class="not-null-btn" onclick="deleteCharge(${chargeCode})" style="color: red;">                               
                                 </div>
                             </div>
             </form>

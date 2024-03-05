@@ -14,23 +14,35 @@
             <label class="title">
                 <h2>회원 관리</h2>
                 <div>
-                    고쳐야할 점 /
-                    1. 변경하고도 해당 페이지 유지 /
-                    2. 좌석번호 넣기 /
-                    3. 권한 이름 변경해서 넣기
+                    고쳐야할 점 :
+                    1. 좌석번호 넣기 /
+                    2. 정보변경 범위 늘이기
                 </div>
             </label>
             <div style="padding: 2vh;"></div>
             <div class="row">
                 <div class="col">
-                    <h4>List</h4>
+                    <h4>List ([[${#lists.size(memberList)}]]명)</h4>
                     <table class="table table-hover adminContainer-table">
                         <tbody class="adminContainer-table-tbody">
-                            <tr th:each="member : ${memberList}" th:onclick="memberInfo([[${member.memberCode}]])">
+                            <tr th:each="member, state : ${memberList}" th:onclick="memberInfo([[${member.memberCode}]], [[${#lists.size(memberList) - state.index}]])">
                                 <td>
                                     <div>
-                                        <span>[[${member.memberName}]] ([[${member.memberId}]])</span>
-                                    </div>                                   
+                                        <span>#[[${#lists.size(memberList) - state.index}]]&ensp;[[${member.memberName}]] ([[${member.memberId}]])</span>
+                                        <span style="float: right;">
+                                            <div>
+                                                <th:block th:if="${member.isAdmin == 'USER'}">
+                                                    [회원]
+                                                </th:block>
+                                                <th:block th:if="${member.isAdmin == 'ARBEIT'}">
+                                                    [알바생]
+                                                </th:block>
+                                                <th:block th:if="${member.isAdmin == 'ADMIN'}">
+                                                    [관리자]
+                                                </th:block>
+                                            </div>                                           
+                                        </span>
+                                    </div>                                                             
                                 </td>
                             </tr>
                         </tbody>
@@ -108,7 +120,7 @@
                             </tbody>
                         </table>
                         <div style="padding: 2vh;"></div>
-                        <div class="text-start input">
+                        <div class="btnDiv">
                             <input type="submit" value="회원정보 변경" disabled>&nbsp;
                             <input type="button" value="취소" onclick="window.location.reload()" disabled>
                         </div>

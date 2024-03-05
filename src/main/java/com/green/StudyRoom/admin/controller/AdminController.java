@@ -47,14 +47,34 @@ public class AdminController {
 
     //(메세지)//////////////////////////////////////////////// //
     @GetMapping("/msg")
-    public String adminMessage(){
+    public String adminMessage(Model model){
+        List<MemberVO> msgList = adminService.selectWho();
+        model.addAttribute("msgList", msgList);
+        List<MessageVO> chtList = adminService.selectMessage();
+        model.addAttribute("chtList", chtList);
         return "content/admin/admin_message";
     }
 
-    @PostMapping("/sendMsg")
+    //모든 채팅 조회하기
+//    @GetMapping("/chat")
+//    public String selectMessage(Model model){
+//        List<MessageVO> chtList = adminService.selectMessage();
+//        model.addAttribute("chtList", chtList);
+//        return "redirect:/admin/msg";
+//    }
+
+    //채팅보낼 사람 정하기 (비동기)
+    @ResponseBody
+    @PostMapping("/who")
+    public MemberVO selectMan(@RequestParam(name="memberCode") int memberCode){
+        MemberVO member = adminService.selectMan(memberCode);
+        return member;
+    }
+
+    //채팅 보내기
+    @PostMapping("/sendAdmMsg")
     public String sendMessage(MessageVO messageVO){
-        adminService.insertMessage(messageVO);
-        System.out.println(messageVO);
+        adminService.insertAdmMsg(messageVO);
         return "redirect:/admin/msg";
     }
 

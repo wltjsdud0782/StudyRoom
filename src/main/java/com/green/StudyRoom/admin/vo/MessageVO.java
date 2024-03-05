@@ -1,5 +1,6 @@
 package com.green.StudyRoom.admin.vo;
 
+import com.green.StudyRoom.member.vo.MemberVO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,5 +18,9 @@ public class MessageVO {
     private int memberCode;
     private int seatNum;
 
+    //외부 - memberVO
+    private String memberName;
+    private String memberId;
+    private String isAdmin;
 
 }

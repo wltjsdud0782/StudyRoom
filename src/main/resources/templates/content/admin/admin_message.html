@@ -13,6 +13,11 @@
         <div class="adminContainer" style="padding: 2vh;">
             <label class="title">
                 <h2>메세지</h2>
+                <div>
+                    고쳐야할 점 :
+                    1. 보내고 받은 메세지 구분하기 >>, << /
+                    2. 메세지 구현 더 자세히 만들기
+                </div>
             </label>
             <div style="padding: 2vh;"></div>
             <div class="row">
@@ -25,56 +30,75 @@
                             <div>
                                 <table class="table table-hover adminContainer-table">
                                     <tbody class="adminContainer-table-tbody2">
-                                        <tr>
+                                        <tr th:each="chat : ${chtList}">
                                             <td>
-                                                <div class="topMsg">[51번] 20XX년 X월 X일 4시</div>
-                                                <div class="botMsg">김잼민(jamin84) : 이 자리 비워주세요</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="topMsg">[seatNum] [messageDate]</div>
-                                                <div class="botMsg">[memberName]([memberId]) : [messageContent]</div>
+                                                <div class="topMsg">([[${chat.seatNum}]]번) [[${chat.messageDate}]]</div>
+                                                <div class="botMsg">[[${chat.memberName}]]([[${chat.memberId}]]) : [[${chat.messageContent}]]</div>
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>
+                                                <form action="/admin/sendAdmMsg" method="post">
+                                                    <div class="btnDiv input" style="text-align: center;">
+                                                        <span class="whoIs">
+                                                            <input type="text" placeholder="@보낼사람"
+                                                                style="text-align: center;" readonly>&nbsp;
+                                                        </span>
+                                                        <!-- @@@@@채팅@@@@@ -->
+                                                        <input type="text" placeholder="&nbsp;[관리자] :"
+                                                            style="width: 60%;" name="messageContent">&nbsp;
+                                                        <!-- @@@@@@@@@@@@@ -->
+                                                        <input type="submit" value="전송">
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
                         <div class="col">
-                            <div>
+                            <div class="row">
                                 <div style="padding: 1.2rem;"></div>
                                 <div>
                                     <h4>Search Name</h4>
                                 </div>
-                                <div class="text-start">
+                                <div class="btnDiv">
                                     <input type="text" value="">&nbsp;
                                     <input type="button" value="검색">
                                 </div>
-                            </div>
-                            <div style="padding: 2vh;"></div>
-                            <div>
-                                <div>
-                                    <h4>To</h4>
-                                </div>
-                                <div class="etc">
-                                    memberName
-                                </div>
-                            </div>
-                            <div style="padding: 2vh;"></div>
-                            <form action="/admin/sendMsg" method="post">
-                                <div>
-                                    <h4>Send Message</h4>
-                                </div>
-                                <div class="text-start">
-                                    <input type="text" placeholder="&nbsp;[관리자] :" style="width: 100%; height: 45px;">
-                                </div>
                                 <div style="padding: 2vh;"></div>
-                                <div class="text-start">                 
-                                    <input type="submit" value="전송">&nbsp;
-                                    <input type="button" value="취소">
+                                <div>
+                                    <h4>List ([[${#lists.size(msgList)}]]명)</h4>
+                                    <table class="table table-hover adminContainer-table">
+                                        <tbody class="adminContainer-table-tbody22">
+                                            <tr th:each="member, state : ${msgList}"
+                                                th:onclick="goChat([[${member.memberCode}]])">
+                                                <td>
+                                                    <div>
+                                                        <span>[[${member.memberName}]] ([[${member.memberId}]])</span>
+                                                        <span style="float: right;">
+                                                            <div>
+                                                                <th:block th:if="${member.isAdmin == 'USER'}">
+                                                                    [회원]
+                                                                </th:block>
+                                                                <th:block th:if="${member.isAdmin == 'ARBEIT'}">
+                                                                    [알바생]
+                                                                </th:block>
+                                                                <th:block th:if="${member.isAdmin == 'ADMIN'}">
+                                                                    [관리자]
+                                                                </th:block>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,7 +110,7 @@
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
-    <!-- <script src="/"></script> -->
+    <script src="/js/admin/admin_message.js"></script>
 </th:block>
 
 </html>

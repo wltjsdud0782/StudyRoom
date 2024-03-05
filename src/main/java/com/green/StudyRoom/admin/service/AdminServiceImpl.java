@@ -15,17 +15,57 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private SqlSessionTemplate sqlSession;
 
+    //회원정보 조회하기 (이름, 아이디)
+    @Override
+    public List<MemberVO> selectMemberInfo() {
+        return sqlSession.selectList("adminMapper.selectMemberInfo");
+    }
+
+    //회원정보 상세조회하기 (비동기)
+    @Override
+    public MemberVO selectMemberDetailInfo(int memberCode) {
+        return sqlSession.selectOne("adminMapper.selectMemberDetailInfo", memberCode);
+    }
+
+    //회원정보/회원권한 업데이트
+    @Override
+    public void uptMemberInfo(MemberVO memberVO) {
+        sqlSession.update("adminMapper.uptMemberInfo", memberVO);
+    }
+
+    /////////////////////////////////////////////////////////////////////
+
+    //채팅보낼 사람 조회
+    @Override
+    public List<MemberVO> selectWho() {
+        return sqlSession.selectList("messageMapper.selectWho");
+    }
+
+    //채팅받을 사람 (비동기)
+    @Override
+    public MemberVO selectMan(int memberCode) {
+        return sqlSession.selectOne("messageMapper.selectMan", memberCode);
+    }
+
+    //관리자 메세지 보내기
+    @Override
+    public void insertAdmMsg(MessageVO messageVO) {
+        sqlSession.insert("messageMapper.insertAdmMsg", messageVO);
+    }
+
     //유저 메세지 저장
     @Override
     public void insertMessage(MessageVO messageVO) {
         sqlSession.insert("messageMapper.insertMessage", messageVO);
     }
 
-    //유저 메세지 보여주기
+    //모든 메세지 조회
     @Override
-    public void selectMessage() {
-        sqlSession.selectList("messageMapper.selectMessage");
+    public List<MessageVO> selectMessage() {
+        return sqlSession.selectList("messageMapper.selectMessage");
     }
+
+    /////////////////////////////////////////////////////////////////////
 
     //요금제 설정하기
     @Override
@@ -56,24 +96,4 @@ public class AdminServiceImpl implements AdminService {
     public void delCharge(int chargeCode) {
         sqlSession.delete("chargeMapper.delCharge", chargeCode);
     }
-
-    //회원정보 조회하기 (이름, 아이디)
-    @Override
-    public List<MemberVO> selectMemberInfo() {
-        return sqlSession.selectList("adminMapper.selectMemberInfo");
-    }
-
-    //회원정보 상세조회하기 (비동기)
-    @Override
-    public MemberVO selectMemberDetailInfo(int memberCode) {
-        return sqlSession.selectOne("adminMapper.selectMemberDetailInfo", memberCode);
-    }
-
-    //회원정보/회원권한 업데이트
-    @Override
-    public void uptMemberInfo(MemberVO memberVO) {
-        sqlSession.update("adminMapper.uptMemberInfo", memberVO);
-    }
-
-
 }

@@ -8,30 +8,33 @@
 </th:block>
 
 <th:block layout:fragment="contentFragment">
+
     <body>
         <div class="adminContainer" style="padding: 2vh;">
             <label class="title">
                 <h2>좌석 관리</h2>
-                <span>좌석배치도 따로 그려야할듯</span>
             </label>
-            <div style="padding: 2vh;"></div>
-            <div>
+        </div>
 
-                <div class="floorBtn">
-                    <div class="row mb-4">
-                        <div class="col">
-                            <button type="button" class="btn btn-light floor-btn" onclick="onefloor()">1층</button>
-                            <button type="button" class="btn btn-light floor-btn" onclick="twofloor()">2층</button>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <div class="floorBtn">
+                        <div class="row mb-4">
+                            <div class="col">
+                                <button type="button" class="btn btn-light floor-btn" onclick="onefloor()">1층</button>
+                                <button type="button" class="btn btn-light floor-btn" onclick="twofloor()">2층</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                    
-                <div class="seatLive">
-                    <!-- 자바스크립트 채울공간 -->
-                </div>
 
+                    <div class="seatLive">
+                        <!-- 자바스크립트 채울공간 -->
+                    </div>
+                </div>
             </div>
         </div>
+
     </body>
 </th:block>
 
