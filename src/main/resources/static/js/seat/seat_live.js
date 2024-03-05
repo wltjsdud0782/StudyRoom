@@ -1,5 +1,9 @@
 onefloor();
 
+// 선택한 층 및 좌석번호
+let selected_floor = 0;
+let selected_seat = 0;
+
 function onefloor(){
     fetch('/seat/seat1Floor', { //요청경로
         method: 'POST',
@@ -18,7 +22,6 @@ function onefloor(){
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
-        console.log(data);
         document.querySelector(".seatLive").innerHTML = '';
         let str = '';
         str = `
@@ -44,9 +47,18 @@ function onefloor(){
                     <div class="row">`
                         for (let i = 0; i < 4; i++) {
                             const e = data[i];
-                            if (e.memberVO == null) {
+                            if(e.seatStatusVO.statusNum == 3){
                                 str += `
-                                <div class="col-3 one-seat">
+                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else if (e.memberVO == null) {
+                                str += `
+                                <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
                                 <div>${e.seatNum}</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -55,7 +67,7 @@ function onefloor(){
                                 `
                             } else {
                                 str += `
-                                <div class="col-3 one-seat">
+                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -66,29 +78,114 @@ function onefloor(){
                         }
                         str += `
                     </div>
-                    <div class="row mt-5">
-                        <div class="col-3 one-seat">5</div>
-                        <div class="col-3 one-seat">6</div>
-                        <div class="col-3 one-seat">7</div>
-                        <div class="col-3"></div>
+                    <div class="row mt-5">`
+                    for (let i = 4; i < 7; i++) {
+                        const e = data[i];
+                        if(e.seatStatusVO.statusNum == 3){
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else if (e.memberVO == null) {
+                            str += `
+                            <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else {
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>${e.memberVO.memberName}</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div>(${e.memberVO.memberTel})</div>
+                            </div>
+                            `
+                        }
+                    }
+                        str += `<div class="col-3"></div>
                     </div>
                 </div>
                 <div class="offset-1 col-5 room up-room">
                     <div>
                         제 2열람실
                     </div>
-                    <div class="row">
-                        <div class="col-3 one-seat">8</div>
-                        <div class="col-3 one-seat">9</div>
-                        <div class="col-3 one-seat">10</div>
-                        <div class="col-3 one-seat">11</div>
-                    </div>
+                    <div class="row">`
+                    for (let i = 7; i < 11; i++) {
+                        const e = data[i];
+                        if(e.seatStatusVO.statusNum == 3){
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else if (e.memberVO == null) {
+                            str += `
+                            <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else {
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>${e.memberVO.memberName}</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div>(${e.memberVO.memberTel})</div>
+                            </div>
+                            `
+                        }
+                    }
+                    str+=`</div>
                     <div class="row mt-5">
-                        <div class="col-3"></div>
-                        <div class="col-3 one-seat">12</div>
-                        <div class="col-3 one-seat">13</div>
-                        <div class="col-3 one-seat">14</div>
-                    </div>
+                        <div class="col-3"></div>`
+
+                        for (let i = 11; i < 14; i++) {
+                            const e = data[i];
+                            if(e.seatStatusVO.statusNum == 3){
+                                str += `
+                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else if (e.memberVO == null) {
+                                str += `
+                                <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else {
+                                str += `
+                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                                <div>${e.seatNum}</div>
+                                <div>${e.memberVO.memberName}</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div>(${e.memberVO.memberTel})</div>
+                                </div>
+                                `
+                            }
+                        }
+
+                    str+=`</div>
                 </div>
             </div>
             <div class="row">
@@ -98,29 +195,137 @@ function onefloor(){
                     </div>
                     <div class="row">
                         <div class="col-2"></div>
-                        <div class="col-1"></div>
-                        <div class="col-1 one-seat">15</div>
-                        <div class="col-1 one-seat">16</div>
-                        <div class="col-1 one-seat">17</div>
-                        <div class="col-1 one-seat">18</div>
-                        <div class="col-1 one-seat">19</div>
-                        <div class="col-1 one-seat">20</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-1 one-seat">21</div>
-                        <div class="col-9"></div>
-                        <div class="col-1 one-seat">22</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2 one-seat">23</div>
-                        <div class="col-1 one-seat">24</div>
-                        <div class="col-1 one-seat">25</div>
-                        <div class="col-1 one-seat">26</div>
-                        <div class="col-1 one-seat">27</div>
-                        <div class="col-1 one-seat">28</div>
-                        <div class="col-1 one-seat">29</div>
-                        <div class="col-1 one-seat">30</div>
-                    </div>
+                        <div class="col-1"></div>`
+                        for (let i = 14; i < 20; i++) {
+                            const e = data[i];
+                            if(e.seatStatusVO.statusNum == 3){
+                                str += `
+                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else if (e.memberVO == null) {
+                                str += `
+                                <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else {
+                                str += `
+                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                                <div>${e.seatNum}</div>
+                                <div>${e.memberVO.memberName}</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div>(${e.memberVO.memberTel})</div>
+                                </div>
+                                `
+                            }
+                        }
+                    str+=`</div>
+                    <div class="row">`
+                    for (let i = 20; i < 21; i++) {
+                        const e = data[i];
+                        if(e.seatStatusVO.statusNum == 3){
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else if (e.memberVO == null) {
+                            str += `
+                            <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else {
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>${e.memberVO.memberName}</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div>(${e.memberVO.memberTel})</div>
+                            </div>
+                            `
+                        }
+                    }
+                        str+=`<div class="col-9"></div>`
+                        for (let i = 21; i < 22; i++) {
+                            const e = data[i];
+                            if(e.seatStatusVO.statusNum == 3){
+                                str += `
+                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else if (e.memberVO == null) {
+                                str += `
+                                <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else {
+                                str += `
+                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                                <div>${e.seatNum}</div>
+                                <div>${e.memberVO.memberName}</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div>(${e.memberVO.memberTel})</div>
+                                </div>
+                                `
+                            }
+                        }
+                    str+=`</div>
+                    <div class="row">`
+                    for (let i = 22; i < 30; i++) {
+                        const e = data[i];
+                        if(e.seatStatusVO.statusNum == 3){
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else if (e.memberVO == null) {
+                            str += `
+                            <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else {
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>${e.memberVO.memberName}</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div>(${e.memberVO.memberTel})</div>
+                            </div>
+                            `
+                        }
+                    }
+                    str+=`</div>
                 </div>
             </div>
         </div>
@@ -176,31 +381,139 @@ function twofloor(){
                     <div>
                         제 4열람실
                     </div>
-                    <div class="row">
-                        <div class="col-2 one-seat">31</div>
-                        <div class="col-1 one-seat">32</div>
-                        <div class="col-1 one-seat">33</div>
-                        <div class="col-1 one-seat">34</div>
-                        <div class="col-1 one-seat">35</div>
-                        <div class="col-1 one-seat">36</div>
-                        <div class="col-1 one-seat">37</div>
-                        <div class="col-1 one-seat">38</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-1 one-seat">39</div>
-                        <div class="col-9"></div>
-                        <div class="col-1 one-seat">40</div>
-                    </div>
+                    <div class="row">`
+                    for (let i = 30; i < 38; i++) {
+                        const e = data[i];
+                        if(e.seatStatusVO.statusNum == 3){
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else if (e.memberVO == null) {
+                            str += `
+                            <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else {
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>${e.memberVO.memberName}</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div>(${e.memberVO.memberTel})</div>
+                            </div>
+                            `
+                        }
+                    }
+                    str+=`</div>
+                    <div class="row">`
+                    for (let i = 38; i < 39; i++) {
+                        const e = data[i];
+                        if(e.seatStatusVO.statusNum == 3){
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else if (e.memberVO == null) {
+                            str += `
+                            <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else {
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>${e.memberVO.memberName}</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div>(${e.memberVO.memberTel})</div>
+                            </div>
+                            `
+                        }
+                    }
+                        str+=`<div class="col-9"></div>`
+                        for (let i = 39; i < 40; i++) {
+                            const e = data[i];
+                            if(e.seatStatusVO.statusNum == 3){
+                                str += `
+                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else if (e.memberVO == null) {
+                                str += `
+                                <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else {
+                                str += `
+                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                                <div>${e.seatNum}</div>
+                                <div>${e.memberVO.memberName}</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div>(${e.memberVO.memberTel})</div>
+                                </div>
+                                `
+                            }
+                        }
+                    str+=`</div>
                     <div class="row">
                         <div class="col-2"></div>
-                        <div class="col-1"></div>
-                        <div class="col-1 one-seat">41</div>
-                        <div class="col-1 one-seat">42</div>
-                        <div class="col-1 one-seat">43</div>
-                        <div class="col-1 one-seat">44</div>
-                        <div class="col-1 one-seat">45</div>
-                        <div class="col-1 one-seat">46</div>
-                    </div>
+                        <div class="col-1"></div>`
+                        for (let i = 40; i < 46; i++) {
+                            const e = data[i];
+                            if(e.seatStatusVO.statusNum == 3){
+                                str += `
+                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else if (e.memberVO == null) {
+                                str += `
+                                <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else {
+                                str += `
+                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                                <div>${e.seatNum}</div>
+                                <div>${e.memberVO.memberName}</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div>(${e.memberVO.memberTel})</div>
+                                </div>
+                                `
+                            }
+                        }
+                    str+=`</div>
                 </div>
             </div>
             <div class="row" style="margin-top: 40px;">
@@ -208,35 +521,145 @@ function twofloor(){
                     <div>
                     제 5열람실
                     </div>
-                    <div class="row">
-                        <div class="col-3 one-seat">47</div>
-                        <div class="col-3 one-seat">48</div>
-                        <div class="col-3 one-seat">49</div>
-                        <div class="col-3"></div>
+                    <div class="row">`
+                    for (let i = 46; i < 49; i++) {
+                        const e = data[i];
+                        if(e.seatStatusVO.statusNum == 3){
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else if (e.memberVO == null) {
+                            str += `
+                            <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else {
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>${e.memberVO.memberName}</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div>(${e.memberVO.memberTel})</div>
+                            </div>
+                            `
+                        }
+                    }
+                        str+=`<div class="col-3"></div>
                     </div>
-                    <div class="row mt-5">
-                        <div class="col-3 one-seat">50</div>
-                        <div class="col-3 one-seat">51</div>
-                        <div class="col-3 one-seat">52</div>
-                        <div class="col-3 one-seat">53</div>
-                    </div>
+                    <div class="row mt-5">`
+                    for (let i = 49; i < 53; i++) {
+                        const e = data[i];
+                        if(e.seatStatusVO.statusNum == 3){
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else if (e.memberVO == null) {
+                            str += `
+                            <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else {
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>${e.memberVO.memberName}</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div>(${e.memberVO.memberTel})</div>
+                            </div>
+                            `
+                        }
+                    }
+                    str+=`</div>
                 </div>
                 <div class="offset-1 col-5 room up-room">
                     <div>
                         제 6열람실
                     </div>
                     <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-3 one-seat">54</div>
-                        <div class="col-3 one-seat">55</div>
-                        <div class="col-3 one-seat">56</div>
-                    </div>
-                    <div class="row mt-5">
-                        <div class="col-3 one-seat">57</div>
-                        <div class="col-3 one-seat">58</div>
-                        <div class="col-3 one-seat">59</div>
-                        <div class="col-3 one-seat">60</div>
-                    </div>
+                        <div class="col-3"></div>`
+                        for (let i = 53; i < 56; i++) {
+                            const e = data[i];
+                            if(e.seatStatusVO.statusNum == 3){
+                                str += `
+                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else if (e.memberVO == null) {
+                                str += `
+                                <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else {
+                                str += `
+                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                                <div>${e.seatNum}</div>
+                                <div>${e.memberVO.memberName}</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div>(${e.memberVO.memberTel})</div>
+                                </div>
+                                `
+                            }
+                        }
+                    str+=`</div>
+                    <div class="row mt-5">`
+                    for (let i = 56; i < 60; i++) {
+                        const e = data[i];
+                        if(e.seatStatusVO.statusNum == 3){
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else if (e.memberVO == null) {
+                            str += `
+                            <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
+                            <div>${e.seatNum}</div>
+                            <div>&nbsp;</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div></div>
+                            </div>
+                            `
+                        } else {
+                            str += `
+                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div>${e.seatNum}</div>
+                            <div>${e.memberVO.memberName}</div>
+                            <div>${e.seatStatusVO.statusName}</div>
+                            <div>(${e.memberVO.memberTel})</div>
+                            </div>
+                            `
+                        }
+                    }
+                    str+=`</div>
                 </div>
             </div>
         </div>
@@ -255,15 +678,18 @@ function twofloor(){
 const modal_open = new bootstrap.Modal('#seat-modal');
 
 function reservation(loginInfo){
+    
     if(loginInfo == null){ // 로그인 X
         alert("로그인이 필요한 기능입니다.");
         location.href = "/member/loginForm"
     }
     
     if(loginInfo != null){ // 로그인 O
-        console.log(loginInfo)
-
-        document.querySelector('.modal-body').innerHTML = '';
+        if (selected_floor == 0 && selected_seat == 0) {
+            alert("좌석을 선택해주세요.")
+        }
+        else{
+            document.querySelector('.modal-body').innerHTML = '';
 
         let str = '';
 
@@ -272,7 +698,7 @@ function reservation(loginInfo){
                 <div class="col">
                     <div class="row">
                         <div class="col text-end">선택한 좌석</div>
-                        <div class="col text-start">1층 10번</div>
+                        <div class="col text-start">${selected_floor}층 ${selected_seat}번</div>
                     </div>
                     <div class="row">
                         <div class="col text-end">예약자 아이디</div>
@@ -295,10 +721,7 @@ function reservation(loginInfo){
                         </div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col text-end">
-                            <button type="button" class="btn btn-danger mb-4" onclick="changeSeat()">좌석변경</button>
-                        </div>
-                        <div class="col text-start">
+                        <div class="col">
                             <button type="button" class="btn btn-danger mb-4" onclick="oneMore()">예약하기</button>
                         </div>
                     </div>
@@ -309,6 +732,7 @@ function reservation(loginInfo){
         document.querySelector('.modal-body').insertAdjacentHTML('afterbegin', str);
 
         modal_open.show();
+        }
     }
 }
 
@@ -316,19 +740,49 @@ function oneMore(){
     const result = confirm('등록된 정보로 예약하시겠습니까?')
     if(result){
         alert('예약이 완료되었습니다.')
-        location.href = "/seat/seatLive";
+        location.href = `/seat/inSeat?seatNum=${selected_seat}`;
     }
     else{
         return ;
     }
 }
 
-function changeSeat(){
-    const result = confirm('좌석을 다시 선택하시겠습니까?')
-    if(result){
-        location.href = "/seat/seatLive";
+function selectSeat(event, seatFloor, seatNum){
+    selected_floor = seatFloor;
+    selected_seat = seatNum;
+
+    const nonClick = document.querySelectorAll('.non-click');
+
+    nonClick.forEach((e) => {
+        e.classList.remove("click");
+    })
+    event.classList.add("click")
+}
+
+function seatMove(){
+    if (selected_floor == 0 && selected_seat == 0) {
+        alert("좌석을 선택해주세요.")
     }
     else{
+        const result = confirm('선택한 좌석으로 이동하시겠습니까?')
+        if (result){
+            alert('자리가 이동되었습니다.')
+            return ;
+        }
+        else {
+            return ;
+        }
+
+    }
+}
+
+function seatOut(){
+    const result = confirm('정말 퇴실하시겠습니까?')
+    if (result) {
+        alert('퇴실이 완료되었습니다. 감사합니다.')
+        location.href = "/seat/outSeat"
+    }
+    else {
         return ;
     }
 }
