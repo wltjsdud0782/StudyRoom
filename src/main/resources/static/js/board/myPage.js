@@ -20,14 +20,14 @@ function loginCheck(mId){
     })
     .then((response) => {
 
-        return response.text();
-        // return response.json(); //나머지 경우에 사용
+        // return response.text();
+        return response.json(); //나머지 경우에 사용
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
-        console(data)
+        console.log(data)
 
-        if(data == ''){
+        if(data.nullInfo == ""){
             alert("입력하신 비밀번호가 맞지않습니다.")
             checkPw.value = '';
         }
@@ -36,9 +36,10 @@ function loginCheck(mId){
 
             let str = '';
 
-            str = `
-                <form action="">
-                    <table class="myPage-table table">
+            str += `
+                <form action="/board/updatePersInfo" method="post" class="myPageForm">
+                    <input type="hidden" value=${data.memberList.memberCode} name="memberCode">
+                    <table class="myPage-table table align-middle">
                         <colgroup>
                             <col width="20%">
                             <col width="*">
@@ -46,40 +47,51 @@ function loginCheck(mId){
                         <tr>
                             <td>아이디 <span style="font-size: 10px; color: red;">변경불가</span>
                             </td>
-                            <td><input type="text" value="" name="memberId" readonly></td>
+                            <td><input type="text" value="${data.memberList.memberId}" name="memberId" readonly></td>
                         </tr>
                         <tr>
                             <td>비밀번호 <span>*</span></td>
-                            <td><input type="text" name="memberPw"></td>
+                            <td><input type="password" name="memberPw"></td>
                         </tr>
                         <tr>
                             <td>비밀번호 확인<span>*</span></td>
-                            <td><input type="text" name=""></td>
+                            <td><input type="password" name=""></td>
                         </tr>
                         <tr>
                             <td>이름 <span>*</span></td>
-                            <td><input type="text" name="memberName" value=""></td>
+                            <td><input type="text" name="memberName" value="${data.memberList.memberName}"></td>
                         </tr>
+
                         <tr>
                             <td>전화번호</td>
-                            <td><input type="text" name="memberTel" value=""></td>
+                            <td><input type="text" name="memberTel" value="${data.memberList.memberTel}"></td>
                         </tr>
+
+                        <tr>
+                            <td>생년월일</td>
+                            <td>
+                                <input type="date" name="memberBirth" value="${data.memberList.memberBirth}"></td>
+                        </tr>
+
                         <tr>
                             <td>주소</td>
-                            <td><input type="text" name="memberAddr" value=""></td>
+                            <td><input type="text" name="memberAddr" value="${data.memberList.memberAddr}"></td>
                         </tr>
+
                         <tr>
                             <td>상세주소</td>
-                            <td><input type="text" name="memberDetail" value=""></td>
+                            <td><input type="text" name="memberDetail" value="${data.memberList.memberDetail}"></td>
                         </tr>
                     </table>
 
                     <div class="myPage-btn">
-                        <button type="submit" value="변경"></button>
+                        <button type="button" style="color: #fff;" onclick="updateInfo()">변경</button>
                     </div>
                 </form>
             `
-            
+
+            myPageContent.insertAdjacentHTML("afterbegin", str);
+
         }
     })
     //fetch 통신 실패 시 실행 영역
@@ -88,5 +100,19 @@ function loginCheck(mId){
         console.log(err);
     });
     
+    
+}
+function updateInfo(){
+    
+    const pwInputs = document.querySelectorAll('input[type="password"]')
 
+    if(pwInputs[0].value != pwInputs[1].value){
+        // < \n > 한 줄 개행 
+        alert('입력한 두 비밀번호가 다릅니다.\n비밀번호를 다시 입력해주세요.')
+        return ;
+    }
+    else{
+        alert("정보가 변경이 되었습니다.")
+        document.querySelector(".myPageForm").submit();
+    }
 }

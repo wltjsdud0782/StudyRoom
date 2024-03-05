@@ -38,7 +38,13 @@
                 <div class="reservationBtn mt-4">
                     <div class="row">
                         <div class="col">
-                            <button type="button" class="btn btn-danger mb-4" th:onclick="reservation([[${session.loginInfo}]])">예약하기</button>
+                            <th:block th:if="${reservationMem == null}">
+                                <button type="button" class="btn btn-danger mb-4" th:onclick="reservation([[${session.loginInfo}]])">예약하기</button>    
+                            </th:block>
+                            <th:block th:if="${reservationMem != null}">
+                                <button type="button" class="btn btn-danger mb-4" onclick="seatMove()">자리이동</button>    
+                                <button type="button" class="btn btn-danger mb-4" onclick="seatOut()">퇴실하기</button>    
+                            </th:block>
                         </div>
                     </div>
                 </div>

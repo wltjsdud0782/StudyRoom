@@ -1,0 +1,28 @@
+.main-myPage-box{
+    width: 100%;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.page-box{
+    margin-right: 80px;
+    width: 18%;
+    height: 380px;
+    border: 10px solid #ccc;
+    text-align: center;
+    border-radius: 2px;
+}
+.page-box img{
+    width: 100%;
+    height: 200px;
+}
+.page-box h4 {
+    border-top: 10px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+}
+.page-box-text{
+    padding: 10px;
+    margin-top: 8px;
+}

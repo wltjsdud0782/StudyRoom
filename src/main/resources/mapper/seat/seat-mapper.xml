@@ -47,6 +47,7 @@
         SELECT
         SEAT_NUM
         , SEAT_POWER
+        , SEAT_FLOOR
         , SEAT.MEMBER_CODE
         , CASE WHEN CHAR_LENGTH(MEMBER_NAME) > 2 THEN
         CONCAT(
@@ -70,9 +71,52 @@
         INNER JOIN seat_status STA
         ON SEAT.STATUS_NUM = STA.STATUS_NUM
         INNER JOIN floor_age AGE
-        ON SEAT.AGE_CODE = AGE.AGE_CODE;
+        ON SEAT.AGE_CODE = AGE.AGE_CODE
+        ORDER BY SEAT_NUM ASC
     </select>
 
+    <select id="moveAndOut" resultMap="seat">
+        SELECT SEAT_NUM
+        FROM STUDYROOM_SEAT SEAT
+        INNER JOIN studyroom_member MEM
+        ON SEAT.MEMBER_CODE = MEM.MEMBER_CODE
+        WHERE SEAT.MEMBER_CODE = #{memberCode};
+    </select>
+
+    <update id="inSeat">
+        UPDATE STUDYROOM_SEAT
+        SET
+            SEAT_POWER = 'ON'
+            , STATUS_NUM = 1
+            , MEMBER_CODE = #{memberCode}
+        WHERE SEAT_NUM = #{seatNum}
+    </update>
+
+    <insert id="inMem">
+        INSERT INTO STUDYROOM_INOUT (
+            MEMBER_CODE
+            , IN_OUT
+        ) VALUES (
+            #{memberCode}
+            , 'IN'
+        )
+    </insert>
+
+    <!-- 퇴실  -->
+    <update id="outSeat">
+        UPDATE STUDYROOM_SEAT
+        SET
+        SEAT_POWER = 'OFF'
+        , STATUS_NUM = 2
+        , MEMBER_CODE = NULL
+        WHERE MEMBER_CODE = #{memberCode}
+    </update>
+    <update id="outMem">
+        UPDATE STUDYROOM_INOUT
+        SET
+        IN_OUT = 'OUT'
+        WHERE MEMBER_CODE = #{memberCode}
+    </update>
 
 </mapper>
 

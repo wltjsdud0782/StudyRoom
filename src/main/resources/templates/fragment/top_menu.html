@@ -15,7 +15,7 @@
           <li><a onclick="location.href='/seat/seatLive'">좌석예약</a></li>
           <li><a href="#">리뷰</a></li>
           <li><a onclick="location.href='/board/inquiry'">문의</a></li>
-          <li><a href="#">오시는길</a></li>
+          <li><a onclick="location.href='/board/wayToCome'">오시는길</a></li>
         </ul>
       </div>
 
@@ -27,8 +27,8 @@
           </th:block>
           <th:block th:if="${session.loginInfo != null}">
               <li ><span style="font-size: 17px;">[[${session.loginInfo.memberId}]]님</span></li>
-              <li ><a onclick="location.href='/board/myPage'" style="padding: 1px;">마이페이지</a></li>
-              <li ><a onclick="location.href='/seat/chargeBuy'" style="padding: 1px;" >정액권구매</a></li>
+              <li ><a onclick="location.href='/board/mainMyPage'" style="padding: 1px;">마이페이지</a></li>
+              <li ><a onclick="location.href='/seat/chargeBuy'" style="padding: 1px;" >이용권구매</a></li>
               <li ><a onclick="logout()" style="padding: 1px;">로그아웃</a></li>
           </th:block>
         </ul> 

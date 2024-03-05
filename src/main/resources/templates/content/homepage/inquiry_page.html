@@ -33,7 +33,12 @@
                     <th:block th:each="board , state : ${boardList}">
                         <tr>
                             <td>[[${#lists.size(boardList) - state.index}]]</td>
-                            <td>[[${board.boardTitle}]]</td>
+                            <th:block th:if="${board.boardSecret} == 'NO'">
+                                <td th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]</td>
+                            </th:block>
+                            <th:block th:unless="${board.boardSecret} == 'NO'">
+                                <td>비밀글입니다.</td>
+                            </th:block>
                             <td>[[${board.boardWriter}]]</td>
                             <td>[[${board.boardDate}]]</td>
                         </tr>
