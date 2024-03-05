@@ -1,0 +1,44 @@
+
+.map-header{
+    margin-left: 30px;
+    margin-top: 60px;
+    border-bottom: 3px solid #000;
+}
+.map-container{
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.map-footer {
+    height: 500px;
+    margin-top: 40px;
+    width: 100%;
+}
+.map-title {
+    border-bottom: 1px solid #ccc;
+    margin-left: 140px;
+    width: 74%;
+    height: 120px;
+}
+.map-info {
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+    margin-left: 140px;
+    width: 74%;
+    height: 120px;
+}
+.map-table tr, td{
+    border: none;
+}
+.map-tel {
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+    margin-left: 140px;
+    width: 74%;
+    height: 120px;
+}
+.map-tel tr, td{
+    border: none;
+}
