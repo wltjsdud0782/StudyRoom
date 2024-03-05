@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/main_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴 때 같이 실행되는 css -->
+    <!-- <link rel="stylesheet" href="/"> -->
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <tr>
+                    <td>[[${boardList.boardCode}]]</td>
+                    <td>[[${boardList.boardWriter}]]</td>
+                    <td>[[${boardList.boardContent}]]</td>
+                    <td>[[${boardList.boardDate}]]</td>
+                    <td>[[${boardList.boardTitle}]]</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- html 코드 작성 -->
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴 때 같이 실행되는 js -->
+    <script src="/"></script>
+</th:block>
+</html>

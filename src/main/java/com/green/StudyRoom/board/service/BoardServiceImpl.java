@@ -1,6 +1,7 @@
 package com.green.StudyRoom.board.service;
 
 import com.green.StudyRoom.board.vo.BoardVO;
+import com.green.StudyRoom.member.vo.MemberVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,26 @@ public class BoardServiceImpl implements BoardService {
     private SqlSessionTemplate sqlSession;
 
     @Override
+    // 글쓰기
     public void insertBoard(BoardVO boardVO) {
         sqlSession.insert("boardMapper.insertBoard", boardVO);
     }
 
+    // 글쓰기 첫 화면, 작성한 글 조회
     @Override
     public List<BoardVO> selectBoard() {
         return sqlSession.selectList("boardMapper.selectBoard");
+    }
+
+    @Override
+    // 회원 정보 수정
+    public void updateMember(MemberVO memberVO) {
+        sqlSession.update("boardMapper.updateMember", memberVO);
+    }
+
+    @Override
+    // 글쓰기 상세 정보 조회
+    public BoardVO detailSelect(int boardCode) {
+        return sqlSession.selectOne("boardMapper.detailSelect", boardCode);
     }
 }

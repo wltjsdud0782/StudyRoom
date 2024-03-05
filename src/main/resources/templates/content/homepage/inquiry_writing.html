@@ -10,7 +10,7 @@
 
 <th:block layout:fragment="contentFragment">
     <!-- html 코드 작성 -->
-    <form action="/board/inquiryWriting" method="post">
+    <form action="/board/inquiryWriting" class="writingForm" method="post">
         <div class="row justify-content-center">
             <div class="col-10">
                 <div class="writing_container">
@@ -25,6 +25,12 @@
                         <tr>
                             <td>이름</td>
                             <td>[[${session.loginInfo.memberId}]]</td>
+                        </tr>
+                        <tr>
+                            <td>비밀글</td>
+                            <td>
+                                <input type="checkbox" name="boardSecret" value="YES" class="boardSecret">
+                            </td>
                         </tr>
                         <tr>
                             <td>제목<span class="writing_table_span">*</span>
@@ -60,7 +66,7 @@
         <div class="row justify-content-center">
             <div class="col-10">
                 <div class="writing_btn">
-                    <input type="submit" value="글쓰기">
+                    <input type="button" value="글쓰기" onclick="goWriting()">
                 </div>
             </div>
         </div>
@@ -71,6 +77,6 @@
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
-    <!-- <script src="/"></script> -->
+    <script src="/js/board/inquiry_writing.js"></script>
 </th:block>
 </html>

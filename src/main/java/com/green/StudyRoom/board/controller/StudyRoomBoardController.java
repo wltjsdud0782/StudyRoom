@@ -12,7 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.crypto.KeySelector;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/board")
@@ -53,29 +56,77 @@ public class StudyRoomBoardController {
 
         boardVO.setBoardWriter(loginInfo.getMemberId());
         boardService.insertBoard(boardVO);
+        System.out.println(boardVO);
         return "redirect:/board/inquiry";
     }
 
-    //MY PAGE로 이동
-    @GetMapping("/myPage")
+    // 개인 정보 페이지로 이동
+    @GetMapping("/personalInfo")
     public String myPage(HttpSession session){
 
         MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 
-        return "content/homepage/myPage";
+        return "content/homepage/pers_info";
     }
 
     //login Check
     @ResponseBody
     @PostMapping("/loginCheck")
-    public String loginCheck(@RequestBody MemberVO memberVO){
+    public Map<String, Object> loginCheck(@RequestBody MemberVO memberVO){
 
-        System.out.println(memberVO);
+        Map<String, Object> map = new HashMap<>();
 
         MemberVO loginInfo = memberService.login(memberVO);
 
-        //null이면 빈문자 전송
+        //Object nullInfo =  loginInfo == null ? "" : map.put("memberList" ,loginInfo);
 
-        return loginInfo == null ? "" : memberVO.toString();
+        String nullInfo = "isLogin";
+
+        if(loginInfo == null){
+            nullInfo = "";
+        }
+        else{
+            map.put("memberList" ,loginInfo);
+        }
+
+        map.put("nullInfo", nullInfo);
+
+//        map.put("memberList", loginInfo);
+
+        //null이면 빈문자 전송
+        return map;
+    }
+
+    //마이페이지로 이동
+    @GetMapping("/mainMyPage")
+    public String mainMyPage(){
+
+        return "content/homepage/main_myPage";
+    }
+
+    //개인 정보 수정
+    @PostMapping("/updatePersInfo")
+    public String updatePersInfo(MemberVO memberVO){
+
+        boardService.updateMember(memberVO);
+        return "redirect:/board/mainMyPage";
+    }
+
+    //오시는길
+    @GetMapping("/wayToCome")
+    public String wayToCome(){
+
+        return "content/homepage/way_to_come";
+    }
+
+    //게시판 상세정보
+    @GetMapping("/detailSelect")
+    public String detailSelect(@RequestParam(name = "boardCode") int boardCode, Model model){
+
+        BoardVO boardList = boardService.detailSelect(boardCode);
+
+        model.addAttribute("boardList", boardList);
+
+        return "content/homepage/detail_select";
     }
 }

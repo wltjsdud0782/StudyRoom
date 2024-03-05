@@ -18,10 +18,12 @@
             BOARD_TITLE
             , BOARD_WRITER
             , BOARD_CONTENT
+            , BOARD_SECRET
         ) VALUES (
             #{boardTitle}
             , #{boardWriter}
             , #{boardContent}
+            , IFNULL(#{boardSecret}, 'NO')
         )
     </insert>
 
@@ -30,7 +32,30 @@
             , BOARD_TITLE
             , DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') BOARD_DATE
             , BOARD_WRITER
+            , BOARD_SECRET
         FROM STUDYROOM_BOARD
+    </select>
+
+    <update id="updateMember">
+        UPDATE STUDYROOM_MEMBER
+        SET
+        MEMBER_NAME = #{memberName}
+        , MEMBER_PW = #{memberPw}
+        , MEMBER_TEL = #{memberTel}
+        , MEMBER_BIRTH = #{memberBirth}
+        , MEMBER_ADDR = #{memberAddr}
+        , MEMBER_DETAIL = #{memberDetail}
+        WHERE MEMBER_CODE = #{memberCode}
+    </update>
+
+    <select id="detailSelect" resultMap="board">
+        SELECT BOARD_CODE
+            , BOARD_TITLE
+            , BOARD_WRITER
+            , BOARD_CONTENT
+            , DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') BOARD_DATE
+        FROM STUDYROOM_BOARD
+        WHERE BOARD_CODE = #{boardCode}
     </select>
 </mapper>
 
