@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="adminMapper">
+
+    <!-- 회원정보 불러오기 -->
+    <select id="selectMemberInfo" resultMap="memberMapper.member">
+        SELECT MEMBER_NAME
+            , MEMBER_ID
+            , MEMBER_CODE
+            , IS_ADMIN
+        FROM studyroom_member
+        ORDER BY MEMBER_CODE DESC
+    </select>
+
+    <!-- 회원정보 상세 조회 -->
+    <!-- 좌석번호는 잠시 비워둠 -->
+    <select id="selectMemberDetailInfo" resultMap="memberMapper.member">
+        SELECT MEMBER_NAME
+            , MEMBER_ID
+            , MEMBER_GENDER
+            , MEMBER_TEL
+            , MEMBER_ADDR
+            , MEMBER_DETAIL
+            , IS_ADMIN
+        FROM studyroom_member
+        WHERE MEMBER_CODE = #{memberCode}
+    </select>
+
+    <!-- 회원정보/회원권한 변경 -->
+    <update id="uptMemberInfo">
+        UPDATE studyroom_member
+        SET
+        IS_ADMIN = #{isAdmin}
+        WHERE MEMBER_CODE = #{memberCode}
+    </update>
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

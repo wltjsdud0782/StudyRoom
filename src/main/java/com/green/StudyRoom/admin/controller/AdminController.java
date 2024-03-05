@@ -4,6 +4,7 @@ import com.green.StudyRoom.admin.service.AdminServiceImpl;
 import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.member.service.MemberServiceImpl;
+import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
@@ -17,15 +18,31 @@ import java.util.List;
 public class AdminController {
     @Resource(name="adminService")
     private AdminServiceImpl adminService;
-//    @Resource(name="memberService")
-//    private MemberServiceImpl memberService;
+    @Resource(name="memberService")
+    private MemberServiceImpl memberService;
 //    @Resource(name="seatService")
 //    private SeatServiceImpl seatService;
 
     //(회원 관리)///////////////////////////////////////////// //
-    @GetMapping("/info")
-    public String adminInfo(){
+    @RequestMapping("/info")
+    public String adminInfo(Model model){
+        List<MemberVO> memberList = adminService.selectMemberInfo();
+        model.addAttribute("memberList", memberList);
         return "content/admin/admin_Info";
+    }
+    //회원정보 상세조회하기 (비동기)
+    @ResponseBody
+    @PostMapping("/changeInfo")
+    public MemberVO selectMemberDetailInfo(@RequestParam(name="memberCode") int memberCode){
+        MemberVO memberVO = adminService.selectMemberDetailInfo(memberCode);
+        return memberVO;
+    }
+
+    //회원정보/회원권한 업데이트
+    @PostMapping("/uptMemberInfo")
+    public String uptMemberInfo(MemberVO memberVO){
+        adminService.uptMemberInfo(memberVO);
+        return "redirect:/admin/info";
     }
 
     //(메세지)//////////////////////////////////////////////// //
@@ -81,8 +98,9 @@ public class AdminController {
 
     // 요금 삭제하기
     @GetMapping("/delCharge")
-    public String delCharge(ChargeVO chargeVO){
-        adminService.delCharge(chargeVO);
+    public String delCharge(@RequestParam(name="chargeCode") int chargeCode){
+        adminService.delCharge(chargeCode);
+        System.out.println("@"+chargeCode);
         return "redirect:/admin/charge";
     }
 
@@ -98,7 +116,6 @@ public class AdminController {
         return "content/admin/admin_sales";
     }
 
-    // ////////////////////////////////////////////////////// //
-    // ////////////////////////////////////////////////////// //
+
 
 }

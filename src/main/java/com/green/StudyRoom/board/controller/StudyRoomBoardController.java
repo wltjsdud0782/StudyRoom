@@ -2,15 +2,14 @@ package com.green.StudyRoom.board.controller;
 
 import com.green.StudyRoom.board.service.BoardService;
 import com.green.StudyRoom.board.vo.BoardVO;
+import com.green.StudyRoom.member.service.MemberService;
 import com.green.StudyRoom.member.vo.MemberVO;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.xml.crypto.KeySelector;
 import java.util.List;
@@ -20,6 +19,8 @@ import java.util.List;
 public class StudyRoomBoardController {
     @Resource(name="boardService")
     private BoardService boardService;
+    @Resource(name = "memberService")
+    private MemberService memberService;
 
     //메인 홈페이지
     @GetMapping("/mainHomepage")
@@ -62,5 +63,19 @@ public class StudyRoomBoardController {
         MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 
         return "content/homepage/myPage";
+    }
+
+    //login Check
+    @ResponseBody
+    @PostMapping("/loginCheck")
+    public String loginCheck(@RequestBody MemberVO memberVO){
+
+        System.out.println(memberVO);
+
+        MemberVO loginInfo = memberService.login(memberVO);
+
+        //null이면 빈문자 전송
+
+        return loginInfo == null ? "" : memberVO.toString();
     }
 }

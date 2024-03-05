@@ -13,6 +13,12 @@
         <div class="adminContainer" style="padding: 2vh;">
             <label class="title">
                 <h2>회원 관리</h2>
+                <div>
+                    고쳐야할 점 /
+                    1. 변경하고도 해당 페이지 유지 /
+                    2. 좌석번호 넣기 /
+                    3. 권한 이름 변경해서 넣기
+                </div>
             </label>
             <div style="padding: 2vh;"></div>
             <div class="row">
@@ -20,129 +26,92 @@
                     <h4>List</h4>
                     <table class="table table-hover adminContainer-table">
                         <tbody class="adminContainer-table-tbody">
-                            <tr>
+                            <tr th:each="member : ${memberList}" th:onclick="memberInfo([[${member.memberCode}]])">
                                 <td>
-                                    memberName (memberId)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    박자바 (Park12)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    이자바 (Lee12)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    윤자바 (Yoon12)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    류자바 (Ryu12)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    문자바 (Moon12)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    백자바 (Baek12)
+                                    <div>
+                                        <span>[[${member.memberName}]] ([[${member.memberId}]])</span>
+                                    </div>                                   
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <div style="padding: 2vh;"></div>
-                    <h4>Info</h4>
-                    <table class="adminContainer-table">
-                        <colgroup>
-                            <col width="33%">
-                            <col width="33%">
-                            <col width="*">
-                        </colgroup>
-                        <tr>
-                            <td>
-                                <div class="row">
-                                    <div class="col">
-                                        【이름】 : memberName
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col">
-                                        【아이디】 : memberId
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col">
-                                        【성별】 : memberGender
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="row">
-                                    <div class="col">
-                                        【전화번호】 : memberTel
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col">
-                                        【주소】 : memberAddr
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col">
-                                        memberDetail
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="row">
-                                    <div class="col">
-                                        【사용중(좌석)】 : seatNum
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col">
-                                        【권한】 : isAdmin
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col">
-                                        【권한 변경】 :
-                                        <select>
-                                            <option value="USER">USER</option>
-                                            <option value="ARBEIT">ARBEIT</option>
-                                            <option value="ADMIN">ADMIN</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <div style="padding: 2vh;"></div>
-                    <div class="text-start input">
-                        <input type="button" value="회원정보 변경">
+                    <div class="changeInfo-div">
+                        <h4 style="color: #ccc">Info</h4>
+                        <table class="adminContainer-table">
+                            <colgroup>
+                                <col width="33%">
+                                <col width="33%">
+                                <col width="*">
+                            </colgroup>
+                            <tbody id="changeInfo">
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col Info-border">&nbsp;
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col Info-border">&nbsp;
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col">&nbsp;
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col Info-border">&nbsp;
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col Info-border">&nbsp;
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col">&nbsp;
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col Info-border">&nbsp;
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col Info-border">&nbsp;
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col">&nbsp;
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="padding: 2vh;"></div>
+                        <div class="text-start input">
+                            <input type="submit" value="회원정보 변경" disabled>&nbsp;
+                            <input type="button" value="취소" onclick="window.location.reload()" disabled>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -153,7 +122,7 @@
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
-    <!-- <script src="/"></script> -->
+    <script src="/js/admin/admin_memberInfo.js"></script>
 </th:block>
 
 </html>

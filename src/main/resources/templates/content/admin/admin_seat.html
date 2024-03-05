@@ -4,7 +4,7 @@
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴 때 같이 실행되는 css -->
-    <link rel="stylesheet" href="/css/admin/admin.css">
+    <link rel="stylesheet" href="/css/seat/seat_live.css"> <!-- 일단 seat에 이어둠 -->
 </th:block>
 
 <th:block layout:fragment="contentFragment">
@@ -12,10 +12,24 @@
         <div class="adminContainer" style="padding: 2vh;">
             <label class="title">
                 <h2>좌석 관리</h2>
+                <span>좌석배치도 따로 그려야할듯</span>
             </label>
             <div style="padding: 2vh;"></div>
             <div>
-                !! 좌석배치도 불러오기 !!
+
+                <div class="floorBtn">
+                    <div class="row mb-4">
+                        <div class="col">
+                            <button type="button" class="btn btn-light floor-btn" onclick="onefloor()">1층</button>
+                            <button type="button" class="btn btn-light floor-btn" onclick="twofloor()">2층</button>
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="seatLive">
+                    <!-- 자바스크립트 채울공간 -->
+                </div>
+
             </div>
         </div>
     </body>
@@ -23,7 +37,7 @@
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
-    <!-- <script src="/"></script> -->
+    <script src="/js/seat/seat_live.js"></script> <!-- 일단 seat에 이어둠 -->
 </th:block>
 
 </html>

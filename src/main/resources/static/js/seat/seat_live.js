@@ -1,7 +1,7 @@
 onefloor();
 
 function onefloor(){
-    fetch('/seat/seatLive', { //요청경로
+    fetch('/seat/seat1Floor', { //요청경로
         method: 'POST',
         cache: 'no-cache',
         headers: {
@@ -10,14 +10,15 @@ function onefloor(){
         //컨트롤러로 전달할 데이터
         body: JSON.stringify({
            // 데이터명 : 데이터값
-            floor : 1
         })
     })
     .then((response) => {
+        //return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
         return response.json(); //나머지 경우에 사용
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
+        console.log(data);
         document.querySelector(".seatLive").innerHTML = '';
         let str = '';
         str = `
@@ -40,20 +41,30 @@ function onefloor(){
                     <div>
                     제 1열람실
                     </div>
-                    <div class="row">
-                        <div class="col-3 one-seat">
-                        <div>1</div>
-                        <div>지*영</div>
-                        <div>사용중</div>
-                        <div>(0782)</div>
-                        </div>
-                        <div class="col-3 one-seat">
-                        <div>2</div>
-                        </div>
-                        <div class="col-3 one-seat">
-                        <div>3</div>
-                        </div>
-                        <div class="col-3 one-seat">4</div>
+                    <div class="row">`
+                        for (let i = 0; i < 4; i++) {
+                            const e = data[i];
+                            if (e.memberVO == null) {
+                                str += `
+                                <div class="col-3 one-seat">
+                                <div>${e.seatNum}</div>
+                                <div>&nbsp;</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div></div>
+                                </div>
+                                `
+                            } else {
+                                str += `
+                                <div class="col-3 one-seat">
+                                <div>${e.seatNum}</div>
+                                <div>${e.memberVO.memberName}</div>
+                                <div>${e.seatStatusVO.statusName}</div>
+                                <div>(${e.memberVO.memberTel})</div>
+                                </div>
+                                `
+                            }
+                        }
+                        str += `
                     </div>
                     <div class="row mt-5">
                         <div class="col-3 one-seat">5</div>
