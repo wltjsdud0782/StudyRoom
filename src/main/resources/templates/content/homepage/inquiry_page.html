@@ -31,13 +31,38 @@
                         <td>작성일</td>
                     </tr>
                     <th:block th:each="board , state : ${boardList}">
-                        <tr>
+                        <tr class="admin-answer">
                             <td>[[${#lists.size(boardList) - state.index}]]</td>
-                            <th:block th:if="${board.boardSecret} == 'NO'">
-                                <td th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]</td>
+                            <th:block th:if="${session.loginInfo != null}">
+                                <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
+                                    <td th:onclick="goDetailSelectAdmin([[${board.boardCode}]], this)">[[${board.boardTitle}]]</td>
+                                </th:block>
+
+                                <th:block th:unless="${session.loginInfo.isAdmin == 'ADMIN'}">
+                                    <th:block th:if="${board.boardSecret == 'NO'}">
+                                        <td th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]</td>
+                                    </th:block>
+
+                                    <th:block th:unless="${board.boardSecret == 'NO'}">
+                                        <th:block th:if="${session.loginInfo.memberId == board.boardWriter}">
+                                            <td th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]</td>
+                                        </th:block>
+
+                                        <th:block th:unless="${session.loginInfo.memberId == board.boardWriter}">
+                                            <td>비밀글입니다.</td>
+                                        </th:block>
+                                    </th:blocK>
+                                </th:block>
                             </th:block>
-                            <th:block th:unless="${board.boardSecret} == 'NO'">
-                                <td>비밀글입니다.</td>
+
+                            <th:block th:if="${session.loginInfo == null}">
+                                <th:block th:if="${board.boardSecret == 'NO'}">
+                                    <td th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]</td>
+                                </th:block>
+
+                                <th:block th:unless="${board.boardSecret == 'NO'}">
+                                    <td>비밀글입니다.</td>
+                                </th:block>
                             </th:block>
                             <td>[[${board.boardWriter}]]</td>
                             <td>[[${board.boardDate}]]</td>
@@ -50,9 +75,6 @@
 
     <div class="row justify-content-center">
         <div class="col-10">
-            <th:bolck th:if="${session.loginInfo == null}">
-
-            </th:bolck>
             <th:bolck th:if="${session.loginInfo != null}">
                 <div class="inquiry_btn">
                     <input type="button" value="내가 쓴글">
