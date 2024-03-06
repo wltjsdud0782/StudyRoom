@@ -33,6 +33,7 @@
             , DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') BOARD_DATE
             , BOARD_WRITER
             , BOARD_SECRET
+            , BOARD_CONTENT
         FROM STUDYROOM_BOARD
     </select>
 
