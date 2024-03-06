@@ -15,30 +15,38 @@ public class SeatServiceImpl implements SeatService{
     @Autowired
     private SqlSessionTemplate sqlSession;
 
-    @Override
+    @Override // 좌석예약 조회
     public List<SeatVO> seatList() {
         return sqlSession.selectList("seatMapper.seatList");
     }
 
-    @Override
+    @Override // 예약되어있는 상태로 좌석예약 조회
     public SeatVO moveAndOut(int memberCode) {
         return sqlSession.selectOne("seatMapper.moveAndOut", memberCode);
     }
 
-    @Override
+    @Override // 입실
     @Transactional(rollbackFor = Exception.class)
     public void inSeat(SeatVO seatVO) {
         sqlSession.update("seatMapper.inSeat", seatVO);
         sqlSession.insert("seatMapper.inMem", seatVO);
     }
 
-    @Override
+    @Override // 퇴실
     @Transactional (rollbackFor = Exception.class)
     public void outSeat(SeatVO seatVO) {
         sqlSession.update("seatMapper.outSeat", seatVO);
         sqlSession.update("seatMapper.outMem", seatVO);
     }
 
+    @Override // 자리이동
+    @Transactional (rollbackFor = Exception.class)
+    public void moveSeat(SeatVO seatVO) {
+        sqlSession.delete("seatMapper.outSeat", seatVO);
+        sqlSession.update("seatMapper.inSeat", seatVO);
+    }
+
+    // 이용권 구입화면
     @Override
     public List<ChargeVO> chargeList() {
         return sqlSession.selectList("seatMapper.chargeList");

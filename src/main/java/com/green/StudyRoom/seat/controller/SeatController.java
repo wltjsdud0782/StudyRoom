@@ -71,6 +71,16 @@ public class SeatController {
         return "redirect:/seat/seatLive";
     }
 
+    @GetMapping("/moveSeat") // 자리이동 눌렀을때
+    public String moveSeat(HttpSession session, SeatVO seatVO){
+        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+        seatVO.setMemberVO(loginInfo);
+        seatVO.setMemberCode(seatVO.getMemberVO().getMemberCode());
+
+        seatService.moveSeat(seatVO);
+        return "redirect:/seat/seatLive";
+    }
+
     @GetMapping("/chargeBuy") // 이용권구매 눌렀을때
     public String chargeBuy(Model model){
         model.addAttribute("chargeList",seatService.chargeList());
