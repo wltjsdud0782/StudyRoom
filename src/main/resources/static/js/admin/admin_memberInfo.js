@@ -28,7 +28,7 @@ function memberInfo(memberCode, idx) {
             str += `  
                         <form action="/admin/uptMemberInfo" method="post">
                         <input type="hidden" name="memberCode" value="${memberCode}">
-                            <h4>Info&ensp;#${idx}</h4>
+                            <h4>&nbsp;Info&ensp;#${idx}</h4>
                             <table class="adminContainer-table">
                                 <colgroup>
                                     <col width="33%">
