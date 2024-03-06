@@ -7,11 +7,12 @@ body {
     width: 90%;
 }
 
-.btnDiv input {
+.btnDiv input, select {
     width: 120px;
     height: 40px;
     border: 1px solid #ccc;
     background-color: #fff;
+    text-align: center;
 }
 
 .title {
@@ -31,7 +32,7 @@ body {
 
 .adminContainer-table-tbody {
     display: block;
-    height: 269px;
+    height: 314px;
     overflow-y: scroll;
 }
 
@@ -101,7 +102,7 @@ body {
 
 .adminContainer-table-tbody22 {
     display: block;
-    height: 44vh;
+    height: 43.8vh;
     overflow-y: scroll;
 }
 

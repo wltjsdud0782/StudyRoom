@@ -59,6 +59,10 @@
             , MEMBER_CODE
             , IS_ADMIN
         FROM STUDYROOM_MEMBER
+        <if test='searchValue != null and !searchValue.equals("")'>
+            WHERE ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+        </if>
+        ORDER BY MEMBER_CODE DESC
     </select>
 
     <!-- 채팅받을 사람 -->
