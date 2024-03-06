@@ -28,6 +28,7 @@ public class StudyRoomBoardController {
     //메인 홈페이지
     @GetMapping("/mainHomepage")
     public String studyRoomBoard(){
+
         return "content/homepage/main_homepage" ;
 
     }
@@ -38,6 +39,7 @@ public class StudyRoomBoardController {
         List<BoardVO> boardList = boardService.selectBoard();
 
         model.addAttribute("boardList", boardList);
+
         return "content/homepage/inquiry_page";
     }
 

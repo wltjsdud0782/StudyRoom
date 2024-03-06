@@ -16,6 +16,12 @@
           <li><a href="#">리뷰</a></li>
           <li><a onclick="location.href='/board/inquiry'">문의</a></li>
           <li><a onclick="location.href='/board/wayToCome'">오시는길</a></li>
+
+          <th:block th:if="${session.loginInfo != null}">
+              <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
+                  <li><a onclick="location.href='/admin/info'">설정</a></li>
+              </th:block>
+          </th:block>
         </ul>
       </div>
 
