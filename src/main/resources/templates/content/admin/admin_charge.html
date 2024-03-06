@@ -10,9 +10,9 @@
 <th:block layout:fragment="contentFragment">
 
     <body>
-        <div class="adminContainer" style="padding: 2vh;">
+        <div class="adminContainer">
             <label class="title">
-                <h2>요금 변경</h2>
+                <h3>요금 변경</h3>
             </label>
             <div style="padding: 2vh;"></div>
             <div class="row">
@@ -20,13 +20,20 @@
                     <h4>&nbsp;Charge</h4>
                     <table class="table table-hover adminContainer-table">
                         <tbody class="adminContainer-table-tbody5">
-                            <tr th:each="charge : ${chargeList}">
-                                <!-- 클릭하면 해당 요금의 chargeCode 보내기 -->
-                                <td th:onclick="changeCharge([[${charge.chargeCode}]])">
-                                    <div>【[[${charge.chargeName}]]】</div>
-                                    <div style="font-style: oblique; font-size: larger;">[[${charge.chargeFee}]]원</div>
-                                </td>
-                            </tr>
+                            <th:block th:if="${#lists.isEmpty(chargeList)}">
+                                <tr>
+                                    <td>※ 등록된 요금제가 없습니다.</td>
+                                </tr>
+                            </th:block>
+                            <th:block th:unless="${#lists.isEmpty(chargeList)}">
+                                <tr th:each="charge : ${chargeList}">
+                                    <!-- 클릭하면 해당 요금의 chargeCode 보내기 -->
+                                    <td th:onclick="changeCharge([[${charge.chargeCode}]])">
+                                        <div>【[[${charge.chargeName}]]】</div>
+                                        <div style="font-style: oblique; font-size: larger;">[[${charge.chargeFee}]]원</div>
+                                    </td>
+                                </tr>
+                            </th:block>                       
                         </tbody>
                     </table>
                     <div style="padding: 2vh;"></div>

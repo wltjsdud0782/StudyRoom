@@ -26,7 +26,7 @@ function goChat(memberCode) {
             whoIs.replaceChildren();
             let str = '';
             str += `
-            <input type="text" value="@${data.memberName}" style="text-align: center;" readonly>&nbsp;
+            <input type="text" value="@${data.memberName}" readonly>&nbsp;
             `;
             whoIs.insertAdjacentHTML('afterbegin', str)
         })

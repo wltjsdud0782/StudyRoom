@@ -16,7 +16,8 @@ body {
 }
 
 .title {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 3px solid #000000;
+    margin-top: 60px;
 }
 
 .adminContainer-table {
@@ -50,17 +51,21 @@ body {
 }
 
 .adminContainer-table-tbody::-webkit-scrollbar {
-    width: 10px;  /* 스크롤바의 너비 */
+    width: 10px;
+    /* 스크롤바의 너비 */
 }
 
 .adminContainer-table-tbody::-webkit-scrollbar-thumb {
-    height: 30%; /* 스크롤바의 길이 */
-    background: #000000; /* 스크롤바의 색상 */
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: #000000;
+    /* 스크롤바의 색상 */
     border-radius: 10px;
 }
 
 .adminContainer-table-tbody::-webkit-scrollbar-track {
-    background: #ccc;  /*스크롤바 뒷 배경 색상*/
+    background: #ccc;
+    /*스크롤바 뒷 배경 색상*/
 }
 
 /* (Message)----------------------------------------------- */
@@ -83,17 +88,21 @@ body {
 }
 
 .adminContainer-table-tbody2::-webkit-scrollbar {
-    width: 10px;  /* 스크롤바의 너비 */
+    width: 10px;
+    /* 스크롤바의 너비 */
 }
 
 .adminContainer-table-tbody2::-webkit-scrollbar-thumb {
-    height: 30%; /* 스크롤바의 길이 */
-    background: #000000; /* 스크롤바의 색상 */
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: #000000;
+    /* 스크롤바의 색상 */
     border-radius: 10px;
 }
 
 .adminContainer-table-tbody2::-webkit-scrollbar-track {
-    background: #ccc;  /*스크롤바 뒷 배경 색상*/
+    background: #ccc;
+    /*스크롤바 뒷 배경 색상*/
 }
 
 .adminContainer-table tfoot {
@@ -112,17 +121,21 @@ body {
 }
 
 .adminContainer-table-tbody22::-webkit-scrollbar {
-    width: 10px;  /* 스크롤바의 너비 */
+    width: 10px;
+    /* 스크롤바의 너비 */
 }
 
 .adminContainer-table-tbody22::-webkit-scrollbar-thumb {
-    height: 30%; /* 스크롤바의 길이 */
-    background: #000000; /* 스크롤바의 색상 */
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: #000000;
+    /* 스크롤바의 색상 */
     border-radius: 10px;
 }
 
 .adminContainer-table-tbody22::-webkit-scrollbar-track {
-    background: #ccc;  /*스크롤바 뒷 배경 색상*/
+    background: #ccc;
+    /*스크롤바 뒷 배경 색상*/
 }
 
 /* (Charge)----------------------------------------------- */
@@ -144,17 +157,21 @@ body {
 }
 
 .adminContainer-table-tbody5::-webkit-scrollbar {
-    width: 10px;  /* 스크롤바의 너비 */
+    width: 10px;
+    /* 스크롤바의 너비 */
 }
 
 .adminContainer-table-tbody5::-webkit-scrollbar-thumb {
-    height: 30%; /* 스크롤바의 길이 */
-    background: #000000; /* 스크롤바의 색상 */
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: #000000;
+    /* 스크롤바의 색상 */
     border-radius: 10px;
 }
 
 .adminContainer-table-tbody5::-webkit-scrollbar-track {
-    background: #ccc;  /*스크롤바 뒷 배경 색상*/
+    background: #ccc;
+    /*스크롤바 뒷 배경 색상*/
 }
 
 #charge-container {
@@ -163,6 +180,6 @@ body {
 
 /* (Log)----------------------------------------------- */
 
-.logList-form-div{
+.logList-form-div {
     border: 1px solid #ccc;
 }

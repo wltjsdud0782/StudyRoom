@@ -10,9 +10,9 @@
 <th:block layout:fragment="contentFragment">
 
     <body>
-        <div class="adminContainer" style="padding: 2vh;">
+        <div class="adminContainer">
             <label class="title">
-                <h2>메세지</h2>
+                <h3>메세지</h3>
                 <div>
                     고쳐야할 점 :
                     1. 보내고 받은 메세지 구분하기 >>, << / 2. 메세지 구현 더 자세히 만들기 </div>
@@ -42,7 +42,7 @@
                                                 <form action="/admin/sendAdmMsg" method="post">
                                                     <div class="btnDiv input">
                                                         <span class="whoIs">
-                                                            <input type="text" placeholder="@보낼사람" readonly>&nbsp;
+                                                            <input type="text" value="@보낼사람" readonly>&nbsp;
                                                         </span>
                                                         <!-- @@@@@채팅@@@@@ -->
                                                         <input type="text" style="width: 60%; text-align: start;"
@@ -59,7 +59,7 @@
                         </div>
                         <div class="col">
                             <div class="row">
-                                <div style="padding: 1.2rem;"></div>
+                                <div style="padding: 2vh;"></div>
                                 <div>
                                     <h4>&nbsp;Send To</h4>
                                     <table class="table table-hover adminContainer-table">

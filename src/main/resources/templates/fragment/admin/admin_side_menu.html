@@ -1,49 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    <th:block th:fragment="adminSideFragment">
-        <div style="padding-top: 2vh;"></div> <!-- 띄우기 -->
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active" onclick="location.href='/admin/info'">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">회원 관리</h5>
-                </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action" onclick="location.href='/admin/msg'">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">메세지</h5>
-                </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action" onclick="location.href='/admin/seat'">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">좌석 관리</h5>
-                </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action" onclick="location.href='/admin/log'">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">로그 확인</h5>
-                </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action" onclick="location.href='/admin/charge'">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">요금 변경</h5>
-                </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action disabled" onclick="location.href='/admin/sales'">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">매출 관리</h5>
-                </div>
-            </a>
-            <div style="font-size: small; padding-top: 10px;">
-                <div><font color="red">※</font> 페이지 표시하기</div>            
-            </div>         
+<th:block th:fragment="adminSideFragment">
+    <div class="row justify-content-center" style="height: 700px; width: 200px;">
+        <div class="col">
+            <div class="sideMenu">
+                <ul>
+                    <li><a href="#" class="bi bi-person-circle" onclick="location.href='/admin/info'">회원 관리</a></li>
+                    <li><a href="#" class="bi bi-credit-card" onclick="location.href='/admin/msg'">메세지</a></li>
+                    <li><a href="#" class="bi bi-calendar-check" onclick="location.href='/admin/seat'">좌석 관리</a></li>
+                    <li><a href="#" class="bi bi-chat-left-dots1" onclick="location.href='/admin/log'">로그 확인</a></li>
+                    <li><a href="#" class="bi bi-chat-left-dots2" onclick="location.href='/admin/charge'">요금 변경</a></li>
+                    <li><a href="#" class="bi bi-chat-left-dots3" onclick="location.href='/admin/sales'">매출 관리</a></li>
+                </ul>
+            </div>
         </div>
-    </th:block>
-</body>
+        <div style="font-size: small; padding-left: 30%;"><font color="red">※</font>수정 필요함 <font color="red">!!!!</font></div>
+    </div>
+</th:block>
 
 </html>
