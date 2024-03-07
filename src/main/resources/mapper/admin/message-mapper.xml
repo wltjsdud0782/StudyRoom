@@ -12,6 +12,10 @@
         <result column="MESSAGE_DATE" property="messageDate"/>
         <result column="MEMBER_CODE" property="memberCode"/>
         <result column="SEAT_NUM" property="seatNum"/>
+
+        <result column="MEMBER_NAME" property="memberName"/>
+        <result column="MEMBER_ID" property="memberId"/>
+        <result column="IS_ADMIN" property="isAdmin"/>
     </resultMap>
 
     <!-- 사용자 메세지 IN -->
@@ -22,14 +26,16 @@
             SEAT_NUM
             , MEMBER_CODE
             , MESSAGE_CONTENT
+            , MESSAGE_CODE
         ) VALUES (
             #{seatNum}
             , #{memberCode}
             , #{messageContent}
+            , #{messageCode}
         )
     </insert>
 
-    <!-- 사용자 메세지 OUT -->
+    <!-- 모든 메세지 조회 -->
         <!-- 좌석번호 : n번 -->
         <!-- 사용자 : 이름 -->
         <!-- 내용 : ㅇㅇ -->
@@ -39,13 +45,43 @@
             , SEAT_NUM
             , MESSAGE.MEMBER_CODE
             , MEMBER_NAME
+            , MEMBER_ID
+            , IS_ADMIN
             , MESSAGE_DATE
         FROM STUDYROOM_MESSAGE MESSAGE INNER JOIN STUDYROOM_MEMBER MEMBER
         ON MESSAGE.MEMBER_CODE = MEMBER.MEMBER_CODE
     </select>
 
+    <!-- 채팅보낼 사람 조회 -->
+    <select id="selectWho" resultMap="memberMapper.member">
+        SELECT MEMBER_NAME
+            , MEMBER_ID
+            , MEMBER_CODE
+            , IS_ADMIN
+        FROM STUDYROOM_MEMBER
+        <if test='searchValue != null and !searchValue.equals("")'>
+            WHERE ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+        </if>
+        ORDER BY MEMBER_CODE DESC
+    </select>
 
+    <!-- 채팅받을 사람 -->
+    <select id="selectMan" resultMap="memberMapper.member">
+        SELECT MEMBER_NAME
+            , MEMBER_ID
+            , MEMBER_CODE
+        FROM STUDYROOM_MEMBER
+        WHERE MEMBER_CODE = #{memberCode}
+    </select>
 
+    <!-- 관리자가 보내는 메세지 -->
+    <insert id="insertAdmMsg">
+        INSERT INTO STUDYROOM_MESSAGE (
+            MESSAGE_CONTENT
+        ) VALUES (
+            #{messageContent}
+        )
+    </insert>
 
 </mapper>
 

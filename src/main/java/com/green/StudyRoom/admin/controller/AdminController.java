@@ -1,7 +1,8 @@
 package com.green.StudyRoom.admin.controller;
 
-import com.green.StudyRoom.admin.service.AdminServiceImpl;
+import com.green.StudyRoom.admin.service.*;
 import com.green.StudyRoom.admin.vo.ChargeVO;
+import com.green.StudyRoom.admin.vo.InfoSearchVO;
 import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.member.service.MemberServiceImpl;
 import com.green.StudyRoom.member.vo.MemberVO;
@@ -16,20 +17,25 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+    //회원관리
     @Resource(name="adminService")
     private AdminServiceImpl adminService;
-    @Resource(name="memberService")
-    private MemberServiceImpl memberService;
-//    @Resource(name="seatService")
-//    private SeatServiceImpl seatService;
+    //요금관리
+    @Resource(name="chargeService")
+    private ChargeServiceImpl chargeService;
+    //채팅관리
+    @Resource(name="messageService")
+    private MessageServiceImpl messageService;
 
     //(회원 관리)///////////////////////////////////////////// //
     @RequestMapping("/info")
-    public String adminInfo(Model model){
-        List<MemberVO> memberList = adminService.selectMemberInfo();
+    public String adminInfo(Model model, InfoSearchVO infoSearchVO){
+        //InfoSearchVO 검색기능
+        List<MemberVO> memberList = adminService.selectMemberInfo(infoSearchVO);
         model.addAttribute("memberList", memberList);
         return "content/admin/admin_Info";
     }
+
     //회원정보 상세조회하기 (비동기)
     @ResponseBody
     @PostMapping("/changeInfo")
@@ -46,15 +52,28 @@ public class AdminController {
     }
 
     //(메세지)//////////////////////////////////////////////// //
-    @GetMapping("/msg")
-    public String adminMessage(){
+    @RequestMapping("/msg")
+    public String adminMessage(Model model, InfoSearchVO infoSearchVO){
+        List<MessageVO> chtList = messageService.selectMessage();
+        model.addAttribute("chtList", chtList);
+        //InfoSearchVO 검색기능
+        List<MemberVO> msgList = messageService.selectWho(infoSearchVO);
+        model.addAttribute("msgList", msgList);
         return "content/admin/admin_message";
     }
 
-    @PostMapping("/sendMsg")
+    //채팅보낼 사람 정하기 (비동기)
+    @ResponseBody
+    @PostMapping("/who")
+    public MemberVO selectMan(@RequestParam(name="memberCode") int memberCode){
+        MemberVO member = messageService.selectMan(memberCode);
+        return member;
+    }
+
+    //채팅 보내기
+    @PostMapping("/sendAdmMsg")
     public String sendMessage(MessageVO messageVO){
-        adminService.insertMessage(messageVO);
-        System.out.println(messageVO);
+        messageService.insertAdmMsg(messageVO);
         return "redirect:/admin/msg";
     }
 
@@ -67,7 +86,7 @@ public class AdminController {
     //(요금 변경)///////////////////////////////////////////// //
     @GetMapping("/charge")
     public String adminCharge(Model model){
-        List<ChargeVO> chargeList = adminService.selectCharge();
+        List<ChargeVO> chargeList = chargeService.selectCharge();
         model.addAttribute("chargeList", chargeList);
         return "content/admin/admin_charge";
     }
@@ -75,7 +94,7 @@ public class AdminController {
     // 요금 등록하기
     @PostMapping("/setCharge")
     public String setCharge(ChargeVO chargeVO){
-        adminService.insertCharge(chargeVO);
+        chargeService.insertCharge(chargeVO);
         return "redirect:/admin/charge";
     }
 
@@ -84,7 +103,7 @@ public class AdminController {
     @PostMapping("/getCharge")
     public ChargeVO changeCharge(@RequestParam(name = "chargeCode") int chargeCode){
         //Charge의 List 받아오기
-        ChargeVO chargeVO = adminService.getCharge(chargeCode);
+        ChargeVO chargeVO = chargeService.getCharge(chargeCode);
         return chargeVO;
     }
 
@@ -92,14 +111,14 @@ public class AdminController {
     @PostMapping("/uptCharge")
     public String uptCharge(ChargeVO chargeVO){
         //Charge의 List 받아오기
-        adminService.uptCharge(chargeVO);
+        chargeService.uptCharge(chargeVO);
         return "redirect:/admin/charge";
     }
 
     // 요금 삭제하기
     @GetMapping("/delCharge")
     public String delCharge(@RequestParam(name="chargeCode") int chargeCode){
-        adminService.delCharge(chargeCode);
+        chargeService.delCharge(chargeCode);
         System.out.println("@"+chargeCode);
         return "redirect:/admin/charge";
     }

@@ -10,37 +10,45 @@
 <th:block layout:fragment="contentFragment">
 
     <body>
-        <div class="adminContainer" style="padding: 2vh;">
+        <div class="adminContainer">
             <label class="title">
-                <h2>요금 변경</h2>
+                <h3>요금 변경</h3>
             </label>
             <div style="padding: 2vh;"></div>
             <div class="row">
                 <div class="col">
-                    <h4>Charge</h4>
+                    <h4>&nbsp;Charge</h4>
                     <table class="table table-hover adminContainer-table">
                         <tbody class="adminContainer-table-tbody5">
-                            <tr th:each="charge : ${chargeList}">
-                                <!-- 클릭하면 해당 요금의 chargeCode 보내기 -->
-                                <td th:onclick="changeCharge([[${charge.chargeCode}]])">
-                                    <div>【[[${charge.chargeName}]]】</div>
-                                    <div style="font-style: oblique; font-size: larger;">[[${charge.chargeFee}]]원</div>
-                                </td>
-                            </tr>
+                            <th:block th:if="${#lists.isEmpty(chargeList)}">
+                                <tr>
+                                    <td>※ 등록된 요금제가 없습니다.</td>
+                                </tr>
+                            </th:block>
+                            <th:block th:unless="${#lists.isEmpty(chargeList)}">
+                                <tr th:each="charge : ${chargeList}">
+                                    <!-- 클릭하면 해당 요금의 chargeCode 보내기 -->
+                                    <td th:onclick="changeCharge([[${charge.chargeCode}]])">
+                                        <div>【[[${charge.chargeName}]]】</div>
+                                        <div style="font-style: oblique; font-size: larger;">[[${charge.chargeFee}]]원</div>
+                                    </td>
+                                </tr>
+                            </th:block>                       
                         </tbody>
                     </table>
                     <div style="padding: 2vh;"></div>
-                    <h4>Register</h4>
+                    <h4>&nbsp;Register</h4>
                     <div id="charge-container">
                         <form action="/admin/setCharge" method="post">
                             <table class="adminContainer-table">
                                 <colgroup>
-                                    <col width="9%">
+                                    <col width="6%">
                                     <col width="5%">
+                                    <col width="28%">
+                                    <col width="7%">
+                                    <col width="5%">
+                                    <col width="28%">
                                     <col width="*">
-                                    <col width="15%">
-                                    <col width="5%">
-                                    <col width="30%">
                                 </colgroup>
                                 <tbody>
                                     <tr>
@@ -59,7 +67,8 @@
                                             </div>
                                         </td>
                                         <td class="charge-td">
-                                            <input type="text" name="chargeName" class="nameInput" placeholder="입력해주세요."
+                                            <input type="text" name="chargeName" class="nameInput" 
+                                                placeholder="요금명을 입력해주세요."
                                                 style="font-style: oblique;">
                                         </td>
                                         <td>
@@ -78,17 +87,26 @@
                                         </td>
                                         <td class="charge-td">
                                             <input type="text" name="chargeFee" class="chargeInput"
-                                                placeholder="입력해주세요." style="font-style: oblique;">
+                                                placeholder="가격을 입력해주세요." 
+                                                style="font-style: oblique;">
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <div class="btnDiv">
+                                                        <input type="submit" value="요금 등록" class="not-null-btn">&nbsp;
+                                                        <input type="button" value="취소" onclick="window.location.reload()">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div style="padding: 2vh;"></div>
                             <div>
-                                <div class="text-start">
-                                    <input type="submit" value="요금 등록" class="not-null-btn">&nbsp;
-                                    <input type="button" value="삭제" class="not-null-btn" disabled>&nbsp;
-                                    <input type="button" value="취소" onclick="window.location.reload()">
+                                <div class="btnDiv">
+                                    <input type="button" value="삭제" class="not-null-btn" disabled>
                                 </div>
                             </div>
                         </form>

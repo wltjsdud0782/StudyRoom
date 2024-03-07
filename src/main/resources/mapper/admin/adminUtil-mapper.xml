@@ -11,11 +11,13 @@
             , MEMBER_CODE
             , IS_ADMIN
         FROM studyroom_member
+        <if test='searchValue != null and !searchValue.equals("")'>
+            WHERE ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+        </if>
         ORDER BY MEMBER_CODE DESC
     </select>
 
     <!-- 회원정보 상세 조회 -->
-    <!-- 좌석번호는 잠시 비워둠 -->
     <select id="selectMemberDetailInfo" resultMap="memberMapper.member">
         SELECT MEMBER_NAME
             , MEMBER_ID
@@ -24,7 +26,8 @@
             , MEMBER_ADDR
             , MEMBER_DETAIL
             , IS_ADMIN
-        FROM studyroom_member
+            , DATE_FORMAT(MEMBER_BIRTH, '%Y-%m-%d') MEMBER_BIRTH
+        FROM STUDYROOM_MEMBER
         WHERE MEMBER_CODE = #{memberCode}
     </select>
 

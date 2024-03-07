@@ -32,7 +32,7 @@
             , CHARGE_NAME
             , CHARGE_FEE
         FROM STUDYROOM_CHARGE
-        ORDER BY CHARGE_FEE DESC
+        ORDER BY CHARGE_CODE DESC
     </select>
 
     <select id="chargeBuy" resultMap="chargeMapper.charge">

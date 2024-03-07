@@ -1,4 +1,4 @@
-function memberInfo(memberCode) {
+function memberInfo(memberCode, idx) {
     fetch('/admin/changeInfo', { //요청경로
         method: 'POST',
         cache: 'no-cache',
@@ -28,7 +28,7 @@ function memberInfo(memberCode) {
             str += `  
                         <form action="/admin/uptMemberInfo" method="post">
                         <input type="hidden" name="memberCode" value="${memberCode}">
-                            <h4>Info</h4>
+                            <h4>&nbsp;Info&ensp;#${idx}</h4>
                             <table class="adminContainer-table">
                                 <colgroup>
                                     <col width="33%">
@@ -54,19 +54,12 @@ function memberInfo(memberCode) {
                                         <td>
                                             <div class="row">
                                                 <div class="col">
-                                                    【성별】 : ${data.memberGender}
+                                                    【전화번호】 : ${data.memberTel}                                                   
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col Info-border">
-                                                    【전화번호】 : ${data.memberTel}
-                                                </div>
-                                            </div>
-                                        </td>
+                                    <tr>                                        
                                         <td>
                                             <div class="row">
                                                 <div class="col Info-border">
@@ -76,8 +69,15 @@ function memberInfo(memberCode) {
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col Info-border">
                                                     【상세주소】 : ${data.memberDetail}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col">
+                                                    【생년월일】 : ${data.memberBirth}
                                                 </div>
                                             </div>
                                         </td>
@@ -86,14 +86,14 @@ function memberInfo(memberCode) {
                                         <td>
                                             <div class="row">
                                                 <div class="col Info-border">
-                                                    【상태(좌석)】 : <font color="red" ;>seatNum</font> 추가하기
+                                                    【성별】 : ${data.memberGender}                                                    
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col Info-border">
-                                                    【권한】 : ${data.isAdmin}
+                                                <div class="col Info-border">                                                   
+                                                    【상태(좌석)】 : <font color="red" ;>${data.seatNum}</font>
                                                 </div>
                                             </div>
                                         </td>
@@ -101,11 +101,26 @@ function memberInfo(memberCode) {
                                             <div class="row">
                                                 <div class="col">
                                                     【권한 변경】 :
-                                                    <select name="isAdmin">
-                                                        <option value="USER">회원</option>
-                                                        <option value="ARBEIT">알바생</option>
-                                                        <option value="ADMIN">관리자</option>
-                                                    </select>
+                                                    <select name="isAdmin">`;
+            if (data.isAdmin == 'USER') {
+                str += `
+                <option value="USER" selected>회원</option>
+                <option value="ARBEIT">알바생</option>
+                <option value="ADMIN">관리자</option>`;
+            }
+            else if (data.isAdmin == 'ARBEIT') {
+                str += `
+                <option value="USER">회원</option>
+                <option value="ARBEIT" selected>알바생</option>
+                <option value="ADMIN">관리자</option>`;
+            }
+            else if (data.isAdmin == 'ADMIN') {
+                str += `
+                <option value="USER">회원</option>
+                <option value="ARBEIT">알바생</option>
+                <option value="ADMIN" selected>관리자</option>`;
+            }
+            str += `</select>
                                                 </div>
                                             </div>
                                         </td>
@@ -113,7 +128,7 @@ function memberInfo(memberCode) {
                                 </tbody>
                             </table>
                             <div style="padding: 2vh;"></div>
-                            <div class="text-start input">
+                            <div class="btnDiv">
                                 <input type="submit" value="회원정보 변경">&nbsp;
                                 <input type="button" value="취소" onclick="window.location.reload()">
                             </div>

@@ -10,108 +10,78 @@
 <th:block layout:fragment="contentFragment">
 
     <body>
-        <div class="adminContainer" style="padding: 2vh;">
+        <div class="adminContainer">
             <label class="title">
-                <h2>회원 관리</h2>
+                <h3>회원 관리</h3>
                 <div>
-                    고쳐야할 점 /
-                    1. 변경하고도 해당 페이지 유지 /
-                    2. 좌석번호 넣기 /
-                    3. 권한 이름 변경해서 넣기
+                    고쳐야할 점 :
+                    1. 좌석번호 넣기 /
+                    2. 정보변경 범위 늘이기 /
                 </div>
             </label>
             <div style="padding: 2vh;"></div>
             <div class="row">
                 <div class="col">
-                    <h4>List</h4>
+                    <h4>&nbsp;Member</h4>
                     <table class="table table-hover adminContainer-table">
+                        <thead>
+                            <form action="/admin/info" method="post">
+                                <tr>
+                                    <td>
+                                        <div class="btnDiv">
+                                            <select name="searchType">
+                                                <option value="MEMBER_NAME"
+                                                    th:selected="${infoSearchVO.searchType == null or infoSearchVO.searchType == 'MEMBER_NAME'}">
+                                                    이름
+                                                </option>
+                                                <option value="MEMBER_ID"
+                                                    th:selected="${infoSearchVO.searchType == 'MEMBER_ID'}">
+                                                    아이디
+                                                </option>
+                                            </select>&nbsp;
+                                            <input type="text" name="searchValue"
+                                                th:value="${infoSearchVO.searchValue}">&nbsp;
+                                            <input type="submit" value="검색">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </form>
+                        </thead>
                         <tbody class="adminContainer-table-tbody">
-                            <tr th:each="member : ${memberList}" th:onclick="memberInfo([[${member.memberCode}]])">
-                                <td>
-                                    <div>
-                                        <span>[[${member.memberName}]] ([[${member.memberId}]])</span>
-                                    </div>                                   
-                                </td>
-                            </tr>
+                            <th:block th:if="${#lists.isEmpty(memberList)}">
+                                <tr>
+                                    <td>※ 회원정보가 존재하지 않습니다.</td>
+                                </tr>
+                            </th:block>
+                            <th:block th:unless="${#lists.isEmpty(memberList)}">
+                                <tr th:each="member, state : ${memberList}"
+                                    th:onclick="memberInfo([[${member.memberCode}]], [[${#lists.size(memberList) - state.index}]])">
+                                    <td>
+                                        <div>
+                                            <span>#[[${#lists.size(memberList) -
+                                                state.index}]]&ensp;[[${member.memberName}]]
+                                                ([[${member.memberId}]])</span>
+                                            <span style="float: right;">
+                                                <div>
+                                                    <th:block th:if="${member.isAdmin == 'USER'}">
+                                                        [회원]
+                                                    </th:block>
+                                                    <th:block th:if="${member.isAdmin == 'ARBEIT'}">
+                                                        [알바생]
+                                                    </th:block>
+                                                    <th:block th:if="${member.isAdmin == 'ADMIN'}">
+                                                        [관리자]
+                                                    </th:block>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </th:block>
                         </tbody>
                     </table>
                     <div style="padding: 2vh;"></div>
                     <div class="changeInfo-div">
-                        <h4 style="color: #ccc">Info</h4>
-                        <table class="adminContainer-table">
-                            <colgroup>
-                                <col width="33%">
-                                <col width="33%">
-                                <col width="*">
-                            </colgroup>
-                            <tbody id="changeInfo">
-                                <tr>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col Info-border">&nbsp;
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col Info-border">&nbsp;
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col">&nbsp;
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col Info-border">&nbsp;
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col Info-border">&nbsp;
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col">&nbsp;
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col Info-border">&nbsp;
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col Info-border">&nbsp;
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col">&nbsp;
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div style="padding: 2vh;"></div>
-                        <div class="text-start input">
-                            <input type="submit" value="회원정보 변경" disabled>&nbsp;
-                            <input type="button" value="취소" onclick="window.location.reload()" disabled>
-                        </div>
                     </div>
                 </div>
             </div>

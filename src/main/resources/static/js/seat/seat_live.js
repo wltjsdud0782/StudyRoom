@@ -701,15 +701,15 @@ function reservation(loginInfo){
                         <div class="col text-start">${selected_floor}층 ${selected_seat}번</div>
                     </div>
                     <div class="row">
-                        <div class="col text-end">예약자 아이디</div>
+                        <div class="col text-end">사용자 아이디</div>
                         <div class="col text-start">${loginInfo.memberId} </div>
                     </div>
                     <div class="row">
-                        <div class="col text-end">예약자명</div>
+                        <div class="col text-end">사용자명</div>
                         <div class="col text-start">${loginInfo.memberName}</div>
                     </div>
                     <div class="row">
-                        <div class="col text-end">예약자번호</div>
+                        <div class="col text-end">사용자번호</div>
                         <div class="col text-start">${loginInfo.memberTel}</div>
                     </div>
                     <div class="row">
@@ -737,9 +737,9 @@ function reservation(loginInfo){
 }
 
 function oneMore(){
-    const result = confirm('등록된 정보로 예약하시겠습니까?')
+    const result = confirm('등록된 정보로 입실하시겠습니까?')
     if(result){
-        alert('예약이 완료되었습니다.')
+        alert('입실이 완료되었습니다.')
         location.href = `/seat/inSeat?seatNum=${selected_seat}`;
     }
     else{
@@ -767,7 +767,7 @@ function seatMove(){
         const result = confirm('선택한 좌석으로 이동하시겠습니까?')
         if (result){
             alert('자리가 이동되었습니다.')
-            return ;
+            location.href = `/seat/moveSeat?seatNum=${selected_seat}`;
         }
         else {
             return ;

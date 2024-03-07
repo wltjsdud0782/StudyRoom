@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.Name;
 import javax.xml.crypto.KeySelector;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,7 @@ public class StudyRoomBoardController {
     //메인 홈페이지
     @GetMapping("/mainHomepage")
     public String studyRoomBoard(){
+
         return "content/homepage/main_homepage" ;
 
     }
@@ -38,6 +40,7 @@ public class StudyRoomBoardController {
         List<BoardVO> boardList = boardService.selectBoard();
 
         model.addAttribute("boardList", boardList);
+
         return "content/homepage/inquiry_page";
     }
 
@@ -129,4 +132,15 @@ public class StudyRoomBoardController {
 
         return "content/homepage/detail_select";
     }
+
+    //관리자 답변 게시글
+    @ResponseBody
+    @PostMapping("/goDetailSelectAdmin")
+    public BoardVO goDetailSelectAdmin(@RequestBody BoardVO boardVO){
+
+        BoardVO boardList = boardService.detailSelect(boardVO.getBoardCode());
+
+        return boardList;
+    }
+
 }

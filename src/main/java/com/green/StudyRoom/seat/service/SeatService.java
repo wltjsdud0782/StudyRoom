@@ -17,6 +17,9 @@ public interface SeatService {
 
     // 퇴실
     void outSeat(SeatVO seatVO);
+
+    // 자리이동
+    void moveSeat(SeatVO seatVO);
     
     // 이용권 구입 화면
     List<ChargeVO> chargeList();
