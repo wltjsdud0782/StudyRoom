@@ -76,7 +76,7 @@ function buyDetail(chargeCode, loginInfo) {
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button type="button" class="btn btn-outline-danger mt-4 buyCard" onclick="buyCard()">
+                        <button type="button" class="btn btn-outline-danger mt-4 buyCard" onclick="buyCard(${data})">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
                             <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"></path>
                             <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"></path>
@@ -111,7 +111,7 @@ function buyDetail(chargeCode, loginInfo) {
 
 }
 
-function buyCard() {
+function buyCard(data) {
     const result = confirm('카드로 결제하시겠습니까?')
     if (result) {
 
@@ -121,13 +121,13 @@ function buyCard() {
                 pg: "html5_inicis", //Test는 TC0ONETIME
                 pay_method: "card",
                 merchant_uid: "57008833-33006",
-                name: "상품명",
-                amount: 100, //금액
-                buyer_email: 'test@naver.com',
-                buyer_name: '코드쿡',
-                buyer_tel: '010-1234-5678',
-                buyer_addr: '서울특별시',
-                buyer_postcode: '123-456',
+                name: `${data.chargeName}`,
+                amount: `${data.chargeFee}`, //금액
+                buyer_email: 'wltjsdud13@naver.com',
+                buyer_name: `${loginInfo.memberName}`,
+                buyer_tel: `${loginInfo.memberTel}`,
+                buyer_addr: `${loginInfo.memberAddr + loginInfo.memberDetail}`,
+                buyer_postcode: `${loginInfo.postCode}`,
             },
             function (rsp) {
                 //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
@@ -136,7 +136,7 @@ function buyCard() {
 
                     //imp_178957754537 / 57008833-33006 / 100
                     console.log(rsp.imp_uid + ' / ' + rsp.merchant_uid + ' / ' + rsp.paid_amount);
-                    alert('결제 성공' + rsp.imp_uid);
+                    alert('결제 성공');
                 } else {
                     alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
                 }

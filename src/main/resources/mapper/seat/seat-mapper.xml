@@ -39,6 +39,7 @@
         SELECT
             CHARGE_NAME
             , CHARGE_FEE
+            , CHARGE_CODE
         FROM STUDYROOM_CHARGE
         WHERE CHARGE_CODE = #{chargeCode}
     </select>
@@ -117,6 +118,19 @@
         IN_OUT = 'OUT'
         WHERE MEMBER_CODE = #{memberCode}
     </update>
+
+
+
+    <!--  카드 결제 정보 추가  -->
+    <insert id="buyCard">
+        INSERT INTO APPROVAL (
+            MEMBER_CODE
+            , CHARGE_CODE
+        ) VALUES (
+            #{memberCode}
+            , #{chargeCode}
+        )
+    </insert>
 
 </mapper>
 
