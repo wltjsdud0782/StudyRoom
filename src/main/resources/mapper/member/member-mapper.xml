@@ -11,6 +11,7 @@
         <result column="MEMBER_NAME" property="memberName"/>
         <result column="MEMBER_TEL" property="memberTel"/>
         <result column="MEMBER_BIRTH" property="memberBirth"/>
+        <result column="POST_CODE" property="postCode"/>
         <result column="MEMBER_ADDR" property="memberAddr"/>
         <result column="MEMBER_DETAIL" property="memberDetail"/>
         <result column="MEMBER_GENDER" property="memberGender"/>
@@ -49,6 +50,7 @@
             , MEMBER_NAME
             , MEMBER_TEL
             , MEMBER_BIRTH
+            , POST_CODE
             , MEMBER_ADDR
             , MEMBER_DETAIL
             , MEMBER_GENDER
@@ -59,6 +61,7 @@
             , #{memberName}
             , #{memberTel}
             , #{memberBirth}
+            , #{postCode}
             , #{memberAddr}
             , #{memberDetail}
             , #{memberGender}
@@ -67,7 +70,11 @@
 
     <select id="login" resultMap="member">
         SELECT
-            *
+              MEMBER_ID
+            , MEMBER_PW
+
+            , MEMBER_IS_ADMIN
+
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_ID=#{memberId}
         AND MEMBER_PW=#{memberPw}
