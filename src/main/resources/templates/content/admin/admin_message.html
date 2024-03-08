@@ -36,7 +36,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                    <tfoot>
+                                    <tfoot class="table-light">
                                         <tr>
                                             <td>
                                                 <form action="/admin/sendAdmMsg" method="post">
@@ -63,7 +63,7 @@
                                 <div>
                                     <h4>&nbsp;Send To</h4>
                                     <table class="table table-hover adminContainer-table">
-                                        <thead>
+                                        <thead class="table-light">
                                             <form action="/admin/msg" method="post">
                                                 <tr>
                                                     <td>
@@ -78,7 +78,7 @@
                                                                     아이디
                                                                 </option>
                                                             </select>&nbsp;
-                                                            <input type="text" name="searchValue"
+                                                            <input type="text" name="searchValue" style="text-align: left;"
                                                                 th:value="${infoSearchVO.searchValue}">&nbsp;
                                                             <input type="submit" value="검색">
                                                         </div>

@@ -7,7 +7,8 @@ body {
     width: 90%;
 }
 
-.btnDiv input, select {
+.btnDiv input,
+select {
     width: 120px;
     height: 40px;
     border: 1px solid #ccc;
@@ -42,12 +43,18 @@ body {
     width: 100%;
 }
 
-#changeInfo tr {
+#changeInfo tr td {
     border: 1px solid #ccc;
+    height: 63px;
 }
 
-.Info-border {
-    border-right: 1px solid #ccc;
+.info-title {
+    text-align: center;
+}
+
+.info-border-title {
+    background-color: #3b3b3b;
+    color: white;
 }
 
 .adminContainer-table-tbody::-webkit-scrollbar {
@@ -66,6 +73,12 @@ body {
 .adminContainer-table-tbody::-webkit-scrollbar-track {
     background: #ccc;
     /*스크롤바 뒷 배경 색상*/
+}
+
+.numUpDown::-webkit-outer-spin-button,
+.numUpDown::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* (Message)----------------------------------------------- */
@@ -176,6 +189,10 @@ body {
 
 #charge-container {
     width: 100%;
+}
+
+.charge-title {
+    font-size: larger;
 }
 
 /* (Log)----------------------------------------------- */

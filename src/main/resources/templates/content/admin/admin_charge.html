@@ -30,8 +30,8 @@
                                 <tr th:each="charge : ${chargeList}">
                                     <!-- 클릭하면 해당 요금의 chargeCode 보내기 -->
                                     <td th:onclick="changeCharge([[${charge.chargeCode}]])">
-                                        <div>【[[${charge.chargeName}]]】</div>
-                                        <div style="font-style: oblique; font-size: larger;">[[${charge.chargeFee}]]원
+                                        <div>[[${charge.chargeName}]]</div>
+                                        <div style="font-size: larger;">&ensp;[[${charge.chargeFee}]]원
                                         </div>
                                     </td>
                                 </tr>
@@ -56,8 +56,8 @@
                                     <tr>
                                         <td>
                                             <div class="row">
-                                                <div class="col text-end">
-                                                    【요금명】
+                                                <div class="col text-end charge-title">
+                                                    요금 명
                                                 </div>
                                             </div>
                                         </td>
@@ -67,8 +67,8 @@
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col text-end">
-                                                    【기간(일)】
+                                                <div class="col text-end charge-title">
+                                                    기간(일)
                                                 </div>
                                             </div>
                                         </td>
@@ -78,8 +78,8 @@
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col text-end">
-                                                    【가격(원)】
+                                                <div class="col text-end charge-title">
+                                                    가격(원)
                                                 </div>
                                             </div>
                                         </td>

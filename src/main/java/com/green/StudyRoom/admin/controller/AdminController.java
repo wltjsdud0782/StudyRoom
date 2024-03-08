@@ -14,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
@@ -43,26 +45,24 @@ public class AdminController {
         return "content/admin/admin_Info";
     }
 
-    //회원정보 상세조회하기 (비동기)
+    //회원정보/좌석정보 조회하기
     @ResponseBody
-    @PostMapping("/changeInfo")
-    public MemberVO selectMemberDetailInfo(@RequestParam(name="memberCode") int memberCode){
-        MemberVO memberVO = adminService.selectMemberDetailInfo(memberCode);
-        return memberVO;
+    @PostMapping("/viewInfo")
+    public Map<String, Object> viewInfo(@RequestParam(name="memberCode") int memberCode){
+        System.out.println(memberCode);
+        MemberVO memberMap = adminService.selectMemberDetailInfo(memberCode);
+        SeatVO seatMap = adminService.selectSeatDetailInfo(memberCode);
+        Map<String, Object> map = new HashMap<>();
+        map.put("memberMap", memberMap);
+        map.put("seatMap", seatMap);
+        return map;
     }
 
-    //회원 좌석정보 상세조회하기 (비동기)
-    @ResponseBody
-    @PostMapping("/changeSeat")
-    public SeatVO selectSeatDetailInfo(@RequestParam(name="memberCode") int memberCode){
-        SeatVO seatVO = adminService.selectSeatDetailInfo(memberCode);
-        return seatVO;
-    }
-
-    //회원정보/회원권한 업데이트
-    @PostMapping("/uptMemberInfo")
-    public String uptMemberInfo(MemberVO memberVO){
+    //회원정보/좌석정보 업데이트
+    @PostMapping("/uptInfo")
+    public String uptAllInfo(MemberVO memberVO, SeatVO seatVO){
         adminService.uptMemberInfo(memberVO);
+        adminService.uptSeatInfo(seatVO);
         return "redirect:/admin/info";
     }
 
@@ -139,7 +139,7 @@ public class AdminController {
     }
 
     //(로그 확인)///////////////////////////////////////////// //
-    @GetMapping("/log")
+    @RequestMapping ("/log")
     public String adminLog(Model model, MemberVO memberVO){
         //현재 들어가있는 데이터가 없음
         List<LogViewVO> logList = logViewService.selectAllLog(memberVO);

@@ -43,8 +43,8 @@ function changeCharge(chargeCode) {
                                     <tr>
                                         <td>
                                             <div class="row">
-                                                <div class="col text-end">
-                                                    【요금명】
+                                                <div class="col text-end charge-title">
+                                                    요금 명
                                                 </div>
                                             </div>
                                         </td>                                       
@@ -53,8 +53,8 @@ function changeCharge(chargeCode) {
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col text-end">
-                                                    【기간(일)】
+                                                <div class="col text-end charge-title">
+                                                    기간(일)
                                                 </div>
                                             </div>
                                         </td>
@@ -63,8 +63,8 @@ function changeCharge(chargeCode) {
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col text-end">
-                                                    【가격(원)】
+                                                <div class="col text-end charge-title">
+                                                    가격(원)
                                                 </div>
                                             </div>
                                         </td>                                        
@@ -110,6 +110,10 @@ document.querySelector('.not-null-btn').addEventListener('click', function (e) {
         alert('빈칸에 값을 입력해주세요!')
     }
     else if (document.querySelector('.chargeInput').value == '') {
+        e.preventDefault() //빈값 방지
+        alert('빈칸에 값을 입력해주세요!')
+    }
+    else if (document.querySelector('.dateInput').value == '') {
         e.preventDefault() //빈값 방지
         alert('빈칸에 값을 입력해주세요!')
     }

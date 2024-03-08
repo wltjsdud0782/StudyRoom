@@ -17,12 +17,18 @@
         ORDER BY MEMBER_CODE DESC
     </select>
 
+
+
+
+
+
     <!-- 회원정보 상세 조회 -->
     <select id="selectMemberDetailInfo" resultMap="memberMapper.member">
         SELECT MEMBER_NAME
             , MEMBER_ID
             , MEMBER_GENDER
             , MEMBER_TEL
+            , POST_CODE
             , MEMBER_ADDR
             , ADDR_DETAIL
             , IS_ADMIN
@@ -37,22 +43,39 @@
         SET
         IS_ADMIN = #{isAdmin}
         , MEMBER_TEL = #{memberTel}
+        , POST_CODE = #{postCode}
         , MEMBER_ADDR = #{memberAddr}
         , ADDR_DETAIL = #{addrDetail}
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 
-    <!-- 좌석 정보 조회 (개선필요) -->
+
+
+
+
+
+
+    <!-- 좌석 정보 조회 -->
     <select id="selectSeatDetailInfo" resultMap="seatMapper.seat">
         SELECT SEAT_NUM
-                ,SEAT_POWER
+                , SEAT_POWER
                 , SEAT_FLOOR
                 , AGE_CODE
                 , SEAT.MEMBER_CODE
         FROM STUDYROOM_SEAT SEAT
         INNER JOIN STUDYROOM_MEMBER MEMBER
-        WHERE MEMBER_CODE = #{memberCode}
+        ON SEAT.MEMBER_CODE = MEMBER.MEMBER_CODE
+        WHERE SEAT.MEMBER_CODE = #{memberCode}
     </select>
+
+    <!-- 좌석 정보 업데이트 -->
+    <update id="uptSeatInfo">
+        UPDATE STUDYROOM_SEAT
+        SET
+        SEAT_POWER = #{seatPower}
+
+        WHERE MEMBER_CODE = #{memberCode}
+    </update>
 
 
 </mapper>

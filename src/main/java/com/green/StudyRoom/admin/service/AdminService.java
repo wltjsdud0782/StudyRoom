@@ -21,5 +21,8 @@ public interface AdminService {
     //좌석정보 상세조회하기 (비동기)
     SeatVO selectSeatDetailInfo(int memberCode);
 
+    //좌석정보 업데이트하기
+    void uptSeatInfo(SeatVO seatVO);
+
 }
 

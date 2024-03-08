@@ -19,7 +19,7 @@
                 <div class="col">
                     <h4>&nbsp;Search</h4>
                     <table class="table table-hover adminContainer-table">
-                        <thead>
+                        <thead class="table-light">
                             <form action="/admin/info" method="post">
                                 <tr>
                                     <td>
@@ -34,7 +34,7 @@
                                                     아이디
                                                 </option>
                                             </select>&nbsp;
-                                            <input type="text" name="searchValue"
+                                            <input type="text" name="searchValue" style="text-align: left;"
                                                 th:value="${infoSearchVO.searchValue}">&nbsp;
                                             <input type="submit" value="검색">
                                         </div>
@@ -50,7 +50,7 @@
                             </th:block>
                             <th:block th:unless="${#lists.isEmpty(memberList)}">
                                 <tr th:each="member, state : ${memberList}"
-                                    th:onclick="memberInfo([[${member.memberCode}]], [[${#lists.size(memberList) - state.index}]])">
+                                    th:onclick="memberInfo([[${member.memberCode}]])">
                                     <td>
                                         <div>
                                             <span>
@@ -79,49 +79,6 @@
                     <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
                     <div class="changeInfo-div">
                     </div>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="seatModal" data-bs-backdrop="static" data-bs-keyboard="false"
-                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="changeSeat-div">
-                                        <table class="adminContainer-table">
-                                            <tbody>
-                                                <tr>
-                                                    <td>【좌석 상태】</td>
-                                                    <td class="Info-border"></td>
-                                                    <td>【좌석 번호】</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>【시작 시간】</td>
-                                                    <td class="Info-border"></td>
-                                                    <td>【종료 시간】</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="Info-border">0</td>
-                                                    <td class="Info-border">1</td>
-                                                    <td class="Info-border">2</td>
-                                                    <td>3</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-dark">변경</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -132,7 +89,7 @@
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
-    <script src="/js/admin/admin_memberInfo.js"></script>
+    <script src="/js/admin/admin_info.js"></script>
 </th:block>
 
 </html>
