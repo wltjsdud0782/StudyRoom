@@ -1,0 +1,52 @@
+.detail_select_header{
+    width: 100%;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #000 ;
+    margin-top: 40px;
+}
+.detail_select_header h3 {
+    
+    margin-left: 45px;
+    padding: 10px;
+}
+.detail_select_Main{
+    width: 100%;
+    height: 300px;
+    border-bottom: 3px solid #000;
+}
+.detail_select_footer{
+    width: 100%;
+    height: 100px;
+    margin-top: 20px;
+}
+.detail_select_footer [type=text]{
+    width: 90%;
+    height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 5px ;
+}
+.detail_select_footer [type=submit]{
+    margin-left: 10px;
+    width: 100px;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #000;
+    color: #fff;
+}
+.no-answer{
+    margin-top: 60px;
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+}
+.yes-answer{
+    margin-top: 20px;
+}
+.yes-answer table tr{
+    background-color: #eeeded;
+    border-radius: 5px;
+}
+/* .yes-answer table tr, td {
+    border: none;
+} */

@@ -1,7 +1,9 @@
 package com.green.StudyRoom.board.controller;
 
 import com.green.StudyRoom.board.service.BoardService;
+import com.green.StudyRoom.board.service.CommentService;
 import com.green.StudyRoom.board.vo.BoardVO;
+import com.green.StudyRoom.board.vo.CommentVO;
 import com.green.StudyRoom.member.service.MemberService;
 import com.green.StudyRoom.member.vo.MemberVO;
 import jakarta.annotation.Resource;
@@ -25,6 +27,8 @@ public class StudyRoomBoardController {
     private BoardService boardService;
     @Resource(name = "memberService")
     private MemberService memberService;
+    @Resource(name = "commentService")
+    private CommentService commentService;
 
     //메인 홈페이지
     @GetMapping("/mainHomepage")
@@ -128,19 +132,38 @@ public class StudyRoomBoardController {
 
         BoardVO boardList = boardService.detailSelect(boardCode);
 
+        List<CommentVO> commentList = commentService.selectComment();
+
         model.addAttribute("boardList", boardList);
+        model.addAttribute("commentList", commentList);
 
         return "content/homepage/detail_select";
     }
 
-    //관리자 답변 게시글
-    @ResponseBody
-    @PostMapping("/goDetailSelectAdmin")
-    public BoardVO goDetailSelectAdmin(@RequestBody BoardVO boardVO){
+//    //관리자 답변 게시글 select
+//    @ResponseBody
+//    @PostMapping("/goDetailSelectAdmin")
+//    public BoardVO goDetailSelectAdmin(@RequestBody BoardVO boardVO){
+//
+//        BoardVO boardList = boardService.detailSelect(boardVO.getBoardCode());
+//
+//        return boardList;
+//    }
 
-        BoardVO boardList = boardService.detailSelect(boardVO.getBoardCode());
+    @PostMapping("/adminAnswer")
+    public String adminAnswer(CommentVO commentVO, HttpSession session){
 
-        return boardList;
+        System.out.println(commentVO);
+
+        MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
+
+        //작성자 세션으로 가져와서 세팅.
+        commentVO.setCommentWriter(loginInfo.getMemberId());
+
+        //insert 겸 update
+        commentService.adminAnswer(commentVO);
+
+        return "redirect:/board/detailSelect";
     }
 
 }
