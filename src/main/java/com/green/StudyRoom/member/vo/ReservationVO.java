@@ -10,7 +10,7 @@ import lombok.ToString;
 public class ReservationVO {
     private int reservationCode;
     private int memberCode;
-    private int seat_num;
+    private int seatNum;
     private String ReservationDate;
-    private String isReservation;
+    private int chargeCode;
 }

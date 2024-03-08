@@ -2,6 +2,7 @@ package com.green.StudyRoom.admin.service;
 
 import com.green.StudyRoom.admin.vo.InfoSearchVO;
 import com.green.StudyRoom.member.vo.MemberVO;
+import com.green.StudyRoom.seat.vo.SeatVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,12 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void uptMemberInfo(MemberVO memberVO) {
         sqlSession.update("adminMapper.uptMemberInfo", memberVO);
+    }
+
+    //좌석정보 상세조회하기 (비동기) << 고쳐야 됨
+    @Override
+    public SeatVO selectSeatDetailInfo(int memberCode) {
+        return sqlSession.selectOne("adminMapper.selectMemberDetailInfo", memberCode);
     }
 
 }

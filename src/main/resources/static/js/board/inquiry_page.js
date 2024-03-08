@@ -5,7 +5,7 @@ function goDetailSelect(boardCode){
     location.href=`/board/detailSelect?boardCode=${boardCode}`;
 }
 
-function goDetailSelectAdmin(boardCode, click){
+function goDetailSelectAdmin(boardCode, setAnswer){
     fetch('/board/goDetailSelectAdmin', { //요청경로
         method: 'POST',
         cache: 'no-cache',
@@ -23,10 +23,18 @@ function goDetailSelectAdmin(boardCode, click){
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
-        alert("안녕")
         console.log(data)
+        
+        const adminContent = setAnswer;
 
-        const adminContent = document.querySelector(".admin-answer");
+        // array.forEach(element => {
+            
+        // });
+        // adminAnswer.addEventListener('click'){
+
+        // })
+
+        
 
         let str = '';
 
@@ -36,9 +44,11 @@ function goDetailSelectAdmin(boardCode, click){
                 <td>
                     <input type="submit" value="답변">
                 </td>
-            </tr>
+        </tr>
         `
-        adminContent.insertAdjacentHTML("afterend", str);
+
+        // adminContent.click = setAnswer.click;
+        adminContent.closest('tr').insertAdjacentHTML("afterend", str);
     })
     //fetch 통신 실패 시 실행 영역
     .catch(err=>{

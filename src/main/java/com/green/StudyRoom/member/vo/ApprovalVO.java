@@ -10,5 +10,6 @@ import lombok.ToString;
 public class ApprovalVO {
     private int approvalCode;
     private int memberCode;
+    private int chargeCode;
     private String card;
 }

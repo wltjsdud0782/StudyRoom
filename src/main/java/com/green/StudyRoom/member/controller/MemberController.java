@@ -16,9 +16,10 @@ public class MemberController {
     @Resource(name="memberService")
     private MemberServiceImpl memberService;
 
+    //회원가입(메뉴에서 회원가입)
     @GetMapping("/join")
     public String join(){
-        return "content/homepage/main_homepage";
+        return "content/member/join";
  }
 
     //회원 등록
@@ -26,7 +27,7 @@ public class MemberController {
     public String joinInsert(MemberVO memberVO){
         memberService.joinInsert(memberVO);
         System.out.println(memberVO);
-        return "content/board/mainHomepage";
+        return "redirect:/board/mainHomepage";
     }
     //로그인 화면-top에서 로그인 눌렀을 때
     @GetMapping("/loginForm")

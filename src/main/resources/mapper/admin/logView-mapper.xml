@@ -8,19 +8,46 @@
 	<resultMap id="logView" type="com.green.StudyRoom.admin.vo.LogViewVO">
         <result column="MEMBER_CODE" property="memberCode"/>
         <result column="MEMBER_NAME" property="memberName"/>
+
         <result column="RESERVATION_CODE" property="reservationCode"/>
         <result column="RESERVATION_DATE" property="reservationDate"/>
-        <result column="IS_RESERVATION" property="isReservation"/>
+
         <result column="APPROVAL_CODE" property="approvalCode"/>
+
         <result column="DAY_INPUT" property="dayInput"/>
         <result column="IN_OUT" property="inOut"/>
-        <result column="SEAT_CODE" property="seatCode"/>
+
         <result column="SEAT_POWER" property="seatPower"/>
         <result column="SEAT_FLOOR" property="seatFloor"/>
+
         <result column="MESSAGE_CODE" property="messageCode"/>
         <result column="MESSAGE_CONTENT" property="messageContent"/>
         <result column="MESSAGE_DATE" property="messageDate"/>
     </resultMap>
+
+    <!-- 로그 선택 -->
+    <select id="selectAllLog" resultMap="logView">
+        SELECT MEMBER_CODE
+                , MEMBER_NAME
+
+                , RESERVATION_CODE
+                , RESERVATION_DATE
+
+                , APPROVAL_CODE
+
+                , DAY_INPUT
+                , IN_OUT
+
+                , SEAT_POWER
+                , SEAT_FLOOR
+
+                , MESSAGE_CODE
+                , MESSAGE_CONTENT
+                , MESSAGE_DATE
+        FROM STUDYROOM_LOG_VIEW
+    </select>
+
+
 
 
 </mapper>

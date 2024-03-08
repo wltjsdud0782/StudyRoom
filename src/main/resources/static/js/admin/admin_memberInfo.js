@@ -37,39 +37,39 @@ function memberInfo(memberCode, idx) {
                                 </colgroup>
                                 <tbody id="changeInfo">
                                     <tr>
-                                        <td>
+                                        <td class="Info-border">
                                             <div class="row">
-                                                <div class="col Info-border">
+                                                <div class="col">
                                                     【이름】 : ${data.memberName}
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="Info-border">
                                             <div class="row">
-                                                <div class="col Info-border">
+                                                <div class="col">
                                                     【아이디】 : ${data.memberId}
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col">
-                                                    【전화번호】 : ${data.memberTel}                                                   
+                                                <div>
+                                                    【전화번호】 : <input type="text" value="${data.memberTel}" style="border: 1px solid #ccc;">                                                
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>                                        
-                                        <td>
+                                        <td class="Info-border">
                                             <div class="row">
-                                                <div class="col Info-border">
+                                                <div class="col">
                                                     【주소】 : ${data.memberAddr}
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="Info-border">
                                             <div class="row">
-                                                <div class="col Info-border">
+                                                <div class="col">
                                                     【상세주소】 : ${data.memberDetail}
                                                 </div>
                                             </div>
@@ -83,17 +83,17 @@ function memberInfo(memberCode, idx) {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td class="Info-border">
                                             <div class="row">
-                                                <div class="col Info-border">
+                                                <div class="col">
                                                     【성별】 : ${data.memberGender}                                                    
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="Info-border">
                                             <div class="row">
-                                                <div class="col Info-border">                                                   
-                                                    【상태(좌석)】 : <font color="red" ;>${data.seatNum}</font>
+                                                <div class="col btnDiv">                                                   
+                                                    【좌석 이용】 : <input type="button" value="조회하기" onclick="seatModal()">
                                                 </div>
                                             </div>
                                         </td>
@@ -141,4 +141,8 @@ function memberInfo(memberCode, idx) {
             alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
             console.log(err);
         });
+}
+
+function seatModal(){
+    alert('click');
 }
