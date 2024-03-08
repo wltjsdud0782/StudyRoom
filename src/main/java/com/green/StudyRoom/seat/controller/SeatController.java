@@ -4,6 +4,7 @@ import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.member.service.MemberServiceImpl;
 import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
+import com.green.StudyRoom.seat.service.SeatService;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
 import com.green.StudyRoom.seat.vo.SeatVO;
 import jakarta.annotation.Resource;
@@ -24,8 +25,6 @@ public class SeatController {
     @Resource(name = "memberService")
     private MemberServiceImpl memberService;
 
-    int a = 0;
-
     @GetMapping("/seatLive") // 좌석예약 눌렀을때
     public String seatLive(@RequestParam(name = "floor", required = false, defaultValue = "1")int floor
                         , Model model, HttpSession session){
@@ -36,6 +35,7 @@ public class SeatController {
             int memberCode = loginInfo.getMemberCode();
 
             model.addAttribute("reservationMem", seatService.moveAndOut(memberCode));
+            model.addAttribute("haveCharge", seatService.haveCharge(memberCode));
         }
 
         return "content/seat/seat_live";
@@ -102,12 +102,11 @@ public class SeatController {
     public Map<String, Object> buyCard(@RequestParam (name = "chargeCode")int chargeCode, @RequestParam(name = "memberCode")int memberCode){
         MemberVO buyMem = seatService.selMem(memberCode);
         ChargeVO buyOne = seatService.chargeBuy(chargeCode);
-        a++;
 
         Map<String, Object> buyInfo = new HashMap<String, Object>();
         buyInfo.put("buyMem", buyMem);
         buyInfo.put("buyOne", buyOne);
-        buyInfo.put("merchant_uid", a);
+        buyInfo.put("merchant_uid", seatService.selectNextApprovalCode());
 
         return buyInfo;
     }
@@ -116,6 +115,5 @@ public class SeatController {
     @PostMapping("/buySuccess")
     public void buySuccess(@RequestBody ApprovalVO approvalVO){
         seatService.buyCard(approvalVO);
-        System.out.println(1);
     }
 }

@@ -147,7 +147,7 @@ function buyCard(chargeCode, memberCode) {
                     merchant_uid: `${data.merchant_uid}`,
                     name: `${data.buyOne.chargeName}`,
                     amount: `${data.buyOne.chargeFee}`, //금액
-                    buyer_email: 'wltjsdud13@naver.com',
+                    buyer_email: '',
                     buyer_name: `${data.buyMem.memberName}`,
                     buyer_tel: `${data.buyMem.memberTel}`,
                     buyer_addr: `${data.buyMem.memberAddr + data.buyMem.addrDetail}`,
@@ -168,7 +168,7 @@ function buyCard(chargeCode, memberCode) {
                             //컨트롤러로 전달할 데이터
                             body: JSON.stringify({
                                // 데이터명 : 데이터값
-                                approbalCode : `${data.merchant_uid}`
+                                approvalCode : `${data.merchant_uid}`
                                 , memberCode : `${data.buyMem.memberCode}`
                                 , chargeCode : `${data.buyOne.chargeCode}`
                             })

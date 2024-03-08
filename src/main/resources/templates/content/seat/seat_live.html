@@ -39,7 +39,7 @@
                     <div class="row">
                         <div class="col">
                             <th:block th:if="${reservationMem == null}">
-                                <button type="button" class="btn btn-danger mb-4" th:onclick="reservation([[${session.loginInfo}]])">입실하기</button>    
+                                <button type="button" class="btn btn-danger mb-4" th:onclick="reservation([[${session.loginInfo}]],[[${haveCharge}]])">입실하기</button>    
                             </th:block>
                             <th:block th:if="${reservationMem != null}">
                                 <button type="button" class="btn btn-danger mb-4" onclick="seatMove()">자리이동</button>    
@@ -60,7 +60,7 @@
                         <h5 class="modal-title">좌석 선택하기</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body text-center">
+                    <div class="modal-body seat-modal-body text-center">
                         <!-- 자바스크립트로 내용 채우기 -->
                     </div>
                 </div>

@@ -13,6 +13,8 @@ public interface SeatService {
     List<SeatVO> seatList();
     SeatVO moveAndOut(int memberCode); // 예약 상태 좌석이동,퇴실 버튼 띄우기
 
+    String haveCharge(int memberCode); // 구입한 이용권 유무
+
     // 입실
     void inSeat(SeatVO seatVO);
 
@@ -29,6 +31,7 @@ public interface SeatService {
 
     // 카드 결제
     MemberVO selMem(int memberCode);
+    int selectNextApprovalCode();
 
     // 카드 결제 성공
     void buyCard(ApprovalVO approvalVO);

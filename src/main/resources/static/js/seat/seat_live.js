@@ -677,7 +677,7 @@ function twofloor(){
 // 예약하기 Modal
 const modal_open = new bootstrap.Modal('#seat-modal');
 
-function reservation(loginInfo){
+function reservation(loginInfo, haveCharge){
     
     if(loginInfo == null){ // 로그인 X
         alert("로그인이 필요한 기능입니다.");
@@ -689,7 +689,13 @@ function reservation(loginInfo){
             alert("좌석을 선택해주세요.")
         }
         else{
-            document.querySelector('.modal-body').innerHTML = '';
+            if (haveCharge == null) {
+                console.log(haveCharge);
+                alert("보유한 이용권이 없습니다.")
+                location.href = "/seat/chargeBuy"
+            }
+            else {
+                document.querySelector('.seat-modal-body').innerHTML = '';
 
         let str = '';
 
@@ -714,11 +720,7 @@ function reservation(loginInfo){
                     </div>
                     <div class="row">
                         <div class="col text-end">보유한 이용권</div>
-                        <div class="col text-start">
-                            <select name="">
-                                <option value="">30일권(남은기간:28일)</option>
-                            </select>
-                        </div>
+                        <div class="col text-start">${haveCharge}</div>
                     </div>
                     <div class="row mt-4">
                         <div class="col">
@@ -729,10 +731,11 @@ function reservation(loginInfo){
             </div>
         `;
 
-        document.querySelector('.modal-body').insertAdjacentHTML('afterbegin', str);
+        document.querySelector('.seat-modal-body').insertAdjacentHTML('afterbegin', str);
 
         modal_open.show();
-        }
+        }    
+            }
     }
 }
 

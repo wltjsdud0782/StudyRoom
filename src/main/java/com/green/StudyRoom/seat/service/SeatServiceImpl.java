@@ -26,6 +26,11 @@ public class SeatServiceImpl implements SeatService{
         return sqlSession.selectOne("seatMapper.moveAndOut", memberCode);
     }
 
+    @Override // 구매한 이용권 유무
+    public String haveCharge(int memberCode) {
+        return sqlSession.selectOne("seatMapper.haveCharge", memberCode);
+    }
+
     @Override // 입실
     @Transactional(rollbackFor = Exception.class)
     public void inSeat(SeatVO seatVO) {
@@ -63,9 +68,14 @@ public class SeatServiceImpl implements SeatService{
         return sqlSession.selectOne("seatMapper.selMem", memberCode);
     }
 
+    @Override
+    public int selectNextApprovalCode() {
+        return sqlSession.selectOne("seatMapper.selectNextApprovalCode");
+    }
+
     @Override // 카드 결제 성공시 정보 추가
     public void buyCard(ApprovalVO approvalVO) {
-
+        sqlSession.insert("seatMapper.buyCard", approvalVO);
     }
 
 }

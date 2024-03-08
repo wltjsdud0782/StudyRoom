@@ -76,6 +76,8 @@
         ORDER BY SEAT_NUM ASC
     </select>
 
+
+
     <select id="moveAndOut" resultMap="seat">
         SELECT SEAT_NUM
         FROM STUDYROOM_SEAT SEAT
@@ -84,6 +86,16 @@
         WHERE SEAT.MEMBER_CODE = #{memberCode};
     </select>
 
+    <select id="haveCharge" resultMap="memberMapper.approval">
+        SELECT
+            CHARGE_NAME
+        FROM approval APP
+        INNER JOIN studyroom_charge CHARG
+        ON APP.CHARGE_CODE = CHARG.CHARGE_CODE
+        WHERE MEMBER_CODE = #{memberCode};
+    </select>
+
+    <!-- 입실  -->
     <update id="inSeat">
         UPDATE STUDYROOM_SEAT
         SET
@@ -128,13 +140,20 @@
         WHERE MEMBER_CODE = #{memberCode}
     </select>
 
+    <!--    다음에 insert 할 APPROVAL_CODE 조회-->
+    <select id="selectNextApprovalCode" resultType="int">
+        SELECT
+        IFNULL(MAX(APPROVAL_CODE) ,0) + 1
+        FROM APPROVAL
+    </select>
+
     <insert id="buyCard">
         INSERT INTO APPROVAL (
-            APPROBAL_CODE
+            APPROVAL_CODE
             , MEMBER_CODE
             , CHARGE_CODE
         ) VALUES (
-            #{approbalCode}
+            #{approvalCode}
             , #{memberCode}
             , #{chargeCode}
         )
