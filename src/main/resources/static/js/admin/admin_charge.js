@@ -31,10 +31,12 @@ function changeCharge(chargeCode) {
             <input type="hidden" name="chargeCode" value="${chargeCode}">
                             <table class="adminContainer-table">
                                 <colgroup>
-                                    <col width="6%">                                  
-                                    <col width="33%">
-                                    <col width="7%">                                  
-                                    <col width="33%">
+                                    <col width="6%">
+                                    <col width="20%">
+                                    <col width="7%">
+                                    <col width="20%">
+                                    <col width="7%">
+                                    <col width="20%">
                                     <col width="*">
                                 </colgroup>
                                 <tbody>
@@ -48,6 +50,16 @@ function changeCharge(chargeCode) {
                                         </td>                                       
                                         <td class="charge-td">
                                             <input type="text" name="chargeName" value="${data.chargeName}" class="nameInput" placeholder="입력해주세요." style="font-style: oblique;">
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col text-end">
+                                                    【기간(일)】
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="charge-td">
+                                            <input type="text" name="chargeDate" value="${data.chargeDate}" class="dateInput" placeholder="입력해주세요." style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
