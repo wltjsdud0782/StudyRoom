@@ -86,8 +86,13 @@ public class SeatController {
     }
 
     @GetMapping("/chargeBuy") // 이용권구매 눌렀을때
-    public String chargeBuy(Model model){
+    public String chargeBuy(HttpSession session, Model model){
         model.addAttribute("chargeList",seatService.chargeList());
+
+        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+        int memberCode = loginInfo.getMemberCode();
+        model.addAttribute("haveCharge", seatService.haveCharge(memberCode));
+
         return "/content/seat/charge_buy";
     }
 

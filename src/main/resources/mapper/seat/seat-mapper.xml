@@ -86,11 +86,11 @@
         WHERE SEAT.MEMBER_CODE = #{memberCode};
     </select>
 
-    <select id="haveCharge" resultMap="memberMapper.approval">
+    <select id="haveCharge" resultType="String">
         SELECT
             CHARGE_NAME
         FROM approval APP
-        INNER JOIN studyroom_charge CHARG
+        INNER JOIN STUDYROOM_CHARGE CHARG
         ON APP.CHARGE_CODE = CHARG.CHARGE_CODE
         WHERE MEMBER_CODE = #{memberCode};
     </select>
