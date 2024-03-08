@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="commentMapper">
+    <resultMap id="comment" type="com.green.StudyRoom.board.vo.CommentVO">
+        <id      column="COMMENT_CODE"         property="commentCode"/>
+        <result  column="COMMENT_WRITER"       property="commentWriter"/>
+        <result  column="COMMENT_CONTENT"      property="commentContent"/>
+        <result  column="COMMENT_DATE"         property="commentDate"/>
+        <result  column="BOARD_CODE"           property="boardCode"/>
+    </resultMap>
+
+    <!-- 관리자 답변 -->
+    <insert id="adminAnswer">
+        INSERT INTO STUDYROOM_COMMENT (
+            COMMENT_WRITER
+            , COMMENT_CONTENT
+            , BOARD_CODE
+        ) VALUES (
+            #{commentWriter}
+            , #{commentContent}
+            , #{boardCode}
+        )
+    </insert>
+
+    <!-- 답변 업데이트 -->
+
+    <update id="updateAnswer">
+        UPDATE STUDYROOM_BOARD
+        SET
+        BOARD_ANSWER = 'Y'
+        WHERE BOARD_CODE = #{boardCode}
+    </update>
+
+    <select id="selectComment" resultMap="comment">
+        SELECT COMMENT_CODE
+            , COMMENT_WRITER
+            , COMMENT_CONTENT
+            , DATE_FORMAT(COMMENT_DATE, '%Y-%m-%d') COMMENT_DATE
+        FROM STUDYROOM_COMMENT
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

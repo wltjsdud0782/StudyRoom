@@ -1,10 +1,12 @@
 package com.green.StudyRoom.board.service;
 
 import com.green.StudyRoom.board.vo.BoardVO;
+import com.green.StudyRoom.board.vo.CommentVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -36,4 +38,7 @@ public class BoardServiceImpl implements BoardService {
     public BoardVO detailSelect(int boardCode) {
         return sqlSession.selectOne("boardMapper.detailSelect", boardCode);
     }
+
+    // 글쓰기 답변
+
 }

@@ -5,21 +5,90 @@
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴 때 같이 실행되는 css -->
-    <!-- <link rel="stylesheet" href="/"> -->
+    <link rel="stylesheet" href="/css/homepage/detail_select.css">
 </th:block>
 
 <th:block layout:fragment="contentFragment">
-    <div class="row">
-        <div class="col">
-            <table class="table">
-                <tr>
-                    <td>[[${boardList.boardCode}]]</td>
-                    <td>[[${boardList.boardWriter}]]</td>
-                    <td>[[${boardList.boardContent}]]</td>
-                    <td>[[${boardList.boardDate}]]</td>
-                    <td>[[${boardList.boardTitle}]]</td>
-                </tr>
-            </table>
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <div class="detail_select_header">
+                <h3>
+                    문의
+                </h3>
+            </div>
+            <div class="detail_select_Main">
+
+                <table class="table">
+                    <colgroup>
+                        <col width="8%">
+                        <col width="70%">
+                        <col width="8%">
+                        <col width="*">
+                    </colgroup>
+                    <tr>
+                        <td>아이디</td>
+                        <td>[[${boardList.boardWriter}]]</td>
+                        <td>작성일</td>
+                        <td>[[${boardList.boardDate}]]</td>
+                    </tr>
+                    <tr>
+                        <td>제목</td>
+                        <td colspan="3">[[${boardList.boardTitle}]]</td>
+                    </tr>
+                    <tr>
+                        <td>내용</td>
+                        <td colspan="3" style="height: 200px;">[[${boardList.boardContent}]]</td>
+                    </tr>
+                </table>
+            </div>
+
+            <th:block th:if="${session.loginInfo != null}">
+                <th:block th:if="${session.loginInfo.isAdmin != 'ADMIN'}">
+                    <th:block th:if="${#lists.isEmpty(commentList)}">
+                        <div class="no-answer">
+                            빠른시일내에 확인하겠습니다.
+                            <p>
+                                조금만 기다려주세요!😊
+                            </p>
+                        </div>
+                    </th:block>
+                </th:block>
+            </th:block>    
+
+            <th:block th:unless="${#lists.isEmpty(commentList)}">
+                <th:block th:each="comment : ${commentList}">
+                
+                    <div class="yes-answer">
+                        <table class="table">
+                            <colgroup>
+                                <col width="8%">
+                                <col width="*">
+                            </colgroup>
+                            <tr>
+                                <td>작성일</td>
+                                <td colspan="3">[[${comment.commentDate}]]</td>
+                            </tr>
+                            <tr>
+                                <td>답변내용</td>
+                                <td colspan="3">[[${comment.commentContent}]]</td>
+                            </tr>
+                        </table>
+                    </div>
+                </th:block>
+            </th:block>
+
+
+            <th:block th:if="${session.loginInfo != null}">
+                <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
+                    <div class="detail_select_footer">
+                        <form action="/board/adminAnswer" method="post">
+                            <input type="hidden" th:value="${boardList.boardCode}" name="boardCode">
+                            <input type="text" name="commentContent">
+                            <input type="submit" value="답변">
+                        </form>
+                    </div>    
+                </th:block>
+            </th:block>   
         </div>
     </div>
     <!-- html 코드 작성 -->
