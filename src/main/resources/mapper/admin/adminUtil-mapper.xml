@@ -4,7 +4,7 @@
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="adminMapper">
 
-    <!-- 회원정보 불러오기 -->
+    <!-- 회원정보 불러오기(+ 검색) -->
     <select id="selectMemberInfo" resultMap="memberMapper.member">
         SELECT MEMBER_NAME
             , MEMBER_ID
@@ -36,9 +36,16 @@
         UPDATE studyroom_member
         SET
         IS_ADMIN = #{isAdmin}
+        , MEMBER_TEL = #{memberTel}
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 
+    <!-- 좌석 정보 조회 (개선필요) -->
+    <select id="selectSeatDetailInfo" resultMap="seatMapper.seat">
+        SELECT SEAT_NUM
+        FROM STUDYROOM_SEAT
+        WHERE MEMBER_CODE = #{memberCode}
+    </select>
 
 
 </mapper>

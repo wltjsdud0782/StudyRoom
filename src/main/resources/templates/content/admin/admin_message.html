@@ -31,7 +31,7 @@
                                         <tr th:each="chat : ${chtList}">
                                             <td>
                                                 <div class="topMsg">([[${chat.seatNum}]]번) [[${chat.messageDate}]]</div>
-                                                <div class="botMsg">[[${chat.memberName}]]([[${chat.memberId}]]) :
+                                                <div class="botMsg">> [[${chat.memberName}]]([[${chat.memberId}]]) :
                                                     [[${chat.messageContent}]]</div>
                                             </td>
                                         </tr>
