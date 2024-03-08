@@ -70,16 +70,18 @@
     </insert>
 
     <select id="login" resultMap="member">
-        SELECT
-              MEMBER_ID
+        SELECT MEMBER_CODE
+            , MEMBER_ID
             , MEMBER_PW
-            , MEMBER_IS_ADMIN
+            , MEMBER_NAME
+            , MEMBER_TEL
+            , DATE_FORMAT(MEMBER_BIRTH,'%Y-%m-%d') as BIRTH
+            , MEMBER_GENDER
+            , IS_ADMIN
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_ID=#{memberId}
         AND MEMBER_PW=#{memberPw}
     </select>
-
-
 </mapper>
 
 
