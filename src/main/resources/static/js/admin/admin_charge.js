@@ -32,11 +32,11 @@ function changeCharge(chargeCode) {
                             <table class="adminContainer-table">
                                 <colgroup>
                                     <col width="6%">
-                                    <col width="5%">
-                                    <col width="28%">
+                                    <col width="20%">
                                     <col width="7%">
-                                    <col width="5%">
-                                    <col width="28%">
+                                    <col width="20%">
+                                    <col width="7%">
+                                    <col width="20%">
                                     <col width="*">
                                 </colgroup>
                                 <tbody>
@@ -47,16 +47,19 @@ function changeCharge(chargeCode) {
                                                     【요금명】
                                                 </div>
                                             </div>
+                                        </td>                                       
+                                        <td class="charge-td">
+                                            <input type="text" name="chargeName" value="${data.chargeName}" class="nameInput" placeholder="입력해주세요." style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col text-center">
-                                                    :
+                                                <div class="col text-end">
+                                                    【기간(일)】
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="charge-td">
-                                            <input type="text" name="chargeName" value="${data.chargeName}" class="nameInput" placeholder="입력해주세요." style="font-style: oblique;">
+                                            <input type="text" name="chargeDate" value="${data.chargeDate}" class="dateInput" placeholder="입력해주세요." style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
@@ -64,20 +67,13 @@ function changeCharge(chargeCode) {
                                                     【가격(원)】
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col text-center">
-                                                    :
-                                                </div>
-                                            </div>
-                                        </td>
+                                        </td>                                        
                                         <td class="charge-td">
                                             <input type="text" name="chargeFee" value="${data.chargeFee}" class="chargeInput" placeholder="입력해주세요." style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col text-center">
+                                                <div class="col text-end">
                                                     <div class="btnDiv">
                                                         <input type="submit" value="요금 변경" class="not-null-btn">&nbsp;
                                                         <input type="button" value="취소" onclick="window.location.reload()">

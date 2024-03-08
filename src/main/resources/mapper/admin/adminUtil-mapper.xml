@@ -24,7 +24,7 @@
             , MEMBER_GENDER
             , MEMBER_TEL
             , MEMBER_ADDR
-            , MEMBER_DETAIL
+            , ADDR_DETAIL
             , IS_ADMIN
             , DATE_FORMAT(MEMBER_BIRTH, '%Y-%m-%d') MEMBER_BIRTH
         FROM STUDYROOM_MEMBER
@@ -37,13 +37,20 @@
         SET
         IS_ADMIN = #{isAdmin}
         , MEMBER_TEL = #{memberTel}
+        , MEMBER_ADDR = #{memberAddr}
+        , ADDR_DETAIL = #{addrDetail}
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 
     <!-- 좌석 정보 조회 (개선필요) -->
     <select id="selectSeatDetailInfo" resultMap="seatMapper.seat">
         SELECT SEAT_NUM
-        FROM STUDYROOM_SEAT
+                ,SEAT_POWER
+                , SEAT_FLOOR
+                , AGE_CODE
+                , SEAT.MEMBER_CODE
+        FROM STUDYROOM_SEAT SEAT
+        INNER JOIN STUDYROOM_MEMBER MEMBER
         WHERE MEMBER_CODE = #{memberCode}
     </select>
 

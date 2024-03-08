@@ -15,7 +15,7 @@
                 <h3>요금 변경</h3>
                 <div>ADMIN 전용</div>
             </label>
-            <div style="padding: 2vh;"></div>
+            <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
                     <h4>&nbsp;Charge</h4>
@@ -31,24 +31,25 @@
                                     <!-- 클릭하면 해당 요금의 chargeCode 보내기 -->
                                     <td th:onclick="changeCharge([[${charge.chargeCode}]])">
                                         <div>【[[${charge.chargeName}]]】</div>
-                                        <div style="font-style: oblique; font-size: larger;">[[${charge.chargeFee}]]원</div>
+                                        <div style="font-style: oblique; font-size: larger;">[[${charge.chargeFee}]]원
+                                        </div>
                                     </td>
                                 </tr>
-                            </th:block>                       
+                            </th:block>
                         </tbody>
                     </table>
-                    <div style="padding: 2vh;"></div>
+                    <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
                     <h4>&nbsp;Register</h4>
                     <div id="charge-container">
                         <form action="/admin/setCharge" method="post">
                             <table class="adminContainer-table">
                                 <colgroup>
                                     <col width="6%">
-                                    <col width="5%">
-                                    <col width="28%">
+                                    <col width="20%">
                                     <col width="7%">
-                                    <col width="5%">
-                                    <col width="28%">
+                                    <col width="20%">
+                                    <col width="7%">
+                                    <col width="20%">
                                     <col width="*">
                                 </colgroup>
                                 <tbody>
@@ -60,17 +61,20 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td class="charge-td">
+                                            <input type="text" name="chargeName" class="nameInput"
+                                                placeholder="요금명을 입력해주세요." style="font-style: oblique;">
+                                        </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col text-center">
-                                                    :
+                                                <div class="col text-end">
+                                                    【기간(일)】
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="charge-td">
-                                            <input type="text" name="chargeName" class="nameInput" 
-                                                placeholder="요금명을 입력해주세요."
-                                                style="font-style: oblique;">
+                                            <input type="text" name="chargeDate" class="dateInput"
+                                                placeholder="기간을 입력해주세요." style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
@@ -79,24 +83,17 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col text-center">
-                                                    :
-                                                </div>
-                                            </div>
-                                        </td>
                                         <td class="charge-td">
                                             <input type="text" name="chargeFee" class="chargeInput"
-                                                placeholder="가격을 입력해주세요." 
-                                                style="font-style: oblique;">
+                                                placeholder="가격을 입력해주세요." style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col text-center">
+                                                <div class="col text-end">
                                                     <div class="btnDiv">
                                                         <input type="submit" value="요금 등록" class="not-null-btn">&nbsp;
-                                                        <input type="button" value="취소" onclick="window.location.reload()">
+                                                        <input type="button" value="취소"
+                                                            onclick="window.location.reload()">
                                                     </div>
                                                 </div>
                                             </div>
@@ -104,7 +101,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <div style="padding: 2vh;"></div>
+                            <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
                             <div>
                                 <div class="btnDiv">
                                     <input type="button" value="삭제" class="not-null-btn" disabled>

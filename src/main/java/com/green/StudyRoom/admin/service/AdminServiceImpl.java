@@ -33,10 +33,10 @@ public class AdminServiceImpl implements AdminService {
         sqlSession.update("adminMapper.uptMemberInfo", memberVO);
     }
 
-    //좌석정보 상세조회하기 (비동기) << 고쳐야 됨
+    //좌석정보 상세조회하기 (비동기)
     @Override
     public SeatVO selectSeatDetailInfo(int memberCode) {
-        return sqlSession.selectOne("adminMapper.selectMemberDetailInfo", memberCode);
+        return sqlSession.selectOne("adminMapper.selectSeatDetailInfo", memberCode);
     }
 
 }
