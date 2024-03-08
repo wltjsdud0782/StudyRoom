@@ -3,6 +3,7 @@ package com.green.StudyRoom.admin.service;
 import com.green.StudyRoom.admin.vo.InfoSearchVO;
 
 import com.green.StudyRoom.member.vo.MemberVO;
+import com.green.StudyRoom.seat.vo.SeatVO;
 
 import java.util.List;
 
@@ -16,6 +17,9 @@ public interface AdminService {
 
     //회원정보/회원권한 업데이트
     void uptMemberInfo(MemberVO memberVO);
+
+    //좌석정보 상세조회하기 (비동기) << 고쳐야 됨
+    SeatVO selectSeatDetailInfo(int memberCode);
 
 }
 

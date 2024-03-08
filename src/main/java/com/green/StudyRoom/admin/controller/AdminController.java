@@ -3,6 +3,7 @@ package com.green.StudyRoom.admin.controller;
 import com.green.StudyRoom.admin.service.*;
 import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.admin.vo.InfoSearchVO;
+import com.green.StudyRoom.admin.vo.LogViewVO;
 import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.member.service.MemberServiceImpl;
 import com.green.StudyRoom.member.vo.MemberVO;
@@ -17,6 +18,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
     //회원관리
     @Resource(name="adminService")
     private AdminServiceImpl adminService;
@@ -26,6 +28,10 @@ public class AdminController {
     //채팅관리
     @Resource(name="messageService")
     private MessageServiceImpl messageService;
+    //로그확인
+    @Resource(name="logViewService")
+    private LogViewServiceImpl logViewService;
+
 
     //(회원 관리)///////////////////////////////////////////// //
     @RequestMapping("/info")
@@ -125,7 +131,10 @@ public class AdminController {
 
     //(로그 확인)///////////////////////////////////////////// //
     @GetMapping("/log")
-    public String adminLog(){
+    public String adminLog(Model model, MemberVO memberVO){
+        //현재 들어가있는 데이터가 없음
+        List<LogViewVO> logList = logViewService.selectAllLog(memberVO);
+        model.addAttribute("logList", logList);
         return "content/admin/admin_log";
     }
 

@@ -52,7 +52,7 @@
         ON MESSAGE.MEMBER_CODE = MEMBER.MEMBER_CODE
     </select>
 
-    <!-- 채팅보낼 사람 조회 -->
+    <!-- 채팅보낼 사람 조회(+ 검색) -->
     <select id="selectWho" resultMap="memberMapper.member">
         SELECT MEMBER_NAME
             , MEMBER_ID

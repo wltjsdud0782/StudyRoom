@@ -15,7 +15,6 @@ public class LogViewVO {
     //STUDYROOM_RESERVATION
     private int reservationCode;
     private String reservationDate;
-    private String isReservation;
 
     //APPROVAL
     private int approvalCode;
@@ -25,7 +24,6 @@ public class LogViewVO {
     private String inOut;
 
     //STUDYROOM_SEAT
-    private int seatCode;
     private String seatPower;
     private int seatFloor;
 
