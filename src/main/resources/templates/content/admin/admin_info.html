@@ -13,16 +13,11 @@
         <div class="adminContainer">
             <label class="title">
                 <h3>회원 관리</h3>
-                <div>
-                    고쳐야할 점 :
-                    1. 좌석번호 넣기 /
-                    2. 정보변경 범위 늘이기 /
-                </div>
             </label>
-            <div style="padding: 2vh;"></div>
+            <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
-                    <h4>&nbsp;Member</h4>
+                    <h4>&nbsp;Search</h4>
                     <table class="table table-hover adminContainer-table">
                         <thead>
                             <form action="/admin/info" method="post">
@@ -58,9 +53,10 @@
                                     th:onclick="memberInfo([[${member.memberCode}]], [[${#lists.size(memberList) - state.index}]])">
                                     <td>
                                         <div>
-                                            <span>#[[${#lists.size(memberList) -
-                                                state.index}]]&ensp;[[${member.memberName}]]
-                                                ([[${member.memberId}]])</span>
+                                            <span>
+                                                <span style="font-size: small;">#[[${#lists.size(memberList) - state.index}]]</span>
+                                                &ensp;[[${member.memberName}]] ([[${member.memberId}]])
+                                            </span>
                                             <span style="float: right;">
                                                 <div>
                                                     <th:block th:if="${member.isAdmin == 'USER'}">
@@ -80,9 +76,52 @@
                             </th:block>
                         </tbody>
                     </table>
-                    <div style="padding: 2vh;"></div>
+                    <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
                     <div class="changeInfo-div">
                     </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="seatModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="changeSeat-div">
+                                        <table class="adminContainer-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>【좌석 상태】</td>
+                                                    <td class="Info-border"></td>
+                                                    <td>【좌석 번호】</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>【시작 시간】</td>
+                                                    <td class="Info-border"></td>
+                                                    <td>【종료 시간】</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="Info-border">0</td>
+                                                    <td class="Info-border">1</td>
+                                                    <td class="Info-border">2</td>
+                                                    <td>3</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-dark">변경</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

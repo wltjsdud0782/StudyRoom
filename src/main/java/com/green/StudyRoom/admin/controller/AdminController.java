@@ -8,6 +8,7 @@ import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.member.service.MemberServiceImpl;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
+import com.green.StudyRoom.seat.vo.SeatVO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +49,14 @@ public class AdminController {
     public MemberVO selectMemberDetailInfo(@RequestParam(name="memberCode") int memberCode){
         MemberVO memberVO = adminService.selectMemberDetailInfo(memberCode);
         return memberVO;
+    }
+
+    //회원 좌석정보 상세조회하기 (비동기)
+    @ResponseBody
+    @PostMapping("/changeSeat")
+    public SeatVO selectSeatDetailInfo(@RequestParam(name="memberCode") int memberCode){
+        SeatVO seatVO = adminService.selectSeatDetailInfo(memberCode);
+        return seatVO;
     }
 
     //회원정보/회원권한 업데이트
