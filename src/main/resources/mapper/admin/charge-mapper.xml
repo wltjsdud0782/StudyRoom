@@ -8,6 +8,7 @@
         <id column="CHARGE_CODE" property="chargeCode"/>
         <result column="CHARGE_FEE" property="chargeFee"/>
         <result column="CHARGE_NAME" property="chargeName"/>
+        <result column="CHARGE_DATE" property="chargeDate"/>
     </resultMap>
 
     <!-- 요금 IN -->
@@ -18,9 +19,11 @@
         INSERT INTO STUDYROOM_CHARGE (
             CHARGE_NAME
             , CHARGE_FEE
+            , CHARGE_DATE
         ) VALUES (
             #{chargeName}
             , #{chargeFee}
+            , #{chargeDate}
         )
     </insert>
 
@@ -40,6 +43,7 @@
     <select id="getCharge" resultMap="charge">
         SELECT CHARGE_NAME
             , CHARGE_FEE
+            , CHARGE_DATE
         FROM STUDYROOM_CHARGE
         WHERE CHARGE_CODE = #{chargeCode}
     </select>
@@ -50,6 +54,7 @@
         SET
         CHARGE_NAME = #{chargeName}
         , CHARGE_FEE = #{chargeFee}
+        , CHARGE_DATE = #{chargeDate}
         WHERE CHARGE_CODE = #{chargeCode}
     </update>
 
