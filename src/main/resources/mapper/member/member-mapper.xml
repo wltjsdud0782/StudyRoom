@@ -21,9 +21,12 @@
 <!-- 결재 -->
     <resultMap id="approval" type="com.green.StudyRoom.member.vo.ApprovalVO">
         <id column="APPROVAL_CODE" property="approvalCode"/>
+        <result column="MEMBER_CODE" property="memberCode"/>
+        <result column="CHARGE_CODE" property="chargeCode"/>
         <result column="CARD" property="card"/>
-        <association property="memberCode" resultMap="member"/>
-        <association property="chargeCode" resultMap="chargeMapper.charge"/>
+
+        <association property="memberVO" resultMap="member"/>
+        <association property="chargeVO" resultMap="chargeMapper.charge"/>
 
     </resultMap>
 
@@ -31,16 +34,22 @@
     <resultMap id="reservation" type="com.green.StudyRoom.member.vo.ReservationVO">
         <id column="RESERVATION_CODE" property="reservationCode"/>
         <result column="RESERVATION_DATE" property="ReservationDate"/>
-        <association property="memberCode" resultMap="member"/>
-        <association property="seat_num" resultMap="seatMapper.seat"/>
-        <association  property="chargeCode" resultMap="chargeMapper.charge"/>
+        <result column="MEMBER_CODE" property="memberCode"/>
+        <result column="SEAT_NUM" property="seatNum"/>
+        <result column="CHARGE_CODE" property="chargeCode"/>
+
+        <association property="memberVO" resultMap="member"/>
+        <association property="seatVO" resultMap="seatMapper.seat"/>
+        <association  property="chargeVO" resultMap="chargeMapper.charge"/>
     </resultMap>
 
     <!--  입실, 퇴실      -->
     <resultMap id="studyRoomInOut" type="com.green.StudyRoom.member.vo.StudyRoomInOutVO">
         <id column="DAY_INPUT" property="dayInput"/>
         <result column="IN_OUT" property="InOut"/>
-        <association property="memberCode" resultMap="member"/>
+        <result column="MEMBER_CODE" property="memberCode"/>
+
+        <association property="memberVO" resultMap="member"/>
     </resultMap>
 
 <!-- 회원 가입 -->
