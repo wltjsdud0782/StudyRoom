@@ -27,6 +27,7 @@ public interface SeatService {
     ChargeVO chargeBuy(int chargeCode);
 
     // 카드 결제
+    MemberVO selMem(int memberCode);
     void buyCard(int chargeCode);
 
 }

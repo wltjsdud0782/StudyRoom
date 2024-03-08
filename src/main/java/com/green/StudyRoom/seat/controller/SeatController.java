@@ -3,7 +3,6 @@ package com.green.StudyRoom.seat.controller;
 import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.member.service.MemberServiceImpl;
 import com.green.StudyRoom.member.vo.MemberVO;
-import com.green.StudyRoom.seat.service.SeatService;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
 import com.green.StudyRoom.seat.vo.SeatVO;
 import jakarta.annotation.Resource;
@@ -12,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/seat")
@@ -88,8 +89,22 @@ public class SeatController {
     }
 
     @ResponseBody
-    @PostMapping("buyDetail") // 이용권 상품 눌렀을때
+    @PostMapping("/buyDetail") // 이용권 상품 눌렀을때
     public ChargeVO buyDetail(@RequestParam(name = "chargeCode")int chargeCode){
         return seatService.chargeBuy(chargeCode);
+    }
+
+    @ResponseBody
+    @PostMapping("/buyCard") // 카드 구매 눌렀을때
+    public Map<String, Object> buyCard(@RequestParam (name = "chargeCode")int chargeCode, @RequestParam(name = "memberCode")int memberCode){
+        MemberVO buyMem = seatService.selMem(memberCode);
+        ChargeVO buyOne = seatService.chargeBuy(chargeCode);
+
+        Map<String, Object> buyInfo = new HashMap<String, Object>();
+        buyInfo.put("buyMem", buyMem);
+        buyInfo.put("buyOne", buyOne);
+        System.out.println(buyInfo);
+
+        return buyInfo;
     }
 }

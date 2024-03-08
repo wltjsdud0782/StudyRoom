@@ -122,6 +122,12 @@
 
 
     <!--  카드 결제 정보 추가  -->
+    <select id="selMem" resultMap="memberMapper.member">
+        SELECT *
+        FROM STUDYROOM_MEMBER
+        WHERE MEMBER_CODE = #{memberCode}
+    </select>
+
     <insert id="buyCard">
         INSERT INTO APPROVAL (
             MEMBER_CODE

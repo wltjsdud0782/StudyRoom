@@ -57,6 +57,11 @@ public class SeatServiceImpl implements SeatService{
         return sqlSession.selectOne("seatMapper.chargeBuy", chargeCode);
     }
 
+    @Override
+    public MemberVO selMem(int memberCode) {
+        return sqlSession.selectOne("seatMapper.selMem", memberCode);
+    }
+
     @Override // 카드 결제 추가
     public void buyCard(int chargeCode) {
         sqlSession.insert("seatMapper.buyCard", chargeCode);
