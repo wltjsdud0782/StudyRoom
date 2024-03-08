@@ -22,20 +22,22 @@ public class MemberController {
         return "content/member/join";
  }
 
-    //회원 등록
+    // 회원 가입
     @PostMapping("/join")
     public String joinInsert(MemberVO memberVO){
+        //연락처 셋팅
+        memberVO.setMemberTel(memberVO.getMemberTel().replace(",","-"));
         memberService.joinInsert(memberVO);
         System.out.println(memberVO);
         return "redirect:/board/mainHomepage";
     }
-    //로그인 화면-top에서 로그인 눌렀을 때
+    // 로그인 화면
     @GetMapping("/loginForm")
     public String loginForm(){
         return "content/member/login";
     }
 
-    //로그인==아이디와 비밀번호 후 로그인 할때
+    // 로그인
     @PostMapping("/login")
     public String login(MemberVO memberVO, HttpSession session){
         MemberVO loginInfo=memberService.login(memberVO);
@@ -45,20 +47,20 @@ public class MemberController {
         return "content/member/login_result";
     }
 
-    //비동기 로그인
+    // 비동기 로그인
     @ResponseBody
     @PostMapping("/loginFetch")
     public String loginFetch(MemberVO memberVO, HttpSession session){
         MemberVO loginInfo = memberService.login(memberVO);
 
-        //로그인 성공 시 세션에 데이터 저장
+    //로그인 성공 시 세션에 데이터 저장
         if(loginInfo != null){
             session.setAttribute("loginInfo", loginInfo);
         }
         return loginInfo == null ? "" : loginInfo.getMemberId();
     }
 
-    //로그아웃
+    // 로그아웃
     @GetMapping("/logout")
     public String logout(HttpSession session){
             session.removeAttribute("loginInfo");
