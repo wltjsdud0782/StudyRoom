@@ -130,10 +130,12 @@
 
     <insert id="buyCard">
         INSERT INTO APPROVAL (
-            MEMBER_CODE
+            APPROBAL_CODE
+            , MEMBER_CODE
             , CHARGE_CODE
         ) VALUES (
-            #{memberCode}
+            #{approbalCode}
+            , #{memberCode}
             , #{chargeCode}
         )
     </insert>

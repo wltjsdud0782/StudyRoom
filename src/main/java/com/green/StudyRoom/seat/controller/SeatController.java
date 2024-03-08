@@ -2,6 +2,7 @@ package com.green.StudyRoom.seat.controller;
 
 import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.member.service.MemberServiceImpl;
+import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
 import com.green.StudyRoom.seat.vo.SeatVO;
@@ -22,6 +23,8 @@ public class SeatController {
     private SeatServiceImpl seatService;
     @Resource(name = "memberService")
     private MemberServiceImpl memberService;
+
+    int a = 0;
 
     @GetMapping("/seatLive") // 좌석예약 눌렀을때
     public String seatLive(@RequestParam(name = "floor", required = false, defaultValue = "1")int floor
@@ -99,12 +102,20 @@ public class SeatController {
     public Map<String, Object> buyCard(@RequestParam (name = "chargeCode")int chargeCode, @RequestParam(name = "memberCode")int memberCode){
         MemberVO buyMem = seatService.selMem(memberCode);
         ChargeVO buyOne = seatService.chargeBuy(chargeCode);
+        a++;
 
         Map<String, Object> buyInfo = new HashMap<String, Object>();
         buyInfo.put("buyMem", buyMem);
         buyInfo.put("buyOne", buyOne);
-        System.out.println(buyInfo);
+        buyInfo.put("merchant_uid", a);
 
         return buyInfo;
+    }
+
+    @ResponseBody
+    @PostMapping("/buySuccess")
+    public void buySuccess(@RequestBody ApprovalVO approvalVO){
+        seatService.buyCard(approvalVO);
+        System.out.println(1);
     }
 }

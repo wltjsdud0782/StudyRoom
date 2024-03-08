@@ -1,6 +1,7 @@
 package com.green.StudyRoom.seat.service;
 
 import com.green.StudyRoom.admin.vo.ChargeVO;
+import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.vo.SeatVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -62,9 +63,9 @@ public class SeatServiceImpl implements SeatService{
         return sqlSession.selectOne("seatMapper.selMem", memberCode);
     }
 
-    @Override // 카드 결제 추가
-    public void buyCard(int chargeCode) {
-        sqlSession.insert("seatMapper.buyCard", chargeCode);
+    @Override // 카드 결제 성공시 정보 추가
+    public void buyCard(ApprovalVO approvalVO) {
+
     }
 
 }

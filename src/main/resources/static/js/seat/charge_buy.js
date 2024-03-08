@@ -1,6 +1,5 @@
 const IMP = window.IMP;
 IMP.init("imp82847817");
-merchant_uid = 1;
 
 function buyDetail(chargeCode, loginInfo) {
     const buyDetail = document.querySelector('.buyDetail');
@@ -139,15 +138,13 @@ function buyCard(chargeCode, memberCode) {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
-            merchant_uid++;
-            console.log(merchant_uid);
-            console.log(data);
+            console.log(data.merchant_uid)
             IMP.request_pay(
                 {
                     //pg: "{PG사코드}.{PG상점ID}", //Test는 TC0ONETIME
                     pg: "html5_inicis", //Test는 TC0ONETIME
                     pay_method: "card",
-                    merchant_uid,
+                    merchant_uid: `${data.merchant_uid}`,
                     name: `${data.buyOne.chargeName}`,
                     amount: `${data.buyOne.chargeFee}`, //금액
                     buyer_email: 'wltjsdud13@naver.com',
@@ -160,10 +157,35 @@ function buyCard(chargeCode, memberCode) {
                     //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
                     if (rsp.success) {
                         //서버 검증 요청 부분
-    
                         //imp_178957754537 / 57008833-33006 / 100
                         console.log(rsp.imp_uid + ' / ' + rsp.merchant_uid + ' / ' + rsp.paid_amount);
-                        alert('결제 성공');
+                        fetch('/seat/buySuccess', { //요청경로
+                            method: 'POST',
+                            cache: 'no-cache',
+                            headers: {
+                                'Content-Type': 'application/json; charset=UTF-8'
+                            },
+                            //컨트롤러로 전달할 데이터
+                            body: JSON.stringify({
+                               // 데이터명 : 데이터값
+                                approbalCode : `${data.merchant_uid}`
+                                , memberCode : `${data.buyMem.memberCode}`
+                                , chargeCode : `${data.buyOne.chargeCode}`
+                            })
+                        })
+                        .then((response) => {
+                            return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
+                            //return response.json(); //나머지 경우에 사용
+                        })
+                        //fetch 통신 후 실행 영역
+                        .then((data) => {//data -> controller에서 리턴되는 데이터!
+                            alert('결제 성공');
+                        })
+                        //fetch 통신 실패 시 실행 영역
+                        .catch(err=>{
+                            alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+                            console.log(err);
+                        });
                     } else {
                         alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
                     }

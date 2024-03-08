@@ -1,6 +1,7 @@
 package com.green.StudyRoom.seat.service;
 
 import com.green.StudyRoom.admin.vo.ChargeVO;
+import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.vo.SeatVO;
 
@@ -28,6 +29,7 @@ public interface SeatService {
 
     // 카드 결제
     MemberVO selMem(int memberCode);
-    void buyCard(int chargeCode);
 
+    // 카드 결제 성공
+    void buyCard(ApprovalVO approvalVO);
 }
