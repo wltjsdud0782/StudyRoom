@@ -13,7 +13,7 @@
         <result column="MEMBER_BIRTH" property="memberBirth"/>
         <result column="POST_CODE" property="postCode"/>
         <result column="MEMBER_ADDR" property="memberAddr"/>
-        <result column="MEMBER_DETAIL" property="memberDetail"/>
+        <result column="ADDR_DETAIL" property="addrDetail"/>
         <result column="MEMBER_GENDER" property="memberGender"/>
         <result column="IS_ADMIN" property="isAdmin"/>
     </resultMap>
@@ -22,6 +22,7 @@
     <resultMap id="approval" type="com.green.StudyRoom.member.vo.ApprovalVO">
         <id column="APPROVAL_CODE" property="approvalCode"/>
         <result column="MEMBER_CODE" property="memberCode"/>
+        <result column="CHARGE_CODE" property="chargeCode"/>
         <result column="CARD" property="card"/>
     </resultMap>
 
@@ -52,7 +53,7 @@
             , MEMBER_BIRTH
             , POST_CODE
             , MEMBER_ADDR
-            , MEMBER_DETAIL
+            , ADDR_DETAIL
             , MEMBER_GENDER
         ) VALUES (
             #{memberCode}
@@ -63,7 +64,7 @@
             , #{memberBirth}
             , #{postCode}
             , #{memberAddr}
-            , #{memberDetail}
+            , #{addrDetail}
             , #{memberGender}
         );
     </insert>
@@ -72,9 +73,7 @@
         SELECT
               MEMBER_ID
             , MEMBER_PW
-
             , MEMBER_IS_ADMIN
-
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_ID=#{memberId}
         AND MEMBER_PW=#{memberPw}
