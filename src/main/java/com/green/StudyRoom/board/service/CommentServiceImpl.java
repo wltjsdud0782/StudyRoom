@@ -25,7 +25,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     //답변 조회
-    public List<CommentVO> selectComment() {
-        return sqlSession.selectList("commentMapper.selectComment");
+    public List<CommentVO> selectComment(int boardCode) {
+        return sqlSession.selectList("commentMapper.selectComment", boardCode);
     }
 }
