@@ -53,29 +53,30 @@
                         </div>
                     </th:block>
                 </th:block>
+
+                <th:block th:unless="${#lists.isEmpty(commentList)}">
+                    <th:block th:each="comment : ${commentList}">
+                            <div class="yes-answer">
+                                <table class="table">
+                                    <colgroup>
+                                        <col width="8%">
+                                        <col width="*">
+                                    </colgroup>
+                                    <tr>
+                                        <td>작성일</td>
+                                        <td colspan="3">[[${comment.commentDate}]]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>답변내용</td>
+                                        <td colspan="3">[[${comment.commentContent}]]</td>
+                                    </tr>
+                                </table>
+                            </div>
+                    </th:block>
+                </th:block>
             </th:block>    
 
-            <th:block th:unless="${#lists.isEmpty(commentList)}">
-                <th:block th:each="comment : ${commentList}">
-                
-                    <div class="yes-answer">
-                        <table class="table">
-                            <colgroup>
-                                <col width="8%">
-                                <col width="*">
-                            </colgroup>
-                            <tr>
-                                <td>작성일</td>
-                                <td colspan="3">[[${comment.commentDate}]]</td>
-                            </tr>
-                            <tr>
-                                <td>답변내용</td>
-                                <td colspan="3">[[${comment.commentContent}]]</td>
-                            </tr>
-                        </table>
-                    </div>
-                </th:block>
-            </th:block>
+            
 
 
             <th:block th:if="${session.loginInfo != null}">

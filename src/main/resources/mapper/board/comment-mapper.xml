@@ -39,6 +39,7 @@
             , COMMENT_CONTENT
             , DATE_FORMAT(COMMENT_DATE, '%Y-%m-%d') COMMENT_DATE
         FROM STUDYROOM_COMMENT
+        WHERE BOARD_CODE = #{boardCode}
     </select>
 </mapper>
 

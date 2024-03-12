@@ -9,5 +9,5 @@ public interface CommentService  {
     //답변 저장
     void adminAnswer(CommentVO commentVO);
 
-    List<CommentVO> selectComment();
+    List<CommentVO> selectComment(int boardCode);
 }

@@ -132,7 +132,7 @@ public class StudyRoomBoardController {
 
         BoardVO boardList = boardService.detailSelect(boardCode);
 
-        List<CommentVO> commentList = commentService.selectComment();
+        List<CommentVO> commentList = commentService.selectComment(boardCode);
 
         model.addAttribute("boardList", boardList);
         model.addAttribute("commentList", commentList);
