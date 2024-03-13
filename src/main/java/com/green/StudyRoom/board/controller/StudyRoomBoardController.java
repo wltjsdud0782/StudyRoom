@@ -1,5 +1,7 @@
 package com.green.StudyRoom.board.controller;
 
+import com.green.StudyRoom.admin.service.ChargeServiceImpl;
+import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.board.service.BoardService;
 import com.green.StudyRoom.board.service.CommentService;
 import com.green.StudyRoom.board.vo.BoardVO;
@@ -25,10 +27,18 @@ import java.util.Objects;
 public class StudyRoomBoardController {
     @Resource(name="boardService")
     private BoardService boardService;
+
+    //멤버
     @Resource(name = "memberService")
     private MemberService memberService;
+
+    //관리자 문의 댓글
     @Resource(name = "commentService")
     private CommentService commentService;
+
+    //요금제
+    @Resource(name="chargeService")
+    private ChargeServiceImpl chargeService;
 
     //메인 홈페이지
     @GetMapping("/mainHomepage")
@@ -164,6 +174,15 @@ public class StudyRoomBoardController {
         commentService.adminAnswer(commentVO);
 
         return "redirect:/board/detailSelect";
+    }
+
+    // 매장 소개
+    @GetMapping("/studyInfo")
+    public String studyInfo(Model model){
+
+        List<ChargeVO> chargeList = chargeService.selectCharge();
+        model.addAttribute("chargeList", chargeList);
+        return "content/homepage/studyInfo";
     }
 
 }
