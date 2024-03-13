@@ -35,14 +35,13 @@ function join(){
      }
 
      //문자 + 숫자 + 특수 문자가 포함 된 4~12자리의 글자
-     let regExp = /^.*(?=^.{4,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+     //let regExp = /^.*(?=^.{4,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
      //test 함수의 매개변수로 들어온 문자가 정규식 조건에 부합하면 return true
-     const expResult = regExp.test(pwInputs[0].value);
-     //if(!expResult){
+//     const expResult = regExp.test(pwInputs[0].value);
+//     if(!expResult){
         //alert('비밀번호 형식에 일치하지 않습니다.');
         //return ;
      //}
-
 
     // 1. submit 시킬 form 태그를 선택 후 submit 함수 실행
     document.querySelector('#join-form').submit();
