@@ -51,17 +51,17 @@ function memberInfo(memberCode) {
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col" style="font-size: larger;">
+                                                <div class="col" style="padding-top: 7px;">
                                                     ${data.memberMap.memberName} (${data.memberMap.memberId})
                                                 </div>
                                                 <div class="col-4" style="text-align: center;">`;
-                if (data.memberMap.memberGender == 'M') {
-                    str +=`&nbsp;<input type="button" value="남자" class="btn btn-dark" disabled>`;
-                }
-                if (data.memberMap.memberGender == 'W') {
-                    str +=`&nbsp;<input type="button" value="여자" class="btn btn-dark" disabled>`;
-                }                                    
-                    str +=                     `</div>
+            if (data.memberMap.memberGender == 'M') {
+                str += `&nbsp;<input type="button" value="남자" class="btn btn-dark" disabled>`;
+            }
+            if (data.memberMap.memberGender == 'W') {
+                str += `&nbsp;<input type="button" value="여자" class="btn btn-dark" disabled>`;
+            }
+            str += `</div>
                                             </div>
                                         </td>
                                         <td class="info-border-title">
@@ -105,10 +105,10 @@ function memberInfo(memberCode) {
                                         <td>
                                             <div class="row">
                                                 <div class="col">
-                                                    <input type="text" value="${data.memberMap.postCode}"
+                                                    <input type="text" value="${data.memberMap.postCode}" id="postCode"
                                                     style="border: 1px solid #ccc; height: 40px;" name="postCode">&ensp;
                                                     <span>
-                                                        <input type="button" value="검색" class="btn btn-dark">
+                                                        <input type="button" value="검색" class="btn btn-dark" onclick="searchAddress()">
                                                     </span>                                            
                                                 </div>                                         
                                             </div>
@@ -123,7 +123,7 @@ function memberInfo(memberCode) {
                                         <td>
                                             <div class="row">
                                                 <div class="col">
-                                                    <input type="text" value="${data.memberMap.memberAddr}" 
+                                                    <input type="text" value="${data.memberMap.memberAddr}" id="roadAddr"
                                                     style="border: 1px solid #ccc; height: 40px;" name="memberAddr">                                                   
                                                 </div>
                                             </div>
@@ -187,12 +187,31 @@ function memberInfo(memberCode) {
                                     </td>
                                     <td>
                                         <div class="row">
-                                            <div class="col">
-                                                ${data.seatMap.seatFloor}층&ensp;
-                                                <input type="number" value="${data.seatMap.seatNum}" class="numUpDown"
-                                                style="border: 1px solid #ccc; height: 40px; width: 40px; text-align: center;" 
-                                                name="" min="1" max="60">번석                                                                                   
+                                            <div class="col">`;
+            if (data.seatMap == null) {
+                str += `
+            사용 중인 좌석이 없습니다.
+            </div>
+                                    </td>
+                                    <td class="info-border-title">
+                                        <div class="row">
+                                            <div class="col info-title">
+                                                점등 상태
                                             </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col">
+                                            `;
+            }
+            else {
+                str += `
+                ${data.seatMap.seatFloor}층&ensp;
+                <input type="number" value="${data.seatMap.seatNum}" class="numUpDown"
+                style="border: 1px solid #ccc; height: 40px; width: 40px; text-align: center;" 
+                name="" min="1" max="60">번석
+                </div>
                                         </div>
                                     </td>
                                     <td class="info-border-title">
@@ -206,16 +225,42 @@ function memberInfo(memberCode) {
                                         <div class="row">
                                             <div class="col">
                                             <select name="seatPower">`;
-            if (data.seatMap.seatPower == 'ON') {
-                str += `
+                if (data.seatMap.seatPower == 'ON') {
+                    str += `
                                             <option value="ON" selected>켜짐</option>
                                             <option value="OFF">꺼짐</option>`;
-            }
-            else if (data.seatMap.seatPower == 'OFF') {
-                str += `
+                }
+                else if (data.seatMap.seatPower == 'OFF') {
+                    str += `
                                             <option value="ON">켜짐</option>
                                             <option value="OFF" selected>꺼짐</option>`;
+                }
             }
+            // str +=`                                                                                                                                                                
+            //                                 </div>
+            //                             </div>
+            //                         </td>
+            //                         <td class="info-border-title">
+            //                             <div class="row">
+            //                                 <div class="col info-title">
+            //                                     점등 상태
+            //                                 </div>
+            //                             </div>
+            //                         </td>
+            //                         <td>
+            //                             <div class="row">
+            //                                 <div class="col">
+            //                                 <select name="seatPower">`;
+            // if (data.seatMap.seatPower == 'ON') {
+            //     str += `
+            //                                 <option value="ON" selected>켜짐</option>
+            //                                 <option value="OFF">꺼짐</option>`;
+            // }
+            // else if (data.seatMap.seatPower == 'OFF') {
+            //     str += `
+            //                                 <option value="ON">켜짐</option>
+            //                                 <option value="OFF" selected>꺼짐</option>`;
+            // }
             str += `</select>
                                             </div>
                                         </div>
@@ -237,4 +282,18 @@ function memberInfo(memberCode) {
             alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
             console.log(err);
         });
+}
+
+
+// search 버튼 클릭 시 주소록 검색 팝업 창 띄우기
+function searchAddress() {
+    new daum.Postcode({
+        oncomplete: function (data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+            document.querySelector('#postCode').value = data.zonecode;
+            document.querySelector('#roadAddr').value = data.roadAddress;
+
+        }
+    }).open();
 }

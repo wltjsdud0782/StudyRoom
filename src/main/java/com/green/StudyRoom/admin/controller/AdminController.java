@@ -49,12 +49,12 @@ public class AdminController {
     @ResponseBody
     @PostMapping("/viewInfo")
     public Map<String, Object> viewInfo(@RequestParam(name="memberCode") int memberCode){
-        System.out.println(memberCode);
         MemberVO memberMap = adminService.selectMemberDetailInfo(memberCode);
         SeatVO seatMap = adminService.selectSeatDetailInfo(memberCode);
         Map<String, Object> map = new HashMap<>();
         map.put("memberMap", memberMap);
         map.put("seatMap", seatMap);
+        System.out.println(map);
         return map;
     }
 
