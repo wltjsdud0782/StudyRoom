@@ -1,8 +1,9 @@
-.seat-title {
+.buy-header {
+    width: 81.5%;
     text-align: start;
-    font-size: 23pt;
+    margin-top: 12px;
     margin-left: 190px;
-    background-color: yellowgreen;
+    border-bottom: 3px solid black;
 }
 
 .line-height {

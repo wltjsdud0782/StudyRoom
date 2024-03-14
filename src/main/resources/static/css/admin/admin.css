@@ -7,8 +7,7 @@ body {
     width: 90%;
 }
 
-.btnDiv input,
-select {
+.btnDiv input, select {
     width: 120px;
     height: 40px;
     border: 1px solid #ccc;

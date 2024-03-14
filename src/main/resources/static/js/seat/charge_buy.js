@@ -29,18 +29,12 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
             buyDetail.innerHTML = '';
             let str = '';
             str = `
-            <div class="row text-start mt-4">
+            <div class="row text-start mt-5">
             <div class="col">
-                <h3>선택한 이용권 구매</h3>
+                <h5>선택한 이용권 구매</h5>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="text-end" style="font-size: 11pt; color: red;">
-                * 구매 후 교환 및 환불이 불가능합니다.
-                </div>
-            </div>
-        </div>
+        
         <div class="row mt-4">
             <div class="col">
                 <table class="table table-borderless text-center align-middle" style="font-size: 13pt;">
@@ -82,7 +76,9 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
                         str += `
                         <div class="row mt-5" style="font-size: 18pt;">
                             <div class="col">
-                                
+                                <div style="font-size: 11pt; color: red;">
+                                * 구매 후 교환 및 환불이 불가능합니다.
+                                </div>
                             </div>
                         </div>
                         <div class="row">

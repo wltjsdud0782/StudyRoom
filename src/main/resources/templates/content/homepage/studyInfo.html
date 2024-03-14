@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/main_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴 때 같이 실행되는 css -->
+    <link rel="stylesheet" href="/css/homepage/studyInfo.css">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <!-- html 코드 작성 -->
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <div class="study_infomation">
+                <div class="study_info_header_text">
+                    <h4>소개</h4>
+                </div>
+                <div class="study_info_content">
+                    <div class="img_con">
+                        <img src="/img/homepage/이미지 준비중.jpg" alt="#">
+                        <img src="/img/homepage/이미지 준비중.jpg" alt="#">
+                    </div>  
+                   
+                    <div class="con1_text">
+                        <h5>프리미엄 그린 독서실</h5>
+                        <p>
+                            삼산동 최고의 시설, 최고의 면학 공간을 자랑하는 프리미엄 그린 독서실 입니다.
+                            쾌적한 공부환경을 만들기 위해 나이대 별로 층을 나누어 불편함을 최소화 시켰습니다.<br>
+                            불편사항이 있으시다면 홈페이지 문의에 글을 남겨주세요.
+                            빠른 시일내에 확인 후 도움을 드리도록 하겠습니다. <br>
+                            더 나은 미래를 위해 열심히 노력하는 여러분들을 늘 응원하겠습니다 😊
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <div class="study_infomation">
+                <div class="study_info_header">
+                    <h4>좌석선택</h4>
+                    <span ><a onclick="location.href='/seat/seatLive'">더보기 ></a></span>
+                </div>
+
+                <div class="study_info_content" style="margin-top: 20px;">
+                    <div class="img_con">
+                        <img src="/img/homepage/이미지 준비중.jpg" alt="#">
+                        <img src="/img/homepage/이미지 준비중.jpg" alt="#">
+                    </div>  
+                    
+                    <div class="con2_text">
+                        <h5>1층 지정석 <span style="font-size: 16px;">❤중고등학생들 전용 공간❤</span> </h5>
+                        <p>
+                            1층은 학생들만 사용할 수 있는 전용공간이며,<br>
+                            칸막이로 옆좌석과 분리되어 있어 본인 좌석 내에서 집중력을 높일 수 있는 좌석들로만 구성되어있습니다.<br>
+                            
+                        </p>
+                        <h5>2층 지정석<span style="font-size: 16px;"> ❤어른들을 위한 전용 공간❤</span></h5>
+                        <p>
+                            2층 또한 칸막이로 옆좌석과 분리되어 있어 집중력을 높일 수 있는 좌석입니다.<br>
+                            20대부터 사용하실 수 있으시며, 노트북과 회의를 자유롭게 하실 수 있으십니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <div class="study_infomation">
+                <div class="study_info_header">
+                    <h4>가격안내</h4>
+                </div>
+
+                <div class="study_info_content" style="margin-top: 20px;"> 
+                    <div class="con3_text">
+                       <table class="table align-middle">
+                            <th:block th:each="charge : ${chargeList}">
+                                <colgroup>
+                                    <col width="90%">
+                                    <col width="*">
+                                </colgroup>
+                                <tr>
+                                    <td>[[${charge.chargeName}]]</td>
+                                    <td class="text-end">[[${charge.chargeFee}]]</td>
+                                </tr>
+                            </th:block>
+                       </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴 때 같이 실행되는 js -->
+    <!-- <script src="/"></script> -->
+</th:block>
+</html>
