@@ -39,6 +39,12 @@ public class BoardServiceImpl implements BoardService {
         return sqlSession.selectOne("boardMapper.detailSelect", boardCode);
     }
 
+    @Override
+    // 매장소개 문의 글
+    public List<BoardVO> selectPageInfo() {
+        return sqlSession.selectList("boardMapper.selectPageInfo");
+    }
+
     // 글쓰기 답변
 
 }

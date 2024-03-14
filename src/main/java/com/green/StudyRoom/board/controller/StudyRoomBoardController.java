@@ -182,6 +182,10 @@ public class StudyRoomBoardController {
 
         List<ChargeVO> chargeList = chargeService.selectCharge();
         model.addAttribute("chargeList", chargeList);
+
+        List<BoardVO> boardList = boardService.selectPageInfo();
+        model.addAttribute("boardList", boardList);
+
         return "content/homepage/studyInfo";
     }
 
