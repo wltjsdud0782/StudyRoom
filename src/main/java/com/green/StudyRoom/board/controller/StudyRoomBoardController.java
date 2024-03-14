@@ -8,6 +8,7 @@ import com.green.StudyRoom.board.vo.BoardVO;
 import com.green.StudyRoom.board.vo.CommentVO;
 import com.green.StudyRoom.member.service.MemberService;
 import com.green.StudyRoom.member.vo.MemberVO;
+import com.green.StudyRoom.seat.service.SeatService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,8 @@ import java.util.Objects;
 public class StudyRoomBoardController {
     @Resource(name="boardService")
     private BoardService boardService;
+    @Resource(name = "seatService")
+    private SeatService seatService;
 
     //멤버
     @Resource(name = "memberService")
@@ -42,7 +45,17 @@ public class StudyRoomBoardController {
 
     //메인 홈페이지
     @GetMapping("/mainHomepage")
-    public String studyRoomBoard(){
+    public String studyRoomBoard(HttpSession session){
+        if (session.getAttribute("loginInfo") != null) {
+            MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
+            int memberCode = loginInfo.getMemberCode();
+
+            if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
+                if (seatService.isExpires(memberCode).equals("만료일이 오늘보다 이전")){
+                seatService.chargeDelete(memberCode);
+                }
+            }
+        }
 
         return "content/homepage/main_homepage" ;
 
@@ -182,6 +195,10 @@ public class StudyRoomBoardController {
 
         List<ChargeVO> chargeList = chargeService.selectCharge();
         model.addAttribute("chargeList", chargeList);
+
+        List<BoardVO> boardList = boardService.selectPageInfo();
+        model.addAttribute("boardList", boardList);
+
         return "content/homepage/studyInfo";
     }
 

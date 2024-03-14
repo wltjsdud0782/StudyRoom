@@ -16,12 +16,6 @@ public class MemberController {
     @Resource(name="memberService")
     private MemberServiceImpl memberService;
 
-    //회원가입(메뉴에서 회원가입)
-    @GetMapping("/join")
-    public String join(){
-        return "content/member/join";
- }
-
     // 회원 가입
     @PostMapping("/join")
     public String joinInsert(MemberVO memberVO){

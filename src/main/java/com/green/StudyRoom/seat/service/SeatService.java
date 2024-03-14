@@ -11,9 +11,17 @@ public interface SeatService {
     
     // 좌석예약 조회
     List<SeatVO> seatList();
-    SeatVO moveAndOut(int memberCode); // 예약 상태 좌석이동,퇴실 버튼 띄우기
+    SeatVO moveAndOut(int memberCode); // 예약 상태 좌석 이동,퇴실 버튼 띄우기
 
-    String haveCharge(int memberCode); // 구입한 이용권 유무
+    // 이용권 관련
+    String haveCharge(int memberCode); // 구매한 이용권 유무
+    String haveChargeApprovalDate(int memberCode); // 구매한 이용권의 결제일
+    int haveChargeDate(int memberCode); // 구매한 이용권의 이용 가능 일 수
+    String haveChargeEndDate(int memberCode); // 구매한 이용권의 끝나는 날짜
+    int haveChargeRemainDate(int memberCode); // 구매한 이용권의 남은 일 수
+    String today();
+    String isExpires(int memberCode);
+    void chargeDelete(int memberCode);
 
     // 입실
     void inSeat(SeatVO seatVO);
@@ -24,9 +32,10 @@ public interface SeatService {
     // 자리이동
     void moveSeat(SeatVO seatVO);
     
-    // 이용권 구입 화면
+    // 이용권 상품 목록
     List<ChargeVO> chargeList();
 
+    // 이용권 상품 하나의 정보
     ChargeVO chargeBuy(int chargeCode);
 
     // 카드 결제

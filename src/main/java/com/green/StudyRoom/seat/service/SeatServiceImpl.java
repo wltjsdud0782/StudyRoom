@@ -31,6 +31,41 @@ public class SeatServiceImpl implements SeatService{
         return sqlSession.selectOne("seatMapper.haveCharge", memberCode);
     }
 
+    @Override // 결제일
+    public String haveChargeApprovalDate(int memberCode) {
+        return sqlSession.selectOne("seatMapper.haveChargeApprovalDate", memberCode);
+    }
+
+    @Override // 이용 가능 일 수
+    public int haveChargeDate(int memberCode) {
+        return sqlSession.selectOne("seatMapper.haveChargeDate", memberCode);
+    }
+
+    @Override // 이용권의 끝나는 날짜
+    public String haveChargeEndDate(int memberCode) {
+        return sqlSession.selectOne("seatMapper.haveChargeEndDate", memberCode);
+    }
+
+    @Override // 이용권의 남은 일 수
+    public int haveChargeRemainDate(int memberCode) {
+        return sqlSession.selectOne("seatMapper.haveChargeRemainDate", memberCode);
+    }
+
+    @Override
+    public String today() {
+        return sqlSession.selectOne("seatMapper.today");
+    }
+
+    @Override
+    public String isExpires(int memberCode) {
+        return sqlSession.selectOne("seatMapper.isExpires", memberCode);
+    }
+
+    @Override
+    public void chargeDelete(int memberCode) {
+        sqlSession.delete("seatMapper.chargeDelete", memberCode);
+    }
+
     @Override // 입실
     @Transactional(rollbackFor = Exception.class)
     public void inSeat(SeatVO seatVO) {
@@ -52,23 +87,22 @@ public class SeatServiceImpl implements SeatService{
         sqlSession.update("seatMapper.inSeat", seatVO);
     }
 
-    // 이용권 구입화면
-    @Override
+    @Override // 이용권 상품 목록
     public List<ChargeVO> chargeList() {
         return sqlSession.selectList("seatMapper.chargeList");
     }
 
-    @Override
+    @Override // 이용권 하나의 정보
     public ChargeVO chargeBuy(int chargeCode) {
         return sqlSession.selectOne("seatMapper.chargeBuy", chargeCode);
     }
 
-    @Override
+    @Override // 카드 결제 고객 정보
     public MemberVO selMem(int memberCode) {
         return sqlSession.selectOne("seatMapper.selMem", memberCode);
     }
 
-    @Override
+    @Override // 카드 결제 주문 번호
     public int selectNextApprovalCode() {
         return sqlSession.selectOne("seatMapper.selectNextApprovalCode");
     }

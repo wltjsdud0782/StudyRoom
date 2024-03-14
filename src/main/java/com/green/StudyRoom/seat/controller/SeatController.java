@@ -25,7 +25,7 @@ public class SeatController {
     @Resource(name = "memberService")
     private MemberServiceImpl memberService;
 
-    @GetMapping("/seatLive") // 좌석예약 눌렀을때
+    @GetMapping("/seatLive") // 좌석선택 눌렀을때
     public String seatLive(@RequestParam(name = "floor", required = false, defaultValue = "1")int floor
                         , Model model, HttpSession session){
         model.addAttribute("floor", floor);
@@ -36,6 +36,10 @@ public class SeatController {
 
             model.addAttribute("reservationMem", seatService.moveAndOut(memberCode));
             model.addAttribute("haveCharge", seatService.haveCharge(memberCode));
+            if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
+                model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
+                model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
+            }
         }
 
         return "content/seat/seat_live";
@@ -55,7 +59,7 @@ public class SeatController {
         return data;
     }
 
-    @GetMapping("/inSeat") // 예약하기 눌렀을때
+    @GetMapping("/inSeat") // 입실하기 눌렀을때
     public String reservationSeat(HttpSession session, SeatVO seatVO){
         MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
         seatVO.setMemberVO(loginInfo);

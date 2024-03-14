@@ -66,3 +66,65 @@
 .con3_text table td {
     height: 80px;
 }
+.con4_text{
+    margin-top: 20px;
+    margin-left: 80px;
+    width: 450px;
+    height: 200px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc ;
+}
+.con4_header{
+    margin-bottom: 70px;
+    font-size: 24px;
+    padding: 20px;
+}
+.con4_content {
+    padding: 20px;
+    font-size: 15px;
+}
+.con4_content span {
+    padding-right: 20px;
+    border-right: 1px solid #000;
+    margin-right: 25px;
+}
+
+
+.map-container{
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.map-footer {
+    height: 500px;
+    margin-top: 40px;
+    width: 100%;
+}
+.map-title {
+    border-bottom: 1px solid #ccc;
+    margin-left: 140px;
+    width: 74%;
+    height: 120px;
+}
+.map-info {
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+    margin-left: 140px;
+    width: 74%;
+    height: 120px;
+}
+.map-table tr, td{
+    border: none;
+}
+.map-tel {
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+    margin-left: 140px;
+    width: 74%;
+    height: 120px;
+}
+.map-tel tr, td{
+    border: none;
+}

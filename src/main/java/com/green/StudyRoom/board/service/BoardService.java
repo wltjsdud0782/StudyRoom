@@ -20,5 +20,8 @@ public interface BoardService {
     //게시판 상세조회
     BoardVO detailSelect(int boardCode);
 
+    // 매장소개 문의글
+    List<BoardVO> selectPageInfo();
+
 
 }

@@ -76,6 +76,7 @@ a {
     background-color: #fff;
     color: #000;
 }
+<<<<<<< HEAD
 
 
 .sideMenu-second {
@@ -114,3 +115,48 @@ a {
     background-color: #fff;
     color: #000;
 }
+=======
+.footer{
+    width: 100%;
+    height: 250px;
+    background-color: #000;
+    position: relative;
+}
+.footer_con1{
+    width: 100%;
+    color: #fff;
+}
+.footer_con1 span{
+    width: 350px;
+    border: 1px solid #ebe9e9;
+    margin-top: 40px;
+    font-size: 26px;
+    display: inline-block;
+    padding: 20px;
+}
+.footer_con2{
+    width: 100%;
+    margin-top: 50px;
+}
+.footer_con2 > ul{
+    color: #fff;
+    display: flex;
+}
+.footer_con2 > ul > li {
+    font-size: 13px;
+    padding: 3px 25px;
+    border-right: 1px solid #b8b7b7;
+}
+
+.footer_con3{
+    position: absolute;
+    left: 80%;
+    top: 20%;
+    transform: translate(-80%,-20%);
+}
+.footer_con3 img{
+    width: 80px;
+    height: 80px;
+    padding: 20px;
+}
+>>>>>>> b3ea7c41b3188a0acff184bdcaa7fe1744c43927

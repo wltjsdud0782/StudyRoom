@@ -48,7 +48,6 @@
         <id column="DAY_INPUT" property="dayInput"/>
         <result column="IN_OUT" property="InOut"/>
         <result column="MEMBER_CODE" property="memberCode"/>
-
         <association property="memberVO" resultMap="member"/>
     </resultMap>
 

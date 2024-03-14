@@ -26,24 +26,7 @@
         <result column="AGE_NAME" property="ageName"/>
     </resultMap>
 
-    <select id="chargeList" resultMap="chargeMapper.charge">
-        SELECT
-            CHARGE_CODE
-            , CHARGE_NAME
-            , CHARGE_FEE
-        FROM STUDYROOM_CHARGE
-        ORDER BY CHARGE_CODE DESC
-    </select>
-
-    <select id="chargeBuy" resultMap="chargeMapper.charge">
-        SELECT
-            CHARGE_NAME
-            , CHARGE_FEE
-            , CHARGE_CODE
-        FROM STUDYROOM_CHARGE
-        WHERE CHARGE_CODE = #{chargeCode}
-    </select>
-
+<!--  좌석 선택 화면 필요 쿼리  -->
     <select id="seatList" resultMap="seat">
         SELECT
         SEAT_NUM
@@ -76,26 +59,117 @@
         ORDER BY SEAT_NUM ASC
     </select>
 
-
-
     <select id="moveAndOut" resultMap="seat">
         SELECT SEAT_NUM
         FROM STUDYROOM_SEAT SEAT
         INNER JOIN studyroom_member MEM
         ON SEAT.MEMBER_CODE = MEM.MEMBER_CODE
-        WHERE SEAT.MEMBER_CODE = #{memberCode};
+        WHERE SEAT.MEMBER_CODE = #{memberCode}
     </select>
 
+
+<!--  이용권 관련 필요 쿼리  -->
+
+    <!--  지정한 회원의 이용권 유무  -->
     <select id="haveCharge" resultType="String">
         SELECT
             CHARGE_NAME
         FROM approval APP
         INNER JOIN STUDYROOM_CHARGE CHARG
         ON APP.CHARGE_CODE = CHARG.CHARGE_CODE
-        WHERE MEMBER_CODE = #{memberCode};
+        WHERE MEMBER_CODE = #{memberCode}
     </select>
 
-    <!-- 입실  -->
+    <!--  지정한 회원의 이용권 결제일  -->
+    <select id="haveChargeApprovalDate" resultType="String">
+        SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode}
+    </select>
+
+    <!--  지정한 회원의 이용권 이용 가능 일 수  -->
+    <select id="haveChargeDate" resultType="int">
+        SELECT
+            CHARGE_DATE
+        FROM STUDYROOM_CHARGE CHARGE
+        INNER JOIN APPROVAL APP
+        ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
+        WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
+    </select>
+
+    <!--  지정한 회원의 이용권 끝나는 날짜  -->
+    <select id="haveChargeEndDate" resultType="String">
+    SELECT
+        (SELECT DATE_ADD(
+            (SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode})
+            , INTERVAL (
+                SELECT
+                    CHARGE_DATE
+                FROM STUDYROOM_CHARGE CHARGE
+                INNER JOIN APPROVAL APP
+                ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
+                WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
+            ) DAY)
+        ) AS END_DATE
+    FROM approval
+    WHERE MEMBER_CODE = #{memberCode}
+    </select>
+
+    <!--  지정한 회원의 이용권 남은 일 수  -->
+    <select id="haveChargeRemainDate" resultType="int">
+        SELECT
+            TIMESTAMPDIFF(DAY, DATE_FORMAT(now(), '%Y-%m-%d')
+            , (SELECT
+                (SELECT DATE_ADD(
+                    (SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode})
+                    , INTERVAL (
+                        SELECT CHARGE_DATE
+                        FROM STUDYROOM_CHARGE CHARGE
+                        INNER JOIN APPROVAL APP
+                        ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
+                        WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
+                        ) DAY)
+                    ) AS END_DATE
+                FROM approval
+                WHERE MEMBER_CODE = #{memberCode})
+            ) AS REMAIN_DATE
+        FROM approval
+        WHERE MEMBER_CODE = #{memberCode}
+    </select>
+
+    <!--  오늘 날짜 구하기  -->
+    <select id="today" resultType="String">
+        SELECT DATE_FORMAT(now(), '%Y-%m-%d')
+    </select>
+
+    <select id="isExpires" resultType="String">
+    SELECT
+    IF(
+    (SELECT
+    (SELECT DATE_ADD(
+    (SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode})
+    , INTERVAL (
+    SELECT
+    CHARGE_DATE
+    FROM STUDYROOM_CHARGE CHARGE
+    INNER JOIN APPROVAL APP
+    ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
+    WHERE
+    APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
+    ) DAY)
+    )
+    FROM approval
+    WHERE MEMBER_CODE = #{memberCode}) &lt; (SELECT DATE_FORMAT(now(), '%Y-%m-%d'))
+    , '만료일이 오늘보다 이전'
+    , '만료일이 오늘보다 이후')AS EXPIRES
+    </select>
+
+    <!--  이용권 만료 삭제  -->
+    <delete id="chargeDelete">
+    DELETE
+    FROM APPROVAL
+    WHERE MEMBER_CODE = #{memberCode}
+    </delete>
+
+<!-- 입실 필요 쿼리  -->
     <update id="inSeat">
         UPDATE STUDYROOM_SEAT
         SET
@@ -115,7 +189,7 @@
         )
     </insert>
 
-    <!-- 퇴실  -->
+<!-- 퇴실 필요 쿼리  -->
     <update id="outSeat">
         UPDATE STUDYROOM_SEAT
         SET
@@ -131,16 +205,33 @@
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 
+<!--  이용권 구매 화면 필요 쿼리  -->
+    <select id="chargeList" resultMap="chargeMapper.charge">
+        SELECT
+        CHARGE_CODE
+        , CHARGE_NAME
+        , CHARGE_FEE
+        FROM STUDYROOM_CHARGE
+        ORDER BY CHARGE_CODE DESC
+    </select>
 
+    <select id="chargeBuy" resultMap="chargeMapper.charge">
+        SELECT
+        CHARGE_NAME
+        , CHARGE_FEE
+        , CHARGE_CODE
+        FROM STUDYROOM_CHARGE
+        WHERE CHARGE_CODE = #{chargeCode}
+    </select>
 
-    <!--  카드 결제 정보 추가  -->
+<!--  카드 결제 필요 쿼리  -->
     <select id="selMem" resultMap="memberMapper.member">
         SELECT *
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_CODE = #{memberCode}
     </select>
 
-    <!--    다음에 insert 할 APPROVAL_CODE 조회-->
+            <!--    다음에 insert 할 APPROVAL_CODE 조회-->
     <select id="selectNextApprovalCode" resultType="int">
         SELECT
         IFNULL(MAX(APPROVAL_CODE) ,0) + 1
