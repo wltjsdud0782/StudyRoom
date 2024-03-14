@@ -39,9 +39,6 @@ public class SeatController {
             if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
                 model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
                 model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
-                //if (seatService.isExpires(memberCode).equals("만료일이 오늘보다 이전")){
-                    //seatService.chargeDelete(memberCode);
-                //}
             }
         }
 
