@@ -677,7 +677,7 @@ function twofloor(){
 // 예약하기 Modal
 const modal_open = new bootstrap.Modal('#seat-modal');
 
-function reservation(loginInfo, haveCharge){
+function reservation(loginInfo, haveCharge, remainDate, endDate){
     
     if(loginInfo == null){ // 로그인 X
         alert("로그인이 필요한 기능입니다.");
@@ -703,28 +703,36 @@ function reservation(loginInfo, haveCharge){
             <div class="row line-height">
                 <div class="col">
                     <div class="row">
-                        <div class="col text-end">선택한 좌석</div>
-                        <div class="col text-start">${selected_floor}층 ${selected_seat}번</div>
+                        <div class="col-6 text-end">선택한 좌석</div>
+                        <div class="col-5 text-start">${selected_floor}층 ${selected_seat}번</div>
                     </div>
                     <div class="row">
-                        <div class="col text-end">사용자 아이디</div>
-                        <div class="col text-start">${loginInfo.memberId} </div>
+                        <div class="col-6 text-end">사용자 아이디</div>
+                        <div class="col-5 text-start">${loginInfo.memberId} </div>
                     </div>
                     <div class="row">
-                        <div class="col text-end">사용자명</div>
-                        <div class="col text-start">${loginInfo.memberName}</div>
+                        <div class="col-6 text-end">사용자명</div>
+                        <div class="col-6 text-start">${loginInfo.memberName}</div>
                     </div>
                     <div class="row">
-                        <div class="col text-end">사용자번호</div>
-                        <div class="col text-start">${loginInfo.memberTel}</div>
+                        <div class="col-6 text-end">사용자번호</div>
+                        <div class="col-5 text-start">${loginInfo.memberTel}</div>
                     </div>
                     <div class="row">
-                        <div class="col text-end">보유한 이용권</div>
-                        <div class="col text-start">${haveCharge}</div>
+                        <div class="col-6 text-end">보유한 이용권</div>
+                        <div class="col-5 text-start">
+                            ${haveCharge}
+                            <span style="font-size: 10pt;">
+                                (${remainDate}일 남음)
+                            </span>
+                            <span style="font-size: 9pt; color: red;">
+                                &nbsp; * ${endDate} 만료</span>
+                            </span>
+                        </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col">
-                            <button type="button" class="btn btn-danger mb-4" onclick="oneMore()">예약하기</button>
+                            <button type="button" class="btn btn-danger mb-4" onclick="oneMore()">입실하기</button>
                         </div>
                     </div>
                 </div>
