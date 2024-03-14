@@ -33,11 +33,11 @@ function memberInfo(memberCode) {
                             <h4>&nbsp;Member</h4>
                             <table class="adminContainer-table">
                                 <colgroup>
-                                    <col width="9%">
-                                    <col width="24%">
-                                    <col width="9%">
-                                    <col width="24%">
-                                    <col width="9%">
+                                    <col width="11%">
+                                    <col width="22%">
+                                    <col width="11%">
+                                    <col width="22%">
+                                    <col width="11%">
                                     <col width="*">
                                 </colgroup>
                                 <tbody id="changeInfo">
@@ -51,12 +51,17 @@ function memberInfo(memberCode) {
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col" style="font-size: larger;">
                                                     ${data.memberMap.memberName} (${data.memberMap.memberId})
                                                 </div>
-                                                <div class="col" style="text-align: end;">
-                                                    [${data.memberMap.memberGender}]
-                                                </div>
+                                                <div class="col-4" style="text-align: center;">`;
+                if (data.memberMap.memberGender == 'M') {
+                    str +=`&nbsp;<input type="button" value="남자" class="btn btn-dark" disabled>`;
+                }
+                if (data.memberMap.memberGender == 'W') {
+                    str +=`&nbsp;<input type="button" value="여자" class="btn btn-dark" disabled>`;
+                }                                    
+                    str +=                     `</div>
                                             </div>
                                         </td>
                                         <td class="info-border-title">
@@ -100,9 +105,12 @@ function memberInfo(memberCode) {
                                         <td>
                                             <div class="row">
                                                 <div class="col">
-                                                    <input type="text" value="${data.memberMap.postCode}" 
-                                                    style="border: 1px solid #ccc; height: 40px;" name="postCode">                        
-                                                </div>
+                                                    <input type="text" value="${data.memberMap.postCode}"
+                                                    style="border: 1px solid #ccc; height: 40px;" name="postCode">&ensp;
+                                                    <span>
+                                                        <input type="button" value="검색" class="btn btn-dark">
+                                                    </span>                                            
+                                                </div>                                         
                                             </div>
                                         </td>                                
                                         <td class="info-border-title">
@@ -173,7 +181,7 @@ function memberInfo(memberCode) {
                                     <td class="info-border-title">
                                         <div class="row">
                                             <div class="col info-title">
-                                                사용중 좌석  
+                                                좌석 사용
                                             </div>
                                         </div>
                                     </td>
