@@ -32,7 +32,7 @@
             , MEMBER_ADDR
             , ADDR_DETAIL
             , IS_ADMIN
-            , DATE_FORMAT(MEMBER_BIRTH, '%Y-%m-%d') MEMBER_BIRTH
+            , DATE_FORMAT(MEMBER_BIRTH, '%Y/%m/%d') MEMBER_BIRTH
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_CODE = #{memberCode}
     </select>

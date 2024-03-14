@@ -42,18 +42,15 @@ body {
     width: 100%;
 }
 
-#changeInfo tr td {
+.changeInfo tr td {
     border: 1px solid #ccc;
     height: 63px;
-}
-
-.info-title {
-    text-align: center;
 }
 
 .info-border-title {
     background-color: #3b3b3b;
     color: white;
+    text-align: center;
 }
 
 .adminContainer-table-tbody::-webkit-scrollbar {

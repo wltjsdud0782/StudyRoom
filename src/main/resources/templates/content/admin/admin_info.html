@@ -13,7 +13,7 @@
         <div class="adminContainer">
             <label class="title">
                 <h3>회원 관리</h3>
-                <span>수정필요 : 입실시간, 퇴실시간, 남은시간, null memberCode</span>
+                <span>수정필요 : 입실시간, 퇴실시간, 남은시간, 자리이동</span>
             </label>
             <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
@@ -34,6 +34,10 @@
                                                     th:selected="${infoSearchVO.searchType == 'MEMBER_ID'}">
                                                     아이디
                                                 </option>
+                                                <option value="IS_ADMIN"
+                                                    th:selected="${infoSearchVO.searchType == 'IS_ADMIN'}">
+                                                    권한(영문)
+                                                </option>
                                             </select>&nbsp;
                                             <input type="text" name="searchValue" style="text-align: left;"
                                                 th:value="${infoSearchVO.searchValue}">&nbsp;
@@ -51,11 +55,12 @@
                             </th:block>
                             <th:block th:unless="${#lists.isEmpty(memberList)}">
                                 <tr th:each="member, state : ${memberList}"
-                                    th:onclick="memberInfo([[${member.memberCode}]])">
+                                    th:onclick="allInfo([[${member.memberCode}]])">
                                     <td>
                                         <div>
                                             <span>
-                                                <span style="font-size: small;">#[[${#lists.size(memberList) - state.index}]]</span>
+                                                <span style="font-size: small;">#[[${#lists.size(memberList) -
+                                                    state.index}]]</span>
                                                 &ensp;[[${member.memberName}]] ([[${member.memberId}]])
                                             </span>
                                             <span style="float: right;">
@@ -83,13 +88,54 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="date_info_modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <table class="adminContainer-table">
+                            <colgroup>
+                                <col width="15%">
+                                <col width="35%">
+                                <col width="15%">
+                                <col width="35%">
+                            </colgroup>
+                            <tbody class="changeInfo">
+                                <tr>
+                                    <td class="info-border-title">요금제 명</td>
+                                    <td></td>
+                                    <td class="info-border-title">남은 시간</td>
+                                    <td></td>                                  
+                                </tr>
+                                <tr>
+                                    <td class="info-border-title">시작 시간</td>
+                                    <td></td>
+                                    <td class="info-border-title">종료 시간</td>
+                                    <td></td>
+                                </tr>                             
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-dark">변경</button> -->
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>                      
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </body>
 </th:block>
 
-<!-- 【상태(좌석)】 : <input type="number" value="${data.seatNum}" name="seatNum" min="1" max="60" style="padding-left: 65px;"> -->
+
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/js/admin/admin_info.js"></script>
 </th:block>
 
