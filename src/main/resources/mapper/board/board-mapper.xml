@@ -84,6 +84,19 @@
         BOARD_ANSWER = 'Y'
         WHERE BOARD_CODE = #{boardCode}
     </update>
+
+    <!-- 매장소개 문의글 Select -->
+    <select id="selectPageInfo" resultMap="board">
+        SELECT BOARD_CODE
+        , BOARD_TITLE
+        , DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') BOARD_DATE
+        , BOARD_WRITER
+        , BOARD_SECRET
+        FROM STUDYROOM_BOARD
+        ORDER BY BOARD_CODE DESC
+        LIMIT 3;
+    </select>
+
 </mapper>
 
 

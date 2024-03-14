@@ -84,6 +84,7 @@
                                     </th:blocK>
                                 </th:block>
                             </th:block>
+                            
                             <th:block th:if="${session.loginInfo == null}">
                                 <th:block th:if="${board.boardSecret == 'NO'}">
                                     <td class="bi bi-chat-left-heart" th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
