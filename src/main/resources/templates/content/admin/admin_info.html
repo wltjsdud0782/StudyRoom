@@ -42,6 +42,9 @@
                                             <input type="text" name="searchValue" style="text-align: left;"
                                                 th:value="${infoSearchVO.searchValue}">&nbsp;
                                             <input type="submit" value="검색">
+                                            <div style="float: right;">
+                                                <input type="button" value="새로고침" onclick="location.href='/admin/info'">
+                                            </div>                           
                                         </div>
                                     </td>
                                 </tr>
@@ -89,6 +92,11 @@
             </div>
         </div>
 
+        <!-- ${data.seatMap.seatFloor}층&ensp;
+        <input type="number" value="${data.seatMap.seatNum}" class="numUpDown"
+        style="border: 1px solid #ccc; height: 40px; width: 40px; text-align: center;" 
+        name="" min="1" max="60">번석 -->
+
         <!-- Modal -->
         <div class="modal fade" id="date_info_modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -106,20 +114,20 @@
                                     <td class="info-border-title">요금제 명</td>
                                     <td></td>
                                     <td class="info-border-title">남은 시간</td>
-                                    <td></td>                                  
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td class="info-border-title">시작 시간</td>
                                     <td></td>
                                     <td class="info-border-title">종료 시간</td>
                                     <td></td>
-                                </tr>                             
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="modal-footer">
                         <!-- <button type="button" class="btn btn-dark">변경</button> -->
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>                      
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                     </div>
                 </div>
             </div>
