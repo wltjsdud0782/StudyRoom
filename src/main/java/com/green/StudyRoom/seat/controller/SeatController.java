@@ -115,7 +115,8 @@ public class SeatController {
         Map<String, Object> buyInfo = new HashMap<String, Object>();
         buyInfo.put("buyMem", buyMem);
         buyInfo.put("buyOne", buyOne);
-        buyInfo.put("merchant_uid", seatService.selectNextApprovalCode());
+        int buyCode = (int)(Math.random()*100000000+1);
+        buyInfo.put("merchant_uid", seatService.buyToday()+buyCode);
 
         return buyInfo;
     }

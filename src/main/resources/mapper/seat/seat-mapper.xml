@@ -137,7 +137,10 @@
 
     <!--  오늘 날짜 구하기  -->
     <select id="today" resultType="String">
-        SELECT DATE_FORMAT(now(), '%Y-%m-%d')
+        SELECT DATE_FORMAT(now(), '%Y%m%d')
+    </select>
+    <select id="buyToday" resultType="String">
+        SELECT DATE_FORMAT(now(), '%y%m%d')
     </select>
 
     <select id="isExpires" resultType="String">
@@ -231,13 +234,6 @@
         WHERE MEMBER_CODE = #{memberCode}
     </select>
 
-            <!--    다음에 insert 할 APPROVAL_CODE 조회-->
-    <select id="selectNextApprovalCode" resultType="int">
-        SELECT
-        IFNULL(MAX(APPROVAL_CODE) ,0) + 1
-        FROM APPROVAL
-    </select>
-
     <insert id="buyCard">
         INSERT INTO APPROVAL (
             APPROVAL_CODE
@@ -249,6 +245,15 @@
             , #{chargeCode}
         )
     </insert>
+
+<!-- 관리자 좌석 관리 필요 쿼리  -->
+    <update id="adminUpdateSeat">
+        UPDATE
+        STUDYROOM_SEAT
+        SET SEAT_POWER = ${seatPower}
+            , STATUS_NUM = #{statusNum}
+        WHERE SEAT_NUM = #{seatNum}
+    </update>
 
 </mapper>
 

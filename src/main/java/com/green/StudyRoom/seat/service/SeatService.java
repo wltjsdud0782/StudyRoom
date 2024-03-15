@@ -40,8 +40,11 @@ public interface SeatService {
 
     // 카드 결제
     MemberVO selMem(int memberCode);
-    int selectNextApprovalCode();
+    String buyToday(); // 주문번호 만들기
 
     // 카드 결제 성공
     void buyCard(ApprovalVO approvalVO);
+
+    // 관리자
+    void adminUpdateSeat(SeatVO seatVO);
 }
