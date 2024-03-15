@@ -102,14 +102,19 @@ public class SeatServiceImpl implements SeatService{
         return sqlSession.selectOne("seatMapper.selMem", memberCode);
     }
 
-    @Override // 카드 결제 주문 번호
-    public int selectNextApprovalCode() {
-        return sqlSession.selectOne("seatMapper.selectNextApprovalCode");
+    @Override // 주문 번호 필요
+    public String buyToday() {
+        return sqlSession.selectOne("seatMapper.buyToday");
     }
 
     @Override // 카드 결제 성공시 정보 추가
     public void buyCard(ApprovalVO approvalVO) {
         sqlSession.insert("seatMapper.buyCard", approvalVO);
+    }
+
+    @Override // 관리자 좌석 상태 변경
+    public void adminUpdateSeat(SeatVO seatVO) {
+        sqlSession.update("seatMapper.adminUpdateSeat", seatVO);
     }
 
 }

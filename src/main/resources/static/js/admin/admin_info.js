@@ -173,7 +173,7 @@ function allInfo(memberCode) {
                                             </div>
                                                 <div class="col-5 text-center">                                                
                                                     <input type="button" value="시간 조회" 
-                                                    onclick="useTime()" class="btn btn-dark">&nbsp;
+                                                    onclick="useTime(${memberCode})" class="btn btn-dark">&nbsp;
                                                 </div>                                                                               
                                         </div>
                                     </td>
@@ -187,26 +187,26 @@ function allInfo(memberCode) {
                                     <td>
                                         <div class="row">
                                             <div class="col">`;
-        if (data.seatMap.seatPower == 'ON') {
-            str += `
+                if (data.seatMap.seatPower == 'ON') {
+                    str += `
                 <div class="btnDiv">
                     <input type="text" value="켜짐" readonly>
                 </div>  
             `;
-        }
-        else if (data.seatMap.seatPower == 'OFF') {
-            str += `
+                }
+                else if (data.seatMap.seatPower == 'OFF') {
+                    str += `
                 <div class="btnDiv">
                     <input type="text" value="꺼짐" readonly>
                 </div>  
             `;
-        }
-            str += `
+                }
+                str += `
                                             </div>
                                         </div>
                                     </td>`;
-        }   
-        str+=`  
+            }
+            str += `  
                                     <td class="info-border-title">
                                         <div class="row">
                                             <div class="col">
@@ -217,28 +217,28 @@ function allInfo(memberCode) {
                                     <td>
                                         <div class="row">
                                             <div class="col">`;
-        if (data.memberMap.isAdmin == 'USER') {
-            str +=`
+            if (data.memberMap.isAdmin == 'USER') {
+                str += `
                 <div class="btnDiv">
                     <input type="text" value="회원" readonly>
                 </div>   
             `;
-        }
-        else if (data.memberMap.isAdmin == 'ARBEIT') {
-            str +=`
+            }
+            else if (data.memberMap.isAdmin == 'ARBEIT') {
+                str += `
                 <div class="btnDiv">
                     <input type="text" value="알바생" readonly>
                 </div>  
             `;
-        }                                    
-        else if (data.memberMap.isAdmin == 'ADMIN') {
-            str +=`
+            }
+            else if (data.memberMap.isAdmin == 'ADMIN') {
+                str += `
                 <div class="btnDiv">
                     <input type="text" value="관리자" readonly>
                 </div>  
             `;
-        }
-            str +=`                                                                           
+            }
+            str += `                                                                           
                                             </div>
                                         </div>
                                     </td>                                                                 
@@ -422,8 +422,33 @@ function memberInfo(memberCode) {
                                                 <div class="col">`;
             if (data.seatMap == null) {
                 str += `
-            사용 중인 좌석이 없습니다.
-            </div>
+                    사용 중인 좌석이 없습니다.
+                        </div>
+                            </div>
+                                </td>
+                                <td class="info-border-title">
+                                    <div class="row">
+                                        <div class="col">
+                                            점등 상태
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="row>
+                                        <div class="col">
+                                            사용 중인 좌석이 없습니다.
+                                        </div>
+                                    </div>
+                                </td>`;
+            }
+            else {
+                str += `<div style="padding-top: 7px;">${data.seatMap.seatFloor}층&ensp;${data.seatMap.seatNum}번석</div>
+                                    </div>
+                                        <div class="col-5 text-center">                                                
+                                            <input type="button" value="시간 조회" 
+                                            onclick="useTime(${memberCode})" class="btn btn-dark">&nbsp;
+                                        </div>                                                                               
+                                </div>
                                         </td>
                                         <td class="info-border-title">
                                             <div class="row">
@@ -433,37 +458,9 @@ function memberInfo(memberCode) {
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="row>
+                                            <div class="row">
                                                 <div class="col">
-                                                    사용 중인 좌석이 없습니다.
-                                                </div>
-                                            </div>
-                                        </td>`;
-            }
-            else {
-                str += `
-                ${data.seatMap.seatFloor}층&ensp;
-                <input type="number" value="${data.seatMap.seatNum}" class="numUpDown"
-                style="border: 1px solid #ccc; height: 40px; width: 40px; text-align: center;" 
-                name="" min="1" max="60">번석</div>
-                                                <div class="col-5 text-center" style="padding-top: 1px;">                                                
-                                                    <input type="button" value="시간 조회" 
-                                                    onclick="useTime()" class="btn btn-dark">&nbsp;
-                                                </div>                                                                               
-                                        </div>
-                                    </td>
-                                    <td class="info-border-title">
-                                        <div class="row">
-                                            <div class="col">
-                                                점등 상태
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col">
-                                            <select name="seatPower">`;
-                                            
+                                                <select name="seatPower">`;
                 if (data.seatMap.seatPower == 'ON') {
                     str += `
                                             <option value="ON" selected>켜짐</option>
@@ -548,6 +545,38 @@ function searchAddress() {
 //사용시간 Modal
 const info_modal = new bootstrap.Modal('#date_info_modal');
 
-function useTime(){
-    info_modal.show();
+function useTime(memberCode) {
+    fetch('/admin/viewDate', { //요청경로
+        method: 'POST',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        //컨트롤러로 전달할 데이터
+        body: new URLSearchParams({
+            // 데이터명 : 데이터값
+            'memberCode': memberCode
+        })
+    })
+        .then((response) => {
+            if (!response.ok) {
+                alert('fetch error!\n컨트롤러로 통신중에 오류가 발생했습니다.');
+                return;
+            }
+
+            return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
+            //return response.json(); //나머지 경우에 사용
+        })
+        //fetch 통신 후 실행 영역
+        .then((data) => {//data -> controller에서 리턴되는 데이터!
+            alert(memberCode);
+            alert(data);
+            info_modal.show();
+        })
+        //fetch 통신 실패 시 실행 영역
+        .catch(err => {
+            alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+            console.log(err);
+        });
+
 }

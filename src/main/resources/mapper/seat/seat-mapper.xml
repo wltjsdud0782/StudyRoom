@@ -137,7 +137,10 @@
 
     <!--  오늘 날짜 구하기  -->
     <select id="today" resultType="String">
-        SELECT DATE_FORMAT(now(), '%Y-%m-%d')
+        SELECT DATE_FORMAT(now(), '%Y%m%d')
+    </select>
+    <select id="buyToday" resultType="String">
+        SELECT DATE_FORMAT(now(), '%y%m%d')
     </select>
 
     <select id="isExpires" resultType="String">
@@ -198,12 +201,15 @@
         , MEMBER_CODE = NULL
         WHERE MEMBER_CODE = #{memberCode}
     </update>
-    <update id="outMem">
-        UPDATE STUDYROOM_INOUT
-        SET
-        IN_OUT = 'OUT'
-        WHERE MEMBER_CODE = #{memberCode}
-    </update>
+    <insert id="outMem">
+        INSERT INTO STUDYROOM_INOUT (
+        MEMBER_CODE
+        , IN_OUT
+        ) VALUES (
+        #{memberCode}
+        , 'OUT'
+        )
+    </insert>
 
 <!--  이용권 구매 화면 필요 쿼리  -->
     <select id="chargeList" resultMap="chargeMapper.charge">
@@ -231,13 +237,6 @@
         WHERE MEMBER_CODE = #{memberCode}
     </select>
 
-            <!--    다음에 insert 할 APPROVAL_CODE 조회-->
-    <select id="selectNextApprovalCode" resultType="int">
-        SELECT
-        IFNULL(MAX(APPROVAL_CODE) ,0) + 1
-        FROM APPROVAL
-    </select>
-
     <insert id="buyCard">
         INSERT INTO APPROVAL (
             APPROVAL_CODE
@@ -249,6 +248,15 @@
             , #{chargeCode}
         )
     </insert>
+
+<!-- 관리자 좌석 관리 필요 쿼리  -->
+    <update id="adminUpdateSeat">
+        UPDATE
+        STUDYROOM_SEAT
+        SET SEAT_POWER = #{seatPower}
+            , STATUS_NUM = #{statusNum}
+        WHERE SEAT_NUM = #{seatNum}
+    </update>
 
 </mapper>
 
