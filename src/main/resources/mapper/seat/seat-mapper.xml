@@ -201,12 +201,15 @@
         , MEMBER_CODE = NULL
         WHERE MEMBER_CODE = #{memberCode}
     </update>
-    <update id="outMem">
-        UPDATE STUDYROOM_INOUT
-        SET
-        IN_OUT = 'OUT'
-        WHERE MEMBER_CODE = #{memberCode}
-    </update>
+    <insert id="outMem">
+        INSERT INTO STUDYROOM_INOUT (
+        MEMBER_CODE
+        , IN_OUT
+        ) VALUES (
+        #{memberCode}
+        , 'OUT'
+        )
+    </insert>
 
 <!--  이용권 구매 화면 필요 쿼리  -->
     <select id="chargeList" resultMap="chargeMapper.charge">
