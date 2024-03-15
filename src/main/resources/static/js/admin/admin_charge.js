@@ -31,12 +31,12 @@ function changeCharge(chargeCode) {
             <input type="hidden" name="chargeCode" value="${chargeCode}">
                             <table class="adminContainer-table">
                                 <colgroup>
-                                    <col width="6%">
-                                    <col width="20%">
                                     <col width="7%">
-                                    <col width="20%">
+                                    <col width="19%">
                                     <col width="7%">
-                                    <col width="20%">
+                                    <col width="19%">
+                                    <col width="7%">
+                                    <col width="19%">
                                     <col width="*">
                                 </colgroup>
                                 <tbody>
@@ -44,7 +44,7 @@ function changeCharge(chargeCode) {
                                         <td>
                                             <div class="row">
                                                 <div class="col text-end charge-title">
-                                                    요금 명
+                                                    이용권 명
                                                 </div>
                                             </div>
                                         </td>                                       
@@ -75,7 +75,7 @@ function changeCharge(chargeCode) {
                                             <div class="row">
                                                 <div class="col text-end">
                                                     <div class="btnDiv">
-                                                        <input type="submit" value="요금 변경" class="not-null-btn">&nbsp;
+                                                        <input type="submit" value="이용권 변경" class="not-null-btn">&nbsp;
                                                         <input type="button" value="취소" onclick="window.location.reload()">
                                                     </div>
                                                 </div>

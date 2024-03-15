@@ -9,10 +9,25 @@
         SELECT MEMBER_NAME
             , MEMBER_ID
             , MEMBER_CODE
-            , IS_ADMIN
+            , CASE
+                WHEN IS_ADMIN = 'USER' THEN '회원'
+                WHEN IS_ADMIN = 'ARBEIT' THEN '알바생'
+                WHEN IS_ADMIN = 'ADMIN' THEN '관리자'
+                END IS_ADMIN
         FROM studyroom_member
         <if test='searchValue != null and !searchValue.equals("")'>
-            WHERE ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+            <choose>
+                <when test="searchType != 'IS_ADMIN'">
+                    WHERE ${searchType} LIKE CONCAT('%', #{searchValue}, '%')
+                </when>
+                <when test="searchType == 'IS_ADMIN'">
+                    WHERE (CASE
+                    WHEN IS_ADMIN = 'USER' THEN '회원'
+                    WHEN IS_ADMIN = 'ARBEIT' THEN '알바생'
+                    WHEN IS_ADMIN = 'ADMIN' THEN '관리자'
+                    END) LIKE CONCAT('%', #{searchValue}, '%')
+                </when>
+            </choose>
         </if>
         ORDER BY MEMBER_CODE DESC
     </select>
