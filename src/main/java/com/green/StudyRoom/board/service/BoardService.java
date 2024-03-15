@@ -23,5 +23,6 @@ public interface BoardService {
     // 매장소개 문의글
     List<BoardVO> selectPageInfo();
 
-
+    //내가 쓴 글(문의글)
+    List<BoardVO> selectMyPage(String boardWriter);
 }

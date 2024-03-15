@@ -1,0 +1,46 @@
+.myWrite-header {
+    width: 100%;
+    border-bottom: 3px solid #000 ;
+}
+.myWrite-header h3 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.myWrite-btn{
+    margin-top: 40px;
+}
+.my_btn span{
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    color: #000;
+    width: 110px;
+    height: 50px;
+}
+.my_btn input{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    background-color: #fff;
+    border: none;
+}
+.my_btn input:hover {
+    background-color: #ccc;
+}
+.myPage-table{
+    text-align: center;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+.myPage-table td {
+    height: 60px;
+    border-bottom: 1px solid #ccc ;
+}
+.myPage-table input {
+    border: none;
+    color: #000;
+    background-color: #fff;
+    width: 80px;
+    height: 40px;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/user_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴 때 같이 실행되는 css -->
+    <link rel="stylesheet" href="/css/homepage/myWriting.css">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <!-- html 코드 작성 -->
+    <div class="row">
+        <div class="col">
+            <div class="myWrite-header">
+                <h3>내 문의 </h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <div class="myWrite-btn">
+                <div class="my_btn">
+                    <span>
+                        <input type="button" value="작성한 글">
+                    </span>
+                    <span>
+                        <input type="button" value="작성한 리뷰" onclick="goReview()">
+                    </span>
+                    <span>
+                        <input type="button" value="삭제한 글">
+                    </span>
+                    
+                </div>
+            </div>
+
+            <div class="myPage-table">
+                <table>
+                    <th:block th:each="board , state : ${boardList}">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="60%">
+                            <col width="30%">
+                            <col width="*">
+                        </colgroup>
+                        <tr>
+                            <td>[[${#lists.size(boardList) - state.index}]]</td>
+                            <td>[[${board.boardTitle}]]</td>
+                            <td>[[${board.boardDate}]]</td>
+                            <td><input type="button" value="삭제"></td>
+                        </tr>
+                    </th:block>
+                </table>
+            </div>
+        </div>
+        
+        <div class="myPage-review">
+            <table>
+                <th:block th:each="board , state : ${boardList}">
+                    <colgroup>
+                        <col width="10%">
+                        <col width="60%">
+                        <col width="30%">
+                        <col width="*">
+                    </colgroup>
+                    <tr>
+                        <td>[[${#lists.size(boardList) - state.index}]]</td>
+                        <td>[[${board.boardTitle}]]</td>
+                        <td>[[${board.boardDate}]]</td>
+                        <td><input type="button" value="삭제"></td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+    </div>
+        </div>
+    </div>
+            
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴 때 같이 실행되는 js -->
+    <script src="/js/board/myWriting.js"></script>
+</th:block>
+</html>

@@ -4,3 +4,6 @@ function goWriting(){
 function goDetailSelect(boardCode){
     location.href=`/board/detailSelect?boardCode=${boardCode}`;
 }
+function myWriting(){
+    location.href="/board/myWriting"
+}

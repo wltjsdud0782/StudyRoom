@@ -11,6 +11,7 @@ import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -186,7 +187,7 @@ public class StudyRoomBoardController {
         //insert 겸 update
         commentService.adminAnswer(commentVO);
 
-        return "redirect:/board/detailSelect";
+        return "redirect:/board/detailSelect?boardCode=" + commentVO.getBoardCode();
     }
 
     // 매장 소개
@@ -202,4 +203,21 @@ public class StudyRoomBoardController {
         return "content/homepage/studyInfo";
     }
 
+    //내가 쓴글 확인
+    @GetMapping("/myWriting")
+    public String myWriting (HttpSession session, Model model){
+        MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
+
+        List<BoardVO> boardList = boardService.selectMyPage(loginInfo.getMemberId());
+        model.addAttribute("boardList", boardList);
+        System.out.println(boardList);
+        return "content/homepage/myWriting";
+    }
+    //내가 쓴 리뷰 확인
+
+//    @ResponseBody
+//    @PostMapping("/goReview")
+//    public List<BoardVO> goReview(@RequestBody BoardVO boardVO){
+//
+//    }
 }

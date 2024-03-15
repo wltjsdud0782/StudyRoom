@@ -45,6 +45,13 @@ public class BoardServiceImpl implements BoardService {
         return sqlSession.selectList("boardMapper.selectPageInfo");
     }
 
+
+    @Override
+    //내가 쓴글 (마이페이지)
+    public List<BoardVO> selectMyPage(String boardWriter) {
+        return sqlSession.selectList("boardMapper.selectMyPage", boardWriter);
+    }
+
     // 글쓰기 답변
 
 }

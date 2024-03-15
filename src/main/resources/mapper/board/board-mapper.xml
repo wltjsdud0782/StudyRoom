@@ -97,6 +97,14 @@
         LIMIT 3;
     </select>
 
+    <select id="selectMyPage" resultMap="board">
+        SELECT BOARD_CODE
+            ,BOARD_TITLE
+            ,DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') BOARD_DATE
+            FROM STUDYROOM_BOARD
+            WHERE BOARD_WRITER = #{boardWriter}
+            ORDER BY BOARD_CODE DESC
+    </select>
 </mapper>
 
 
