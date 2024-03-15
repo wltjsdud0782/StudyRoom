@@ -6,6 +6,7 @@ import com.green.StudyRoom.admin.vo.InfoSearchVO;
 import com.green.StudyRoom.admin.vo.LogViewVO;
 import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.member.service.MemberServiceImpl;
+import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
 import com.green.StudyRoom.seat.vo.SeatVO;
@@ -34,7 +35,9 @@ public class AdminController {
     //로그확인
     @Resource(name="logViewService")
     private LogViewServiceImpl logViewService;
-
+    //좌석관리
+    @Resource(name="seatService")
+    private SeatServiceImpl seatService;
 
     //(회원 관리)///////////////////////////////////////////// //
     @RequestMapping("/info")
@@ -54,7 +57,6 @@ public class AdminController {
         Map<String, Object> map = new HashMap<>();
         map.put("memberMap", memberMap);
         map.put("seatMap", seatMap);
-        System.out.println(map);
         return map;
     }
 
@@ -64,6 +66,26 @@ public class AdminController {
         adminService.uptMemberInfo(memberVO);
         adminService.uptSeatInfo(seatVO);
         return "redirect:/admin/info";
+    }
+
+    //좌석의 시간정보 불러오기
+    @ResponseBody
+    @PostMapping("/viewDate")
+    public Map<String, Object> viewDate(@RequestParam(name="memberCode") int memberCode){
+        Map<String, Object> map = new HashMap<>();
+        map.put("CharName", seatService.haveCharge(memberCode));
+        map.put("CharDate", seatService.haveChargeDate(memberCode));
+        map.put("CharAppDate", seatService.haveChargeApprovalDate(memberCode));
+        map.put("CharRemDate", seatService.haveChargeRemainDate(memberCode));
+        map.put("CharEndDate", seatService.haveChargeEndDate(memberCode));
+
+        System.out.println("@@@@@@@@@@@@@@@@@"+memberCode+"@@@@@@@@@@@@@@@@@");
+        System.out.println(seatService.haveCharge(memberCode));
+        System.out.println(seatService.haveChargeDate(memberCode));
+        System.out.println(seatService.haveChargeApprovalDate(memberCode));
+        System.out.println(seatService.haveChargeRemainDate(memberCode));
+        System.out.println(seatService.haveChargeEndDate(memberCode));
+        return map;
     }
 
     //(메세지)//////////////////////////////////////////////// //
