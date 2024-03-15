@@ -253,7 +253,7 @@
     <update id="adminUpdateSeat">
         UPDATE
         STUDYROOM_SEAT
-        SET SEAT_POWER = ${seatPower}
+        SET SEAT_POWER = #{seatPower}
             , STATUS_NUM = #{statusNum}
         WHERE SEAT_NUM = #{seatNum}
     </update>
