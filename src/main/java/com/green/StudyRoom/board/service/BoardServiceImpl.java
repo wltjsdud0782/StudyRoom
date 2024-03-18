@@ -52,6 +52,12 @@ public class BoardServiceImpl implements BoardService {
         return sqlSession.selectList("boardMapper.selectMyPage", boardWriter);
     }
 
+    @Override
+    //내가 쓴글 삭제
+    public int deleteBoard(int boardCode) {
+        return sqlSession.delete("boardMapper.deleteBoard", boardCode);
+    }
+
     // 글쓰기 답변
 
 }

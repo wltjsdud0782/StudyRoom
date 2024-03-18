@@ -105,6 +105,11 @@
             WHERE BOARD_WRITER = #{boardWriter}
             ORDER BY BOARD_CODE DESC
     </select>
+
+    <delete id="deleteBoard">
+        DELETE FROM STUDYROOM_BOARD
+        WHERE BOARD_CODE = #{boardCode}
+    </delete>
 </mapper>
 
 
