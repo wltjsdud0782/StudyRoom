@@ -117,4 +117,9 @@ public class SeatServiceImpl implements SeatService{
         sqlSession.update("seatMapper.adminUpdateSeat", seatVO);
     }
 
+    @Override
+    public ApprovalVO myBuyDetail(int memberCode) {
+        return sqlSession.selectOne("seatMapper.myBuyDetail", memberCode);
+    }
+
 }

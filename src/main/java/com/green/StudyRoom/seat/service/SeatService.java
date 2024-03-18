@@ -47,4 +47,7 @@ public interface SeatService {
 
     // 관리자
     void adminUpdateSeat(SeatVO seatVO);
+
+    // 마이페이지 이용권
+    ApprovalVO myBuyDetail(int memberCode);
 }

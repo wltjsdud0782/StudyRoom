@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.spring6.processor.SpringInputCheckboxFieldTagProcessor;
 
 import javax.naming.Name;
 import javax.xml.crypto.KeySelector;
@@ -200,6 +201,26 @@ public class StudyRoomBoardController {
         model.addAttribute("boardList", boardList);
 
         return "content/homepage/studyInfo";
+    }
+
+    // 내 이용권/쿠폰
+    @GetMapping("/myBuyDetail")
+    public String myBuyDetail(Model model, HttpSession session){
+        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+        int memberCode = loginInfo.getMemberCode();
+
+        model.addAttribute("haveCharge", seatService.haveCharge(memberCode));
+        if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
+            model.addAttribute("buyDetailInfo", seatService.myBuyDetail(memberCode));
+            model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
+            model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
+
+            System.out.println(seatService.myBuyDetail(memberCode));
+            System.out.println(seatService.haveChargeRemainDate(memberCode));
+            System.out.println(seatService.haveChargeEndDate(memberCode));
+        }
+
+        return "content/homepage/myBuyDetail";
     }
 
     //내가 쓴글 확인
