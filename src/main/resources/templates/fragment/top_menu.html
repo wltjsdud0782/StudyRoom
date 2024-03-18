@@ -3,13 +3,16 @@
 
 <th:block th:fragment="menuFragment">
     <div class="row">
-        <div class="col-9 menu">
+        <div class="col-2 menu">
             <ul>
                 <li style="margin-right: 20px; 
-                     border-right: 1px solid #ccc; 
-                     padding: 10px 30px">
-                    <span>그린독서실</span>
+                     border-right: 1px solid #ccc; ">
+                    <span><a href=""><img src="/img/homepage/greenLogo.gif" alt="그린독서실로고"></a></span>
                 </li>
+            </ul>
+        </div>
+        <div class="col-7 menu">
+            <ul class="submenu">
                 <li><a onclick="location.href='/board/mainHomepage'">홈</a></li>
                 <li><a onclick="location.href='/board/studyInfo'">매장소개</a></li>
                 <li><a onclick="location.href='/seat/seatLive'">좌석선택</a></li>
@@ -20,7 +23,7 @@
         </div>
 
         <div class="col-3 menu">
-            <ul>
+            <ul class="submenu">
                 <th:block th:if="${session.loginInfo == null }">
                     <li style="margin-left: 150px;" class="pointer-span" data-bs-toggle="modal"
                         data-bs-target="#join-modal">회원가입</a></li>

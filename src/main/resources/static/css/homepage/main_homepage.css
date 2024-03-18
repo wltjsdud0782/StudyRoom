@@ -2,6 +2,9 @@
     height: 900px;
     position: relative;
 }
+.main_row{
+    background: linear-gradient(#45607c,#4ca1af);
+}
 .subMain {
     position: absolute;
     left: 50%;
@@ -10,6 +13,7 @@
     text-align: center;
 }
 .navText{
+    color: #058f05;
     width: 600px;
     font-size: 30px;
     font-weight: lighter;
@@ -21,7 +25,12 @@
     margin-top: 50px;
     font-size: 70px;
 }
+.mainText img {
+    width: 450px;
+    height: 400px;
+}
 .footerText {
+    color: #096809;
     margin-top: 20px;
     font-size: 24px;
 }
