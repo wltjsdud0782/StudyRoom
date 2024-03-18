@@ -157,7 +157,6 @@ public class StudyRoomBoardController {
         BoardVO boardList = boardService.detailSelect(boardCode);
 
         List<CommentVO> commentList = commentService.selectComment(boardCode);
-
         model.addAttribute("boardList", boardList);
         model.addAttribute("commentList", commentList);
 
@@ -206,6 +205,7 @@ public class StudyRoomBoardController {
     //내가 쓴글 확인
     @GetMapping("/myWriting")
     public String myWriting (HttpSession session, Model model){
+
         MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
 
         List<BoardVO> boardList = boardService.selectMyPage(loginInfo.getMemberId());
@@ -213,11 +213,11 @@ public class StudyRoomBoardController {
         System.out.println(boardList);
         return "content/homepage/myWriting";
     }
-    //내가 쓴 리뷰 확인
+    @GetMapping("/deleteBoard")
+    public String deleteBoard(@RequestParam(name = "boardCode") int boardCode){
 
-//    @ResponseBody
-//    @PostMapping("/goReview")
-//    public List<BoardVO> goReview(@RequestBody BoardVO boardVO){
-//
-//    }
+        boardService.deleteBoard(boardCode);
+
+        return "redirect:/board/myWriting";
+    }
 }
