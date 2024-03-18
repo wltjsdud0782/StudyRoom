@@ -49,7 +49,7 @@
         , MEMBER_TEL = #{memberTel}
         , MEMBER_BIRTH = #{memberBirth}
         , MEMBER_ADDR = #{memberAddr}
-        , MEMBER_DETAIL = #{memberDetail}
+        , ADDR_DETAIL = #{addrDetail}
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 
