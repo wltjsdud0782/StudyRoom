@@ -587,7 +587,7 @@ function useTime(memberCode) {
                                 </tr>
                                 <tr style="height: 90px;">
                                     <td class="info-border-title">남은 시간</td>
-                                    <td>${data.charRemDate}일</td>
+                                    <td>${data.charRemDate}일 (${data.charDate - data.charRemDate}일 경과)</td>
                                     <td class="info-border-title">만료 기간</td>
                                     <td><font color="red">${data.charEndDate}</font>&nbsp;만료</td>
                                 </tr>

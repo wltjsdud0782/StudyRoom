@@ -8,59 +8,61 @@
 </th:block>
 
 <th:block layout:fragment="contentFragment">
+
     <body>
         <div class="adminContainer">
-            <label class="title">
+            <div class="title">
                 <h3>메세지</h3>
-                <div>
-                    고쳐야할 점 :
-                    1. 보내고 받은 메세지 구분하기 >>, << / 2. 메세지 구현 더 자세히 만들기 </div>
-            </label>
+            </div>
             <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
                     <div class="row">
                         <div class="col">
                             <div>
-                                <h4>&nbsp;Message (회원)</h4>
+                                <h4>&nbsp;Message</h4>
                             </div>
                             <div>
-                                <table class="table table-hover adminContainer-table">
-                                    <tbody class="adminContainer-table-tbody2">
-                                        <tr th:each="chat : ${chtList}">
-                                            <td>
-                                                <div class="topMsg">([[${chat.seatNum}]]번) [[${chat.messageDate}]]</div>
-                                                <div class="botMsg">>> [[${chat.memberName}]]([[${chat.memberId}]]) :
-                                                    [[${chat.messageContent}]]</div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot class="table-light">
-                                        <tr>
-                                            <td>
-                                                <form action="/admin/sendAdmMsg" method="post">
+                                <form action="/admin/sendAdmMsg" method="post" id="sendForm">
+                                    <!-- 같이 보낼 정보 -->
+                                    <input type="hidden" name="memberCode" value="">
+                                    <!-- ------------- -->
+                                    <table class="table table-striped adminContainer-table">
+                                        <tbody class="adminContainer-table-tbody2">
+                                            <tr th:each="chat : ${chtList}">
+                                                <td>
+                                                    <div class="topMsg">[[${chat.messageDate}]]
+                                                    </div>
+                                                    <div class="botMsg">[[${chat.memberName}]]([[${chat.memberId}]])님에게
+                                                        :
+                                                        [[${chat.messageContent}]]</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot class="table-light">
+                                            <tr>
+                                                <td>
                                                     <div class="btnDiv input">
                                                         <span class="whoIs">
                                                             <input type="text" value="@보낼사람" readonly>&nbsp;
                                                         </span>
-                                                        <!-- @@@@@채팅@@@@@ -->
+                                                        <!-- 채팅 -->
                                                         <input type="text" style="width: 60%; text-align: start;"
-                                                            name="messageContent">&nbsp;
-                                                        <!-- @@@@@@@@@@@@@ -->
-                                                        <input type="submit" value="전송">
+                                                            name="messageContent" id="admin_message_content">&nbsp;
+                                                        <!-- ---- -->
+                                                        <input type="button" value="전송" onclick="StartChat()" class="not-null-btn">
                                                     </div>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </form>
                             </div>
                         </div>
                         <div class="col">
                             <div class="row">
-                                <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
                                 <div>
-                                    <h4>&nbsp;Send To</h4>
+                                    <h4>&nbsp;Send To (회원)</h4>
                                     <table class="table table-hover adminContainer-table">
                                         <thead class="table-light">
                                             <form action="/admin/msg" method="post">
@@ -77,12 +79,14 @@
                                                                     아이디
                                                                 </option>
                                                             </select>&nbsp;
-                                                            <input type="text" name="searchValue" style="text-align: left;"
+                                                            <input type="text" name="searchValue"
+                                                                style="text-align: left;"
                                                                 th:value="${infoSearchVO.searchValue}">&nbsp;
                                                             <input type="submit" value="검색">
                                                             <div style="float: right;">
-                                                                <input type="button" value="새로고침" onclick="location.href='/admin/info'">
-                                                            </div>  
+                                                                <input type="button" value="새로고침"
+                                                                    onclick="location.href='/admin/msg'">
+                                                            </div>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -95,25 +99,13 @@
                                                 </tr>
                                             </th:block>
                                             <th:block th:unless="${#lists.isEmpty(msgList)}">
-                                                <tr th:each="member, state : ${msgList}"
+                                                <tr th:each="member : ${msgList}"
                                                     th:onclick="goChat([[${member.memberCode}]])">
                                                     <td>
                                                         <div>
                                                             <span>[[${member.memberName}]]
-                                                                ([[${member.memberId}]])</span>
-                                                            <span style="float: right;">
-                                                                <div>
-                                                                    <th:block th:if="${member.isAdmin == 'USER'}">
-                                                                        [회원]
-                                                                    </th:block>
-                                                                    <th:block th:if="${member.isAdmin == 'ARBEIT'}">
-                                                                        [알바생]
-                                                                    </th:block>
-                                                                    <th:block th:if="${member.isAdmin == 'ADMIN'}">
-                                                                        [관리자]
-                                                                    </th:block>
-                                                                </div>
-                                                            </span>
+                                                                ([[${member.memberId}]])
+                                                            </span>                 
                                                         </div>
                                                     </td>
                                                 </tr>

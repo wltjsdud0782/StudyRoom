@@ -11,6 +11,7 @@ import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
 import com.green.StudyRoom.seat.vo.SeatVO;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +43,6 @@ public class AdminController {
     //(회원 관리)///////////////////////////////////////////// //
     @RequestMapping("/info")
     public String adminInfo(Model model, InfoSearchVO infoSearchVO){
-        System.out.println(infoSearchVO);
         //InfoSearchVO 검색기능
         List<MemberVO> memberList = adminService.selectMemberInfo(infoSearchVO);
         model.addAttribute("memberList", memberList);
@@ -85,6 +85,7 @@ public class AdminController {
     //(메세지)//////////////////////////////////////////////// //
     @RequestMapping("/msg")
     public String adminMessage(Model model, InfoSearchVO infoSearchVO){
+        //채팅 목록
         List<MessageVO> chtList = messageService.selectMessage();
         model.addAttribute("chtList", chtList);
         //InfoSearchVO 검색기능

@@ -26,7 +26,8 @@ function goChat(memberCode) {
             whoIs.replaceChildren();
             let str = '';
             str += `
-            <input type="text" value="@${data.memberName}" readonly>&nbsp;
+            <input type="text" value="@${data.memberName}" name="memberName" readonly>&nbsp;
+            <input type="hidden" value="${memberCode}" name="memberCode" id="memCode">
             `;
             whoIs.insertAdjacentHTML('afterbegin', str)
         })
@@ -36,3 +37,18 @@ function goChat(memberCode) {
             console.log(err);
         });
 }
+
+//submit 보내기
+function StartChat() {
+    const memberCode = document.querySelector('#memCode').value;
+    document.querySelector('input[name="memberCode"]').value = memberCode;
+    const sendForm = document.querySelector('#sendForm');
+
+    if (document.querySelector('#admin_message_content').value == '') {
+        alert('빈칸에 값을 입력해주세요!');
+    }
+    else{
+        sendForm.submit();
+    }
+}
+
