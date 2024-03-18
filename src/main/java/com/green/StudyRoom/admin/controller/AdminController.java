@@ -42,6 +42,7 @@ public class AdminController {
     //(회원 관리)///////////////////////////////////////////// //
     @RequestMapping("/info")
     public String adminInfo(Model model, InfoSearchVO infoSearchVO){
+        System.out.println(infoSearchVO);
         //InfoSearchVO 검색기능
         List<MemberVO> memberList = adminService.selectMemberInfo(infoSearchVO);
         model.addAttribute("memberList", memberList);
@@ -73,18 +74,11 @@ public class AdminController {
     @PostMapping("/viewDate")
     public Map<String, Object> viewDate(@RequestParam(name="memberCode") int memberCode){
         Map<String, Object> map = new HashMap<>();
-        map.put("CharName", seatService.haveCharge(memberCode));
-        map.put("CharDate", seatService.haveChargeDate(memberCode));
-        map.put("CharAppDate", seatService.haveChargeApprovalDate(memberCode));
-        map.put("CharRemDate", seatService.haveChargeRemainDate(memberCode));
-        map.put("CharEndDate", seatService.haveChargeEndDate(memberCode));
-
-        System.out.println("@@@@@@@@@@@@@@@@@"+memberCode+"@@@@@@@@@@@@@@@@@");
-        System.out.println(seatService.haveCharge(memberCode));
-        System.out.println(seatService.haveChargeDate(memberCode));
-        System.out.println(seatService.haveChargeApprovalDate(memberCode));
-        System.out.println(seatService.haveChargeRemainDate(memberCode));
-        System.out.println(seatService.haveChargeEndDate(memberCode));
+        map.put("charName", seatService.haveCharge(memberCode));
+        map.put("charDate", seatService.haveChargeDate(memberCode));
+        map.put("charAppDate", seatService.haveChargeApprovalDate(memberCode));
+        map.put("charRemDate", seatService.haveChargeRemainDate(memberCode));
+        map.put("charEndDate", seatService.haveChargeEndDate(memberCode));
         return map;
     }
 

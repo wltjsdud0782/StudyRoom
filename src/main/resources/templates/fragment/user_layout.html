@@ -13,7 +13,7 @@ crossorigin="anonymous">
 </head>
 <body>
 
-<div class="container-fluid" style="height: 2000px;">
+<div class="container-fluid">
 
     <!-- @@@@상단메뉴@@@@ -->
     <div class="row">
@@ -24,7 +24,7 @@ crossorigin="anonymous">
         </div>
     </div>
 
-    <div class="row">
+    <div class="row row_content">
         <div class="col-2">
             <th:block th:replace="~{fragment/user_side::sideFragment}">
 
@@ -37,9 +37,9 @@ crossorigin="anonymous">
         </div>
     </div>
 
-    <div class="row">
+    <div class="row row_footer">
         <div class="col">
-            <th:block th:replace="~{fragment/footer_meun::footerFragment}">
+            <th:block th:replace="~{fragment/footer_menu::footerFragment}">
 
             </th:block>
         </div>

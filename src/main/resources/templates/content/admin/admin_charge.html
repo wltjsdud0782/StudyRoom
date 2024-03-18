@@ -10,10 +10,9 @@
 <th:block layout:fragment="contentFragment">
     <body>
         <div class="adminContainer">
-            <label class="title">
-                <h3>요금 변경</h3>
-                <div>ADMIN 전용</div>
-            </label>
+            <div class="title">
+                <h3>이용권 변경</h3>               
+            </div>
             <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
@@ -22,7 +21,7 @@
                         <tbody class="adminContainer-table-tbody5">
                             <th:block th:if="${#lists.isEmpty(chargeList)}">
                                 <tr>
-                                    <td>※ 등록된 요금제가 없습니다.</td>
+                                    <td>※ 등록된 이용권이 없습니다.</td>
                                 </tr>
                             </th:block>
                             <th:block th:unless="${#lists.isEmpty(chargeList)}">
@@ -43,12 +42,12 @@
                         <form action="/admin/setCharge" method="post">
                             <table class="adminContainer-table">
                                 <colgroup>
-                                    <col width="6%">
-                                    <col width="20%">
                                     <col width="7%">
-                                    <col width="20%">
+                                    <col width="19%">
                                     <col width="7%">
-                                    <col width="20%">
+                                    <col width="19%">
+                                    <col width="7%">
+                                    <col width="19%">
                                     <col width="*">
                                 </colgroup>
                                 <tbody>
@@ -56,13 +55,13 @@
                                         <td>
                                             <div class="row">
                                                 <div class="col text-end charge-title">
-                                                    요금 명
+                                                    이용권 명
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="charge-td">
                                             <input type="text" name="chargeName" class="nameInput"
-                                                placeholder="요금명을 입력해주세요." style="font-style: oblique;">
+                                                placeholder="이용권 명을 입력해주세요." style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
@@ -90,7 +89,7 @@
                                             <div class="row">
                                                 <div class="col text-end">
                                                     <div class="btnDiv">
-                                                        <input type="submit" value="요금 등록" class="not-null-btn">&nbsp;
+                                                        <input type="submit" value="이용권 등록" class="not-null-btn">&nbsp;
                                                         <input type="button" value="취소"
                                                             onclick="window.location.reload()">
                                                     </div>

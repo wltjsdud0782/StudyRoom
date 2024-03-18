@@ -44,7 +44,7 @@ function allInfo(memberCode) {
                                         <td class="info-border-title">
                                             <div class="row">
                                                 <div class="col">
-                                                    이름/아이디
+                                                    이름(아이디)
                                                 </div>
                                             </div>
                                         </td>
@@ -310,7 +310,7 @@ function memberInfo(memberCode) {
                                         <td class="info-border-title">
                                             <div class="row">
                                                 <div class="col">
-                                                    이름/아이디
+                                                    이름(아이디)
                                                 </div>
                                             </div>
                                         </td>
@@ -560,22 +560,45 @@ function useTime(memberCode) {
     })
         .then((response) => {
             if (!response.ok) {
-                alert('fetch error!\n컨트롤러로 통신중에 오류가 발생했습니다.');
+                alert('보유한 이용권이 없습니다.');
                 return;
             }
-
-            return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
-            //return response.json(); //나머지 경우에 사용
+            //return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
+            return response.json(); //나머지 경우에 사용
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
-            alert(memberCode);
-            alert(data);
+            const date_info = document.querySelector('#date-info-div');
+            date_info.replaceChildren();
+            let str = '';
+            str +=`
+                                <tr style="height: 90px;">
+                                    <td class="info-border-title">요금제 명</td>
+                                    <td>
+                                        <div>
+                                            <span style="font-size: 22px">${data.charName}</span>
+                                        </div>
+                                        <div>
+                                            (${data.charDate}일 사용권)
+                                        </div>
+                                    </td>
+                                    <td class="info-border-title">결제 일</td>
+                                    <td>${data.charAppDate}</td>
+                                </tr>
+                                <tr style="height: 90px;">
+                                    <td class="info-border-title">남은 시간</td>
+                                    <td>${data.charRemDate}일</td>
+                                    <td class="info-border-title">만료 기간</td>
+                                    <td><font color="red">${data.charEndDate}</font>&nbsp;만료</td>
+                                </tr>
+            `;
+            date_info.insertAdjacentHTML('afterbegin', str);
             info_modal.show();
+
         })
         //fetch 통신 실패 시 실행 영역
         .catch(err => {
-            alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+            alert('이용권을 구매해주세요.');
             console.log(err);
         });
 

@@ -102,7 +102,7 @@ public class SeatServiceImpl implements SeatService{
         return sqlSession.selectOne("seatMapper.selMem", memberCode);
     }
 
-    @Override
+    @Override // 주문 번호 필요
     public String buyToday() {
         return sqlSession.selectOne("seatMapper.buyToday");
     }

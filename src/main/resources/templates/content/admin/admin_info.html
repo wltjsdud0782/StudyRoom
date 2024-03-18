@@ -11,10 +11,9 @@
 
     <body>
         <div class="adminContainer">
-            <label class="title">
+            <div class="title">
                 <h3>회원 관리</h3>
-                <span>수정필요 : 입실시간, 퇴실시간, 남은시간, 자리이동</span>
-            </label>
+            </div>
             <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
@@ -36,7 +35,7 @@
                                                 </option>
                                                 <option value="IS_ADMIN"
                                                     th:selected="${infoSearchVO.searchType == 'IS_ADMIN'}">
-                                                    권한(영문)
+                                                    권한
                                                 </option>
                                             </select>&nbsp;
                                             <input type="text" name="searchValue" style="text-align: left;"
@@ -44,7 +43,7 @@
                                             <input type="submit" value="검색">
                                             <div style="float: right;">
                                                 <input type="button" value="새로고침" onclick="location.href='/admin/info'">
-                                            </div>                           
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -68,13 +67,13 @@
                                             </span>
                                             <span style="float: right;">
                                                 <div>
-                                                    <th:block th:if="${member.isAdmin == 'USER'}">
+                                                    <th:block th:if="${member.isAdmin == '회원'}">
                                                         [회원]
                                                     </th:block>
-                                                    <th:block th:if="${member.isAdmin == 'ARBEIT'}">
+                                                    <th:block th:if="${member.isAdmin == '알바생'}">
                                                         [알바생]
                                                     </th:block>
-                                                    <th:block th:if="${member.isAdmin == 'ADMIN'}">
+                                                    <th:block th:if="${member.isAdmin == '관리자'}">
                                                         [관리자]
                                                     </th:block>
                                                 </div>
@@ -101,6 +100,9 @@
         <div class="modal fade" id="date_info_modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">이용권 정보</h4>
+                    </div>
                     <div class="modal-body">
                         <table class="adminContainer-table">
                             <colgroup>
@@ -109,19 +111,8 @@
                                 <col width="15%">
                                 <col width="35%">
                             </colgroup>
-                            <tbody class="changeInfo">
-                                <tr>
-                                    <td class="info-border-title">요금제 명</td>
-                                    <td>요금이름(haveChargeDate일)</td>
-                                    <td class="info-border-title">결제 일</td>
-                                    <td>haveChargeApprovalDate</td>
-                                </tr>
-                                <tr>
-                                    <td class="info-border-title">남은 시간</td>
-                                    <td>haveChargeRemainDate</td>
-                                    <td class="info-border-title">종료 시간</td>
-                                    <td>haveChargeEndDate</td>
-                                </tr>
+                            <tbody class="changeInfo" id="date-info-div">
+
                             </tbody>
                         </table>
                     </div>

@@ -10,7 +10,7 @@
 
 <th:block layout:fragment="contentFragment">
     <!-- html 코드 작성 -->
-    <div class="row" style="height: 1000px;">
+    <div class="row">
         <div class="col">
             <div class="row justify-content-center">
                 <div class="col-10">
@@ -124,7 +124,7 @@
                 <div class="col-10">
                     <th:bolck th:if="${session.loginInfo != null}">
                         <div class="inquiry_btn">
-                            <input type="button" value="내가 쓴글">
+                            <input type="button" value="내가 쓴글" onclick="myWriting()">
                             <input type="button" value="글쓰기" onclick="goWriting()">
                         </div>
                     </th:bolck>
