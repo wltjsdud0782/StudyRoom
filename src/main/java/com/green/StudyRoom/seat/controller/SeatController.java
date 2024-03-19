@@ -40,6 +40,7 @@ public class SeatController {
                 model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
                 model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
             }
+
         }
 
         return "content/seat/seat_live";

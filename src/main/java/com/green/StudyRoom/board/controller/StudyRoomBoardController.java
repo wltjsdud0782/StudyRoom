@@ -9,6 +9,7 @@ import com.green.StudyRoom.board.vo.CommentVO;
 import com.green.StudyRoom.member.service.MemberService;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatService;
+import com.green.StudyRoom.seat.vo.SeatVO;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
@@ -52,8 +53,15 @@ public class StudyRoomBoardController {
             MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
             int memberCode = loginInfo.getMemberCode();
 
+            SeatVO seatVO = new SeatVO();
+            seatVO.setMemberCode(memberCode);
+
             if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
-                if (seatService.isExpires(memberCode).equals("만료일이 오늘보다 이전")){
+                if((seatService.isExpires(memberCode).equals("만료일이 오늘보다 이전")) && (seatService.moveAndOut(memberCode) != null)){ // 자리가 있는 상태로 이용권이 만료 되었을 때
+                        seatService.outSeat(seatVO);
+                        seatService.chargeDelete(memberCode);
+                }
+                else if (seatService.isExpires(memberCode).equals("만료일이 오늘보다 이전")){ // 자리는 없고 이용권이 만료 되었을 때
                 seatService.chargeDelete(memberCode);
                 }
             }
