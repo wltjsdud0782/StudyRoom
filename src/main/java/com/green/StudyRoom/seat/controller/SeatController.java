@@ -117,7 +117,7 @@ public class SeatController {
         buyInfo.put("buyMem", buyMem);
         buyInfo.put("buyOne", buyOne);
         int buyCode = (int)(Math.random()*100000000+1);
-        buyInfo.put("merchant_uid", seatService.buyToday()+buyCode);
+        buyInfo.put("merchant_uid", seatService.buyToday()+git buyCode);
 
         return buyInfo;
     }
