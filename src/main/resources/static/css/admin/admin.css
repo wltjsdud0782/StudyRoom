@@ -91,10 +91,6 @@ body {
     width: 100%;
 }
 
-.adminContainer-table-tbody2 td {
-    border-top: 1px solid #ccc;
-}
-
 .adminContainer-table-tbody2 .topMsg {
     font-size: smaller;
     font-style: oblique;

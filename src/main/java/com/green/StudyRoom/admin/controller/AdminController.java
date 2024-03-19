@@ -3,18 +3,16 @@ package com.green.StudyRoom.admin.controller;
 import com.green.StudyRoom.admin.service.*;
 import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.admin.vo.InfoSearchVO;
-import com.green.StudyRoom.admin.vo.LogViewVO;
+import com.green.StudyRoom.admin.vo.TimeLogVO;
 import com.green.StudyRoom.admin.vo.MessageVO;
-import com.green.StudyRoom.member.service.MemberServiceImpl;
-import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
 import com.green.StudyRoom.seat.vo.SeatVO;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,8 +32,8 @@ public class AdminController {
     @Resource(name="messageService")
     private MessageServiceImpl messageService;
     //로그확인
-    @Resource(name="logViewService")
-    private LogViewServiceImpl logViewService;
+    @Resource(name="timeLogService")
+    private TimeLogServiceImpl timeLogService;
     //좌석관리
     @Resource(name="seatService")
     private SeatServiceImpl seatService;
@@ -84,13 +82,18 @@ public class AdminController {
 
     //(메세지)//////////////////////////////////////////////// //
     @RequestMapping("/msg")
-    public String adminMessage(Model model, InfoSearchVO infoSearchVO){
+    public String adminMessage(Model model, InfoSearchVO infoSearchVO,
+                               @RequestParam(name = "receiver", required = false, defaultValue = "") String receiver){
         //채팅 목록
         List<MessageVO> chtList = messageService.selectMessage();
         model.addAttribute("chtList", chtList);
         //InfoSearchVO 검색기능
         List<MemberVO> msgList = messageService.selectWho(infoSearchVO);
         model.addAttribute("msgList", msgList);
+
+        //메세지를 받은 사람의 이름
+        model.addAttribute("receiver", receiver);
+
         return "content/admin/admin_message";
     }
 
@@ -104,8 +107,10 @@ public class AdminController {
 
     //채팅 보내기
     @PostMapping("/sendAdmMsg")
-    public String sendMessage(MessageVO messageVO){
+    public String sendMessage(MessageVO messageVO ,
+                              @RequestParam(name = "receiver") String receiver, RedirectAttributes redirectAttributes){
         messageService.insertAdmMsg(messageVO);
+        redirectAttributes.addAttribute("receiver", receiver);
         return "redirect:/admin/msg";
     }
 
@@ -159,7 +164,7 @@ public class AdminController {
     @RequestMapping ("/log")
     public String adminLog(Model model, MemberVO memberVO){
         //현재 들어가있는 데이터가 없음
-        List<LogViewVO> logList = logViewService.selectAllLog(memberVO);
+        List<TimeLogVO> logList = timeLogService.selectAllLog(memberVO);
         model.addAttribute("logList", logList);
         return "content/admin/admin_log";
     }
