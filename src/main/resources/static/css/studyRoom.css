@@ -130,13 +130,12 @@ a {
 .row_footer{
     height: 300px;
     position: relative;
-    transform: translateY(10%);
+    transform: translateY(0%);
 }
 .footer{
-    padding: 0;
     width: 100%;
     height: 300px;
-    background-color: #000;
+    background-color: #4d6d49;
     position: relative;
 }
 .footer_con1{
