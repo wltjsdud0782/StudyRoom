@@ -23,7 +23,7 @@
             <div class="col">
                 
                 <div class="floorBtn">
-                    <div class="row mt-4 mb-4">
+                    <div class="row mt-5 mb-5">
                         <div class="col">
                             <button type="button" class="btn btn-light floor-btn" onclick="onefloor()">1층</button>
                             <button type="button" class="btn btn-light floor-btn" onclick="twofloor()">2층</button>
@@ -39,11 +39,11 @@
                     <div class="row">
                         <div class="col">
                             <th:block th:if="${reservationMem == null}">
-                                <button type="button" class="btn btn-danger mb-4" th:onclick="reservation([[${session.loginInfo}]],[[${haveCharge}]],[[${remainDate}]],[[${endDate}]])">입실하기</button>    
+                                <button type="button" class="btn btn-danger mb-5" th:onclick="reservation([[${session.loginInfo}]],[[${haveCharge}]],[[${remainDate}]],[[${endDate}]])">입실하기</button>    
                             </th:block>
                             <th:block th:if="${reservationMem != null}">
-                                <button type="button" class="btn btn-danger mb-4" onclick="seatMove()">자리이동</button>    
-                                <button type="button" class="btn btn-danger mb-4" onclick="seatOut()">퇴실하기</button>    
+                                <button type="button" class="btn btn-danger mb-5" onclick="seatMove()">자리이동</button>    
+                                <button type="button" class="btn btn-danger mb-5" onclick="seatOut()">퇴실하기</button>    
                             </th:block>
                         </div>
                     </div>

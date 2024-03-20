@@ -13,6 +13,7 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
         body: new URLSearchParams({
             // 데이터명 : 데이터값
             chargeCode: chargeCode
+            , memberCode : loginInfo.memberCode
         })
     })
         .then((response) => {
@@ -44,11 +45,11 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
                     </colgroup>
                     <tr>
                         <td class="text-end">상품명</td>
-                        <td>${data.chargeName}</td>
+                        <td>${data.chargeBuy.chargeName}</td>
                     </tr>
                     <tr>
                         <td class="text-end">가격</td>
-                        <td>${data.chargeFee.toLocaleString()} 원</td>
+                        <td>${data.chargeBuy.chargeFee.toLocaleString()} 원</td>
                     </tr>
                     <tr>
                         <td class="text-end">구매자ID</td>
@@ -79,6 +80,15 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
                                 <div style="font-size: 11pt; color: red;">
                                 * 구매 후 교환 및 환불이 불가능합니다.
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <select class="form-select text-center" style="width: 350px;">`
+
+                                    str+=`<option selected>적용할 쿠폰을 선택해주세요.</option>`
+
+                                str+=`</select>
                             </div>
                         </div>
                         <div class="row">

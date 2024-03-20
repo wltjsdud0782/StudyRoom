@@ -51,7 +51,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="pointer-span" style="height: 50px;" th:each="charge, state : ${chargeList}" th:onclick="buyDetail([[${charge.chargeCode}]], [[${session.loginInfo}]], [[${haveCharge}]])">
+                                <tr class="pointer-span" style="height: 50px; cursor: pointer;" th:each="charge, state : ${chargeList}" th:onclick="buyDetail([[${charge.chargeCode}]], [[${session.loginInfo}]], [[${haveCharge}]])">
                                     <td>[[${state.index + 1}]]</td>
                                     <td>[[${charge.chargeName}]]</td>
                                     <td>[[${charge.chargeFee}]]</td>

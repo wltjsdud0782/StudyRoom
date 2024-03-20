@@ -3,6 +3,8 @@ package com.green.StudyRoom.seat.service;
 import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
+import com.green.StudyRoom.seat.vo.CouponVO;
+import com.green.StudyRoom.seat.vo.MemberCouponVO;
 import com.green.StudyRoom.seat.vo.SeatVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,9 +119,19 @@ public class SeatServiceImpl implements SeatService{
         sqlSession.update("seatMapper.adminUpdateSeat", seatVO);
     }
 
-    @Override
+    @Override // 내 이용권 조회
     public ApprovalVO myBuyDetail(int memberCode) {
         return sqlSession.selectOne("seatMapper.myBuyDetail", memberCode);
+    }
+
+    @Override // 모든 쿠폰 조회
+    public List<CouponVO> coupon() {
+        return sqlSession.selectList("seatMapper.coupon");
+    }
+
+    @Override // 내 쿠폰 조회
+    public List<MemberCouponVO> ownCoupon(int memberCode) {
+        return sqlSession.selectOne("seatMapper.ownCoupon", memberCode);
     }
 
 }

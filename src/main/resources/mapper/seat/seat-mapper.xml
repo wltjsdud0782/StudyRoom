@@ -26,6 +26,20 @@
         <result column="AGE_NAME" property="ageName"/>
     </resultMap>
 
+    <resultMap id="coupon" type="com.green.StudyRoom.seat.vo.CouponVO">
+        <id     column="COUPON_CODE"     property="couponCode"/>
+        <result column="COUPON_NAME"    property="couponName"/>
+        <result column="DISCOUNT_PERCENT"    property="discountPercent"/>
+    </resultMap>
+
+    <resultMap id="memberCoupon" type="com.green.StudyRoom.seat.vo.MemberCouponVO">
+        <id     column="OWN_COUPON_CODE"     property="ownCouponCode"/>
+        <result column="COUPON_CODE"    property="couponCode"/>
+        <result column="MEMBER_CODE"    property="memberCode"/>
+        <association property="memberVO" resultMap="memberMapper.member"/>
+        <collection property="couponVOList" resultMap="coupon"/>
+    </resultMap>
+
 <!--  좌석 선택 화면 필요 쿼리  -->
     <select id="seatList" resultMap="seat">
         SELECT
@@ -276,6 +290,22 @@
         WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
     </select>
 
+
+<!--  쿠폰 관련 쿼리  -->
+    <select id="coupon" resultMap="coupon">
+        SELECT
+        *
+        FROM COUPON
+    </select>
+
+
+<!--  회원이 가진 쿠폰 관련 쿼리  -->
+    <select id="ownCoupon" resultMap="memberCoupon">
+        SELECT
+            *
+        FROM MEMBER_COUPON
+        WHERE MEMBER_CODE = #{memberCode}
+    </select>
 </mapper>
 
 

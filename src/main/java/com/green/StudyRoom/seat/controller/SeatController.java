@@ -103,8 +103,11 @@ public class SeatController {
 
     @ResponseBody
     @PostMapping("/buyDetail") // 이용권 상품 눌렀을때
-    public ChargeVO buyDetail(@RequestParam(name = "chargeCode")int chargeCode){
-        return seatService.chargeBuy(chargeCode);
+    public Map<String, Object> buyDetail(@RequestParam(name = "chargeCode")int chargeCode, @RequestParam(name = "memberCode")int memberCode){
+        Map<String, Object> a = new HashMap<String, Object>();
+        a.put("chargeBuy", seatService.chargeBuy(chargeCode));
+        a.put("ownCoupon", seatService.ownCoupon(memberCode));
+        return a;
     }
 
     @ResponseBody
