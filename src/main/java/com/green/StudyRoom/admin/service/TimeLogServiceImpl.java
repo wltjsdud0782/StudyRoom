@@ -1,6 +1,7 @@
 package com.green.StudyRoom.admin.service;
 
 import com.green.StudyRoom.admin.vo.TimeLogVO;
+import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,11 @@ public class TimeLogServiceImpl implements TimeLogService {
     @Override
     public List<TimeLogVO> selectAllLog(MemberVO memberVO) {
         return sqlSession.selectList("logMapper.selectAllLog", memberVO);
+    }
+
+    //결재 기록 조회
+    @Override
+    public List<ApprovalVO> selectBuyList() {
+        return sqlSession.selectList("logMapper.selectBuyList");
     }
 }

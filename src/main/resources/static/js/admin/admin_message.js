@@ -1,13 +1,15 @@
+//페이지 최초 실행
 setReceiver();
-
 function setReceiver() {
-    const receiver = document.querySelector("#receiver1").value;
+    const receiver = document.querySelector("#receiver").value;
 
     if (receiver != '') {
-        document.querySelector('#memCode1').value = receiver;
+        document.querySelector('#send_memberName').value = receiver;
     }
+
 }
 
+//멤버 리스트 클릭 시 보낼 사람 호출
 function goChat(memberCode) {
     fetch('/admin/who', { //요청경로
         method: 'POST',
@@ -32,14 +34,10 @@ function goChat(memberCode) {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
-            const whoIs = document.querySelector('.whoIs');
-            whoIs.replaceChildren();
-            let str = '';
-            str += `
-            <input type="text" value="@${data.memberName}" name="memberName" id="memName" readonly>&nbsp;
-            <input type="hidden" value="${memberCode}" name="memberCode" id="memCode">
-            `;
-            whoIs.insertAdjacentHTML('afterbegin', str);
+
+            document.querySelector('input[name="memberCode"]').value = memberCode;
+            document.querySelector('#send_memberName').value = `@${data.memberName}`;
+
         })
 
         //fetch 통신 실패 시 실행 영역
@@ -49,15 +47,16 @@ function goChat(memberCode) {
         });
 }
 
-//submit 보내기
+//submit으로 보내기
 function StartChat() {
 
-    const memberCode = document.querySelector('#memCode').value;
+    const sendForm = document.querySelector('#sendForm');
+
+    const memberCode = document.querySelector('#send_memberCode').value;
     document.querySelector('input[name="memberCode"]').value = memberCode;
 
-    const sendForm = document.querySelector('#sendForm');
-    let receiverName = document.querySelector('#memName').value;
-    document.querySelector('input[name="receiver"]').value = receiverName;
+    let receiverName = document.querySelector('#send_memberName').value;
+    document.querySelector('#receiver').value = receiverName;
 
     if (document.querySelector('#admin_message_content').value == '') {
         alert('빈칸에 값을 입력해주세요!');

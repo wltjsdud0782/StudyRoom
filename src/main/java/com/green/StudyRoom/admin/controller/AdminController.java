@@ -5,6 +5,7 @@ import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.admin.vo.InfoSearchVO;
 import com.green.StudyRoom.admin.vo.TimeLogVO;
 import com.green.StudyRoom.admin.vo.MessageVO;
+import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
 import com.green.StudyRoom.seat.vo.SeatVO;
@@ -83,16 +84,19 @@ public class AdminController {
     //(메세지)//////////////////////////////////////////////// //
     @RequestMapping("/msg")
     public String adminMessage(Model model, InfoSearchVO infoSearchVO,
-                               @RequestParam(name = "receiver", required = false, defaultValue = "") String receiver){
+                               @RequestParam(name="receiver", required=false, defaultValue="") String receiver
+                                , @RequestParam(name="memberCode", required=false, defaultValue="0") int memberCode){
         //채팅 목록
         List<MessageVO> chtList = messageService.selectMessage();
         model.addAttribute("chtList", chtList);
+
         //InfoSearchVO 검색기능
         List<MemberVO> msgList = messageService.selectWho(infoSearchVO);
         model.addAttribute("msgList", msgList);
 
         //메세지를 받은 사람의 이름
         model.addAttribute("receiver", receiver);
+        model.addAttribute("memberCode", memberCode);
 
         return "content/admin/admin_message";
     }
@@ -108,9 +112,11 @@ public class AdminController {
     //채팅 보내기
     @PostMapping("/sendAdmMsg")
     public String sendMessage(MessageVO messageVO ,
-                              @RequestParam(name = "receiver") String receiver, RedirectAttributes redirectAttributes){
+                              @RequestParam(name="receiver") String receiver, RedirectAttributes redirectAttributes
+                            , @RequestParam(name="memberCode") int memberCode){
         messageService.insertAdmMsg(messageVO);
         redirectAttributes.addAttribute("receiver", receiver);
+        redirectAttributes.addAttribute("memberCode", memberCode);
         return "redirect:/admin/msg";
     }
 
@@ -138,7 +144,7 @@ public class AdminController {
     // 요금 변경 조회하기 (비동기, fetch1)
     @ResponseBody
     @PostMapping("/getCharge")
-    public ChargeVO changeCharge(@RequestParam(name = "chargeCode") int chargeCode){
+    public ChargeVO changeCharge(@RequestParam(name="chargeCode") int chargeCode){
         //Charge의 List 받아오기
         ChargeVO chargeVO = chargeService.getCharge(chargeCode);
         return chargeVO;
@@ -162,10 +168,14 @@ public class AdminController {
 
     //(로그 확인)///////////////////////////////////////////// //
     @RequestMapping ("/log")
-    public String adminLog(Model model, MemberVO memberVO){
+    public String adminLog(Model model){
         //현재 들어가있는 데이터가 없음
-        List<TimeLogVO> logList = timeLogService.selectAllLog(memberVO);
-        model.addAttribute("logList", logList);
+        //List<TimeLogVO> logList = timeLogService.selectAllLog(memberVO);
+        //model.addAttribute("logList", logList);
+
+        //결재 기록
+        model.addAttribute("appList", timeLogService.selectBuyList());
+        System.out.println(timeLogService.selectBuyList());
         return "content/admin/admin_log";
     }
 

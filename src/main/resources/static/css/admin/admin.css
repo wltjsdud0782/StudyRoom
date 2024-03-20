@@ -81,7 +81,7 @@ body {
 
 .adminContainer-table-tbody2 {
     display: flex;
-    height: 49vh;
+    height: 48vh;
     overflow-y: scroll;
     flex-direction: column-reverse;
 }
@@ -89,12 +89,6 @@ body {
 .adminContainer-table-tbody2 tr {
     display: table;
     width: 100%;
-}
-
-.adminContainer-table-tbody2 .topMsg {
-    font-size: smaller;
-    font-style: oblique;
-    color: #ccc;
 }
 
 .adminContainer-table-tbody2::-webkit-scrollbar {
@@ -148,6 +142,20 @@ body {
     /*스크롤바 뒷 배경 색상*/
 }
 
+.userMsg {
+    font-size: small;
+    padding-bottom: 10px;
+}
+
+.botMsg {
+    padding-bottom: 10px;
+}
+
+.topMsg {
+    font-size: small;
+    font-style: oblique;
+    color: #ccc;
+}
 /* (Charge)----------------------------------------------- */
 
 .adminContainer-table-tbody5 {

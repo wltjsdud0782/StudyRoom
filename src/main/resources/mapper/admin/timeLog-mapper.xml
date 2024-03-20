@@ -25,7 +25,7 @@
         <result column="MESSAGE_DATE" property="messageDate"/>
     </resultMap>
 
-    <!-- 로그 선택/ 이거 안씀 -->
+    <!-- view -->
     <select id="selectAllLog" resultMap="timeLog">
         SELECT MEMBER_CODE
                 , MEMBER_NAME
@@ -46,6 +46,23 @@
                 , MESSAGE_DATE
         FROM STUDYROOM_LOG_VIEW
     </select>
+
+
+    <!-- 결제 기록 가져오기 -->
+    <select id="selectBuyList" resultMap="memberMapper.approval">
+        SELECT APPROVAL_DATE
+            , MEMBER_NAME
+            , CHARGE_NAME
+            , CHARGE_FEE
+        FROM approval APP
+        INNER JOIN studyroom_charge CHARGE
+        ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
+        INNER JOIN studyroom_member MEMBER
+        ON APP.MEMBER_CODE = MEMBER.MEMBER_CODE
+        ORDER BY APPROVAL_DATE DESC
+    </select>
+
+    <!-- 입실 퇴실 기록 가져오기 -->
 
 
 
