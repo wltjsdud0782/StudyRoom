@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class LogViewVO {
+public class TimeLogVO {
     //STUDYROOM_MEMBER
     private int memberCode;
     private String memberName;

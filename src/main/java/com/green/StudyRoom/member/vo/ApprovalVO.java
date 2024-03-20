@@ -13,6 +13,7 @@ public class ApprovalVO {
     private int memberCode;
     private int chargeCode;
     private String card;
+    private String approvalDate;
 
     private MemberVO memberVO;
     private ChargeVO chargeVO;

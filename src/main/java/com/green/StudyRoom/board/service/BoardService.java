@@ -25,4 +25,7 @@ public interface BoardService {
 
     //내가 쓴 글(문의글)
     List<BoardVO> selectMyPage(String boardWriter);
+
+    //내가 쓴 글 삭제
+    int deleteBoard(int boardCode);
 }

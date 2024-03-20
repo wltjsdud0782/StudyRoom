@@ -9,6 +9,7 @@ import com.green.StudyRoom.board.vo.CommentVO;
 import com.green.StudyRoom.member.service.MemberService;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatService;
+import com.green.StudyRoom.seat.vo.SeatVO;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.spring6.processor.SpringInputCheckboxFieldTagProcessor;
 
 import javax.naming.Name;
 import javax.xml.crypto.KeySelector;
@@ -51,8 +53,15 @@ public class StudyRoomBoardController {
             MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
             int memberCode = loginInfo.getMemberCode();
 
+            SeatVO seatVO = new SeatVO();
+            seatVO.setMemberCode(memberCode);
+
             if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
-                if (seatService.isExpires(memberCode).equals("만료일이 오늘보다 이전")){
+                if((seatService.isExpires(memberCode).equals("만료일이 오늘보다 이전")) && (seatService.moveAndOut(memberCode) != null)){ // 자리가 있는 상태로 이용권이 만료 되었을 때
+                        seatService.outSeat(seatVO);
+                        seatService.chargeDelete(memberCode);
+                }
+                else if (seatService.isExpires(memberCode).equals("만료일이 오늘보다 이전")){ // 자리는 없고 이용권이 만료 되었을 때
                 seatService.chargeDelete(memberCode);
                 }
             }
@@ -157,7 +166,6 @@ public class StudyRoomBoardController {
         BoardVO boardList = boardService.detailSelect(boardCode);
 
         List<CommentVO> commentList = commentService.selectComment(boardCode);
-
         model.addAttribute("boardList", boardList);
         model.addAttribute("commentList", commentList);
 
@@ -203,9 +211,30 @@ public class StudyRoomBoardController {
         return "content/homepage/studyInfo";
     }
 
+    // 내 이용권/쿠폰
+    @GetMapping("/myBuyDetail")
+    public String myBuyDetail(Model model, HttpSession session){
+        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+        int memberCode = loginInfo.getMemberCode();
+
+        model.addAttribute("haveCharge", seatService.haveCharge(memberCode));
+        if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
+            model.addAttribute("buyDetailInfo", seatService.myBuyDetail(memberCode));
+            model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
+            model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
+
+            System.out.println(seatService.myBuyDetail(memberCode));
+            System.out.println(seatService.haveChargeRemainDate(memberCode));
+            System.out.println(seatService.haveChargeEndDate(memberCode));
+        }
+
+        return "content/homepage/myBuyDetail";
+    }
+
     //내가 쓴글 확인
     @GetMapping("/myWriting")
     public String myWriting (HttpSession session, Model model){
+
         MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
 
         List<BoardVO> boardList = boardService.selectMyPage(loginInfo.getMemberId());
@@ -213,11 +242,11 @@ public class StudyRoomBoardController {
         System.out.println(boardList);
         return "content/homepage/myWriting";
     }
-    //내가 쓴 리뷰 확인
+    @GetMapping("/deleteBoard")
+    public String deleteBoard(@RequestParam(name = "boardCode") int boardCode){
 
-//    @ResponseBody
-//    @PostMapping("/goReview")
-//    public List<BoardVO> goReview(@RequestBody BoardVO boardVO){
-//
-//    }
+        boardService.deleteBoard(boardCode);
+
+        return "redirect:/board/myWriting";
+    }
 }

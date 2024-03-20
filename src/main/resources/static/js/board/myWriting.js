@@ -26,3 +26,9 @@ function goReview(){
     
     
 }
+function goDetailSelect(boardCode){
+    location.href=`/board/detailSelect?boardCode=${boardCode}`;
+}
+function deleteBoard(boardCode){
+    location.href=`/board/deleteBoard?boardCode=${boardCode}`;
+}

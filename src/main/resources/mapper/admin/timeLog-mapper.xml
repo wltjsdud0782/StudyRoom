@@ -3,9 +3,9 @@
 
 <mapper namespace="logMapper">
 
-    <!-- LOG(로그) 조회하기 -->
+    <!-- LOG(로그) 조회하기 / 이거 안씀 -->
     <!-- 사용자 이름, 사용자 이용시간(시작, 종료, 사용시간), 결제내역, 좌석번호, 예약정보, 메세지 -->
-	<resultMap id="logView" type="com.green.StudyRoom.admin.vo.LogViewVO">
+	<resultMap id="timeLog" type="com.green.StudyRoom.admin.vo.TimeLogVO">
         <result column="MEMBER_CODE" property="memberCode"/>
         <result column="MEMBER_NAME" property="memberName"/>
 
@@ -25,8 +25,8 @@
         <result column="MESSAGE_DATE" property="messageDate"/>
     </resultMap>
 
-    <!-- 로그 선택 -->
-    <select id="selectAllLog" resultMap="logView">
+    <!-- 로그 선택/ 이거 안씀 -->
+    <select id="selectAllLog" resultMap="timeLog">
         SELECT MEMBER_CODE
                 , MEMBER_NAME
 

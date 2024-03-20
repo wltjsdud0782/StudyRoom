@@ -1,3 +1,13 @@
+setReceiver();
+
+function setReceiver() {
+    const receiver = document.querySelector("#receiver1").value;
+
+    if (receiver != '') {
+        document.querySelector('#memCode1').value = receiver;
+    }
+}
+
 function goChat(memberCode) {
     fetch('/admin/who', { //요청경로
         method: 'POST',
@@ -26,13 +36,34 @@ function goChat(memberCode) {
             whoIs.replaceChildren();
             let str = '';
             str += `
-            <input type="text" value="@${data.memberName}" readonly>&nbsp;
+            <input type="text" value="@${data.memberName}" name="memberName" id="memName" readonly>&nbsp;
+            <input type="hidden" value="${memberCode}" name="memberCode" id="memCode">
             `;
-            whoIs.insertAdjacentHTML('afterbegin', str)
+            whoIs.insertAdjacentHTML('afterbegin', str);
         })
+
         //fetch 통신 실패 시 실행 영역
         .catch(err => {
             alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
             console.log(err);
         });
 }
+
+//submit 보내기
+function StartChat() {
+
+    const memberCode = document.querySelector('#memCode').value;
+    document.querySelector('input[name="memberCode"]').value = memberCode;
+
+    const sendForm = document.querySelector('#sendForm');
+    let receiverName = document.querySelector('#memName').value;
+    document.querySelector('input[name="receiver"]').value = receiverName;
+
+    if (document.querySelector('#admin_message_content').value == '') {
+        alert('빈칸에 값을 입력해주세요!');
+    }
+    else {
+        sendForm.submit();
+    }
+}
+

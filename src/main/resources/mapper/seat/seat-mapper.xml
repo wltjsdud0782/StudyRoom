@@ -82,7 +82,10 @@
 
     <!--  지정한 회원의 이용권 결제일  -->
     <select id="haveChargeApprovalDate" resultType="String">
-        SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode}
+        SELECT
+            DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') APPROVAL_DATE
+        FROM approval
+        WHERE MEMBER_CODE = #{memberCode}
     </select>
 
     <!--  지정한 회원의 이용권 이용 가능 일 수  -->
@@ -257,6 +260,21 @@
             , STATUS_NUM = #{statusNum}
         WHERE SEAT_NUM = #{seatNum}
     </update>
+
+<!--  보유한 이용권 정보 조회  -->
+    <select id="myBuyDetail" resultMap="memberMapper.approval">
+        SELECT
+            DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') APPROVAL_DATE
+            , CASE
+                WHEN CARD = 'Y' THEN '카드'
+                WHEN CARD = 'N' THEN '카드외'
+                END CARD
+            , CHARGE_FEE
+        FROM APPROVAL APP
+        INNER JOIN STUDYROOM_CHARGE CHARGE
+        ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
+        WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
+    </select>
 
 </mapper>
 

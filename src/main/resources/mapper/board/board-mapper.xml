@@ -49,7 +49,7 @@
         , MEMBER_TEL = #{memberTel}
         , MEMBER_BIRTH = #{memberBirth}
         , MEMBER_ADDR = #{memberAddr}
-        , MEMBER_DETAIL = #{memberDetail}
+        , ADDR_DETAIL = #{addrDetail}
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 
@@ -105,6 +105,11 @@
             WHERE BOARD_WRITER = #{boardWriter}
             ORDER BY BOARD_CODE DESC
     </select>
+
+    <delete id="deleteBoard">
+        DELETE FROM STUDYROOM_BOARD
+        WHERE BOARD_CODE = #{boardCode}
+    </delete>
 </mapper>
 
 

@@ -80,7 +80,7 @@ function loginCheck(mId){
 
                         <tr>
                             <td>상세주소</td>
-                            <td><input type="text" name="memberDetail" value="${data.memberList.memberDetail}"></td>
+                            <td><input type="text" name="memberDetail" value="${data.memberList.addrDetail}"></td>
                         </tr>
                     </table>
 

@@ -1,6 +1,12 @@
 .mainContainer {
-    height: 900px;
+    height: 1000px;
     position: relative;
+}
+.main_row{
+    /* background-size: cover;
+    width: 100%;
+    height: 98%;
+    background-image: url(/img/homepage/mad.gif); */
 }
 .subMain {
     position: absolute;
@@ -10,6 +16,7 @@
     text-align: center;
 }
 .navText{
+    color: #058f05;
     width: 600px;
     font-size: 30px;
     font-weight: lighter;
@@ -17,11 +24,18 @@
     border-bottom: 1px solid #ccc ;
 }
 .mainText {
-    /* width: 1200px; */
-    margin-top: 50px;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 90px;
     font-size: 70px;
 }
+.mainText img {
+    width: 100%;
+    height: 100%;
+}
+    
 .footerText {
+    color: #096809;
     margin-top: 20px;
     font-size: 24px;
 }

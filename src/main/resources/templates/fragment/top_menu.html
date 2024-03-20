@@ -3,41 +3,49 @@
 
 <th:block th:fragment="menuFragment">
     <div class="row">
-        <div class="col-9 menu">
+        <div class="col-2 menu">
             <ul>
                 <li style="margin-right: 20px; 
-                     border-right: 1px solid #ccc; 
-                     padding: 10px 30px">
-                    <span>그린독서실</span>
+                     border-right: 1px solid #ccc; ">
+                    <span><a href=""><img src="/img/homepage/greenLogo.gif" alt="그린독서실로고"></a></span>
                 </li>
+            </ul>
+        </div>
+        <div class="col-7 menu">
+            <ul class="submenu">
                 <li><a onclick="location.href='/board/mainHomepage'">홈</a></li>
                 <li><a onclick="location.href='/board/studyInfo'">매장소개</a></li>
                 <li><a onclick="location.href='/seat/seatLive'">좌석선택</a></li>
                 <li><a href="#">리뷰</a></li>
                 <li><a onclick="location.href='/board/inquiry'">문의</a></li>
                 <li><a onclick="location.href='/board/wayToCome'">오시는길</a></li>
-
-                <th:block th:if="${session.loginInfo != null}">
-                    <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
-                        <li><a onclick="location.href='/admin/info'">설정</a></li>
-                    </th:block>
-                </th:block>
             </ul>
         </div>
 
         <div class="col-3 menu">
-            <ul>
+            <ul class="submenu">
                 <th:block th:if="${session.loginInfo == null }">
                     <li style="margin-left: 150px;" class="pointer-span" data-bs-toggle="modal"
                         data-bs-target="#join-modal">회원가입</a></li>
                     <li><a onclick="location.href='/member/loginForm'">로그인</a></li>
                 </th:block>
+
                 <th:block th:if="${session.loginInfo != null}">
-                    <li><span style="font-size: 17px;">[[${session.loginInfo.memberId}]]님</span></li>
-                    <li><a onclick="location.href='/board/mainMyPage'" style="padding: 1px;">마이페이지</a></li>
-                    <li><a onclick="location.href='/seat/chargeBuy'" style="padding: 1px;">이용권구매</a></li>
-                    <li><a onclick="logout()" style="padding: 1px;">로그아웃</a></li>
+                    <th:block th:unless="${session.loginInfo.isAdmin == 'ADMIN'}">
+                        <li><span style="font-size: 17px;">[[${session.loginInfo.memberId}]]님</span></li>
+                        <li><a onclick="location.href='/board/mainMyPage'" style="padding: 1px;">마이페이지</a></li>
+                        <li><a onclick="location.href='/seat/chargeBuy'" style="padding: 1px;">이용권구매</a></li>
+                        <li><a onclick="logout()" style="padding: 1px;">로그아웃</a></li>
+                    </th:block>
                 </th:block>
+                
+                <th:block th:if="${session.loginInfo != null}">
+                    <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
+                        <li><span style="font-size: 17px; margin-left: 120px;">[[${session.loginInfo.memberId}]]님</span></li>
+                        <li><a onclick="location.href='/admin/info'">설정</a></li>
+                        <li><a onclick="logout()" style="padding: 1px;">로그아웃</a></li>
+                    </th:block>
+                </th:block>    
             </ul>
         </div>
     </div>
