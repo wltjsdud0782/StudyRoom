@@ -50,7 +50,7 @@
 
     <!-- 결제 기록 가져오기 -->
     <select id="selectBuyList" resultMap="memberMapper.approval">
-        SELECT APPROVAL_DATE
+        SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d ㅤ%p %l:%i') APPROVAL_DATE
             , MEMBER_NAME
             , CHARGE_NAME
             , CHARGE_FEE
@@ -62,9 +62,52 @@
         ORDER BY APPROVAL_DATE DESC
     </select>
 
-    <!-- 입실 퇴실 기록 가져오기 -->
+    <!-- 예약 기록 가져오기 Beta -->
+    <select id="selectReserveList" resultMap="memberMapper.reservation">
+        SELECT RESERVATION_CODE
+            , DATE_FORMAT(RESERVATION_DATE, '%Y-%m-%d ㅤ%p %l:%i') RESERVATION_DATE
+            , MEMBER_NAME
+            , SEAT_NUM
+            , CHARGE_NAME
+        FROM studyroom_reservation RES
+        INNER JOIN studyroom_member MEMBER
+        ON RES.MEMBER_CODE = MEMBER.MEMBER_CODE
+        INNER JOIN studyroom_charge CHARGE
+        ON RES.CHARGE_CODE = CHARGE.CHARGE_CODE
+        ORDER BY RESERVATION_DATE DESC;
+    </select>
 
+    <!-- 입실 퇴실 기록 Beta -->
+    <select id="selectInOutList" resultMap="memberMapper.studyRoomInOut">
+        SELECT DAY_INPUT
+            , MEMBER_NAME
+            , CASE
+                WHEN IN_OUT = 'IN' THEN '입실'
+                WHEN IN_OUT = 'OUT' THEN '퇴실'
+                END IN_OUT
+        FROM studyroom_inout INOT
+        INNER JOIN studyroom_member MEMBER
+        ON INOT.MEMBER_CODE = MEMBER.MEMBER_CODE
+        ORDER BY DAY_INPUT DESC;
+    </select>
 
+    <!-- 좌석 상태 보기 -->
+    <select id="selectSeatStatusList" resultMap="seatMapper.seat">
+        SELECT SEAT_NUM
+            , STATUS_NAME
+            , SEAT_FLOOR
+            , CASE
+                WHEN SEAT_POWER = 'ON' THEN '켜짐'
+                WHEN SEAT_POWER = 'OFF' THEN '꺼짐'
+                END SEAT_POWER
+            , MEMBER_NAME
+        FROM studyroom_seat SEAT
+        INNER JOIN seat_status STATUS
+        ON SEAT.STATUS_NUM = STATUS.STATUS_NUM
+        INNER JOIN studyroom_member MEMBER
+        ON SEAT.MEMBER_CODE = MEMBER.MEMBER_CODE
+        ORDER BY SEAT_NUM ASC;
+    </select>
 
 
 </mapper>

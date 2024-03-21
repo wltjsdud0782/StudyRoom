@@ -10,6 +10,7 @@ import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
 import com.green.StudyRoom.seat.vo.SeatVO;
 import jakarta.annotation.Resource;
+import org.codehaus.groovy.transform.SourceURIASTTransformation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -169,13 +170,19 @@ public class AdminController {
     //(로그 확인)///////////////////////////////////////////// //
     @RequestMapping ("/log")
     public String adminLog(Model model){
-        //현재 들어가있는 데이터가 없음
-        //List<TimeLogVO> logList = timeLogService.selectAllLog(memberVO);
-        //model.addAttribute("logList", logList);
 
         //결재 기록
         model.addAttribute("appList", timeLogService.selectBuyList());
-        System.out.println(timeLogService.selectBuyList());
+
+        //예약 기록
+        model.addAttribute("resList", timeLogService.selectReserveList());
+
+        //입퇴실 기록
+        model.addAttribute("inotList", timeLogService.selectInOutList());
+
+        //좌석상태 조회
+        model.addAttribute("statusList", timeLogService.selectSeatStatusList());
+
         return "content/admin/admin_log";
     }
 

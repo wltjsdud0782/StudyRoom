@@ -29,7 +29,7 @@ function allInfo(memberCode) {
             let str = '';
             str += `  
                         <input type="hidden" name="memberCode" value="${memberCode}">
-                            <h4>&nbsp;Member</h4>
+                            <h4>&nbsp;MEMBER</h4>
                             <table class="adminContainer-table">
                                 <colgroup>
                                     <col width="11%">
@@ -295,7 +295,7 @@ function memberInfo(memberCode) {
             str += `  
                         <form action="/admin/uptInfo" method="post">
                         <input type="hidden" name="memberCode" value="${memberCode}">
-                            <h4>&nbsp;Member</h4>
+                            <h4>&nbsp;MEMBER</h4>
                             <table class="adminContainer-table">
                                 <colgroup>
                                     <col width="11%">
