@@ -106,7 +106,7 @@ public class SeatController {
     public Map<String, Object> buyDetail(@RequestParam(name = "chargeCode")int chargeCode, @RequestParam(name = "memberCode")int memberCode){
         Map<String, Object> a = new HashMap<String, Object>();
         a.put("chargeBuy", seatService.chargeBuy(chargeCode));
-        a.put("ownCoupon", seatService.ownCoupon(memberCode));
+        a.put("ownCouponList", seatService.ownCoupon(memberCode));
         return a;
     }
 

@@ -302,8 +302,17 @@
 <!--  회원이 가진 쿠폰 관련 쿼리  -->
     <select id="ownCoupon" resultMap="memberCoupon">
         SELECT
-            *
-        FROM MEMBER_COUPON
+            OWN_COUPON_CODE
+            , COUPON_CODE
+            , (SELECT
+                COUPON_NAME
+                FROM coupon
+                WHERE COUPON_CODE = member_coupon.COUPON_CODE) COUPON_NAME
+            , (SELECT
+                DISCOUNT_PERCENT
+                FROM coupon
+                WHERE COUPON_CODE = member_coupon.COUPON_CODE) DISCOUNT_PERCENT
+        FROM member_coupon
         WHERE MEMBER_CODE = #{memberCode}
     </select>
 </mapper>

@@ -131,7 +131,7 @@ public class SeatServiceImpl implements SeatService{
 
     @Override // 내 쿠폰 조회
     public List<MemberCouponVO> ownCoupon(int memberCode) {
-        return sqlSession.selectOne("seatMapper.ownCoupon", memberCode);
+        return sqlSession.selectList("seatMapper.ownCoupon", memberCode);
     }
 
 }
