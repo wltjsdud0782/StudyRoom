@@ -84,16 +84,27 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
                         </div>
                         <div class="row mt-3">
                             <div class="col">
-                                <select class="form-select text-center" style="width: 350px;">`
-
-                                    str+=`<option selected>적용할 쿠폰을 선택해주세요.</option>`
-
+                                <select class="form-select text-center" style="width: 350px;" onchange="changePrice()" id="discount">`
+                                    if (data.ownCouponList == null) {
+                                        str+=`<option value=0 selected>적용할 쿠폰이 없습니다.</option>`
+                                    } else {
+                                        str+=`<option value=0 selected>적용할 쿠폰을 선택해주세요.</option>`
+                                        for (let i = 0; i < data.ownCouponList.length; i++) {
+                                            const e = data.ownCouponList[i].couponVOList[0];
+                                            str+=`<option value=${e.discountPercent}>${e.couponName}</option>`
+                                        }                                        
+                                    }
                                 str+=`</select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <button type="button" class="btn btn-outline-danger mt-4 buyCard" onclick="buyCard(${data.chargeCode}, ${loginInfo.memberCode})">
+                                    총 결제금액 : <span id="resultPrice">${data.chargeBuy.chargeFee}</span> 원
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="btn btn-outline-danger mt-4 buyCard" onclick="buyCard(${data.chargeBuy.chargeCode}, ${loginInfo.memberCode})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
                                     <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"></path>
                                     <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"></path>
@@ -119,7 +130,17 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
 
 }
 
+function changePrice(){
+    const discount = document.querySelector('#discount').value;
+    const result = parseInt(document.querySelector('#resultPrice').textContent);
+    console.log(discount, result);
+
+    result.insertAdjacentHTML= result/100*(100-discount);
+
+}
+
 function buyCard(chargeCode, memberCode) {
+    const discount = document.querySelector('#discount').value;
     const result = confirm('결제를 진행하시겠습니까?')
     if (result) {
         fetch('/seat/buyCard', { //요청경로
@@ -154,7 +175,7 @@ function buyCard(chargeCode, memberCode) {
                     pay_method: "card",
                     merchant_uid: `${data.merchant_uid}`,
                     name: `${data.buyOne.chargeName}`,
-                    amount: `${data.buyOne.chargeFee}`, //금액
+                    amount: `${data.buyOne.chargeFee/100*(100-discount)}`, //금액
                     buyer_email: '',
                     buyer_name: `${data.buyMem.memberName}`,
                     buyer_tel: `${data.buyMem.memberTel}`,
