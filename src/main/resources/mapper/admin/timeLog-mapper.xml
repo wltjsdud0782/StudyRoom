@@ -54,12 +54,13 @@
             , MEMBER_NAME
             , CHARGE_NAME
             , CHARGE_FEE
+            , APPROVAL_FEE
         FROM approval APP
         INNER JOIN studyroom_charge CHARGE
         ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
         INNER JOIN studyroom_member MEMBER
         ON APP.MEMBER_CODE = MEMBER.MEMBER_CODE
-        ORDER BY APPROVAL_DATE DESC
+        ORDER BY APPROVAL_DATE DESC LIMIT 100
     </select>
 
     <!-- 예약 기록 가져오기 Beta -->
@@ -74,7 +75,7 @@
         ON RES.MEMBER_CODE = MEMBER.MEMBER_CODE
         INNER JOIN studyroom_charge CHARGE
         ON RES.CHARGE_CODE = CHARGE.CHARGE_CODE
-        ORDER BY RESERVATION_DATE DESC;
+        ORDER BY RESERVATION_DATE DESC LIMIT 100;
     </select>
 
     <!-- 입실 퇴실 기록 Beta -->
@@ -88,7 +89,7 @@
         FROM studyroom_inout INOT
         INNER JOIN studyroom_member MEMBER
         ON INOT.MEMBER_CODE = MEMBER.MEMBER_CODE
-        ORDER BY DAY_INPUT DESC;
+        ORDER BY DAY_INPUT DESC LIMIT 100;
     </select>
 
     <!-- 좌석 상태 보기 -->
@@ -98,7 +99,7 @@
             , SEAT_FLOOR
             , CASE
                 WHEN SEAT_POWER = 'ON' THEN '켜짐'
-                WHEN SEAT_POWER = 'OFF' THEN '꺼짐'
+                WHEN SEAT_POWER = 'OFF' THEN '-'
                 END SEAT_POWER
             , MEMBER_NAME
         FROM studyroom_seat SEAT

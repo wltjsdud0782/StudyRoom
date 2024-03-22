@@ -17,108 +17,140 @@
             <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
-                    <div>
+                    <div class="row">
 
-                        <div>
-                            <h4>&nbsp;APPROVAL</h4>
-                            <table class="table table-hover adminContainer-table">
-                                <tbody>
-                                    <tr th:each="app : ${appList}">
-                                        <td>
-                                            <div>
-                                                <span style="font-style: oblique; color: #ccc; font-size: small;">
-                                                    [[${app.approvalDate}]]&nbsp;
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <span>[[${app.memberVO.memberName}]]</span> 님이
-                                                <span
-                                                    style="text-decoration: underline;">[[${app.chargeVO.chargeName}]]</span>
-                                                이용권을
-                                                <span>[[${app.chargeVO.chargeFee}]]</span>원에 결제하였습니다.
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <!-- 왼쪽 -->
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col">
+                                    <h4>&nbsp;APPROVAL</h4>
+                                    <table class="table table-hover adminContainer-table">
+                                        <tbody class="adminContainer-table-tbody4">
+                                            <tr th:each="app : ${appList}">
+                                                <td>
+                                                    <div>
+                                                        <span>[[${app.memberVO.memberName}]]</span> 님이
+                                                        <span style="text-decoration: underline;">
+                                                            [[${app.chargeVO.chargeName}]]
+                                                        </span>
+                                                        이용권을
+                                                        <span>[[${app.chargeVO.chargeFee}]]</span>원에 결제하였습니다.
+                                                    </div>
+                                                    <div>
+                                                        <span class="logDate text-end">
+                                                            [[${app.approvalDate}]]&nbsp;
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div style="padding: 2vh;"></div>
+                            <div class="row">
+                                <div class="col">
+                                    <h4>&nbsp;RESERVATION</h4>
+                                    <table class="table table-hover adminContainer-table">
+                                        <tbody class="adminContainer-table-tbody4">
+                                            <tr th:each="res : ${resList}">
+                                                <td>
+                                                    <div>
+                                                        <span>
+                                                            [[${res.memberVO.memberName}]]
+                                                        </span> 님이
+                                                        <span style="text-decoration: underline;">
+                                                            [[${res.chargeVO.chargeName}]]
+                                                        </span>이용권으로
+                                                        <span>
+                                                            [[${res.seatVO.seatNum}]]번 좌석을 예약 구매하셨습니다.
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="logDate">
+                                                            [[${res.reservationDate}]]&nbsp;
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div style="padding: 2vh;"></div>
+                            <div class="row">
+                                <div class="col">
+                                    <h4>&nbsp;IN-OUT</h4>
+                                    <table class="table table-hover adminContainer-table">
+                                        <tbody class="adminContainer-table-tbody4">
+                                            <tr th:each="inot, state : ${inotList}">
+                                                <td>
+                                                    <span>
+                                                        [[${inot.memberVO.memberName}]]
+                                                    </span> 님이
+                                                    <span>
+                                                        [[${inot.InOut}]]
+                                                    </span>하셨습니다.
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot class="table table-light">
+                                            <tr style="text-align: center;">
+                                                <td style="color: #ccc;">
+                                                    <span id="realDate" style="color: #ccc; font-style: oblique;">
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                        <div style="padding: 2vh;"></div>
-                        <div>
-                            <h4>&nbsp;RESERVATION</h4>
-                            <table class="table table-hover adminContainer-table">
-                                <tbody>
-                                    <tr th:each="res : ${resList}">
-                                        <td>
-                                            <div>
-                                                <span style="font-style: oblique; color: #ccc; font-size: small;">
-                                                    [[${res.reservationDate}]]&nbsp;
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <span>[[${res.memberVO.memberName}]]</span> 님이
-                                                <span>[[${res.seatVO.seatNum}]]번 좌석에 예약하셨습니다.</span>&ensp;
-                                                <span
-                                                    style="text-decoration: underline;">([[${res.chargeVO.chargeName}]]</span>
-                                                이용권)
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+
+
+                        <!-- 오른쪽 -->
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col">
+                                    <h4>&nbsp;SEAT-IN-USE (대공사 중)</h4>
+                                </div>
+                            </div>
+                            <!-- <div class="row scrollbar" style="height: 120px; overflow: auto;"> -->
+                            <div class="col">
+                                <table class="table table-hover adminContainer-table" style="text-align: center;"
+                                    id="seatInUse">
+                                    <colgroup>
+                                        <col width="20%">
+                                        <col width="20%">
+                                        <col width="20%">
+                                        <col width="20%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <thead class="table-light">
+                                        <tr>
+                                            <td>좌석 번호</td>
+                                            <td>좌석 층수</td>
+                                            <td>좌석 상태</td>
+                                            <td>점등 상태</td>
+                                            <td>사용자</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="status : ${statusList}">
+                                            <td>[[${status.seatNum}]]번</td>
+                                            <td>[[${status.seatFloor}]]층</td>
+                                            <td>[[${status.seatStatusVO.statusName}]]</td>
+                                            <td>[[${status.seatPower}]]</td>
+                                            <td>[[${status.memberVO.memberName}]]</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- </div> -->
                         </div>
-                        <div style="padding: 2vh;"></div>   
-                        <div>
-                            <h4>&nbsp;IN-OUT</h4>
-                            <table class="table table-hover adminContainer-table">
-                                <colgroup>
-                                    <col width="10%">
-                                    <col width="*">
-                                </colgroup>
-                                <thead class="table table-light">
-                                    <tr>
-                                        <td colspan="2">1</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="inot, state : ${inotList}">
-                                        <td class="text-center">
-                                            <span>( [[${#lists.size(inotList) - state.index}]] )&ensp;</span>
-                                        </td>
-                                        <td>
-                                            <span>[[${inot.memberVO.memberName}]]</span> 님이
-                                            <span>[[${inot.InOut}]]</span>하셨습니다.
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+
+
                     </div>
-                </div>
-                <div class="col">
-                    <div>
-                        <h4>&nbsp;SEAT-IN-USE
-                        </h4>
-                        <table class="table table-hover adminContainer-table text-center">
-                            <thead class="table table-light">
-                                <tr>
-                                    <td>좌석 번호</td>
-                                    <td>좌석 층수</td>
-                                    <td>좌석 상태</td>
-                                    <td>점등 상태</td>
-                                    <td>사용자</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="status : ${statusList}">
-                                    <td>[[${status.seatNum}]]번</td>
-                                    <td>[[${status.seatFloor}]]층</td>
-                                    <td>[[${status.seatStatusVO.statusName}]]</td>
-                                    <td>[[${status.seatPower}]]</td>
-                                    <td>[[${status.memberVO.memberName}]]</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>  
                 </div>
             </div>
         </div>
@@ -127,7 +159,22 @@
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
-    <!-- <script src="/"></script> -->
+    <script>
+        function clock() {
+            const datetext = document.querySelector('#realDate'); /* 태그 갖고오기 */
+
+            const today = new Date(); /* 날짜와 시간 */
+            const year = today.getFullYear(); // 년도
+            const month = today.getMonth() + 1;  // 월
+            const date = today.getDate();  // 날짜
+            const hrs = today.getHours() % 12 ? today.getHours() % 12 : 12; //시간
+            const min = today.getMinutes() //분
+            const ampm = today.getHours() >= 12 ? 'PM' : 'AM'; //오후 오전
+
+            datetext.innerHTML = year + "-" + month + "-" + date + "&ensp;&ensp;&nbsp;" + ampm + "&ensp;" + hrs + ":" + min; /* html에 출력 */
+        }
+        clock();
+    </script>
 </th:block>
 
 </html>
