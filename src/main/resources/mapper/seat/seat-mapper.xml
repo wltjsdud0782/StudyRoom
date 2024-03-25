@@ -280,13 +280,11 @@
         SELECT
             DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') APPROVAL_DATE
             , CASE
-                WHEN CARD = 'Y' THEN '카드'
-                WHEN CARD = 'N' THEN '카드외'
-                END CARD
-            , CHARGE_FEE
+                WHEN COUPON_USE = 'Y' THEN '사용함'
+                WHEN COUPON_USE = 'N' THEN '사용안함'
+                END COUPON_USE
+            , APPROVAL_FEE
         FROM APPROVAL APP
-        INNER JOIN STUDYROOM_CHARGE CHARGE
-        ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
         WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
     </select>
 
@@ -314,7 +312,14 @@
                 WHERE COUPON_CODE = member_coupon.COUPON_CODE) DISCOUNT_PERCENT
         FROM member_coupon
         WHERE MEMBER_CODE = #{memberCode}
+        ORDER BY OWN_COUPON_CODE
     </select>
+
+    <delete id="deleteCoupon">
+        DELETE FROM MEMBER_COUPON
+        WHERE OWN_COUPON_CODE = #{ownCouponCode}
+    </delete>
+
 </mapper>
 
 

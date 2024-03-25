@@ -21,10 +21,11 @@
 <!-- 결재 -->
     <resultMap id="approval" type="com.green.StudyRoom.member.vo.ApprovalVO">
         <id column="APPROVAL_CODE" property="approvalCode"/>
+        <result column="APPROVAL_Fee" property="approvalFee"/>
+        <result column="APPROVAL_DATE" property="approvalDate"/>
         <result column="MEMBER_CODE" property="memberCode"/>
         <result column="CHARGE_CODE" property="chargeCode"/>
-        <result column="APPROVAL_DATE" property="approvalDate"/>
-        <result column="CARD" property="card"/>
+        <result column="COUPON_USE" property="couponUse"/>
 
         <association property="memberVO" resultMap="member"/>
         <association property="chargeVO" resultMap="chargeMapper.charge"/>

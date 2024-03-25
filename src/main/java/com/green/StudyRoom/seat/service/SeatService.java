@@ -55,6 +55,8 @@ public interface SeatService {
 
     // 쿠폰 관련 (해야됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)
     List<CouponVO> coupon(); // admin 관련
-    List<MemberCouponVO> ownCoupon(int memberCode); // homepage 관련
+    List<MemberCouponVO> ownCoupon(int memberCode); // homepage 관련 (내가 해야함)
+
+    void deleteCoupon(MemberCouponVO memberCouponVO);
 
 }

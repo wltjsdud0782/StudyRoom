@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{fragment/user_layout}" >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/user_layout}">
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴때 같이 실행되는 css -->
@@ -10,6 +9,7 @@
 
 <th:block layout:fragment="contentFragment">
     <!-- html 코드 작성 -->
+    <!-- 보드컨트롤러 변경해야함 (아마 조회컬럼) -->
     <div class="row">
         <div class="col">
             <div class="myBuyDetail-header">
@@ -26,7 +26,8 @@
                     <h5>보유한 이용권</h5>
                 </div>
             </div>
-            <div class="row scrollbar mt-4" style="height: 100%; overflow: auto; line-height: 4;">
+
+            <div class="row scrollbar mt-4" style="height: 700px; overflow: auto; line-height: 4;">
                 <div class="col">
                     <table class="table table-hover text-center align-middle table-bordered" style="font-size: 12pt;">
                         <colgroup>
@@ -54,12 +55,12 @@
                                     <td>[[${buyDetailInfo.approvalDate}]]</td>
                                 </tr>
                                 <tr style="height: 50px;">
-                                    <td>결제수단</td>
-                                    <td>[[${buyDetailInfo.card}]]</td>
+                                    <td>쿠폰사용 여부</td>
+                                    <td>[[${buyDetailInfo.couponUse}]]</td>
                                 </tr>
                                 <tr style="height: 50px;">
                                     <td>결제금액</td>
-                                    <td>[[${#numbers.formatCurrency(buyDetailInfo.chargeVO.chargeFee)}]]</td>
+                                    <td>[[${#numbers.formatCurrency(buyDetailInfo.approvalFee)}]]</td>
                                 </tr>
                                 <tr style="height: 50px;">
                                     <td>만료날짜</td>
@@ -85,7 +86,7 @@
             <div class="row">
                 <div class="col">
                     <div class="text-end" style="font-size: 11pt; color: red;">
-                    * 사용 가능한 쿠폰 : <span>몇</span>장
+                        * 사용 가능한 쿠폰 : <span>몇</span>장
                     </div>
                 </div>
             </div>
@@ -104,4 +105,5 @@
     <!-- html 파일이 열릴때 같이 실행되는 js -->
     <!-- <script src="/"></script> -->
 </th:block>
+
 </html>

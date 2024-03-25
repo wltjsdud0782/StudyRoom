@@ -10,10 +10,11 @@ import lombok.ToString;
 @ToString
 public class ApprovalVO {
     private int approvalCode;
+    private int approvalFee;
+    private String approvalDate;
     private int memberCode;
     private int chargeCode;
-    private String card;
-    private String approvalDate;
+    private String couponUse;
 
     private MemberVO memberVO;
     private ChargeVO chargeVO;
