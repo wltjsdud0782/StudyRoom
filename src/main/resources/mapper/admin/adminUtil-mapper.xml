@@ -81,7 +81,6 @@
         UPDATE STUDYROOM_SEAT
         SET
         SEAT_POWER = #{seatPower}
-
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 

@@ -212,7 +212,6 @@ select {
     padding-top: 7px;
 }
 
-
 .logList-form-div {
     border: 1px solid #ccc;
 }
@@ -247,6 +246,34 @@ select {
     /*스크롤바 뒷 배경 색상*/
 }
 
+.adminContainer-table-tbody44 {
+    display: block;
+    height: 577px;
+    overflow-y: scroll;
+}
+
+.adminContainer-table-tbody44 tr {
+    display: table;
+    width: 100%;
+}
+
+.adminContainer-table-tbody44::-webkit-scrollbar {
+    width: 10px;
+    /* 스크롤바의 너비 */
+}
+
+.adminContainer-table-tbody44::-webkit-scrollbar-thumb {
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: #4d6d49;
+    /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.adminContainer-table-tbody44::-webkit-scrollbar-track {
+    background: #ccc;
+    /*스크롤바 뒷 배경 색상*/
+}
+
 
 /* ----------------------- */
-
