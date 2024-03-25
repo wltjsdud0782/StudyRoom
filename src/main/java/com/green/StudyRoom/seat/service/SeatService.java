@@ -3,6 +3,7 @@ package com.green.StudyRoom.seat.service;
 import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
+import com.green.StudyRoom.member.vo.StudyRoomInOutVO;
 import com.green.StudyRoom.seat.vo.CouponVO;
 import com.green.StudyRoom.seat.vo.MemberCouponVO;
 import com.green.StudyRoom.seat.vo.SeatVO;
@@ -14,6 +15,8 @@ public interface SeatService {
     // 좌석예약 조회
     List<SeatVO> seatList();
     SeatVO moveAndOut(int memberCode); // 예약 상태 좌석 이동,퇴실 버튼 띄우기
+
+    List<StudyRoomInOutVO> inOutTime(int memberCode); // 입퇴실 시간
 
     // 이용권 관련
     String haveCharge(int memberCode); // 구매한 이용권 유무

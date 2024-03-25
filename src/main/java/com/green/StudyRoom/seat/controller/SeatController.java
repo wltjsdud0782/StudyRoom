@@ -135,10 +135,4 @@ public class SeatController {
         }
     }
 
-    // 완성 후 보드컨트롤러로 옮긴 후 my_page.html, user_side.html 수정해야함
-    @GetMapping("/mySeat")
-    public String mySeat(){
-
-        return "content/homepage/mySeat";
-    }
 }

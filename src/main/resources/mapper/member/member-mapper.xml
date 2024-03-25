@@ -32,6 +32,14 @@
 
     </resultMap>
 
+    <resultMap id="inOut" type="com.green.StudyRoom.member.vo.StudyRoomInOutVO">
+        <id column="DAY_INPUT" property="dayInput"/>
+        <result column="MEMBER_CODE" property="memberCode"/>
+        <result column="IN_OUT" property="inOut"/>
+        <result column="INOUT_TIME" property="inOutTime"/>
+    </resultMap>
+
+
 <!--  예약      -->
     <resultMap id="reservation" type="com.green.StudyRoom.member.vo.ReservationVO">
         <id column="RESERVATION_CODE" property="reservationCode"/>

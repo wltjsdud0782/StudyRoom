@@ -3,6 +3,7 @@ package com.green.StudyRoom.seat.service;
 import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
+import com.green.StudyRoom.member.vo.StudyRoomInOutVO;
 import com.green.StudyRoom.seat.vo.CouponVO;
 import com.green.StudyRoom.seat.vo.MemberCouponVO;
 import com.green.StudyRoom.seat.vo.SeatVO;
@@ -26,6 +27,11 @@ public class SeatServiceImpl implements SeatService{
     @Override // 예약되어있는 상태로 좌석예약 조회
     public SeatVO moveAndOut(int memberCode) {
         return sqlSession.selectOne("seatMapper.moveAndOut", memberCode);
+    }
+
+    @Override // 입퇴실 시간
+    public List<StudyRoomInOutVO> inOutTime(int memberCode) {
+        return sqlSession.selectList("seatMapper.inOutTime", memberCode);
     }
 
     @Override // 구매한 이용권 유무

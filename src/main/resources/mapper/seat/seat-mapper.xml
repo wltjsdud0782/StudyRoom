@@ -10,7 +10,6 @@
         <result column="MEMBER_CODE"    property="memberCode"/>
         <result column="STATUS_NUM"     property="statusNum"/>
         <result column="AGE_CODE"       property="ageCode"/>
-        <result column="AGE_CODE"       property="ageCode"/>
         <association property="seatStatusVO" resultMap="seatStatus"/>
         <association property="floorAgeVO" resultMap="floorAge"/>
         <association property="memberVO" resultMap="memberMapper.member"/>
@@ -74,11 +73,27 @@
     </select>
 
     <select id="moveAndOut" resultMap="seat">
-        SELECT SEAT_NUM
+        SELECT
+            SEAT_NUM
+            , SEAT_POWER
+            , SEAT_FLOOR
+            , AGE_NAME
         FROM STUDYROOM_SEAT SEAT
-        INNER JOIN studyroom_member MEM
-        ON SEAT.MEMBER_CODE = MEM.MEMBER_CODE
-        WHERE SEAT.MEMBER_CODE = #{memberCode}
+        INNER JOIN FLOOR_AGE AGE
+        ON SEAT.AGE_CODE = AGE.AGE_CODE
+        WHERE MEMBER_CODE = #{memberCode}
+    </select>
+
+    <select id="inOutTime" resultMap="memberMapper.inOut">
+        SELECT
+            DATE_FORMAT(INOUT_TIME, '%y/%m/%d  %h:%i') INOUT_TIME
+            , CASE
+                WHEN IN_OUT = 'IN' THEN '입실'
+                WHEN IN_OUT = 'OUT' THEN '퇴실'
+                END IN_OUT
+        FROM STUDYROOM_INOUT
+        WHERE MEMBER_CODE = #{memberCode}
+        ORDER BY INOUT_TIME DESC
     </select>
 
 

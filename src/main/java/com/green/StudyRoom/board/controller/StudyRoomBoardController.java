@@ -249,13 +249,21 @@ public class StudyRoomBoardController {
             model.addAttribute("buyDetailInfo", seatService.myBuyDetail(memberCode));
             model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
             model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
-
-            System.out.println(seatService.myBuyDetail(memberCode));
-            System.out.println(seatService.haveChargeRemainDate(memberCode));
-            System.out.println(seatService.haveChargeEndDate(memberCode));
         }
 
         return "content/homepage/myBuyDetail";
+    }
+
+    // 내 입실조회
+    @GetMapping("/mySeat")
+    public String mySeat(HttpSession session, Model model){
+        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+        int memberCode = loginInfo.getMemberCode();
+
+        model.addAttribute("reservationMem", seatService.moveAndOut(memberCode));
+        model.addAttribute("inoutTime", seatService.inOutTime(memberCode));
+
+        return "content/homepage/mySeat";
     }
 
     //내가 쓴글 확인
