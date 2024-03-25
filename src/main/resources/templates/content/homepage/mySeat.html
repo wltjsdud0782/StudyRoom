@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/user_layout}">
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴때 같이 실행되는 css -->
+    <link rel="stylesheet" href="/css/homepage/mySeat.css">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <!-- html 코드 작성 -->
+    <div class="row">
+        <div class="col">
+            <div class="mySeat-header">
+                <h3>입실조회</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-5">
+            <div class="row text-start mt-5">
+                <div class="col">
+                    <h5>나의 입실 정보</h5>
+                </div>
+            </div>
+
+            <div class="row scrollbar mt-4" style="height: 700px; overflow: auto; line-height: 4;">
+                <div class="col">
+                    <table class="table table-hover text-center align-middle table-bordered" style="font-size: 12pt;">
+                        <colgroup>
+                            <col width="50%">
+                            <col width="50%">
+                        </colgroup>
+                        <thead>
+                            <tr class="table-success align-middle" style="height: 65px;">
+                                <td colspan="2">[[${session.loginInfo.memberId}]] 님의 입실정보</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>asd</td>
+                                <td>asdf</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="offset-1 col-5">
+            <div class="row text-start mt-5">
+                <div class="col">
+                    <h5>입퇴실</h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴때 같이 실행되는 js -->
+    <!-- <script src="/"></script> -->
+</th:block>
+</html>

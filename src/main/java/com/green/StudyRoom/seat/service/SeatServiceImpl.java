@@ -134,4 +134,9 @@ public class SeatServiceImpl implements SeatService{
         return sqlSession.selectList("seatMapper.ownCoupon", memberCode);
     }
 
+    @Override // 쿠폰 사용하여 결제 시 해당 쿠폰 삭제
+    public void deleteCoupon(MemberCouponVO memberCouponVO) {
+        sqlSession.delete("seatMapper.deleteCoupon", memberCouponVO);
+    }
+
 }

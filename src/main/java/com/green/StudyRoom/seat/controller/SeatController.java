@@ -6,6 +6,7 @@ import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatService;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
+import com.green.StudyRoom.seat.vo.MemberCouponVO;
 import com.green.StudyRoom.seat.vo.SeatVO;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
@@ -126,8 +127,18 @@ public class SeatController {
     }
 
     @ResponseBody
-    @PostMapping("/buySuccess")
-    public void buySuccess(@RequestBody ApprovalVO approvalVO){
+    @PostMapping("/buySuccess") // 사용시 삭제되는지 확인해야함!!!!!!!!!!!!!!!
+    public void buySuccess(@RequestBody ApprovalVO approvalVO, MemberCouponVO memberCouponVO){
         seatService.buyCard(approvalVO);
+        if (memberCouponVO.getOwnCouponCode() != 0){
+            seatService.deleteCoupon(memberCouponVO);
+        }
+    }
+
+    // 완성 후 보드컨트롤러로 옮긴 후 my_page.html, user_side.html 수정해야함
+    @GetMapping("/mySeat")
+    public String mySeat(){
+
+        return "content/homepage/mySeat";
     }
 }
