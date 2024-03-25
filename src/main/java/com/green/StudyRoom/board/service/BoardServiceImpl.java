@@ -2,6 +2,7 @@ package com.green.StudyRoom.board.service;
 
 import com.green.StudyRoom.board.vo.BoardVO;
 import com.green.StudyRoom.board.vo.CommentVO;
+import com.green.StudyRoom.board.vo.SearchVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class BoardServiceImpl implements BoardService {
 
     // 글쓰기 첫 화면, 작성한 글 조회
     @Override
-    public List<BoardVO> selectBoard() {
-        return sqlSession.selectList("boardMapper.selectBoard");
+    public List<BoardVO> selectBoard(SearchVO searchVO) {
+        return sqlSession.selectList("boardMapper.selectBoard", searchVO);
     }
 
     @Override

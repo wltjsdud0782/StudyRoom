@@ -60,3 +60,130 @@ textarea{
     color: #000;
     margin-bottom: 80px;
 }
+.tdTag{
+    position: relative;
+}
+.tdTag img {
+    background-color: #fff;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    margin-right: 20px;
+}
+.popUp{
+    text-align: center;
+    width: 350px;
+    height: 150px;
+    border: 3px solid #065a06;
+    background-color: #fff;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+}
+.popUp h6{
+    margin-top: 40px;
+}
+.popUp button {
+    margin-top: 30px;
+    width: 65px;
+    height: 40px;
+    border: 1px solid;
+    border-radius: 3px;
+    background-color: #3c993c;
+    color: #fff;
+}
+.popUp button:hover{
+    cursor: pointer;
+}
+
+.popUp-2{
+    text-align: center;
+    width: 350px;
+    height: 150px;
+    border: 3px solid #065a06;
+    background-color: #fff;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+}
+
+.popUp-2 h6{
+    margin-top: 40px;
+}
+.popUp-2 button {
+    margin-top: 30px;
+    width: 65px;
+    height: 40px;
+    border: 1px solid;
+    border-radius: 3px;
+    background-color: #3c993c;
+    color: #fff;
+}
+.popUp-2 button:hover{
+    cursor: pointer;
+}
+
+.popUp-3{
+    text-align: center;
+    width: 350px;
+    height: 150px;
+    border: 3px solid #065a06;
+    background-color: #fff;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+}
+
+.popUp-3 h6{
+    margin-top: 40px;
+}
+.popUp-3 button {
+    margin-top: 30px;
+    width: 65px;
+    height: 40px;
+    border: 1px solid;
+    border-radius: 3px;
+    background-color: #3c993c;
+    color: #fff;
+}
+.popUp-3 button:hover{
+    cursor: pointer;
+}
+
+.popUp_4{
+    text-align: center;
+    width: 350px;
+    height: 150px;
+    border: 3px solid #065a06;
+    background-color: #fff;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+}
+
+.popUp_4 h6{
+    margin-top: 40px;
+}
+.popUp_4 button {
+    margin-top: 30px;
+    width: 65px;
+    height: 40px;
+    border: 1px solid;
+    border-radius: 3px;
+    background-color: #3c993c;
+    color: #fff;
+}
+.popUp_4 button:hover{
+    cursor: pointer;
+}
+

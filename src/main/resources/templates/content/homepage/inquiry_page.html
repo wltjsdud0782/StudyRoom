@@ -113,9 +113,21 @@
                                     <td>[[${board.boardWriter}]]</td>
                                     <td>[[${board.boardDate}]]</td>
                                 </tr>
-                                
                             </th:block>
                         </table>
+                        <!-- th:each="i :${#numbers.sequence(1, 10)}" -->
+                        <div>
+                            <th:block th:if="${searchVO.prev}">
+                                <a th:href="@{/board/inquiry(nowPage=${searchVO.beginPage - 1})}">이전</a>
+                            </th:block>
+                            <th:block th:each="i :${#numbers.sequence(searchVO.beginPage, searchVO.endPage)}">     
+                                <a th:href="@{/board/inquiry(nowPage=${i})}">[[${i}]]</a>
+                            </th:block>
+                            <th:block th:if="${searchVO.next}">
+                                <a th:href="@{/board/inquiry(nowPage=${searchVO.endPage + 1})}">다음</a>
+                            </th:block>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

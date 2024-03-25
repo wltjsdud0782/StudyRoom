@@ -4,14 +4,16 @@
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="boardMapper">
     <resultMap id="board" type="com.green.StudyRoom.board.vo.BoardVO">
-        <id  column="BOARD_CODE"        property="boardCode"/>
+        <id  column="BOARD_CODE"            property="boardCode"/>
         <result  column="BOARD_TITLE"       property="boardTitle"/>
         <result  column="BOARD_WRITER"      property="boardWriter"/>
         <result  column="BOARD_DATE"        property="boardDate"/>
         <result  column="BOARD_CONTENT"     property="boardContent"/>
         <result  column="BOARD_SECRET"      property="boardSecret"/>
-        <result  column="BOARD_ANSWER"       property="boardAnswer"/>
+        <result  column="BOARD_ANSWER"      property="boardAnswer"/>
+        <collection property="imgList"      resultMap="imgMapper.img"/>
     </resultMap>
+
 
     <insert id="insertBoard">
         INSERT INTO STUDYROOM_BOARD (
@@ -19,14 +21,17 @@
             , BOARD_WRITER
             , BOARD_CONTENT
             , BOARD_SECRET
+            , BOARD_CODE
         ) VALUES (
             #{boardTitle}
             , #{boardWriter}
             , #{boardContent}
             , IFNULL(#{boardSecret}, 'NO')
+            , #{boardCode}
         )
     </insert>
 
+    <!-- 문의 페이지-->
     <select id="selectBoard" resultMap="board">
         SELECT BOARD_CODE
             , BOARD_TITLE
@@ -37,6 +42,11 @@
             , BOARD_ANSWER
         FROM STUDYROOM_BOARD
         ORDER BY BOARD_CODE DESC
+        LIMIT #{displayDateCnt} OFFSET ${displayDateCnt * (nowPage-1)}
+
+<!--        ${displayDateCnt * (nowPage-1)}-->
+
+
 <!--        BOA INNER JOIN STUDYROOM_COMMENT COM-->
 <!--        ON BOA.BOARD_CODE = COM.BOARD_CODE-->
     </select>
@@ -54,13 +64,15 @@
     </update>
 
     <select id="detailSelect" resultMap="board">
-        SELECT BOARD_CODE
+        SELECT BOARD.BOARD_CODE
             , BOARD_TITLE
             , BOARD_WRITER
             , BOARD_CONTENT
             , DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') BOARD_DATE
-        FROM STUDYROOM_BOARD
-        WHERE BOARD_CODE = #{boardCode}
+            , ATTACHED_FILE_NAME
+        FROM STUDYROOM_BOARD BOARD INNER JOIN BOARD_IMG IMG
+        ON BOARD.BOARD_CODE = IMG.BOARD_CODE
+        WHERE BOARD.BOARD_CODE = #{boardCode}
     </select>
 
     <!-- 관리자 답변 -->
@@ -110,6 +122,15 @@
         DELETE FROM STUDYROOM_BOARD
         WHERE BOARD_CODE = #{boardCode}
     </delete>
+
+    <!-- 페이징 처리 -->
+    <select id="selectBoardCnt" resultType="int">
+        SELECT
+        COUNT (
+            BOARD_CODE
+        )
+        FROM STUDYROOM_BOARD
+    </select>
 </mapper>
 
 

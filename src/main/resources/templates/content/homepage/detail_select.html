@@ -9,7 +9,7 @@
 </th:block>
 
 <th:block layout:fragment="contentFragment">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="height: 900px;">
         <div class="col-10">
             <div class="detail_select_header">
                 <h3>
@@ -37,7 +37,14 @@
                     </tr>
                     <tr>
                         <td>내용</td>
-                        <td colspan="3" style="height: 200px;">[[${boardList.boardContent}]]</td>
+                        <td colspan="3" style="height: 200px;">[[${boardList.boardContent}]]
+                            <div style="margin-top: 20px;">
+                                <th:block th:each="img : ${boardList.imgList}">
+                                    <img th:src="@{'/upload/'+ ${img.attachedFileName}}"
+                                    style=" width: 150px; height: 150px; margin-right: 0;">
+                                </th:block>
+                            </div>
+                        </td>
                     </tr>
                 </table>
             </div>
