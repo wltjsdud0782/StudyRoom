@@ -86,10 +86,10 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
                         <div class="row mt-4 mb-4">
                             <div class="col" style="margin-left:100px;">
                                 <select class="form-select text-center" style="width: 350px;" onchange="changePrice(${data.chargeBuy.chargeFee})" id="discount">`
-                                    if (data.ownCouponList == null) {
-                                        str+=`<option value=0 selected>적용할 쿠폰이 없습니다.</option>`
+                                    if (data.ownCouponList.length == 0) {
+                                        str+=`<option value=0 class=0 selected>적용할 쿠폰이 없습니다.</option>`
                                     } else {
-                                        str+=`<option value=0 selected>적용할 쿠폰을 선택해주세요.</option>`
+                                        str+=`<option value=0 class=0 selected>적용할 쿠폰을 선택해주세요.</option>`
                                         for (let i = 0; i < data.ownCouponList.length; i++) {
                                             const e = data.ownCouponList[i];
                                             str+=`
@@ -216,6 +216,7 @@ function buyCard(chargeCode, memberCode) {
                             body: JSON.stringify({
                                // 데이터명 : 데이터값
                                 approvalCode : `${data.merchant_uid}`
+                                , approvalFee : `${data.buyOne.chargeFee/100*(100-discount)}`
                                 , memberCode : `${data.buyMem.memberCode}`
                                 , chargeCode : `${data.buyOne.chargeCode}`
                                 , couponUse : couponUse

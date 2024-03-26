@@ -64,10 +64,10 @@ public class SeatServiceImpl implements SeatService{
         return sqlSession.selectOne("seatMapper.today");
     }
 
-    @Override
-    public String isExpires(int memberCode) {
-        return sqlSession.selectOne("seatMapper.isExpires", memberCode);
-    }
+//    @Override
+//    public String isExpires(int memberCode) {
+//        return sqlSession.selectOne("seatMapper.isExpires", memberCode);
+//    }
 
     @Override
     public void chargeDelete(int memberCode) {
@@ -141,8 +141,8 @@ public class SeatServiceImpl implements SeatService{
     }
 
     @Override // 쿠폰 사용하여 결제 시 해당 쿠폰 삭제
-    public void deleteCoupon(MemberCouponVO memberCouponVO) {
-        sqlSession.delete("seatMapper.deleteCoupon", memberCouponVO);
+    public void deleteCoupon(int ownCouponCode) {
+        sqlSession.delete("seatMapper.deleteCoupon", ownCouponCode);
     }
 
 }

@@ -68,11 +68,11 @@ public class StudyRoomBoardController {
             seatVO.setMemberCode(memberCode);
 
             if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
-                if((seatService.isExpires(memberCode).equals("만료일이 오늘보다 이전")) && (seatService.moveAndOut(memberCode) != null)){ // 자리가 있는 상태로 이용권이 만료 되었을 때
+                if((seatService.haveChargeRemainDate(memberCode) == 0) && (seatService.moveAndOut(memberCode) != null)){ // 자리가 있는 상태로 이용권이 만료 되었을 때
                         seatService.outSeat(seatVO);
                         seatService.chargeDelete(memberCode);
                 }
-                else if (seatService.isExpires(memberCode).equals("만료일이 오늘보다 이전")){ // 자리는 없고 이용권이 만료 되었을 때
+                else if (seatService.haveChargeRemainDate(memberCode) == 0){ // 자리는 없고 이용권이 만료 되었을 때
                 seatService.chargeDelete(memberCode);
                 }
             }

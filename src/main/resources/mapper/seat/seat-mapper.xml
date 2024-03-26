@@ -171,31 +171,31 @@
     <select id="today" resultType="String">
         SELECT DATE_FORMAT(now(), '%Y%m%d')
     </select>
-    <select id="buyToday" resultType="String">
+    <select id="buyToday" resultType="int">
         SELECT DATE_FORMAT(now(), '%y%m%d')
     </select>
 
-    <select id="isExpires" resultType="String">
-    SELECT
-    IF(
-    (SELECT
-    (SELECT DATE_ADD(
-    (SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode})
-    , INTERVAL (
-    SELECT
-    CHARGE_DATE
-    FROM STUDYROOM_CHARGE CHARGE
-    INNER JOIN APPROVAL APP
-    ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
-    WHERE
-    APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
-    ) DAY)
-    )
-    FROM approval
-    WHERE MEMBER_CODE = #{memberCode}) &lt; (SELECT DATE_FORMAT(now(), '%Y-%m-%d'))
-    , '만료일이 오늘보다 이전'
-    , '만료일이 오늘보다 이후')AS EXPIRES
-    </select>
+<!--    <select id="isExpires" resultType="String">-->
+<!--    SELECT-->
+<!--    IF(-->
+<!--    (SELECT-->
+<!--    (SELECT DATE_ADD(-->
+<!--    (SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode})-->
+<!--    , INTERVAL (-->
+<!--    SELECT-->
+<!--    CHARGE_DATE-->
+<!--    FROM STUDYROOM_CHARGE CHARGE-->
+<!--    INNER JOIN APPROVAL APP-->
+<!--    ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE-->
+<!--    WHERE-->
+<!--    APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})-->
+<!--    ) DAY)-->
+<!--    )-->
+<!--    FROM approval-->
+<!--    WHERE MEMBER_CODE = #{memberCode}) &lt; (SELECT DATE_FORMAT(now(), '%Y-%m-%d'))-->
+<!--    , '만료일이 오늘보다 이전'-->
+<!--    , '만료일이 오늘보다 이후')AS EXPIRES-->
+<!--    </select>-->
 
     <!--  이용권 만료 삭제  -->
     <delete id="chargeDelete">
@@ -272,12 +272,16 @@
     <insert id="buyCard">
         INSERT INTO APPROVAL (
             APPROVAL_CODE
+            , APPROVAL_FEE
             , MEMBER_CODE
             , CHARGE_CODE
+            , COUPON_USE
         ) VALUES (
             #{approvalCode}
+            , #{approvalFee}
             , #{memberCode}
             , #{chargeCode}
+            , #{couponUse}
         )
     </insert>
 

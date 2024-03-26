@@ -25,7 +25,7 @@ public interface SeatService {
     String haveChargeEndDate(int memberCode); // 구매한 이용권의 끝나는 날짜
     int haveChargeRemainDate(int memberCode); // 구매한 이용권의 남은 일 수
     String today();
-    String isExpires(int memberCode);
+//    String isExpires(int memberCode);
     void chargeDelete(int memberCode);
 
     // 입실
@@ -60,6 +60,6 @@ public interface SeatService {
     List<CouponVO> coupon(); // admin 관련
     List<MemberCouponVO> ownCoupon(int memberCode); // homepage 관련 (내가 해야함)
 
-    void deleteCoupon(MemberCouponVO memberCouponVO);
+    void deleteCoupon(int ownCouponCode);
 
 }
