@@ -37,6 +37,8 @@
         <result column="MEMBER_CODE" property="memberCode"/>
         <result column="IN_OUT" property="inOut"/>
         <result column="INOUT_TIME" property="inOutTime"/>
+
+        <association property="memberVO" resultMap="member"/>
     </resultMap>
 
 

@@ -39,6 +39,9 @@ public class AdminController {
     //좌석관리
     @Resource(name="seatService")
     private SeatServiceImpl seatService;
+    //매출관리
+    @Resource(name="salesService")
+    private SalesServiceImpl salesService;
 
     //(회원 관리)///////////////////////////////////////////// //
     @RequestMapping("/info")
@@ -154,8 +157,10 @@ public class AdminController {
     // 요금 변경사항 업데이트
     @PostMapping("/uptCharge")
     public String uptCharge(ChargeVO chargeVO){
-        //Charge의 List 받아오기
+        //Charge의 List 업데이트
         chargeService.uptCharge(chargeVO);
+        //Coupon의 List 업데이트
+
         return "redirect:/admin/charge";
     }
 
@@ -163,7 +168,6 @@ public class AdminController {
     @GetMapping("/delCharge")
     public String delCharge(@RequestParam(name="chargeCode") int chargeCode){
         chargeService.delCharge(chargeCode);
-        System.out.println("@"+chargeCode);
         return "redirect:/admin/charge";
     }
 
@@ -179,6 +183,7 @@ public class AdminController {
 
         //입퇴실 기록
         model.addAttribute("inotList", timeLogService.selectInOutList());
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@"+timeLogService.selectInOutList());
 
         //좌석상태 조회
         model.addAttribute("statusList", timeLogService.selectSeatStatusList());
@@ -188,7 +193,8 @@ public class AdminController {
 
     //(매출 관리)///////////////////////////////////////////// //
     @GetMapping("/sales")
-    public String adminSales(){
+    public String adminSales(Model model){
+        model.addAttribute("salesList", salesService.selectSales());
         return "content/admin/admin_sales";
     }
 
