@@ -120,18 +120,27 @@ public class SeatController {
         Map<String, Object> buyInfo = new HashMap<String, Object>();
         buyInfo.put("buyMem", buyMem);
         buyInfo.put("buyOne", buyOne);
-        int buyCode = (int)(Math.random()*100000000+1);
-        buyInfo.put("merchant_uid", seatService.buyToday()+buyCode);
+        int buyCode = (int)(Math.random()*10000000+1);
+        buyInfo.put("merchant_uid", buyCode);
 
         return buyInfo;
     }
 
     @ResponseBody
     @PostMapping("/buySuccess") // 사용시 삭제되는지 확인해야함!!!!!!!!!!!!!!!
-    public void buySuccess(@RequestBody ApprovalVO approvalVO, MemberCouponVO memberCouponVO){
+    public void buySuccess(@RequestBody HashMap<String, String> data){
+        System.out.println(data);
+        ApprovalVO approvalVO = new ApprovalVO();
+        approvalVO.setApprovalCode(Integer.parseInt(data.get("approvalCode")));
+        approvalVO.setApprovalFee(Integer.parseInt(data.get("approvalFee")));
+        approvalVO.setMemberCode(Integer.parseInt(data.get("memberCode")));
+        approvalVO.setChargeCode(Integer.parseInt(data.get("chargeCode")));
+        approvalVO.setCouponUse((String)data.get("couponUse"));
+        int result = Integer.parseInt(data.get("ownCouponCode"));
+
         seatService.buyCard(approvalVO);
-        if (memberCouponVO.getOwnCouponCode() != 0){
-            seatService.deleteCoupon(memberCouponVO);
+        if (result != 0){
+            seatService.deleteCoupon(result);
         }
     }
 

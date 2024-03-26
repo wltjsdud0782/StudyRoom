@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <div class="row scrollbar mt-4" style="height: 700px; overflow: auto; line-height: 4;">
+            <div class="row scrollbar mt-4 mb-5" style="height: 600px; overflow: auto; line-height: 4;">
                 <div class="col">
                     <table class="table table-hover text-center align-middle table-bordered" style="font-size: 12pt;">
                         <colgroup>
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <div class="row scrollbar mt-4" style="height: 650px; overflow: auto; line-height: 4;">
+            <div class="row scrollbar mt-4 mb-5" style="height: 600px; overflow: auto; line-height: 4;">
                 <div class="col">
                     <table class="table table-hover text-center align-middle table-bordered" style="font-size: 12pt;" id="mySeat-table">
                         <colgroup>
@@ -89,12 +89,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <th:block th:if="${inoutTime == null}">
+                            <th:block th:if="${#lists.size(inoutTime)==0}">
                                 <tr>
                                     <td colspan="2">입퇴실내역이 존재하지 않습니다.</td>
                                 </tr>
                             </th:block>
-                            <th:block th:if="${inoutTime != null}">
+                            <th:block th:if="${#lists.size(inoutTime)!=0}">
                                 <th:block th:each="e : ${inoutTime}">
                                     <tr>
                                         <td>[[${e.inOut}]]</td>
