@@ -250,7 +250,7 @@ public class StudyRoomBoardController {
             model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
             model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
         }
-
+        model.addAttribute("ownCouponList", seatService.ownCoupon(memberCode));
         return "content/homepage/myBuyDetail";
     }
 
