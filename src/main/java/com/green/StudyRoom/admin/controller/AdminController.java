@@ -3,14 +3,12 @@ package com.green.StudyRoom.admin.controller;
 import com.green.StudyRoom.admin.service.*;
 import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.admin.vo.InfoSearchVO;
-import com.green.StudyRoom.admin.vo.TimeLogVO;
 import com.green.StudyRoom.admin.vo.MessageVO;
-import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
+import com.green.StudyRoom.seat.vo.CouponVO;
 import com.green.StudyRoom.seat.vo.SeatVO;
 import jakarta.annotation.Resource;
-import org.codehaus.groovy.transform.SourceURIASTTransformation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -133,8 +131,12 @@ public class AdminController {
     //(요금 변경)///////////////////////////////////////////// //
     @GetMapping("/charge")
     public String adminCharge(Model model){
+        //요금제
         List<ChargeVO> chargeList = chargeService.selectCharge();
         model.addAttribute("chargeList", chargeList);
+        //쿠폰
+        List<CouponVO> couponList = chargeService.selectCoupon();
+        model.addAttribute("couponList", couponList);
         return "content/admin/admin_charge";
     }
 
@@ -159,8 +161,6 @@ public class AdminController {
     public String uptCharge(ChargeVO chargeVO){
         //Charge의 List 업데이트
         chargeService.uptCharge(chargeVO);
-        //Coupon의 List 업데이트
-
         return "redirect:/admin/charge";
     }
 
@@ -171,23 +171,48 @@ public class AdminController {
         return "redirect:/admin/charge";
     }
 
+    //쿠폰 등록하기
+    @PostMapping("/setCoupon")
+    public String setCoupon(CouponVO couponVO){
+        chargeService.insertCoupon(couponVO);
+        return "redirect:/admin/charge";
+    }
+
+    //쿠폰 변경 조회하기
+    @ResponseBody
+    @PostMapping("/getCoupon")
+    public CouponVO changeCoupon(@RequestParam(name="couponCode") int couponCode){
+        //Coupon의 List 받아오기
+        CouponVO couponVO = chargeService.getCoupon(couponCode);
+        return couponVO;
+    }
+
+    // 쿠폰 변경사항 업데이트
+    @PostMapping("/uptCoupon")
+    public String uptCoupon(CouponVO couponVO){
+        //Coupon의 List 업데이트
+        chargeService.uptCoupon(couponVO);
+        return "redirect:/admin/charge";
+    }
+
+    //쿠폰 삭제하기
+    @GetMapping("/delCoupon")
+    public String delCoupon(@RequestParam(name="couponCode") int couponCode){
+        chargeService.delCoupon(couponCode);
+        return "redirect:/admin/charge";
+    }
+
     //(로그 확인)///////////////////////////////////////////// //
     @RequestMapping ("/log")
     public String adminLog(Model model){
-
         //결재 기록
         model.addAttribute("appList", timeLogService.selectBuyList());
-
         //예약 기록
         model.addAttribute("resList", timeLogService.selectReserveList());
-
         //입퇴실 기록
         model.addAttribute("inotList", timeLogService.selectInOutList());
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@"+timeLogService.selectInOutList());
-
         //좌석상태 조회
         model.addAttribute("statusList", timeLogService.selectSeatStatusList());
-
         return "content/admin/admin_log";
     }
 
@@ -195,6 +220,7 @@ public class AdminController {
     @GetMapping("/sales")
     public String adminSales(Model model){
         model.addAttribute("salesList", salesService.selectSales());
+        model.addAttribute("sumAll", salesService.salesSum());
         return "content/admin/admin_sales";
     }
 

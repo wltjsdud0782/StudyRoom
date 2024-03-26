@@ -1,8 +1,6 @@
 package com.green.StudyRoom.admin.service;
 
-import com.green.StudyRoom.admin.vo.TimeLogVO;
 import com.green.StudyRoom.member.vo.ApprovalVO;
-import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.member.vo.ReservationVO;
 import com.green.StudyRoom.member.vo.StudyRoomInOutVO;
 import com.green.StudyRoom.seat.vo.SeatVO;

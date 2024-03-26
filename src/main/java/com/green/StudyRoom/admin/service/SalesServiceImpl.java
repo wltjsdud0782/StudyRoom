@@ -16,6 +16,12 @@ public class SalesServiceImpl implements SalesService{
     //매출 조회
     @Override
     public List<ApprovalVO> selectSales() {
-        return sqlSession.selectList("logMapper.selectSales");
+        return sqlSession.selectList("salesMapper.selectSales");
+    }
+
+    //매출 총합
+    @Override
+    public List<ApprovalVO> salesSum() {
+        return sqlSession.selectList("salesMapper.salesSum");
     }
 }

@@ -8,25 +8,29 @@
 </th:block>
 
 <th:block layout:fragment="contentFragment">
-    <body>
-        <div class="adminContainer">    
-                <label style="padding-top: 60px; border-bottom: 3px solid #4d6d49;">
-                    <h3>좌석 관리</h3>
-                </label>&ensp;
-                <span>
-                    <button type="button" class="btn btn-light floor-btn" onclick="onefloor()">1층</button>
-                </span>&nbsp;
-                <span>
-                    <button type="button" class="btn btn-light floor-btn" onclick="twofloor()">2층</button>
-                </span>&nbsp;
-                <span>
-                    <button type="button" class="btn btn-danger" onclick="seatMove()">자리이동</button>
-                </span>&nbsp;
-                <span>
-                    <button type="button" class="btn btn-danger" onclick="seatOut()">퇴실하기</button>
-                </span>      
-        </div>
 
+    <body>
+        <div class="adminContainer">
+            <label style="padding-top: 60px; border-bottom: 3px solid #4d6d49;">
+                <div style="float: left;">
+                    <h3>좌석 관리&ensp;</h3>
+                </div>
+                <div style="float: left;">
+                    <span>
+                        <button type="button" class="btn btn-light floor-btn" onclick="onefloor()">1층</button>
+                    </span>&nbsp;
+                    <span>
+                        <button type="button" class="btn btn-light floor-btn" onclick="twofloor()">2층</button>
+                    </span>&nbsp;
+                    <span>
+                        <button type="button" class="btn btn-danger" onclick="seatMove()">자리이동</button>
+                    </span>&nbsp;
+                    <span>
+                        <button type="button" class="btn btn-danger" onclick="seatOut()">퇴실하기</button>
+                    </span>
+                </div>
+            </label>
+        </div>
         <div class="container text-center">
             <div class="row">
                 <div class="col">
@@ -42,7 +46,7 @@
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
-    <script src="/js/seat/seat_live.js"></script> <!-- 일단 seat에 이어둠 -->
+    <script src="/js/admin/admin_seat.js"></script> <!-- 일단 seat에 이어둠 -->
 </th:block>
 
 </html>

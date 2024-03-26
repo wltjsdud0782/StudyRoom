@@ -8,27 +8,25 @@
 </th:block>
 
 <th:block layout:fragment="contentFragment">
+
     <body>
         <div class="adminContainer">
             <label class="title">
                 <h3>매출 관리</h3>
             </label>
             <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
-            <div>
-                <h4>매출</h4>
-                <table class="adminContainer-table">
-                    <tr th:each="sales : ${salesList}">
-                        <td>
-                            [[${sales.approvalFee}]]원
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            총 매출 : 
-                        </td>                       
-                    </tr>
-                </table>
-            </div>
+            <table class="adminContainer-table">
+                <tr th:each="sales : ${salesList}">
+                    <td>
+                        [[${sales.approvalFee}]]원
+                    </td>
+                </tr>
+                <tr th:each="sum : ${sumAll}">
+                    <td>
+                        총 매출 : [[${sum.approvalFee}]]원
+                    </td>
+                </tr>
+            </table>
         </div>
     </body>
 </th:block>

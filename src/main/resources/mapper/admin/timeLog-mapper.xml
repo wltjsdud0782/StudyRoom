@@ -5,47 +5,20 @@
 
     <!-- LOG(로그) 조회하기 / 이거 안씀 -->
     <!-- 사용자 이름, 사용자 이용시간(시작, 종료, 사용시간), 결제내역, 좌석번호, 예약정보, 메세지 -->
-	<resultMap id="timeLog" type="com.green.StudyRoom.admin.vo.TimeLogVO">
-        <result column="MEMBER_CODE" property="memberCode"/>
-        <result column="MEMBER_NAME" property="memberName"/>
-
-        <result column="RESERVATION_CODE" property="reservationCode"/>
-        <result column="RESERVATION_DATE" property="reservationDate"/>
-
-        <result column="APPROVAL_CODE" property="approvalCode"/>
-
-        <result column="DAY_INPUT" property="dayInput"/>
-        <result column="IN_OUT" property="inOut"/>
-
-        <result column="SEAT_POWER" property="seatPower"/>
-        <result column="SEAT_FLOOR" property="seatFloor"/>
-
-        <result column="MESSAGE_CODE" property="messageCode"/>
-        <result column="MESSAGE_CONTENT" property="messageContent"/>
-        <result column="MESSAGE_DATE" property="messageDate"/>
-    </resultMap>
-
-    <!-- view -->
-    <select id="selectAllLog" resultMap="timeLog">
-        SELECT MEMBER_CODE
-                , MEMBER_NAME
-
-                , RESERVATION_CODE
-                , RESERVATION_DATE
-
-                , APPROVAL_CODE
-
-                , DAY_INPUT
-                , IN_OUT
-
-                , SEAT_POWER
-                , SEAT_FLOOR
-
-                , MESSAGE_CODE
-                , MESSAGE_CONTENT
-                , MESSAGE_DATE
-        FROM STUDYROOM_LOG_VIEW
-    </select>
+<!--	<resultMap id="timeLog" type="com.green.StudyRoom.admin.vo.TimeLogVO">-->
+<!--        <result column="MEMBER_CODE" property="memberCode"/>-->
+<!--        <result column="MEMBER_NAME" property="memberName"/>-->
+<!--        <result column="RESERVATION_CODE" property="reservationCode"/>-->
+<!--        <result column="RESERVATION_DATE" property="reservationDate"/>-->
+<!--        <result column="APPROVAL_CODE" property="approvalCode"/>-->
+<!--        <result column="DAY_INPUT" property="dayInput"/>-->
+<!--        <result column="IN_OUT" property="inOut"/>-->
+<!--        <result column="SEAT_POWER" property="seatPower"/>-->
+<!--        <result column="SEAT_FLOOR" property="seatFloor"/>-->
+<!--        <result column="MESSAGE_CODE" property="messageCode"/>-->
+<!--        <result column="MESSAGE_CONTENT" property="messageContent"/>-->
+<!--        <result column="MESSAGE_DATE" property="messageDate"/>-->
+<!--    </resultMap>-->
 
 
     <!-- 결제 기록 가져오기 -->
@@ -110,11 +83,6 @@
         ORDER BY SEAT_NUM ASC;
     </select>
 
-    <!-- 매출 관리 -->
-    <select id="selectSales" resultMap="memberMapper.approval">
-        SELECT APPROVAL_FEE
-        FROM approval;
-    </select>
 
 </mapper>
 

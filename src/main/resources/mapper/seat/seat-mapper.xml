@@ -335,6 +335,7 @@
         WHERE OWN_COUPON_CODE = #{ownCouponCode}
     </delete>
 
+
 </mapper>
 
 

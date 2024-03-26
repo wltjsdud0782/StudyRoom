@@ -29,7 +29,11 @@
                                 <tr th:each="charge : ${chargeList}">
                                     <!-- 클릭하면 해당 요금의 chargeCode 보내기 -->
                                     <td th:onclick="changeCharge([[${charge.chargeCode}]])">
-                                        <div>[[${charge.chargeName}]]</div>
+                                        <div>[[${charge.chargeName}]]
+                                            <div style="float: right;">
+                                                [[${charge.chargeDate}]]일
+                                            </div>
+                                        </div>
                                         <div style="font-size: larger;">&ensp;[[${charge.chargeFee}]]원
                                         </div>
                                     </td>
@@ -48,14 +52,12 @@
                                 </tr>
                             </th:block>
                             <th:block th:unless="${#lists.isEmpty(chargeList)}">
-                                <tr>
-                                    <td>10% 할인권</td>
-                                </tr>
-                                <tr>
-                                    <td>신년맞이 할인권</td>
-                                </tr>
-                                <tr>
-                                    <td>새내기 할인권</td>
+                                <tr th:each="coupon : ${couponList}">
+                                    <td th:onclick="changeCoupon([[${coupon.couponCode}]])">
+                                        <div>[[${coupon.couponName}]]</div>
+                                        <div style="font-size: larger;">&ensp;[[${coupon.discountPercent}]]% 할인
+                                        </div>
+                                    </td>
                                 </tr>
                             </th:block>
                         </tbody>
@@ -65,7 +67,7 @@
             <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
             <h4>&nbsp;REGISTER</h4>
             <div id="charge-container" class="changeOption">
-                <form action="/admin/setCharge" method="post">
+                <form action="/admin/setCharge" method="post" class="sendCharge">
                     <table class="adminContainer-table">
                         <colgroup>
                             <col width="11%">
@@ -94,7 +96,7 @@
                                     </div>
                                 </td>
                                 <td class="charge-td">
-                                    <input type="text" name="chargeName" class="nameInput" placeholder="이용권 명을 입력해주세요."
+                                    <input type="text" name="chargeName" class="enInput" placeholder="이용권 명을 입력해주세요."
                                         style="font-style: oblique;">
                                 </td>
                                 <td>
@@ -105,7 +107,7 @@
                                     </div>
                                 </td>
                                 <td class="charge-td">
-                                    <input type="text" name="chargeDate" class="dateInput" placeholder="기간을 입력해주세요."
+                                    <input type="text" name="chargeDate" class="enInput" placeholder="기간을 입력해주세요."
                                         style="font-style: oblique;">
                                 </td>
                                 <td>
@@ -116,14 +118,14 @@
                                     </div>
                                 </td>
                                 <td class="charge-td">
-                                    <input type="text" name="chargeFee" class="chargeInput" placeholder="가격을 입력해주세요."
+                                    <input type="text" name="chargeFee" class="enInput" placeholder="가격을 입력해주세요."
                                         style="font-style: oblique;">
                                 </td>
                                 <td>
                                     <div class="row">
                                         <div class="col text-end">
                                             <div class="btnDiv">
-                                                <input type="submit" value="이용권 등록" class="not-null-btn">&nbsp;
+                                                <input type="button" value="이용권 등록" onclick="enroll()">&nbsp;
                                                 <input type="button" value="취소" onclick="window.location.reload()">
                                             </div>
                                         </div>

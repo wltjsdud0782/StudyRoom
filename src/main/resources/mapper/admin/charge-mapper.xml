@@ -12,9 +12,6 @@
     </resultMap>
 
     <!-- 요금 IN -->
-    <!-- 설정할 요금제의 이름 -->
-    <!-- 설정할 요금제의 금액 -->
-    <!-- 설정할 요금제의 지정시간 -->
     <insert id="insertCharge">
         INSERT INTO STUDYROOM_CHARGE (
             CHARGE_NAME
@@ -28,13 +25,11 @@
     </insert>
 
     <!-- 요금 OUT -->
-    <!-- 설정된 요금제의 이름 -->
-    <!-- 설정된 요금제의 금액 -->
-    <!-- 설정된 요금제의 지정시간 -->
     <select id="selectCharge" resultMap="charge">
         SELECT CHARGE_NAME
             , CHARGE_FEE
             , CHARGE_CODE
+            , CHARGE_DATE
         FROM STUDYROOM_CHARGE
         ORDER BY CHARGE_FEE DESC
     </select>
@@ -63,6 +58,52 @@
         DELETE FROM STUDYROOM_CHARGE
         WHERE CHARGE_CODE = #{chargeCode}
     </delete>
+
+    <!-- 쿠폰 등록 -->
+    <insert id="insertCoupon">
+        INSERT INTO COUPON (
+        COUPON_NAME
+        , DISCOUNT_PERCENT
+        ) VALUES (
+        #{couponName}
+        , #{discountPercent}
+        )
+    </insert>
+
+    <!-- 쿠폰 조회 -->
+    <select id="selectCoupon" resultMap="seatMapper.coupon">
+        SELECT COUPON_CODE
+        , COUPON_NAME
+        , DISCOUNT_PERCENT
+        FROM coupon
+        ORDER BY DISCOUNT_PERCENT DESC
+    </select>
+
+    <!-- 쿠폰 조회하기(비동기) -->
+    <select id="getCoupon" resultMap="seatMapper.coupon">
+        SELECT COUPON_CODE
+        , COUPON_NAME
+        , DISCOUNT_PERCENT
+        FROM coupon
+        WHERE COUPON_CODE = #{couponCode}
+    </select>
+
+    <!-- 쿠폰 업데이트 -->
+    <update id="uptCoupon">
+        UPDATE COUPON
+        SET
+        COUPON_NAME = #{couponName}
+        , DISCOUNT_PERCENT = #{discountPercent}
+        WHERE COUPON_CODE = #{couponCode}
+    </update>
+
+    <!-- 등록된 쿠폰 삭제하기 -->
+    <delete id="delCoupon">
+        DELETE FROM COUPON
+        WHERE COUPON_CODE = #{couponCode}
+    </delete>
+
+
 
 
 </mapper>
