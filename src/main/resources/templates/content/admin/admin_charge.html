@@ -8,10 +8,11 @@
 </th:block>
 
 <th:block layout:fragment="contentFragment">
+
     <body>
         <div class="adminContainer">
             <div class="title">
-                <h3>이용권 변경</h3>               
+                <h3>이용권 변경</h3>
             </div>
             <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
@@ -36,78 +37,109 @@
                             </th:block>
                         </tbody>
                     </table>
-                    <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
-                    <h4>&nbsp;REGISTER</h4>
-                    <div id="charge-container">
-                        <form action="/admin/setCharge" method="post">
-                            <table class="adminContainer-table">
-                                <colgroup>
-                                    <col width="7%">
-                                    <col width="19%">
-                                    <col width="7%">
-                                    <col width="19%">
-                                    <col width="7%">
-                                    <col width="19%">
-                                    <col width="*">
-                                </colgroup>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col text-end charge-title">
-                                                    이용권 명
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="charge-td">
-                                            <input type="text" name="chargeName" class="nameInput"
-                                                placeholder="이용권 명을 입력해주세요." style="font-style: oblique;">
-                                        </td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col text-end charge-title">
-                                                    기간(일)
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="charge-td">
-                                            <input type="text" name="chargeDate" class="dateInput"
-                                                placeholder="기간을 입력해주세요." style="font-style: oblique;">
-                                        </td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col text-end charge-title">
-                                                    가격(원)
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="charge-td">
-                                            <input type="text" name="chargeFee" class="chargeInput"
-                                                placeholder="가격을 입력해주세요." style="font-style: oblique;">
-                                        </td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col text-end">
-                                                    <div class="btnDiv">
-                                                        <input type="submit" value="이용권 등록" class="not-null-btn">&nbsp;
-                                                        <input type="button" value="취소"
-                                                            onclick="window.location.reload()">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
-                            <div>
-                                <div class="btnDiv">
-                                    <input type="button" value="삭제" class="not-null-btn" disabled>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
                 </div>
+                <div class="col">
+                    <h4>&nbsp;COUPON</h4>
+                    <table class="table table-hover adminContainer-table">
+                        <tbody class="adminContainer-table-tbody5">
+                            <th:block th:if="${#lists.isEmpty(chargeList)}">
+                                <tr>
+                                    <td>※ 등록된 쿠폰이 없습니다.</td>
+                                </tr>
+                            </th:block>
+                            <th:block th:unless="${#lists.isEmpty(chargeList)}">
+                                <tr>
+                                    <td>10% 할인권</td>
+                                </tr>
+                                <tr>
+                                    <td>신년맞이 할인권</td>
+                                </tr>
+                                <tr>
+                                    <td>새내기 할인권</td>
+                                </tr>
+                            </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
+            <h4>&nbsp;REGISTER</h4>
+            <div id="charge-container" class="changeOption">
+                <form action="/admin/setCharge" method="post">
+                    <table class="adminContainer-table">
+                        <colgroup>
+                            <col width="11%">
+                            <col width="7%">
+                            <col width="16%">
+                            <col width="7%">
+                            <col width="16%">
+                            <col width="7%">
+                            <col width="16%">
+                            <col width="*">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select id="selectOption" onchange="selectService(this.value)">
+                                        <option value="CHARGE-option" selected>CHARGE</option>
+                                        <option value="COUPON-option">COUPON</option>
+                                    </select>
+                                </td>
+                                <!-- 이용권 -->
+                                <td>
+                                    <div class="row">
+                                        <div class="col text-end charge-title">
+                                            이용권 명
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="charge-td">
+                                    <input type="text" name="chargeName" class="nameInput" placeholder="이용권 명을 입력해주세요."
+                                        style="font-style: oblique;">
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col text-end charge-title">
+                                            기간(일)
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="charge-td">
+                                    <input type="text" name="chargeDate" class="dateInput" placeholder="기간을 입력해주세요."
+                                        style="font-style: oblique;">
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col text-end charge-title">
+                                            가격(원)
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="charge-td">
+                                    <input type="text" name="chargeFee" class="chargeInput" placeholder="가격을 입력해주세요."
+                                        style="font-style: oblique;">
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col text-end">
+                                            <div class="btnDiv">
+                                                <input type="submit" value="이용권 등록" class="not-null-btn">&nbsp;
+                                                <input type="button" value="취소" onclick="window.location.reload()">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <!--  -->
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
+                    <div>
+                        <div class="btnDiv">
+                            <input type="button" value="삭제" class="not-null-btn" disabled>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </body>

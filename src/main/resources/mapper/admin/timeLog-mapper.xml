@@ -53,7 +53,6 @@
         SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d ㅤ%p %l:%i') APPROVAL_DATE
             , MEMBER_NAME
             , CHARGE_NAME
-            , CHARGE_FEE
             , APPROVAL_FEE
         FROM approval APP
         INNER JOIN studyroom_charge CHARGE
@@ -79,17 +78,18 @@
     </select>
 
     <!-- 입실 퇴실 기록 Beta -->
-    <select id="selectInOutList" resultMap="memberMapper.studyRoomInOut">
+    <select id="selectInOutList" resultMap="memberMapper.inOut">
         SELECT DAY_INPUT
             , MEMBER_NAME
             , CASE
                 WHEN IN_OUT = 'IN' THEN '입실'
                 WHEN IN_OUT = 'OUT' THEN '퇴실'
                 END IN_OUT
+            , DATE_FORMAT(INOUT_TIME, '%Y-%m-%d ㅤ%p %l:%i') INOUT_TIME
         FROM studyroom_inout INOT
         INNER JOIN studyroom_member MEMBER
         ON INOT.MEMBER_CODE = MEMBER.MEMBER_CODE
-        ORDER BY DAY_INPUT DESC LIMIT 100;
+        ORDER BY INOUT_TIME DESC LIMIT 100;
     </select>
 
     <!-- 좌석 상태 보기 -->
@@ -110,6 +110,11 @@
         ORDER BY SEAT_NUM ASC;
     </select>
 
+    <!-- 매출 관리 -->
+    <select id="selectSales" resultMap="memberMapper.approval">
+        SELECT APPROVAL_FEE
+        FROM approval;
+    </select>
 
 </mapper>
 
