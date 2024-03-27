@@ -34,6 +34,20 @@
         ORDER BY MESSAGE_CODE DESC LIMIT 100
     </select>
 
+    <!-- 최근 댓글 조회하기 (FROM의 경우만 조회하기 / 미완성) -->
+    <select id="selectRecentMsg" resultMap="message">
+        SELECT MESSAGE_CONTENT
+            , MESSAGE.MEMBER_CODE
+            , MEMBER_NAME
+            , MEMBER_ID
+            , DATE_FORMAT(MESSAGE_DATE, '%Y-%m-%d ㅤ%p %l:%i') MESSAGE_DATE
+            , TO_FROM
+        FROM STUDYROOM_MESSAGE MESSAGE
+        INNER JOIN STUDYROOM_MEMBER MEMBER
+        ON MESSAGE.MEMBER_CODE = MEMBER.MEMBER_CODE
+        ORDER BY MESSAGE_CODE DESC LIMIT 9
+    </select>
+
     <!-- 채팅보낼 사람 조회(+ 검색) -->
     <select id="selectWho" resultMap="memberMapper.member">
         SELECT MEMBER_NAME

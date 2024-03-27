@@ -158,12 +158,13 @@ select {
     color: #ccc;
 }
 
-/* .toMsg {
-
-} */
+.toMsg {
+    border-top: 1px solid #ccc;
+}
 
 .fromMsg {
     background-color: #ececec;
+    border-top: 1px solid #ccc;
 }
 
 /* (Charge)----------------------------------------------- */
