@@ -4,25 +4,24 @@
 <mapper namespace="messageMapper">
 
     <!-- message(이용자 메세지) -->
-    <!-- SELECT에서 MEMBER_CODE로 여러개 INNER JOIN -->
-    <!-- FK 오류 안나는지 확인하기 -->
     <resultMap id="message" type="com.green.StudyRoom.admin.vo.MessageVO">
         <id column="MESSAGE_CODE" property="messageCode"/>
         <result column="MESSAGE_CONTENT" property="messageContent"/>
         <result column="MESSAGE_DATE" property="messageDate"/>
         <result column="MEMBER_CODE" property="memberCode"/>
-        <result column="SEAT_NUM" property="seatNum"/>
+<!--        <result column="SEAT_NUM" property="seatNum"/>-->
+<!--        <result column="MEMBER_NAME" property="memberName"/>-->
+<!--        <result column="MEMBER_ID" property="memberId"/>-->
+<!--        <result column="IS_ADMIN" property="isAdmin"/>-->
+        <association property="memberVO" resultMap="memberMapper.member"/>
+<!--        <association property="seatVO" resultMap="seatMapper.seat"/>-->
 
-        <result column="MEMBER_NAME" property="memberName"/>
-        <result column="MEMBER_ID" property="memberId"/>
-        <result column="IS_ADMIN" property="isAdmin"/>
     </resultMap>
 
 
     <!-- 모든 메세지 조회 -->
     <select id="selectMessage" resultMap="message">
         SELECT MESSAGE_CONTENT
-            , SEAT_NUM
             , MESSAGE.MEMBER_CODE
             , MEMBER_NAME
             , MEMBER_ID
@@ -30,6 +29,7 @@
         FROM STUDYROOM_MESSAGE MESSAGE
         INNER JOIN STUDYROOM_MEMBER MEMBER
         ON MESSAGE.MEMBER_CODE = MEMBER.MEMBER_CODE
+        WHERE MESSAGE.MEMBER_CODE = #{memberCode}
         ORDER BY MESSAGE_CODE DESC LIMIT 100
     </select>
 
@@ -38,7 +38,7 @@
         SELECT MEMBER_NAME
             , MEMBER_ID
             , MEMBER_CODE
-        FROM STUDYROOM_MEMBER
+        FROM studyroom_member
         WHERE IS_ADMIN = 'USER'
         <if test='searchValue != null and !searchValue.equals("")'>
             AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')

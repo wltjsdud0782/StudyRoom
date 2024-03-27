@@ -34,9 +34,18 @@ function goChat(memberCode) {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
+            console.log(data);
 
             document.querySelector('input[name="memberCode"]').value = memberCode;
-            document.querySelector('#send_memberName').value = `@${data.memberName}`;
+            document.querySelector('#send_memberName').value = `@${data.member.memberName}`;
+
+            //여기에서 1:1 채팅창을 띄워주기
+            // const oneByone = document.querySelector('adminContainer-table-tbody2');
+            //임시
+            // oneByone.insertAdjacentHTML = '';
+            
+
+
 
         })
 

@@ -20,6 +20,6 @@ public interface MessageService {
     //유저 메세지 저장
     void insertMessage(MessageVO messageVO);
 
-    //모든 메세지 조회
-    List<MessageVO> selectMessage();
+    //메세지 조회
+    List<MessageVO> selectMessage(int memberCode);
 }

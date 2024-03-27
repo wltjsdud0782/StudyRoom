@@ -88,13 +88,10 @@ public class AdminController {
     public String adminMessage(Model model, InfoSearchVO infoSearchVO,
                                @RequestParam(name="receiver", required=false, defaultValue="") String receiver
                                 , @RequestParam(name="memberCode", required=false, defaultValue="0") int memberCode){
-        //채팅 목록
-        List<MessageVO> chtList = messageService.selectMessage();
-        model.addAttribute("chtList", chtList);
-
         //InfoSearchVO 검색기능
-        List<MemberVO> msgList = messageService.selectWho(infoSearchVO);
-        model.addAttribute("msgList", msgList);
+        model.addAttribute("msgList", messageService.selectWho(infoSearchVO));
+
+        model.addAttribute("chtList", messageService.selectMessage(memberCode));
 
         //메세지를 받은 사람의 이름
         model.addAttribute("receiver", receiver);
@@ -106,16 +103,23 @@ public class AdminController {
     //채팅보낼 사람 정하기 (비동기)
     @ResponseBody
     @PostMapping("/who")
-    public MemberVO selectMan(@RequestParam(name="memberCode") int memberCode){
+    public  Map<String, Object> selectMan(@RequestParam(name="memberCode") int memberCode){
+        Map<String, Object> map = new HashMap<>();
+        //고른 사람
         MemberVO member = messageService.selectMan(memberCode);
-        return member;
+        //채팅 목록
+        List<MessageVO> chtList = messageService.selectMessage(memberCode);
+        map.put("member",member);
+        map.put("chtList", chtList);
+        return map;
     }
 
     //채팅 보내기
     @PostMapping("/sendAdmMsg")
     public String sendMessage(MessageVO messageVO ,
                               @RequestParam(name="receiver") String receiver, RedirectAttributes redirectAttributes
-                            , @RequestParam(name="memberCode") int memberCode){
+                            , @RequestParam(name="memberCode") int memberCode)
+    {
         messageService.insertAdmMsg(messageVO);
         redirectAttributes.addAttribute("receiver", receiver);
         redirectAttributes.addAttribute("memberCode", memberCode);
