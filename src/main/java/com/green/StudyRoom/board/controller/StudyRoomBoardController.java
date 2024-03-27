@@ -3,6 +3,7 @@ package com.green.StudyRoom.board.controller;
 import com.green.StudyRoom.admin.service.ChargeServiceImpl;
 import com.green.StudyRoom.admin.service.MessageServiceImpl;
 import com.green.StudyRoom.admin.vo.ChargeVO;
+import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.board.service.*;
 import com.green.StudyRoom.board.vo.BoardVO;
 import com.green.StudyRoom.board.vo.CommentVO;
@@ -291,8 +292,15 @@ public class StudyRoomBoardController {
 
     @ResponseBody
     @PostMapping("/sendCounter")
-    public void sendCounter(){
+    public List<MessageVO> sendCounter(@RequestBody Map<String, String> data){
+        System.out.println(data);
+        MessageVO messageVO = new MessageVO();
+        messageVO.setMemberCode(Integer.parseInt(data.get("memberCode")));
+        messageVO.setMessageContent(data.get("messageContent"));
 
+        seatService.userSend(messageVO);
+
+        return seatService.userMsg(Integer.parseInt(data.get("memberCode")));
     }
 
     @GetMapping("/deleteBoard")

@@ -65,5 +65,6 @@ public interface SeatService {
 
     // 채팅
     List<MessageVO> userMsg(int memberCode);
+    void userSend(MessageVO messageVO);
 
 }

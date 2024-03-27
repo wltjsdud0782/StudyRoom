@@ -151,4 +151,9 @@ public class SeatServiceImpl implements SeatService{
         return sqlSession.selectList("seatMapper.userMsg", memberCode);
     }
 
+    @Override // 채팅 전송
+    public void userSend(MessageVO messageVO) {
+        sqlSession.insert("seatMapper.userSend", messageVO);
+    }
+
 }

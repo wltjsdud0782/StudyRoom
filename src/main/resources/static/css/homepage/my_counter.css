@@ -6,24 +6,24 @@
     border-bottom: 3px solid black;
 }
 
-.adminContainer-table-tbody2 {
+.userChat {
     display: flex;
     height: 520px;
     overflow: auto;
     flex-direction: column-reverse;
 }
 
-.adminContainer-table-tbody2 tr {
+.userChat tr {
     display: table;
     width: 100%;
 }
 
-.adminContainer-table-tbody2::-webkit-scrollbar {
+.userChat::-webkit-scrollbar {
     width: 10px;
     /* 스크롤바의 너비 */
 }
 
-.adminContainer-table-tbody2::-webkit-scrollbar-thumb {
+.userChat::-webkit-scrollbar-thumb {
     height: 30%;
     /* 스크롤바의 길이 */
     background: #4d6d49;
@@ -31,11 +31,11 @@
     border-radius: 10px;
 }
 
-.adminContainer-table-tbody2::-webkit-scrollbar-track {
+.userChat::-webkit-scrollbar-track {
     background: #ccc;
     /*스크롤바 뒷 배경 색상*/
 }
 
-.adminContainer-table tfoot {
+.user-chat-table tfoot {
     border-top: 1px solid #ccc;
 }

@@ -347,9 +347,21 @@
             , TO_FROM
             , DATE_FORMAT(MESSAGE_DATE, '%Y-%m-%d   %p %l:%i') MESSAGE_DATE
         FROM STUDYROOM_MESSAGE
-        WHERE MESSAGE.MEMBER_CODE = #{memberCode}
+        WHERE MEMBER_CODE = #{memberCode}
         ORDER BY MESSAGE_CODE DESC LIMIT 100
     </select>
+
+    <insert id="userSend">
+        INSERT INTO STUDYROOM_MESSAGE (
+            MESSAGE_CONTENT
+            , MEMBER_CODE
+            , TO_FROM
+        ) VALUES (
+            #{messageContent}
+            , #{memberCode}
+            , 'FROM'
+        )
+    </insert>
 
 
 </mapper>
