@@ -9,7 +9,7 @@
         <result column="MESSAGE_CONTENT" property="messageContent"/>
         <result column="MESSAGE_DATE" property="messageDate"/>
         <result column="MEMBER_CODE" property="memberCode"/>
-<!--        <result column="SEAT_NUM" property="seatNum"/>-->
+        <result column="TO_FROM" property="toFrom"/>
 <!--        <result column="MEMBER_NAME" property="memberName"/>-->
 <!--        <result column="MEMBER_ID" property="memberId"/>-->
 <!--        <result column="IS_ADMIN" property="isAdmin"/>-->
@@ -26,6 +26,7 @@
             , MEMBER_NAME
             , MEMBER_ID
             , DATE_FORMAT(MESSAGE_DATE, '%Y-%m-%d ㅤ%p %l:%i') MESSAGE_DATE
+            , TO_FROM
         FROM STUDYROOM_MESSAGE MESSAGE
         INNER JOIN STUDYROOM_MEMBER MEMBER
         ON MESSAGE.MEMBER_CODE = MEMBER.MEMBER_CODE
@@ -60,9 +61,11 @@
         INSERT INTO STUDYROOM_MESSAGE (
             MESSAGE_CONTENT
             , MEMBER_CODE
+            , TO_FROM
         ) VALUES (
             #{messageContent}
             , #{memberCode}
+            , #{toFrom}
         )
     </insert>
 

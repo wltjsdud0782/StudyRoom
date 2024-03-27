@@ -15,7 +15,7 @@ public class MessageVO {
     private String messageContent;
     private String messageDate;
     private int memberCode;
-//    private int seatNum;
+    private String toFrom;
 //    private String memberName;
 //    private String memberId;
 //    private String isAdmin;

@@ -91,6 +91,7 @@ public class AdminController {
         //InfoSearchVO 검색기능
         model.addAttribute("msgList", messageService.selectWho(infoSearchVO));
 
+        //메세지 보기(처음엔 안보임)
         model.addAttribute("chtList", messageService.selectMessage(memberCode));
 
         //메세지를 받은 사람의 이름
@@ -100,17 +101,13 @@ public class AdminController {
         return "content/admin/admin_message";
     }
 
-    //채팅보낼 사람 정하기 (비동기)
+    //채팅보낼 사람 정하기(비동기)
     @ResponseBody
     @PostMapping("/who")
     public  Map<String, Object> selectMan(@RequestParam(name="memberCode") int memberCode){
         Map<String, Object> map = new HashMap<>();
-        //고른 사람
-        MemberVO member = messageService.selectMan(memberCode);
-        //채팅 목록
-        List<MessageVO> chtList = messageService.selectMessage(memberCode);
-        map.put("member",member);
-        map.put("chtList", chtList);
+        map.put("member", messageService.selectMan(memberCode));
+        map.put("chtList", messageService.selectMessage(memberCode));
         return map;
     }
 
