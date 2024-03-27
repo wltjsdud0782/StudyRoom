@@ -34,6 +34,8 @@ function goChat(memberCode) {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
+            console.log(data);
+
             document.querySelector('input[name="memberCode"]').value = memberCode;
             document.querySelector('#send_memberName').value = `@${data.member.memberName}`;
 
@@ -41,24 +43,45 @@ function goChat(memberCode) {
             oneByone.innerHTML = '';
             let str = '';
             data.chtList.forEach(e => {
-                str += `
-            <tr>
-                <td>
+            
+            str += `
+            <tr>`;
+                if (e.toFrom == 'TO') {
+                    str += `
+                <td class="toMsg">
                     <div class="userMsg">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                 height="16" fill="currentColor"
-                                class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                                class="bi bi-arrow-return-right"
+                                viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
                                 d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5" />
                             </svg>
                         </span>
-                        <th:block th:if="${toFrom == 'TO'}" >
-                            <span>&nbsp;[[${chat.memberVO.memberName}]]([[${chat.memberVO.memberId}]]) 님에게</span>
-                        </th:block>
-                        <th:block th:else="${toFrom == 'TO'}" >
-                            <span>&nbsp;[[${chat.memberVO.memberName}]]([[${chat.memberVO.memberId}]]) 님으로부터</span>
-                        </th:block>
+                        <span>&nbsp;${data.member.memberName}(${data.member.memberId})님에게
+                    </div>
+                    <div class="botMsg">
+                        <span>${e.messageContent}</span>
+                    </div>
+                    <div class="topMsg text-end">
+                        <span>${e.messageDate}&ensp;</span>
+                    </div>
+                </td>`;}
+                else {
+                    str += `                                   
+                <td class="fromMsg">
+                    <div class="userMsg">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor"
+                                class="bi bi-arrow-return-right"
+                                viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5" />
+                            </svg>
+                        </span>
+                        <span>&nbsp;${data.member.memberName}(${data.member.memberId})님</span>
                     </div>
                     <div class="botMsg">
                         <span>${e.messageContent}</span>
@@ -67,7 +90,9 @@ function goChat(memberCode) {
                         <span>${e.messageDate}&ensp;</span>
                     </div>
                 </td>
-            </tr>`});
+            </tr>
+            `;}
+        })
             //th:each="chat : ${data.chtList}"
             oneByone.insertAdjacentHTML('afterbegin', str)
         })

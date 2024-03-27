@@ -61,11 +61,9 @@
         INSERT INTO STUDYROOM_MESSAGE (
             MESSAGE_CONTENT
             , MEMBER_CODE
-            , TO_FROM
         ) VALUES (
             #{messageContent}
             , #{memberCode}
-            , #{toFrom}
         )
     </insert>
 

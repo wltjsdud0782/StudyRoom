@@ -158,6 +158,14 @@ select {
     color: #ccc;
 }
 
+/* .toMsg {
+
+} */
+
+.fromMsg {
+    background-color: #ececec;
+}
+
 /* (Charge)----------------------------------------------- */
 
 .adminContainer-table-tbody5 {
