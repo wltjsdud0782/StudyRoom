@@ -1,6 +1,7 @@
 package com.green.StudyRoom.seat.service;
 
 import com.green.StudyRoom.admin.vo.ChargeVO;
+import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.member.vo.StudyRoomInOutVO;
@@ -143,6 +144,11 @@ public class SeatServiceImpl implements SeatService{
     @Override // 쿠폰 사용하여 결제 시 해당 쿠폰 삭제
     public void deleteCoupon(int ownCouponCode) {
         sqlSession.delete("seatMapper.deleteCoupon", ownCouponCode);
+    }
+
+    @Override // 채팅
+    public List<MessageVO> userMsg(int memberCode) {
+        return sqlSession.selectList("seatMapper.userMsg", memberCode);
     }
 
 }

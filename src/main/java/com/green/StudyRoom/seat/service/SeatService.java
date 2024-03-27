@@ -1,6 +1,7 @@
 package com.green.StudyRoom.seat.service;
 
 import com.green.StudyRoom.admin.vo.ChargeVO;
+import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.member.vo.StudyRoomInOutVO;
@@ -56,10 +57,13 @@ public interface SeatService {
     // 마이페이지 이용권
     ApprovalVO myBuyDetail(int memberCode);
 
-    // 쿠폰 관련 (해야됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)
+    // 쿠폰 관련
     List<CouponVO> coupon(); // admin 관련
-    List<MemberCouponVO> ownCoupon(int memberCode); // homepage 관련 (내가 해야함)
+    List<MemberCouponVO> ownCoupon(int memberCode);
 
     void deleteCoupon(int ownCouponCode);
+
+    // 채팅
+    List<MessageVO> userMsg(int memberCode);
 
 }

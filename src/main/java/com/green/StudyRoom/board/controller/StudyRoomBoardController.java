@@ -1,6 +1,7 @@
 package com.green.StudyRoom.board.controller;
 
 import com.green.StudyRoom.admin.service.ChargeServiceImpl;
+import com.green.StudyRoom.admin.service.MessageServiceImpl;
 import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.board.service.*;
 import com.green.StudyRoom.board.vo.BoardVO;
@@ -278,11 +279,20 @@ public class StudyRoomBoardController {
         return "content/homepage/myWriting";
     }
 
-    // 카운터 문의
+    // 카운터 채팅
     @GetMapping("/myCounter")
-    public String myCounter(){
+    public String myCounter(HttpSession session, Model model){
+        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+        int memberCode = loginInfo.getMemberCode();
 
+        model.addAttribute("msgList", seatService.userMsg(memberCode));
         return "content/homepage/my_counter";
+    }
+
+    @ResponseBody
+    @PostMapping("/sendCounter")
+    public void sendCounter(){
+
     }
 
     @GetMapping("/deleteBoard")
