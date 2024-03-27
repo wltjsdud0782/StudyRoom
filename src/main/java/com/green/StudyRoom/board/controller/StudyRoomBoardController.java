@@ -278,6 +278,13 @@ public class StudyRoomBoardController {
         return "content/homepage/myWriting";
     }
 
+    // 카운터 문의
+    @GetMapping("/myCounter")
+    public String myCounter(){
+
+        return "content/homepage/my_counter";
+    }
+
     @GetMapping("/deleteBoard")
     public String deleteBoard(@RequestParam(name = "boardCode") int boardCode){
 
