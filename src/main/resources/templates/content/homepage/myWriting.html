@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{fragment/user_layout}" >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/user_layout}">
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴 때 같이 실행되는 css -->
@@ -17,7 +16,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row justify-content-center">
         <div class="col-10">
             <div class="myWrite-btn">
@@ -32,14 +31,23 @@
             </div>
 
             <div class="myPage-table">
+                <th:block th:if="${#lists.size(boardList)} == 0">
+                    <div class="row" style="height: 350px;">
+                        <div class="col">
+                            <div style="font-size: 17pt; margin-top: 150px;">
+                                등록한 글이 없습니다.
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
                 <table>
+                    <colgroup>
+                        <col width="10%">
+                        <col width="60%">
+                        <col width="30%">
+                        <col width="*">
+                    </colgroup>
                     <th:block th:each="board , state : ${boardList}">
-                        <colgroup>
-                            <col width="10%">
-                            <col width="60%">
-                            <col width="30%">
-                            <col width="*">
-                        </colgroup>
                         <tr>
                             <td>[[${#lists.size(boardList) - state.index}]]</td>
                             <td th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]</td>
@@ -50,15 +58,16 @@
                 </table>
             </div>
         </div>
-        
+
     </div>
-        </div>
     </div>
-            
+    </div>
+
 </th:block>
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
     <script src="/js/board/myWriting.js"></script>
 </th:block>
+
 </html>

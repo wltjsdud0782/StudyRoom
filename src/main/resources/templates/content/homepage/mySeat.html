@@ -35,7 +35,7 @@
                         </colgroup>
                         <thead>
                             <tr class="table-success align-middle" style="height: 65px;">
-                                <td colspan="2">[[${session.loginInfo.memberId}]] 님의 입실정보</td>
+                                <td colspan="2">[[${session.loginInfo.memberId}]]님의 입실정보</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,20 +72,22 @@
 
             <div class="row text-start mt-5">
                 <div class="col">
-                    <h5>입퇴실내역</h5>
+                    <h5>[[${session.loginInfo.memberId}]]님의 입퇴실내역</h5>
                 </div>
             </div>
 
             <div class="row scrollbar mt-4 mb-5" style="height: 600px; overflow: auto; line-height: 4;">
                 <div class="col">
-                    <table class="table table-hover text-center align-middle table-bordered" style="font-size: 12pt;" id="mySeat-table">
+                    <table class="table table-hover text-center align-middle table-bordered" style="font-size: 12pt;"
+                        id="mySeat-table">
                         <colgroup>
                             <col width="50%">
                             <col width="50%">
                         </colgroup>
                         <thead>
                             <tr class="table-success align-middle" style="height: 65px;">
-                                <td colspan="2">[[${session.loginInfo.memberId}]] 님의 이용내역</td>
+                                <td>입/퇴실</td>
+                                <td>날짜 및 시간</td>
                             </tr>
                         </thead>
                         <tbody>
