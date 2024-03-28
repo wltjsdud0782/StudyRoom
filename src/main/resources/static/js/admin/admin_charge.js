@@ -37,8 +37,8 @@ function selectService(value) {
                 <tr>
                     <td>
                         <select id="selectOption" onchange="selectService(this.value)">
-                            <option value="CHARGE-option" selected>CHARGE</option>
-                            <option value="COUPON-option">COUPON</option>
+                            <option value="CHARGE-option" selected>이용권</option>
+                            <option value="COUPON-option">쿠폰</option>
                         </select>
                     </td>
                     <!-- 이용권 -->
@@ -119,8 +119,8 @@ function selectService(value) {
                 <tr>
                     <td>
                         <select id="selectOption" onchange="selectService(this.value)">
-                            <option value="CHARGE-option">CHARGE</option>
-                            <option value="COUPON-option" selected>COUPON</option>
+                            <option value="CHARGE-option">이용권</option>
+                            <option value="COUPON-option" selected>쿠폰</option>
                         </select>
                     </td>
                     <!-- 쿠폰 -->
@@ -221,8 +221,8 @@ function changeCharge(chargeCode) {
                             <tr>
                                 <td>
                                 <select id="selectOption" onchange="selectService(this.value)">
-                                    <option value="CHARGE-option" selected>CHARGE</option>
-                                    <option value="COUPON-option">COUPON</option>
+                                    <option value="CHARGE-option" selected>이용권</option>
+                                    <option value="COUPON-option">쿠폰</option>
                                 </select>
                                 </td>
                                         <td>
@@ -342,8 +342,8 @@ function changeCoupon(couponCode) {
                     <tr>
                         <td>
                             <select id="selectOption" onchange="selectService(this.value)">
-                                <option value="CHARGE-option">CHARGE</option>
-                                <option value="COUPON-option" selected>COUPON</option>
+                                <option value="CHARGE-option">이용권</option>
+                                <option value="COUPON-option" selected>쿠폰</option>
                             </select>
                         </td>
                         <!-- 쿠폰 -->

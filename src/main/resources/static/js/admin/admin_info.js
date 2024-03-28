@@ -1,3 +1,8 @@
+//원래 쓰던 info(백업용)
+
+
+
+
 //수정 불가능한 info 나오기
 function allInfo(memberCode) {
     fetch('/admin/viewInfo', { //요청경로

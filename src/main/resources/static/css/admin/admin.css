@@ -72,11 +72,40 @@ select {
     /*스크롤바 뒷 배경 색상*/
 }
 
-.numUpDown::-webkit-outer-spin-button,
+.adminContainer-table-tbody1 {
+    display: block;
+    height: 331px;
+    overflow-y: scroll;
+}
+
+.adminContainer-table-tbody1 tr {
+    display: table;
+    width: 100%;
+}
+
+.adminContainer-table-tbody1::-webkit-scrollbar {
+    width: 10px;
+    /* 스크롤바의 너비 */
+}
+
+.adminContainer-table-tbody1::-webkit-scrollbar-thumb {
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: #4d6d49;
+    /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.adminContainer-table-tbody1::-webkit-scrollbar-track {
+    background: #ccc;
+    /*스크롤바 뒷 배경 색상*/
+}
+
+/* .numUpDown::-webkit-outer-spin-button,
 .numUpDown::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
+} */
 
 /* (Message)----------------------------------------------- */
 

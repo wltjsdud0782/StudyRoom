@@ -47,6 +47,9 @@ public class AdminController {
         //InfoSearchVO 검색기능
         List<MemberVO> memberList = adminService.selectMemberInfo(infoSearchVO);
         model.addAttribute("memberList", memberList);
+        //쿠폰 리스트 보여주기
+        List<CouponVO> couponList = chargeService.selectCoupon();
+        model.addAttribute("couponList", couponList);
         return "content/admin/admin_Info";
     }
 
@@ -54,34 +57,54 @@ public class AdminController {
     @ResponseBody
     @PostMapping("/viewInfo")
     public Map<String, Object> viewInfo(@RequestParam(name="memberCode") int memberCode){
-        MemberVO memberMap = adminService.selectMemberDetailInfo(memberCode);
-        SeatVO seatMap = adminService.selectSeatDetailInfo(memberCode);
         Map<String, Object> map = new HashMap<>();
-        map.put("memberMap", memberMap);
-        map.put("seatMap", seatMap);
+        map.put("memberMap", adminService.selectMemberDetailInfo(memberCode));
+        map.put("seatMap", adminService.selectSeatDetailInfo(memberCode));
+        map.put("couponMap", adminService.selectInfoCoupon(memberCode));
+
+        map.put("charName", seatService.haveCharge(memberCode));
+        if (seatService.haveCharge(memberCode) != null){
+            map.put("charDate", seatService.haveChargeDate(memberCode));
+            map.put("charAppDate", seatService.haveChargeApprovalDate(memberCode));
+            map.put("charRemDate", seatService.haveChargeRemainDate(memberCode));
+            map.put("charEndDate", seatService.haveChargeEndDate(memberCode));
+        }
+
         return map;
     }
 
     //회원정보/좌석정보 업데이트
-    @PostMapping("/uptInfo")
-    public String uptAllInfo(MemberVO memberVO, SeatVO seatVO){
-        adminService.uptMemberInfo(memberVO);
-        adminService.uptSeatInfo(seatVO);
-        return "redirect:/admin/info";
-    }
+//    @PostMapping("/uptInfo")
+//    public String uptAllInfo(MemberVO memberVO, SeatVO seatVO){
+//        adminService.uptMemberInfo(memberVO);
+//        adminService.uptSeatInfo(seatVO);
+//        return "redirect:/admin/info";
+//    }
+
+    //회원정보/좌석정보 조회하기
+//    @ResponseBody
+//    @PostMapping("/viewInfo")
+//    public Map<String, Object> viewInfo(@RequestParam(name="memberCode") int memberCode){
+//        MemberVO memberMap = adminService.selectMemberDetailInfo(memberCode);
+//        SeatVO seatMap = adminService.selectSeatDetailInfo(memberCode);
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("memberMap", memberMap);
+//        map.put("seatMap", seatMap);
+//        return map;
+//    }
 
     //좌석의 시간정보 불러오기
-    @ResponseBody
-    @PostMapping("/viewDate")
-    public Map<String, Object> viewDate(@RequestParam(name="memberCode") int memberCode){
-        Map<String, Object> map = new HashMap<>();
-        map.put("charName", seatService.haveCharge(memberCode));
-        map.put("charDate", seatService.haveChargeDate(memberCode));
-        map.put("charAppDate", seatService.haveChargeApprovalDate(memberCode));
-        map.put("charRemDate", seatService.haveChargeRemainDate(memberCode));
-        map.put("charEndDate", seatService.haveChargeEndDate(memberCode));
-        return map;
-    }
+//    @ResponseBody
+//    @PostMapping("/viewDate")
+//    public Map<String, Object> viewDate(@RequestParam(name="memberCode") int memberCode){
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("charName", seatService.haveCharge(memberCode));
+//        map.put("charDate", seatService.haveChargeDate(memberCode));
+//        map.put("charAppDate", seatService.haveChargeApprovalDate(memberCode));
+//        map.put("charRemDate", seatService.haveChargeRemainDate(memberCode));
+//        map.put("charEndDate", seatService.haveChargeEndDate(memberCode));
+//        return map;
+//    }
 
     //(메세지)//////////////////////////////////////////////// //
     @RequestMapping("/msg")
