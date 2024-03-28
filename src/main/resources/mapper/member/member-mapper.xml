@@ -96,9 +96,11 @@
             , MEMBER_PW
             , MEMBER_NAME
             , MEMBER_TEL
-            , DATE_FORMAT(MEMBER_BIRTH,'%Y-%m-%d') as BIRTH
+            , DATE_FORMAT(MEMBER_BIRTH,'%Y-%m-%d') as MEMBER_BIRTH
             , MEMBER_GENDER
             , IS_ADMIN
+            , ADDR_DETAIL
+            , MEMBER_ADDR
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_ID=#{memberId}
         AND MEMBER_PW=#{memberPw}
