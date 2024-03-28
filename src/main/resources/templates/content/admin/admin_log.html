@@ -22,13 +22,14 @@
                         <div class="col-6">
                             <div class="row">
                                 <div class="col">
-                                    <h4>&nbsp;APPROVAL</h4>
+                                    <h4>&nbsp;결제 내역</h4>
                                     <table class="table table-hover adminContainer-table">
                                         <tbody class="adminContainer-table-tbody4">
                                             <tr th:each="app : ${appList}">
                                                 <td>
                                                     <div>
-                                                        <span>[[${app.memberVO.memberName}]]</span> 님이
+                                                        <span>[[${app.memberVO.memberName}]]
+                                                            ([[${app.memberVO.memberId}]])</span> 님이
                                                         <span style="text-decoration: underline;">
                                                             [[${app.chargeVO.chargeName}]]
                                                         </span>
@@ -50,37 +51,7 @@
                             <div style="padding: 2vh;"></div>
                             <div class="row">
                                 <div class="col">
-                                    <h4>&nbsp;RESERVATION</h4>
-                                    <table class="table table-hover adminContainer-table">
-                                        <tbody class="adminContainer-table-tbody4">
-                                            <tr th:each="res : ${resList}">
-                                                <td>
-                                                    <div>
-                                                        <span>
-                                                            [[${res.memberVO.memberName}]]
-                                                        </span> 님이
-                                                        <span style="text-decoration: underline;">
-                                                            [[${res.chargeVO.chargeName}]]
-                                                        </span>이용권으로
-                                                        <span>
-                                                            [[${res.seatVO.seatNum}]]번 좌석을 예약하셨습니다.
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="logDate">
-                                                            [[${res.reservationDate}]]&nbsp;
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div style="padding: 2vh;"></div>
-                            <div class="row">
-                                <div class="col">
-                                    <h4>&nbsp;IN-OUT</h4>
+                                    <h4>&nbsp;입퇴실 기록</h4>
                                     <table class="table table-hover adminContainer-table">
                                         <tbody class="adminContainer-table-tbody4">
                                             <tr th:each="inot, state : ${inotList}">
@@ -88,11 +59,12 @@
                                                     <div>
                                                         <span>
                                                             [[${inot.memberVO.memberName}]]
+                                                            ([[${inot.memberVO.memberId}]])
                                                         </span> 님이
                                                         <span>
                                                             [[${inot.inOut}]]
                                                         </span>하셨습니다.
-                                                    </div>                                                  
+                                                    </div>
                                                     <div>
                                                         <span class="logDate">
                                                             [[${inot.inOutTime}]]&nbsp;
@@ -112,12 +84,43 @@
                                     </table>
                                 </div>
                             </div>
+                            <div style="padding: 2vh;"></div>
+                            <div class="row">
+                                <div class="col">
+                                    <h4>&nbsp;예약 (not use)</h4>
+                                    <table class="table table-hover adminContainer-table">
+                                        <tbody class="adminContainer-table-tbody4">
+                                            <tr th:each="res : ${resList}">
+                                                <td>
+                                                    <div>
+                                                        <span>
+                                                            [[${res.memberVO.memberName}]]
+                                                            ([[${res.memberVO.memberId}]])
+                                                        </span> 님이
+                                                        <span style="text-decoration: underline;">
+                                                            [[${res.chargeVO.chargeName}]]
+                                                        </span>이용권으로
+                                                        <span>
+                                                            [[${res.seatVO.seatNum}]]번 좌석을 예약하셨습니다.
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="logDate">
+                                                            [[${res.reservationDate}]]&nbsp;
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <!-- 오른쪽 -->
                         <div class="col-6">
                             <div class="row">
                                 <div class="col">
-                                    <h4>&nbsp;SEAT-IN-USE</h4>
+                                    <h4>&nbsp;입실 회원</h4>
                                 </div>
                             </div>
                             <div class="col" style="border: 1px solid #ccc;">
@@ -132,11 +135,11 @@
                                     </colgroup>
                                     <thead class="table-light">
                                         <tr>
-                                            <td>좌석 번호</td>
-                                            <td>좌석 층수</td>
+                                            <td>좌석 정보</td>
                                             <td>좌석 상태</td>
                                             <td>점등 상태&nbsp;</td>
-                                            <td>&nbsp;사용자</td>
+                                            <td>사용자&ensp;</td>
+                                            <td>&nbsp;아이디</td>
                                             <td></td>
                                         </tr>
                                     </thead>
@@ -144,15 +147,21 @@
                                 <table class="table table-hover" style="text-align: center; margin-top: -16px;">
                                     <tbody class="adminContainer-table-tbody44">
                                         <tr th:each="status : ${statusList}">
-                                            <td style="width: 20%;">[[${status.seatNum}]]번</td>
-                                            <td style="width: 20%;">[[${status.seatFloor}]]층</td>
+                                            <td style="width: 20%;">
+                                                [[${status.seatFloor}]]층&ensp;[[${status.seatNum}]]번석</td>
                                             <td style="width: 20%;">[[${status.seatStatusVO.statusName}]]</td>
-                                            <td style="width: 20%;">[[${status.seatPower}]]</td>
+                                            <th:block th:if="${status.seatPower == '켜짐'}">
+                                                <td style="width: 20%;"><font color="orange">[[${status.seatPower}]]</font></td>
+                                            </th:block>
+                                            <th:block th:unless="${status.seatPower == '켜짐'}">
+                                                <td style="width: 20%;"><font color="gray">[[${status.seatPower}]]</font></td>
+                                            </th:block>
                                             <td style="width: 20%;">[[${status.memberVO.memberName}]]</td>
+                                            <td style="width: 20%;">[[${status.memberVO.memberId}]]</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>                       
+                            </div>
                         </div>
                     </div>
                 </div>

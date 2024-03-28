@@ -12,7 +12,7 @@ public interface TimeLogService {
     //결재 기록 조회
     List<ApprovalVO> selectBuyList();
 
-    //예약 기록 조회
+    //예약 기록 조회 (안쓸 기능)
     List<ReservationVO> selectReserveList();
 
     //입퇴실 기록 조회

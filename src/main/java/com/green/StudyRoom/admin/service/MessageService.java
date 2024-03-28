@@ -18,8 +18,11 @@ public interface MessageService {
     void insertAdmMsg(MessageVO messageVO);
 
     //유저 메세지 저장
-    void insertMessage(MessageVO messageVO);
+    //void insertMessage(MessageVO messageVO);
 
     //메세지 조회
     List<MessageVO> selectMessage(int memberCode);
+
+    //최근 메세지 조회
+    List<MessageVO> selectRecentMsg();
 }

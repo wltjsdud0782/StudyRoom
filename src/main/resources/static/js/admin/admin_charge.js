@@ -89,7 +89,7 @@ function selectService(value) {
                 </tr>
             </tbody>
         </table>
-        <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
+        <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
         <div>
             <div class="btnDiv">
                 <input type="button" value="삭제" disabled>
@@ -160,7 +160,7 @@ function selectService(value) {
                 </tr>
             </tbody>
         </table>
-        <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
+        <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
         <div>
             <div class="btnDiv">
                 <input type="button" value="삭제" disabled>
@@ -268,7 +268,7 @@ function changeCharge(chargeCode) {
                                     </tr>
                                 </tbody>
                             </table>
-                            <div style="padding: 2vh;"></div>
+                            <div style="padding: 1vh;"></div>
                             <div>
                                 <div class="btnDiv">                                           
                                     <input type="button" value="삭제" onclick="deleteCharge(${chargeCode})" style="color: red;">                               
@@ -373,7 +373,7 @@ function changeCoupon(couponCode) {
                             <div class="row">
                                 <div class="col text-end">
                                     <div class="btnDiv">
-                                        <input type="button" value="쿠폰 등록" onclick="enroll()">&nbsp;
+                                        <input type="button" value="쿠폰 변경" onclick="enroll()">&nbsp;
                                         <input type="button" value="취소" onclick="window.location.reload()">
                                     </div>
                                 </div>
@@ -383,13 +383,15 @@ function changeCoupon(couponCode) {
                     </tr>
                 </tbody>
             </table>
-            <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
+            <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
             <div>
                 <div class="btnDiv">
-                <input type="button" value="삭제" onclick="deleteCoupon(${couponCode})" style="color: red;">
+                    <input type="button" value="삭제" onclick="deleteCoupon(${couponCode})" style="color: red;">
                 </div>
-            </div>
+            </div>         
         </form>
+        <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
+        <!-- <h4>&nbsp;쿠폰 지급하기</h4> -->
             `;
             reCoupon.insertAdjacentHTML('afterbegin', str)
 
