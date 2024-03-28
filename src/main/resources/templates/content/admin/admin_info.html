@@ -12,78 +12,86 @@
     <body>
         <div class="adminContainer">
             <div class="title">
-                <h3>회원 관리</h3>
+                <h3>회원 관리 (수정필요)</h3>
             </div>
             <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
-                    <h4>&nbsp;SEARCH <span style="font-size: 15px;">([[${#lists.size(memberList)}]]명)</span></h4>
-                    <table class="table table-hover adminContainer-table">
-                        <thead class="table-light">
-                            <form action="/admin/info" method="post">
-                                <tr>
-                                    <td>
-                                        <div class="btnDiv">
-                                            <select name="searchType">
-                                                <option value="MEMBER_NAME"
-                                                    th:selected="${infoSearchVO.searchType == null or infoSearchVO.searchType == 'MEMBER_NAME'}">
-                                                    이름
-                                                </option>
-                                                <option value="MEMBER_ID"
-                                                    th:selected="${infoSearchVO.searchType == 'MEMBER_ID'}">
-                                                    아이디
-                                                </option>
-                                                <option value="IS_ADMIN"
-                                                    th:selected="${infoSearchVO.searchType == 'IS_ADMIN'}">
-                                                    권한
-                                                </option>
-                                            </select>&nbsp;
-                                            <input type="text" name="searchValue" style="text-align: left;"
-                                                th:value="${infoSearchVO.searchValue}">&nbsp;
-                                            <input type="submit" value="검색">
-                                            <div style="float: right;">
-                                                <input type="button" value="새로고침" onclick="location.href='/admin/info'">
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </form>
-                        </thead>
-                        <tbody class="adminContainer-table-tbody">
-                            <th:block th:if="${#lists.isEmpty(memberList)}">
-                                <tr>
-                                    <td>※ 회원정보가 존재하지 않습니다.</td>
-                                </tr>
-                            </th:block>
-                            <th:block th:unless="${#lists.isEmpty(memberList)}">
-                                <tr th:each="member, state : ${memberList}"
-                                    th:onclick="allInfo([[${member.memberCode}]])">
-                                    <td>
-                                        <div>
-                                            <span>
-                                                <span style="font-size: small;">#[[${#lists.size(memberList) -
-                                                    state.index}]]</span>
-                                                &ensp;[[${member.memberName}]] ([[${member.memberId}]])
-                                            </span>
-                                            <span style="float: right;">
-                                                <div>
-                                                    <th:block th:if="${member.isAdmin == '회원'}">
-                                                        회원
-                                                    </th:block>
-                                                    <th:block th:if="${member.isAdmin == '알바생'}">
-                                                        알바생
-                                                    </th:block>
-                                                    <th:block th:if="${member.isAdmin == '관리자'}">
-                                                        관리자
-                                                    </th:block>
+                    <div class="row">
+                        <div class="col-10">
+                            <h4>&nbsp;검색 <span style="font-size: 15px;">([[${#lists.size(memberList)}]]명)</span></h4>
+                            <table class="table table-hover adminContainer-table">
+                                <thead class="table-light">
+                                    <form action="/admin/info" method="post">
+                                        <tr>
+                                            <td>
+                                                <div class="btnDiv">
+                                                    <select name="searchType">
+                                                        <option value="MEMBER_NAME"
+                                                            th:selected="${infoSearchVO.searchType == null or infoSearchVO.searchType == 'MEMBER_NAME'}">
+                                                            이름
+                                                        </option>
+                                                        <option value="MEMBER_ID"
+                                                            th:selected="${infoSearchVO.searchType == 'MEMBER_ID'}">
+                                                            아이디
+                                                        </option>
+                                                        <option value="IS_ADMIN"
+                                                            th:selected="${infoSearchVO.searchType == 'IS_ADMIN'}">
+                                                            권한
+                                                        </option>
+                                                    </select>&nbsp;
+                                                    <input type="text" name="searchValue" style="text-align: left;"
+                                                        th:value="${infoSearchVO.searchValue}">&nbsp;
+                                                    <input type="submit" value="검색">
+                                                    <div style="float: right;">
+                                                        <input type="button" value="새로고침"
+                                                            onclick="location.href='/admin/info'">
+                                                    </div>
                                                 </div>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </th:block>
-                        </tbody>
-                    </table>
+                                            </td>
+                                        </tr>
+                                    </form>
+                                </thead>
+                                <tbody class="adminContainer-table-tbody">
+                                    <th:block th:if="${#lists.isEmpty(memberList)}">
+                                        <tr>
+                                            <td>※ 회원정보가 존재하지 않습니다.</td>
+                                        </tr>
+                                    </th:block>
+                                    <th:block th:unless="${#lists.isEmpty(memberList)}">
+                                        <tr th:each="member, state : ${memberList}"
+                                            th:onclick="allInfo([[${member.memberCode}]])">
+                                            <td>
+                                                <div>
+                                                    <span>
+                                                        <span style="font-size: small;">#[[${#lists.size(memberList) -
+                                                            state.index}]]</span>
+                                                        &ensp;[[${member.memberName}]] ([[${member.memberId}]])
+                                                    </span>
+                                                    <span style="float: right;">
+                                                        <div>
+                                                            <th:block th:if="${member.isAdmin == '회원'}">
+                                                                회원
+                                                            </th:block>
+                                                            <th:block th:if="${member.isAdmin == '알바생'}">
+                                                                알바생
+                                                            </th:block>
+                                                            <th:block th:if="${member.isAdmin == '관리자'}">
+                                                                관리자
+                                                            </th:block>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col">
+                            <!-- 오른쪽 창 -->
+                        </div>
+                    </div>
                     <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
                     <div class="changeInfo-div">
                     </div>
@@ -112,7 +120,6 @@
                                 <col width="35%">
                             </colgroup>
                             <tbody class="changeInfo" id="date-info-div">
-
                             </tbody>
                         </table>
                     </div>
@@ -123,14 +130,8 @@
                 </div>
             </div>
         </div>
-
-
-
-
     </body>
 </th:block>
-
-
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->

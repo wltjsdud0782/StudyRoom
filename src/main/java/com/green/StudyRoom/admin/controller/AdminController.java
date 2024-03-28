@@ -90,14 +90,13 @@ public class AdminController {
                                 , @RequestParam(name="memberCode", required=false, defaultValue="0") int memberCode){
         //InfoSearchVO 검색기능
         model.addAttribute("msgList", messageService.selectWho(infoSearchVO));
-
-        //메세지 보기(처음엔 안보임)
+        //메세지 보기 (처음엔 안보임)
         model.addAttribute("chtList", messageService.selectMessage(memberCode));
-
+        //최근 메세지 보기(처음에만 보임)
+        model.addAttribute("recList", messageService.selectRecentMsg());
         //메세지를 받은 사람의 이름
         model.addAttribute("receiver", receiver);
         model.addAttribute("memberCode", memberCode);
-
         return "content/admin/admin_message";
     }
 
@@ -208,7 +207,7 @@ public class AdminController {
     public String adminLog(Model model){
         //결재 기록
         model.addAttribute("appList", timeLogService.selectBuyList());
-        //예약 기록
+        //예약 기록 (안쓸 기능)
         model.addAttribute("resList", timeLogService.selectReserveList());
         //입퇴실 기록
         model.addAttribute("inotList", timeLogService.selectInOutList());

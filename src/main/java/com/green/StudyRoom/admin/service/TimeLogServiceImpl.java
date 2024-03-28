@@ -22,7 +22,7 @@ public class TimeLogServiceImpl implements TimeLogService {
         return sqlSession.selectList("logMapper.selectBuyList");
     }
 
-    //예약 기록 조회
+    //예약 기록 조회 (안쓸 기능)
     @Override
     public List<ReservationVO> selectReserveList() {
         return sqlSession.selectList("logMapper.selectReserveList");

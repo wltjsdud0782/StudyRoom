@@ -29,7 +29,7 @@ function allInfo(memberCode) {
             let str = '';
             str += `  
                         <input type="hidden" name="memberCode" value="${memberCode}">
-                            <h4>&nbsp;MEMBER</h4>
+                            <h4>&nbsp;회원 정보</h4>
                             <table class="adminContainer-table">
                                 <colgroup>
                                     <col width="11%">
@@ -96,7 +96,7 @@ function allInfo(memberCode) {
                                         <td class="info-border-title">
                                             <div class="row">
                                                 <div class="col">
-                                                    우편 주소
+                                                    우편 번호
                                                 </div>
                                             </div>
                                         </td>
@@ -295,7 +295,7 @@ function memberInfo(memberCode) {
             str += `  
                         <form action="/admin/uptInfo" method="post">
                         <input type="hidden" name="memberCode" value="${memberCode}">
-                            <h4>&nbsp;MEMBER</h4>
+                            <h4>&nbsp;회원정보</h4>
                             <table class="adminContainer-table">
                                 <colgroup>
                                     <col width="11%">
@@ -363,7 +363,7 @@ function memberInfo(memberCode) {
                                         <td class="info-border-title">
                                             <div class="row">
                                                 <div class="col">
-                                                    우편 주소
+                                                    우편 번호
                                                 </div>
                                             </div>
                                         </td>

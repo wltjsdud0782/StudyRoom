@@ -25,6 +25,7 @@
     <select id="selectBuyList" resultMap="memberMapper.approval">
         SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d ㅤ%p %l:%i') APPROVAL_DATE
             , MEMBER_NAME
+            , MEMBER_ID
             , CHARGE_NAME
             , APPROVAL_FEE
         FROM approval APP
@@ -35,11 +36,12 @@
         ORDER BY APPROVAL_DATE DESC LIMIT 100
     </select>
 
-    <!-- 예약 기록 가져오기 Beta -->
+    <!-- 예약 기록 가져오기 (이제 안쓰는 기능) -->
     <select id="selectReserveList" resultMap="memberMapper.reservation">
         SELECT RESERVATION_CODE
             , DATE_FORMAT(RESERVATION_DATE, '%Y-%m-%d ㅤ%p %l:%i') RESERVATION_DATE
             , MEMBER_NAME
+            , MEMBER_ID
             , SEAT_NUM
             , CHARGE_NAME
         FROM studyroom_reservation RES
@@ -50,10 +52,11 @@
         ORDER BY RESERVATION_DATE DESC LIMIT 100;
     </select>
 
-    <!-- 입실 퇴실 기록 Beta -->
+    <!-- 입실 퇴실 기록 -->
     <select id="selectInOutList" resultMap="memberMapper.inOut">
         SELECT DAY_INPUT
             , MEMBER_NAME
+            , MEMBER_ID
             , CASE
                 WHEN IN_OUT = 'IN' THEN '입실'
                 WHEN IN_OUT = 'OUT' THEN '퇴실'
@@ -72,9 +75,10 @@
             , SEAT_FLOOR
             , CASE
                 WHEN SEAT_POWER = 'ON' THEN '켜짐'
-                WHEN SEAT_POWER = 'OFF' THEN '-'
+                WHEN SEAT_POWER = 'OFF' THEN '꺼짐'
                 END SEAT_POWER
             , MEMBER_NAME
+            , MEMBER_ID
         FROM studyroom_seat SEAT
         INNER JOIN seat_status STATUS
         ON SEAT.STATUS_NUM = STATUS.STATUS_NUM
