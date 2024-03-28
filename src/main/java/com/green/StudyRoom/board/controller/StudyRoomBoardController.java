@@ -84,6 +84,14 @@ public class StudyRoomBoardController {
 
     }
 
+    //리뷰
+    @GetMapping("/review")
+    public String review(){
+
+        return "content/homepage/review";
+    }
+
+
     //문의 홈페이지
     @GetMapping("/inquiry")
     public String studyRoomInquiry(Model model, SearchVO searchVO){

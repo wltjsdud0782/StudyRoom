@@ -176,3 +176,8 @@ a {
     height: 80px;
     padding: 20px;
 }
+
+
+.pointer{
+    cursor: pointer;
+}

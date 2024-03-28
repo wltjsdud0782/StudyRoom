@@ -7,27 +7,27 @@
             <ul>
                 <li style="margin-right: 20px; 
                     border-right: 1px solid #ccc; ">
-                    <span><a href=""><img src="/img/homepage/greenLogo.gif" alt="그린독서실로고"></a></span>
+                    <span><a class="pointer" onclick="location.href='/board/mainHomepage'"><img src="/img/homepage/greenLogo.gif" alt="그린독서실로고"></a></span>
                 </li>
             </ul>
         </div>
         <div class="col-7 menu">
             <ul class="submenu">
-                <li><a onclick="location.href='/board/mainHomepage'">홈</a></li>
-                <li><a onclick="location.href='/board/studyInfo'">매장소개</a></li>
-                <li><a onclick="location.href='/seat/seatLive'">좌석선택</a></li>
-                <li><a href="#">리뷰</a></li>
-                <li><a onclick="location.href='/board/inquiry'">문의</a></li>
-                <li><a onclick="location.href='/board/wayToCome'">오시는길</a></li>
+                <li><a class="pointer" onclick="location.href='/board/mainHomepage'">홈</a></li>
+                <li><a class="pointer" onclick="location.href='/board/studyInfo'">매장소개</a></li>
+                <li><a class="pointer" onclick="location.href='/seat/seatLive'">좌석선택</a></li>
+                <li><a class="pointer" onclick="location.href='/board/review'">리뷰</a></li>
+                <li><a class="pointer" onclick="location.href='/board/inquiry'">문의</a></li>
+                <li><a class="pointer" onclick="location.href='/board/wayToCome'">오시는길</a></li>
             </ul>
         </div>
 
         <div class="col-3 menu">
             <ul class="submenu">
                 <th:block th:if="${session.loginInfo == null }">
-                    <li style="margin-left: 150px;" class="pointer-span" data-bs-toggle="modal"
+                    <li style="margin-left: 150px;" class="pointer-span pointer" data-bs-toggle="modal"
                         data-bs-target="#join-modal">회원가입</a></li>
-                    <li><a onclick="location.href='/member/loginForm'">로그인</a></li>
+                    <li><a class="pointer" onclick="location.href='/member/loginForm'">로그인</a></li>
                 </th:block>
 
                 <th:block th:if="${session.loginInfo != null}">
