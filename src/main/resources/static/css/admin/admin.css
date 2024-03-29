@@ -32,6 +32,20 @@ select {
 
 /* (Info)----------------------------------------------- */
 
+.memberInfo-table {
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.memberInfo-table tr td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.infoIndex {
+    background-color: #ececec;
+}
+
 .adminContainer-table-tbody {
     display: block;
     height: 269px;
@@ -43,16 +57,10 @@ select {
     width: 100%;
 }
 
-.changeInfo tr td {
+/* .changeInfo tr td {
     border: 1px solid #ccc;
     height: 63px;
-}
-
-.info-border-title {
-    background-color: #4d6d49;
-    color: white;
-    text-align: center;
-}
+} */
 
 .adminContainer-table-tbody::-webkit-scrollbar {
     width: 10px;

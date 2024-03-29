@@ -271,7 +271,9 @@ function changeCharge(chargeCode) {
                             <div style="padding: 1vh;"></div>
                             <div>
                                 <div class="btnDiv">                                           
-                                    <input type="button" value="삭제" onclick="deleteCharge(${chargeCode})" style="color: red;">                               
+                                    <input type="button" value="삭제" onclick="deleteCharge(${chargeCode})" style="color: red;">
+                                    <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
+                                    <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 이용권을 이용하는 회원이 있는지 확인해주세요.</span>                              
                                 </div>
                             </div>
             </form>
@@ -388,6 +390,8 @@ function changeCoupon(couponCode) {
                 <div class="btnDiv">
                     <input type="button" value="삭제" onclick="deleteCoupon(${couponCode})" style="color: red;">
                 </div>
+                <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
+                <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 쿠폰을 이용하는 회원이 있는지 확인해주세요.</span>
             </div>         
         </form>
         <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
