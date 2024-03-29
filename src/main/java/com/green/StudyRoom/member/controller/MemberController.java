@@ -46,6 +46,35 @@ public class MemberController {
         return "content/member/id_find";
     }
 
+    //아이디 찾기
+    @PostMapping("/idFind")
+    public String idFindSelect(MemberVO memberVO, Model model) {
+
+        MemberVO idFind=memberService.idFindSelect(memberVO);
+        String str="";
+        if (idFind != null) {
+            idFind.setMemberId(idFind.getMemberId().replace(idFind.getMemberId().substring(idFind.getMemberId().length()-2, idFind.getMemberId().length()),"**"));
+            model.addAttribute("idFind", idFind);
+            str = "content/member/id_find_result";
+        } else {
+            str="redirect:/member/idFindForm";
+        }
+        return str;
+    }
+
+    //이용약관
+    @GetMapping("/termsUse")
+    public String terms_use(){
+        return "content/member/terms_use";
+    }
+
+    //개인정보처리방침
+    @GetMapping("/privacyPolicy")
+    public String privacy_policy(){
+        return "content/member/privacy_policy";
+
+    }
+
     // 비동기 로그인
     @ResponseBody
     @PostMapping("/loginFetch")
