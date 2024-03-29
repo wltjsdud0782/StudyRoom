@@ -5,10 +5,8 @@ import com.green.StudyRoom.member.vo.MemberVO;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/member")
@@ -39,6 +37,13 @@ public class MemberController {
             session.setAttribute("loginInfo", loginInfo);
         }
         return "content/member/login_result";
+    }
+
+    //아이디 찾기 폼
+    @GetMapping("/idFindForm")
+    public String id_find(@RequestParam(name="errorMsg", required = false , defaultValue = "success") String errorMsg, Model model){
+        model.addAttribute("errorMsg",errorMsg);
+        return "content/member/id_find";
     }
 
     // 비동기 로그인
