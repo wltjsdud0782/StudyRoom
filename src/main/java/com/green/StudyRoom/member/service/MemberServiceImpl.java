@@ -22,5 +22,10 @@ public class MemberServiceImpl implements MemberService{
         return sqlSession.selectOne("memberMapper.login", memberVO);
     }
 
+    @Override
+    public MemberVO idFindSelect(MemberVO memberVO) {
+        return sqlSession.selectOne("memberMapper.idFindSelect",memberVO);
+    }
+
 
 }
