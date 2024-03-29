@@ -21,15 +21,26 @@
 <!-- 결재 -->
     <resultMap id="approval" type="com.green.StudyRoom.member.vo.ApprovalVO">
         <id column="APPROVAL_CODE" property="approvalCode"/>
+        <result column="APPROVAL_FEE" property="approvalFee"/>
+        <result column="APPROVAL_DATE" property="approvalDate"/>
         <result column="MEMBER_CODE" property="memberCode"/>
         <result column="CHARGE_CODE" property="chargeCode"/>
-        <result column="APPROVAL_DATE" property="approvalDate"/>
-        <result column="CARD" property="card"/>
+        <result column="COUPON_USE" property="couponUse"/>
 
         <association property="memberVO" resultMap="member"/>
         <association property="chargeVO" resultMap="chargeMapper.charge"/>
 
     </resultMap>
+
+    <resultMap id="inOut" type="com.green.StudyRoom.member.vo.StudyRoomInOutVO">
+        <id column="DAY_INPUT" property="dayInput"/>
+        <result column="MEMBER_CODE" property="memberCode"/>
+        <result column="IN_OUT" property="inOut"/>
+        <result column="INOUT_TIME" property="inOutTime"/>
+
+        <association property="memberVO" resultMap="member"/>
+    </resultMap>
+
 
 <!--  예약      -->
     <resultMap id="reservation" type="com.green.StudyRoom.member.vo.ReservationVO">
@@ -85,9 +96,11 @@
             , MEMBER_PW
             , MEMBER_NAME
             , MEMBER_TEL
-            , DATE_FORMAT(MEMBER_BIRTH,'%Y-%m-%d') as BIRTH
+            , DATE_FORMAT(MEMBER_BIRTH,'%Y-%m-%d') as MEMBER_BIRTH
             , MEMBER_GENDER
             , IS_ADMIN
+            , ADDR_DETAIL
+            , MEMBER_ADDR
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_ID=#{memberId}
         AND MEMBER_PW=#{memberPw}

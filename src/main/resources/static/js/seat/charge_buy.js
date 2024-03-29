@@ -1,6 +1,7 @@
 const IMP = window.IMP;
 IMP.init("imp82847817");
 
+// 이용권 구매 오른쪽화면 ////////////////////////////////////////////////////////////
 function buyDetail(chargeCode, loginInfo, haveCharge) {
     const buyDetail = document.querySelector('.buyDetail');
     fetch('/seat/buyDetail', { //요청경로
@@ -13,6 +14,7 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
         body: new URLSearchParams({
             // 데이터명 : 데이터값
             chargeCode: chargeCode
+            , memberCode : loginInfo.memberCode
         })
     })
         .then((response) => {
@@ -44,11 +46,11 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
                     </colgroup>
                     <tr>
                         <td class="text-end">상품명</td>
-                        <td>${data.chargeName}</td>
+                        <td>${data.chargeBuy.chargeName}</td>
                     </tr>
                     <tr>
                         <td class="text-end">가격</td>
-                        <td>${data.chargeFee.toLocaleString()} 원</td>
+                        <td>${data.chargeBuy.chargeFee.toLocaleString()} 원</td>
                     </tr>
                     <tr>
                         <td class="text-end">구매자ID</td>
@@ -81,9 +83,31 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-4 mb-4">
+                            <div class="col" style="margin-left:100px;">
+                                <select class="form-select text-center" style="width: 350px;" onchange="changePrice(${data.chargeBuy.chargeFee})" id="discount">`
+                                    if (data.ownCouponList.length == 0) {
+                                        str+=`<option value=0 class=0 selected>적용할 쿠폰이 없습니다.</option>`
+                                    } else {
+                                        str+=`<option value=0 class=0 selected>적용할 쿠폰을 선택해주세요.</option>`
+                                        for (let i = 0; i < data.ownCouponList.length; i++) {
+                                            const e = data.ownCouponList[i];
+                                            str+=`
+                                            <option value="${e.couponVOList[0].discountPercent}" class="${e.ownCouponCode}">${e.couponVOList[0].couponName}</option>
+                                            `
+                                        }                                        
+                                    }
+                                str+=`</select>
+                            </div>
+                        </div>
+                        <div class="row mt-5 mb-4">
+                            <div class="col couponResult" style="font-size: 14pt;">
+                                    총 결제금액 : ${data.chargeBuy.chargeFee.toLocaleString()} 원
+                            </div>
+                        </div>
+                        <div class="row mb-5">
                             <div class="col">
-                                <button type="button" class="btn btn-outline-danger mt-4 buyCard" onclick="buyCard(${data.chargeCode}, ${loginInfo.memberCode})">
+                                <button type="button" class="btn btn-outline-danger mt-4 buyCard" onclick="buyCard(${data.chargeBuy.chargeCode}, ${loginInfo.memberCode})">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
                                     <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"></path>
                                     <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"></path>
@@ -108,8 +132,33 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
         });
 
 }
+// 구매 금액 쿠폰 적용 시 바꾸기 ///////////////////////////////////////////////////
+function changePrice(chargeFee){
+    const discount = document.querySelector('#discount').value;
+    const resultSpan = document.querySelector('.couponResult');
 
+    let a = chargeFee/100*(100-discount);
+
+    resultSpan.innerHTML='';
+    let str=``;
+    str += `총 결제금액 : ${a.toLocaleString()} 원`;
+
+    resultSpan.insertAdjacentHTML("afterbegin", str);
+}
+// 카드결제 요청 ////////////////////////////////////////////////////////////////////
 function buyCard(chargeCode, memberCode) {
+    const discount = document.querySelector('#discount').value;
+    //선택자를 통해 원하는 select 를 가져온다
+    let select = document.getElementById('discount');
+
+    //select.selectedIndex --> selected된 옵션 번호 
+    select = select.options[select.selectedIndex].className;
+
+    let couponUse = 'N';
+    if (discount != 0) {
+        couponUse = 'Y'
+    }
+    
     const result = confirm('결제를 진행하시겠습니까?')
     if (result) {
         fetch('/seat/buyCard', { //요청경로
@@ -136,7 +185,6 @@ function buyCard(chargeCode, memberCode) {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
-            console.log(data.merchant_uid)
             IMP.request_pay(
                 {
                     //pg: "{PG사코드}.{PG상점ID}", //Test는 TC0ONETIME
@@ -144,14 +192,15 @@ function buyCard(chargeCode, memberCode) {
                     pay_method: "card",
                     merchant_uid: `${data.merchant_uid}`,
                     name: `${data.buyOne.chargeName}`,
-                    amount: `${data.buyOne.chargeFee}`, //금액
+                    amount: `${data.buyOne.chargeFee/100*(100-discount)}`, //금액
                     buyer_email: '',
                     buyer_name: `${data.buyMem.memberName}`,
                     buyer_tel: `${data.buyMem.memberTel}`,
                     buyer_addr: `${data.buyMem.memberAddr + data.buyMem.addrDetail}`,
                     buyer_postcode: `${data.buyMem.postCode}`,
                 },
-                function (rsp) {
+                function (rsp) { // 결제 신청 //////////////////////////////////////
+
                     //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
                     if (rsp.success) {
                         //서버 검증 요청 부분
@@ -167,8 +216,11 @@ function buyCard(chargeCode, memberCode) {
                             body: JSON.stringify({
                                // 데이터명 : 데이터값
                                 approvalCode : `${data.merchant_uid}`
+                                , approvalFee : `${data.buyOne.chargeFee/100*(100-discount)}`
                                 , memberCode : `${data.buyMem.memberCode}`
                                 , chargeCode : `${data.buyOne.chargeCode}`
+                                , couponUse : couponUse
+                                , ownCouponCode : `${select}`
                             })
                         })
                         .then((response) => {
@@ -195,16 +247,6 @@ function buyCard(chargeCode, memberCode) {
             alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
             console.log(err);
         });
-    }
-    else {
-        return;
-    }
-}
-
-function buyAccount() {
-    const result = confirm('계좌이체로 결제하시겠습니까?')
-    if (result) {
-        return;
     }
     else {
         return;

@@ -32,14 +32,14 @@
                                 <td>글쓴이</td>
                                 <td>작성일</td>
                             </tr>
-                           
+                            
                             <th:block th:each="board , state : ${boardList}">
                                 <tr class="admin-answer">
                                     
                                     <td>[[${#lists.size(boardList) - state.index}]]</td>
                                     <th:block th:if="${session.loginInfo != null}">
                                         <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
-                                            <td class="bi bi-chat-left-heart" th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
+                                            <td class="bi bi-chat-left-heart pointer" th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
                                                 <th:block th:if="${board.boardAnswer == 'Y'}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
                                                         <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
@@ -51,7 +51,7 @@
         
                                         <th:block th:unless="${session.loginInfo.isAdmin == 'ADMIN'}">
                                             <th:block th:if="${board.boardSecret == 'NO'}">
-                                                <td class="bi bi-chat-left-heart" th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
+                                                <td class="bi bi-chat-left-heart pointer" th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
                                                     <th:block th:if="${board.boardAnswer == 'Y'}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
                                                         <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
@@ -63,7 +63,7 @@
         
                                             <th:block th:unless="${board.boardSecret == 'NO'}">
                                                 <th:block th:if="${session.loginInfo.memberId == board.boardWriter}">
-                                                    <td class="bi bi-chat-left-heart" th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
+                                                    <td class="bi bi-chat-left-heart pointer" th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
                                                         <th:block th:if="${board.boardAnswer == 'Y'}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
                                                                 <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
@@ -89,7 +89,7 @@
                                     
                                     <th:block th:if="${session.loginInfo == null}">
                                         <th:block th:if="${board.boardSecret == 'NO'}">
-                                            <td class="bi bi-chat-left-heart" th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
+                                            <td class="bi bi-chat-left-heart pointer" th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
                                                 <th:block th:if="${board.boardAnswer == 'Y'}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
                                                         <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
@@ -113,9 +113,21 @@
                                     <td>[[${board.boardWriter}]]</td>
                                     <td>[[${board.boardDate}]]</td>
                                 </tr>
-                                
                             </th:block>
                         </table>
+                        <!-- th:each="i :${#numbers.sequence(1, 10)}" -->
+                        <div>
+                            <th:block th:if="${searchVO.prev}">
+                                <a th:href="@{/board/inquiry(nowPage=${searchVO.beginPage - 1})}">이전</a>
+                            </th:block>
+                            <th:block th:each="i :${#numbers.sequence(searchVO.beginPage, searchVO.endPage)}">     
+                                <a th:href="@{/board/inquiry(nowPage=${i})}">[[${i}]]</a>
+                            </th:block>
+                            <th:block th:if="${searchVO.next}">
+                                <a th:href="@{/board/inquiry(nowPage=${searchVO.endPage + 1})}">다음</a>
+                            </th:block>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

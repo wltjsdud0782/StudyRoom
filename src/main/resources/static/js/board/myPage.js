@@ -14,8 +14,8 @@ function loginCheck(mId){
         //컨트롤러로 전달할 데이터
         body: JSON.stringify({
            // 데이터명 : 데이터값
-           memberId : mId ,
-           memberPw : checkPw
+            memberId : mId ,
+            memberPw : checkPw
         })
     })
     .then((response) => {

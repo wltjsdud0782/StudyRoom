@@ -1,0 +1,9 @@
+.mySeat-header{
+    width: 100%;
+    border-bottom: 3px solid #000;
+}
+
+.mySeat-header h3 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}

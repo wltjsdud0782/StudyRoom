@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/user_layout}">
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴때 같이 실행되는 css -->
+    <link rel="stylesheet" href="/css/homepage/mySeat.css">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <!-- html 코드 작성 -->
+    <div class="row">
+        <div class="col">
+            <div class="mySeat-header">
+                <h3>입실조회</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-5">
+            <div class="row text-start mt-5">
+                <div class="col">
+                    <h5>현재 입실 정보</h5>
+                </div>
+            </div>
+
+            <div class="row scrollbar mt-4 mb-5" style="height: 600px; overflow: auto; line-height: 4;">
+                <div class="col">
+                    <table class="table table-hover text-center align-middle table-bordered" style="font-size: 12pt;">
+                        <colgroup>
+                            <col width="50%">
+                            <col width="50%">
+                        </colgroup>
+                        <thead>
+                            <tr class="table-success align-middle" style="height: 65px;">
+                                <td colspan="2">[[${session.loginInfo.memberId}]]님의 입실정보</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <th:block th:if="${reservationMem == null}">
+                                <tr>
+                                    <td colspan="2">아직 입실하지 않았습니다.</td>
+                                </tr>
+                            </th:block>
+                            <th:block th:if="${reservationMem != null}">
+                                <tr>
+                                    <td>좌석 번호</td>
+                                    <td>[[${reservationMem.seatNum}]]번 좌석</td>
+                                </tr>
+                                <tr>
+                                    <td>전원 공급 상태</td>
+                                    <td>[[${reservationMem.seatPower}]]</td>
+                                </tr>
+                                <tr>
+                                    <td>해당 좌석 층수</td>
+                                    <td>[[${reservationMem.seatFloor}]]층</td>
+                                </tr>
+                                <tr>
+                                    <td>제한 정보</td>
+                                    <td>[[${reservationMem.floorAgeVO.ageName}]]</td>
+                                </tr>
+                            </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="offset-1 col-5">
+
+            <div class="row text-start mt-5">
+                <div class="col">
+                    <h5>[[${session.loginInfo.memberId}]]님의 입퇴실내역</h5>
+                </div>
+            </div>
+
+            <div class="row scrollbar mt-4 mb-5" style="height: 600px; overflow: auto; line-height: 4;">
+                <div class="col">
+                    <table class="table table-hover text-center align-middle table-bordered" style="font-size: 12pt;"
+                        id="mySeat-table">
+                        <colgroup>
+                            <col width="50%">
+                            <col width="50%">
+                        </colgroup>
+                        <thead>
+                            <tr class="table-success align-middle" style="height: 65px;">
+                                <td>입/퇴실</td>
+                                <td>날짜 및 시간</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <th:block th:if="${#lists.size(inoutTime)==0}">
+                                <tr>
+                                    <td colspan="2">입퇴실내역이 존재하지 않습니다.</td>
+                                </tr>
+                            </th:block>
+                            <th:block th:if="${#lists.size(inoutTime)!=0}">
+                                <th:block th:each="e : ${inoutTime}">
+                                    <tr>
+                                        <td>[[${e.inOut}]]</td>
+                                        <td>[[${e.inOutTime}]]</td>
+                                    </tr>
+                                </th:block>
+                            </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴때 같이 실행되는 js -->
+    <!-- <script src="/"></script> -->
+</th:block>
+
+</html>

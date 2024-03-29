@@ -7,7 +7,8 @@ body {
     width: 90%;
 }
 
-.btnDiv input, select {
+.btnDiv input,
+select {
     width: 120px;
     height: 40px;
     border: 1px solid #ccc;
@@ -16,7 +17,7 @@ body {
 }
 
 .title {
-    border-bottom: 3px solid #000000;
+    border-bottom: 3px solid #4d6d49;
     margin-top: 60px;
 }
 
@@ -48,7 +49,7 @@ body {
 }
 
 .info-border-title {
-    background-color: #3b3b3b;
+    background-color: #4d6d49;
     color: white;
     text-align: center;
 }
@@ -61,7 +62,7 @@ body {
 .adminContainer-table-tbody::-webkit-scrollbar-thumb {
     height: 30%;
     /* 스크롤바의 길이 */
-    background: #000000;
+    background: #4d6d49;
     /* 스크롤바의 색상 */
     border-radius: 10px;
 }
@@ -71,17 +72,46 @@ body {
     /*스크롤바 뒷 배경 색상*/
 }
 
-.numUpDown::-webkit-outer-spin-button,
+.adminContainer-table-tbody1 {
+    display: block;
+    height: 331px;
+    overflow-y: scroll;
+}
+
+.adminContainer-table-tbody1 tr {
+    display: table;
+    width: 100%;
+}
+
+.adminContainer-table-tbody1::-webkit-scrollbar {
+    width: 10px;
+    /* 스크롤바의 너비 */
+}
+
+.adminContainer-table-tbody1::-webkit-scrollbar-thumb {
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: #4d6d49;
+    /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.adminContainer-table-tbody1::-webkit-scrollbar-track {
+    background: #ccc;
+    /*스크롤바 뒷 배경 색상*/
+}
+
+/* .numUpDown::-webkit-outer-spin-button,
 .numUpDown::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
+} */
 
 /* (Message)----------------------------------------------- */
 
 .adminContainer-table-tbody2 {
     display: flex;
-    height: 49vh;
+    height: 520px;
     overflow-y: scroll;
     flex-direction: column-reverse;
 }
@@ -89,12 +119,6 @@ body {
 .adminContainer-table-tbody2 tr {
     display: table;
     width: 100%;
-}
-
-.adminContainer-table-tbody2 .topMsg {
-    font-size: smaller;
-    font-style: oblique;
-    color: #ccc;
 }
 
 .adminContainer-table-tbody2::-webkit-scrollbar {
@@ -105,7 +129,7 @@ body {
 .adminContainer-table-tbody2::-webkit-scrollbar-thumb {
     height: 30%;
     /* 스크롤바의 길이 */
-    background: #000000;
+    background: #4d6d49;
     /* 스크롤바의 색상 */
     border-radius: 10px;
 }
@@ -121,7 +145,7 @@ body {
 
 .adminContainer-table-tbody22 {
     display: block;
-    height: 43.8vh;
+    height: 520px;
     overflow-y: scroll;
 }
 
@@ -138,7 +162,7 @@ body {
 .adminContainer-table-tbody22::-webkit-scrollbar-thumb {
     height: 30%;
     /* 스크롤바의 길이 */
-    background: #000000;
+    background: #4d6d49;
     /* 스크롤바의 색상 */
     border-radius: 10px;
 }
@@ -146,6 +170,30 @@ body {
 .adminContainer-table-tbody22::-webkit-scrollbar-track {
     background: #ccc;
     /*스크롤바 뒷 배경 색상*/
+}
+
+.userMsg {
+    font-size: small;
+    padding-bottom: 10px;
+}
+
+.botMsg {
+    padding-bottom: 10px;
+}
+
+.topMsg {
+    font-size: small;
+    font-style: oblique;
+    color: #ccc;
+}
+
+.toMsg {
+    border-top: 1px solid #ccc;
+}
+
+.fromMsg {
+    background-color: #ececec;
+    border-top: 1px solid #ccc;
 }
 
 /* (Charge)----------------------------------------------- */
@@ -174,7 +222,7 @@ body {
 .adminContainer-table-tbody5::-webkit-scrollbar-thumb {
     height: 30%;
     /* 스크롤바의 길이 */
-    background: #000000;
+    background: #4d6d49;
     /* 스크롤바의 색상 */
     border-radius: 10px;
 }
@@ -194,6 +242,76 @@ body {
 
 /* (Log)----------------------------------------------- */
 
+.logDate {
+    font-style: oblique;
+    color: #ccc;
+    font-size: small;
+    float: right;
+    padding-top: 7px;
+}
+
 .logList-form-div {
     border: 1px solid #ccc;
 }
+
+.adminContainer-table-tbody4 {
+    display: flex;
+    height: 135px;
+    overflow-y: scroll;
+    flex-direction: column-reverse;
+}
+
+.adminContainer-table-tbody4 tr {
+    display: table;
+    width: 100%;
+}
+
+.adminContainer-table-tbody4::-webkit-scrollbar {
+    width: 10px;
+    /* 스크롤바의 너비 */
+}
+
+.adminContainer-table-tbody4::-webkit-scrollbar-thumb {
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: #4d6d49;
+    /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.adminContainer-table-tbody4::-webkit-scrollbar-track {
+    background: #ccc;
+    /*스크롤바 뒷 배경 색상*/
+}
+
+.adminContainer-table-tbody44 {
+    display: block;
+    height: 531px;
+    overflow-y: scroll;
+}
+
+.adminContainer-table-tbody44 tr {
+    display: table;
+    width: 100%;
+}
+
+.adminContainer-table-tbody44::-webkit-scrollbar {
+    width: 10px;
+    /* 스크롤바의 너비 */
+}
+
+.adminContainer-table-tbody44::-webkit-scrollbar-thumb {
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: #4d6d49;
+    /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.adminContainer-table-tbody44::-webkit-scrollbar-track {
+    background: #ccc;
+    /*스크롤바 뒷 배경 색상*/
+}
+
+
+/* ----------------------- */

@@ -1,22 +1,31 @@
 package com.green.StudyRoom.board.controller;
 
 import com.green.StudyRoom.admin.service.ChargeServiceImpl;
+import com.green.StudyRoom.admin.service.MessageServiceImpl;
 import com.green.StudyRoom.admin.vo.ChargeVO;
-import com.green.StudyRoom.board.service.BoardService;
-import com.green.StudyRoom.board.service.CommentService;
+import com.green.StudyRoom.admin.vo.MessageVO;
+import com.green.StudyRoom.board.service.*;
 import com.green.StudyRoom.board.vo.BoardVO;
 import com.green.StudyRoom.board.vo.CommentVO;
+import com.green.StudyRoom.board.vo.ImgVO;
+import com.green.StudyRoom.board.vo.SearchVO;
 import com.green.StudyRoom.member.service.MemberService;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatService;
 import com.green.StudyRoom.seat.vo.SeatVO;
+import com.green.StudyRoom.util.ImgUploadUtil;
 import jakarta.annotation.Resource;
+import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.spring6.processor.SpringInputCheckboxFieldTagProcessor;
 
 import javax.naming.Name;
@@ -29,6 +38,9 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/board")
 public class StudyRoomBoardController {
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
     @Resource(name="boardService")
     private BoardService boardService;
     @Resource(name = "seatService")
@@ -46,6 +58,7 @@ public class StudyRoomBoardController {
     @Resource(name="chargeService")
     private ChargeServiceImpl chargeService;
 
+
     //메인 홈페이지
     @GetMapping("/mainHomepage")
     public String studyRoomBoard(HttpSession session){
@@ -57,11 +70,11 @@ public class StudyRoomBoardController {
             seatVO.setMemberCode(memberCode);
 
             if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
-                if((seatService.isExpires(memberCode).equals("만료일이 오늘보다 이전")) && (seatService.moveAndOut(memberCode) != null)){ // 자리가 있는 상태로 이용권이 만료 되었을 때
+                if((seatService.haveChargeRemainDate(memberCode) == 0) && (seatService.moveAndOut(memberCode) != null)){ // 자리가 있는 상태로 이용권이 만료 되었을 때
                         seatService.outSeat(seatVO);
                         seatService.chargeDelete(memberCode);
                 }
-                else if (seatService.isExpires(memberCode).equals("만료일이 오늘보다 이전")){ // 자리는 없고 이용권이 만료 되었을 때
+                else if (seatService.haveChargeRemainDate(memberCode) == 0){ // 자리는 없고 이용권이 만료 되었을 때
                 seatService.chargeDelete(memberCode);
                 }
             }
@@ -71,10 +84,31 @@ public class StudyRoomBoardController {
 
     }
 
+    //리뷰
+    @GetMapping("/review")
+    public String review(){
+
+        return "content/homepage/review";
+    }
+
+
     //문의 홈페이지
     @GetMapping("/inquiry")
-    public String studyRoomInquiry(Model model){
-        List<BoardVO> boardList = boardService.selectBoard();
+    public String studyRoomInquiry(Model model, SearchVO searchVO){
+
+        //페이징처리 interface
+        PagingService page = () -> sqlSession.selectOne("boardMapper.selectBoardCnt");
+
+
+        // 전체 데이터 수
+        searchVO.setTotalDateCnt(page.selectBoardCnt());
+
+        //페이징 정보 세팅
+        searchVO.setPageInfo();
+
+        System.out.println("!!!!!!!!!!! " + searchVO.getDisplayDateCnt() + "!!!!!!!!" + page.selectBoardCnt());
+
+        List<BoardVO> boardList = boardService.selectBoard(searchVO);
 
         model.addAttribute("boardList", boardList);
 
@@ -90,15 +124,15 @@ public class StudyRoomBoardController {
     }
 
     //글쓴 내용 저장
-    @PostMapping("/inquiryWriting")
-    public String insertWriting(BoardVO boardVO, HttpSession session){
-        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-
-        boardVO.setBoardWriter(loginInfo.getMemberId());
-        boardService.insertBoard(boardVO);
-        System.out.println(boardVO);
-        return "redirect:/board/inquiry";
-    }
+//    @PostMapping("/inquiryWriting")
+//    public String insertWriting(BoardVO boardVO, HttpSession session){
+//        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+//
+//        boardVO.setBoardWriter(loginInfo.getMemberId());
+//        boardService.insertBoard(boardVO);
+//        System.out.println(boardVO);
+//        return "redirect:/board/inquiry";
+//    }
 
     // 개인 정보 페이지로 이동
     @GetMapping("/personalInfo")
@@ -166,6 +200,9 @@ public class StudyRoomBoardController {
         BoardVO boardList = boardService.detailSelect(boardCode);
 
         List<CommentVO> commentList = commentService.selectComment(boardCode);
+
+        System.out.println(boardList);
+
         model.addAttribute("boardList", boardList);
         model.addAttribute("commentList", commentList);
 
@@ -222,13 +259,21 @@ public class StudyRoomBoardController {
             model.addAttribute("buyDetailInfo", seatService.myBuyDetail(memberCode));
             model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
             model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
-
-            System.out.println(seatService.myBuyDetail(memberCode));
-            System.out.println(seatService.haveChargeRemainDate(memberCode));
-            System.out.println(seatService.haveChargeEndDate(memberCode));
         }
-
+        model.addAttribute("ownCouponList", seatService.ownCoupon(memberCode));
         return "content/homepage/myBuyDetail";
+    }
+
+    // 내 입실조회
+    @GetMapping("/mySeat")
+    public String mySeat(HttpSession session, Model model){
+        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+        int memberCode = loginInfo.getMemberCode();
+
+        model.addAttribute("reservationMem", seatService.moveAndOut(memberCode));
+        model.addAttribute("inoutTime", seatService.inOutTime(memberCode));
+
+        return "content/homepage/mySeat";
     }
 
     //내가 쓴글 확인
@@ -242,6 +287,30 @@ public class StudyRoomBoardController {
         System.out.println(boardList);
         return "content/homepage/myWriting";
     }
+
+    // 카운터 채팅
+    @GetMapping("/myCounter")
+    public String myCounter(HttpSession session, Model model){
+        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+        int memberCode = loginInfo.getMemberCode();
+
+        model.addAttribute("msgList", seatService.userMsg(memberCode));
+        return "content/homepage/my_counter";
+    }
+
+    @ResponseBody
+    @PostMapping("/sendCounter")
+    public List<MessageVO> sendCounter(@RequestBody Map<String, String> data){
+        System.out.println(data);
+        MessageVO messageVO = new MessageVO();
+        messageVO.setMemberCode(Integer.parseInt(data.get("memberCode")));
+        messageVO.setMessageContent(data.get("messageContent"));
+
+        seatService.userSend(messageVO);
+
+        return seatService.userMsg(Integer.parseInt(data.get("memberCode")));
+    }
+
     @GetMapping("/deleteBoard")
     public String deleteBoard(@RequestParam(name = "boardCode") int boardCode){
 
@@ -249,4 +318,43 @@ public class StudyRoomBoardController {
 
         return "redirect:/board/myWriting";
     }
+
+    //이미지 업로드 컨트롤러
+    @PostMapping("/inquiryWriting")
+    @Transactional(rollbackFor = Exception.class)
+    public String insertWriting(BoardVO boardVO, @RequestParam(name= "file")MultipartFile[] boardImg
+                                , HttpSession session){
+
+        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+        boardVO.setBoardWriter(loginInfo.getMemberId());
+
+        SelectNextService selectCode = () -> sqlSession.selectOne("imgMapper.selectNextBoardCode");
+
+        // ImgInterface
+        ImgService imgService = board -> {
+            sqlSession.insert("boardMapper.insertBoard", board);
+            sqlSession.insert("imgMapper.insertImgs", board);
+        };
+
+        List<ImgVO> imgList = ImgUploadUtil.multiUploadFile(boardImg);
+        
+        int boardCode = selectCode.selectNextBoardCode();
+        
+        //boardVO에 boardCode값 세팅
+        boardVO.setBoardCode(boardCode);
+        
+        for(ImgVO img : imgList){
+            img.setImgCode(boardCode);
+        }
+
+        boardVO.setImgList(imgList);
+
+        imgList.forEach(s -> System.out.println(s));
+
+        imgService.insertBoard(boardVO);
+
+        return "redirect:/board/inquiry";
+    }
+
+
 }

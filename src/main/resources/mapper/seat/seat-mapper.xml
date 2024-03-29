@@ -10,7 +10,6 @@
         <result column="MEMBER_CODE"    property="memberCode"/>
         <result column="STATUS_NUM"     property="statusNum"/>
         <result column="AGE_CODE"       property="ageCode"/>
-        <result column="AGE_CODE"       property="ageCode"/>
         <association property="seatStatusVO" resultMap="seatStatus"/>
         <association property="floorAgeVO" resultMap="floorAge"/>
         <association property="memberVO" resultMap="memberMapper.member"/>
@@ -24,6 +23,20 @@
     <resultMap id="floorAge" type="com.green.StudyRoom.seat.vo.FloorAgeVO">
         <id     column="AGE_CODE" property="ageCode"/>
         <result column="AGE_NAME" property="ageName"/>
+    </resultMap>
+
+    <resultMap id="coupon" type="com.green.StudyRoom.seat.vo.CouponVO">
+        <id     column="COUPON_CODE"     property="couponCode"/>
+        <result column="COUPON_NAME"    property="couponName"/>
+        <result column="DISCOUNT_PERCENT"    property="discountPercent"/>
+    </resultMap>
+
+    <resultMap id="memberCoupon" type="com.green.StudyRoom.seat.vo.MemberCouponVO">
+        <id     column="OWN_COUPON_CODE"     property="ownCouponCode"/>
+        <result column="COUPON_CODE"    property="couponCode"/>
+        <result column="MEMBER_CODE"    property="memberCode"/>
+        <association property="memberVO" resultMap="memberMapper.member"/>
+        <collection property="couponVOList" resultMap="coupon"/>
     </resultMap>
 
 <!--  좌석 선택 화면 필요 쿼리  -->
@@ -60,11 +73,27 @@
     </select>
 
     <select id="moveAndOut" resultMap="seat">
-        SELECT SEAT_NUM
+        SELECT
+            SEAT_NUM
+            , SEAT_POWER
+            , SEAT_FLOOR
+            , AGE_NAME
         FROM STUDYROOM_SEAT SEAT
-        INNER JOIN studyroom_member MEM
-        ON SEAT.MEMBER_CODE = MEM.MEMBER_CODE
-        WHERE SEAT.MEMBER_CODE = #{memberCode}
+        INNER JOIN FLOOR_AGE AGE
+        ON SEAT.AGE_CODE = AGE.AGE_CODE
+        WHERE MEMBER_CODE = #{memberCode}
+    </select>
+
+    <select id="inOutTime" resultMap="memberMapper.inOut">
+        SELECT
+            DATE_FORMAT(INOUT_TIME, '%y/%m/%d  %h:%i') INOUT_TIME
+            , CASE
+                WHEN IN_OUT = 'IN' THEN '입실'
+                WHEN IN_OUT = 'OUT' THEN '퇴실'
+                END IN_OUT
+        FROM STUDYROOM_INOUT
+        WHERE MEMBER_CODE = #{memberCode}
+        ORDER BY INOUT_TIME DESC
     </select>
 
 
@@ -142,31 +171,31 @@
     <select id="today" resultType="String">
         SELECT DATE_FORMAT(now(), '%Y%m%d')
     </select>
-    <select id="buyToday" resultType="String">
+    <select id="buyToday" resultType="int">
         SELECT DATE_FORMAT(now(), '%y%m%d')
     </select>
 
-    <select id="isExpires" resultType="String">
-    SELECT
-    IF(
-    (SELECT
-    (SELECT DATE_ADD(
-    (SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode})
-    , INTERVAL (
-    SELECT
-    CHARGE_DATE
-    FROM STUDYROOM_CHARGE CHARGE
-    INNER JOIN APPROVAL APP
-    ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
-    WHERE
-    APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
-    ) DAY)
-    )
-    FROM approval
-    WHERE MEMBER_CODE = #{memberCode}) &lt; (SELECT DATE_FORMAT(now(), '%Y-%m-%d'))
-    , '만료일이 오늘보다 이전'
-    , '만료일이 오늘보다 이후')AS EXPIRES
-    </select>
+<!--    <select id="isExpires" resultType="String">-->
+<!--    SELECT-->
+<!--    IF(-->
+<!--    (SELECT-->
+<!--    (SELECT DATE_ADD(-->
+<!--    (SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode})-->
+<!--    , INTERVAL (-->
+<!--    SELECT-->
+<!--    CHARGE_DATE-->
+<!--    FROM STUDYROOM_CHARGE CHARGE-->
+<!--    INNER JOIN APPROVAL APP-->
+<!--    ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE-->
+<!--    WHERE-->
+<!--    APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})-->
+<!--    ) DAY)-->
+<!--    )-->
+<!--    FROM approval-->
+<!--    WHERE MEMBER_CODE = #{memberCode}) &lt; (SELECT DATE_FORMAT(now(), '%Y-%m-%d'))-->
+<!--    , '만료일이 오늘보다 이전'-->
+<!--    , '만료일이 오늘보다 이후')AS EXPIRES-->
+<!--    </select>-->
 
     <!--  이용권 만료 삭제  -->
     <delete id="chargeDelete">
@@ -243,12 +272,16 @@
     <insert id="buyCard">
         INSERT INTO APPROVAL (
             APPROVAL_CODE
+            , APPROVAL_FEE
             , MEMBER_CODE
             , CHARGE_CODE
+            , COUPON_USE
         ) VALUES (
             #{approvalCode}
+            , #{approvalFee}
             , #{memberCode}
             , #{chargeCode}
+            , #{couponUse}
         )
     </insert>
 
@@ -266,45 +299,69 @@
         SELECT
             DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') APPROVAL_DATE
             , CASE
-                WHEN CARD = 'Y' THEN '카드'
-                WHEN CARD = 'N' THEN '카드외'
-                END CARD
-            , CHARGE_FEE
+                WHEN COUPON_USE = 'Y' THEN '사용함'
+                WHEN COUPON_USE = 'N' THEN '사용안함'
+                END COUPON_USE
+            , APPROVAL_FEE
         FROM APPROVAL APP
-        INNER JOIN STUDYROOM_CHARGE CHARGE
-        ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
         WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
     </select>
 
+
+<!--  쿠폰 관련 쿼리  -->
+    <select id="coupon" resultMap="coupon">
+        SELECT
+        *
+        FROM COUPON
+    </select>
+
+
+<!--  회원이 가진 쿠폰 관련 쿼리  -->
+    <select id="ownCoupon" resultMap="memberCoupon">
+        SELECT
+            OWN_COUPON_CODE
+            , COUPON_CODE
+            , (SELECT
+                COUPON_NAME
+                FROM coupon
+                WHERE COUPON_CODE = member_coupon.COUPON_CODE) COUPON_NAME
+            , (SELECT
+                DISCOUNT_PERCENT
+                FROM coupon
+                WHERE COUPON_CODE = member_coupon.COUPON_CODE) DISCOUNT_PERCENT
+        FROM member_coupon
+        WHERE MEMBER_CODE = #{memberCode}
+        ORDER BY OWN_COUPON_CODE
+    </select>
+
+    <delete id="deleteCoupon">
+        DELETE FROM MEMBER_COUPON
+        WHERE OWN_COUPON_CODE = #{ownCouponCode}
+    </delete>
+
+<!--  채팅  -->
+    <select id="userMsg" resultMap="messageMapper.message">
+        SELECT
+            MESSAGE_CONTENT
+            , MEMBER_CODE
+            , TO_FROM
+            , DATE_FORMAT(MESSAGE_DATE, '%Y-%m-%d   %p %l:%i') MESSAGE_DATE
+        FROM STUDYROOM_MESSAGE
+        WHERE MEMBER_CODE = #{memberCode}
+        ORDER BY MESSAGE_CODE DESC LIMIT 100
+    </select>
+
+    <insert id="userSend">
+        INSERT INTO STUDYROOM_MESSAGE (
+            MESSAGE_CONTENT
+            , MEMBER_CODE
+            , TO_FROM
+        ) VALUES (
+            #{messageContent}
+            , #{memberCode}
+            , 'FROM'
+        )
+    </insert>
+
+
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -34,14 +34,20 @@ public class MessageServiceImpl implements MessageService{
     }
 
     //유저 메세지 저장
+//    @Override
+//    public void insertMessage(MessageVO messageVO) {
+//        sqlSession.insert("messageMapper.insertMessage", messageVO);
+//    }
+
+    //메세지 조회
     @Override
-    public void insertMessage(MessageVO messageVO) {
-        sqlSession.insert("messageMapper.insertMessage", messageVO);
+    public List<MessageVO> selectMessage(int memberCode) {
+        return sqlSession.selectList("messageMapper.selectMessage", memberCode);
     }
 
-    //모든 메세지 조회
+    //최근 메세지 조회
     @Override
-    public List<MessageVO> selectMessage() {
-        return sqlSession.selectList("messageMapper.selectMessage");
+    public List<MessageVO> selectRecentMsg() {
+        return sqlSession.selectList("messageMapper.selectRecentMsg");
     }
 }

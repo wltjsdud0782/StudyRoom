@@ -1,8 +1,12 @@
 package com.green.StudyRoom.seat.service;
 
 import com.green.StudyRoom.admin.vo.ChargeVO;
+import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
+import com.green.StudyRoom.member.vo.StudyRoomInOutVO;
+import com.green.StudyRoom.seat.vo.CouponVO;
+import com.green.StudyRoom.seat.vo.MemberCouponVO;
 import com.green.StudyRoom.seat.vo.SeatVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,11 @@ public class SeatServiceImpl implements SeatService{
     @Override // 예약되어있는 상태로 좌석예약 조회
     public SeatVO moveAndOut(int memberCode) {
         return sqlSession.selectOne("seatMapper.moveAndOut", memberCode);
+    }
+
+    @Override // 입퇴실 시간
+    public List<StudyRoomInOutVO> inOutTime(int memberCode) {
+        return sqlSession.selectList("seatMapper.inOutTime", memberCode);
     }
 
     @Override // 구매한 이용권 유무
@@ -56,10 +65,10 @@ public class SeatServiceImpl implements SeatService{
         return sqlSession.selectOne("seatMapper.today");
     }
 
-    @Override
-    public String isExpires(int memberCode) {
-        return sqlSession.selectOne("seatMapper.isExpires", memberCode);
-    }
+//    @Override
+//    public String isExpires(int memberCode) {
+//        return sqlSession.selectOne("seatMapper.isExpires", memberCode);
+//    }
 
     @Override
     public void chargeDelete(int memberCode) {
@@ -117,9 +126,34 @@ public class SeatServiceImpl implements SeatService{
         sqlSession.update("seatMapper.adminUpdateSeat", seatVO);
     }
 
-    @Override
+    @Override // 내 이용권 조회
     public ApprovalVO myBuyDetail(int memberCode) {
         return sqlSession.selectOne("seatMapper.myBuyDetail", memberCode);
+    }
+
+    @Override // 모든 쿠폰 조회
+    public List<CouponVO> coupon() {
+        return sqlSession.selectList("seatMapper.coupon");
+    }
+
+    @Override // 내 쿠폰 조회
+    public List<MemberCouponVO> ownCoupon(int memberCode) {
+        return sqlSession.selectList("seatMapper.ownCoupon", memberCode);
+    }
+
+    @Override // 쿠폰 사용하여 결제 시 해당 쿠폰 삭제
+    public void deleteCoupon(int ownCouponCode) {
+        sqlSession.delete("seatMapper.deleteCoupon", ownCouponCode);
+    }
+
+    @Override // 채팅
+    public List<MessageVO> userMsg(int memberCode) {
+        return sqlSession.selectList("seatMapper.userMsg", memberCode);
+    }
+
+    @Override // 채팅 전송
+    public void userSend(MessageVO messageVO) {
+        sqlSession.insert("seatMapper.userSend", messageVO);
     }
 
 }

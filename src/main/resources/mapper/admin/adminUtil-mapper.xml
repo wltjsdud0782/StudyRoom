@@ -33,24 +33,28 @@
     </select>
 
 
-
-
-
-
     <!-- 회원정보 상세 조회 -->
     <select id="selectMemberDetailInfo" resultMap="memberMapper.member">
         SELECT MEMBER_NAME
             , MEMBER_ID
-            , MEMBER_GENDER
+            , CASE
+                WHEN MEMBER_GENDER = 'M' THEN '남성'
+                WHEN MEMBER_GENDER = 'W' THEN '여성'
+                END AS MEMBER_GENDER
             , MEMBER_TEL
             , POST_CODE
             , MEMBER_ADDR
             , ADDR_DETAIL
-            , IS_ADMIN
+            , CASE
+                WHEN IS_ADMIN = 'USER' THEN '회원'
+                WHEN IS_ADMIN = 'ARBEIT' THEN '알바생'
+                WHEN IS_ADMIN = 'ADMIN' THEN '관리자'
+                END AS IS_ADMIN
             , DATE_FORMAT(MEMBER_BIRTH, '%Y-%m-%d') MEMBER_BIRTH
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_CODE = #{memberCode}
     </select>
+
 
     <!-- 회원정보/회원권한 변경 -->
     <update id="uptMemberInfo">
@@ -65,35 +69,48 @@
     </update>
 
 
-
-
-
-
-
     <!-- 좌석 정보 조회 -->
     <select id="selectSeatDetailInfo" resultMap="seatMapper.seat">
         SELECT SEAT_NUM
-                , SEAT_POWER
+                , CASE
+                    WHEN SEAT_POWER = 'ON' THEN '켜짐'
+                    WHEN SEAT_POWER = 'OFF' THEN '꺼짐'
+                    END SEAT_POWER
                 , SEAT_FLOOR
+                , STATUS_NAME
                 , AGE_CODE
                 , SEAT.MEMBER_CODE
         FROM STUDYROOM_SEAT SEAT
         INNER JOIN STUDYROOM_MEMBER MEMBER
         ON SEAT.MEMBER_CODE = MEMBER.MEMBER_CODE
+        INNER JOIN seat_status STATUS
+        ON SEAT.STATUS_NUM = STATUS.STATUS_NUM
         WHERE SEAT.MEMBER_CODE = #{memberCode}
     </select>
+
 
     <!-- 좌석 정보 업데이트 -->
     <update id="uptSeatInfo">
         UPDATE STUDYROOM_SEAT
         SET
         SEAT_POWER = #{seatPower}
-
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 
 
-
+    <!-- 쿠폰 정보 띄우기 -->
+    <select id="selectInfoCoupon" resultMap="seatMapper.memberCoupon">
+        SELECT COU.COUPON_CODE
+            , COU.MEMBER_CODE
+            , COUPON_NAME
+            , DISCOUNT_PERCENT
+        FROM member_coupon COU
+        INNER JOIN STUDYROOM_MEMBER MEMBER
+        ON COU.MEMBER_CODE = MEMBER.MEMBER_CODE
+        INNER JOIN coupon PON
+        ON COU.COUPON_CODE = PON.COUPON_CODE
+        WHERE COU.MEMBER_CODE = #{memberCode};
+    </select>
 
 </mapper>
 

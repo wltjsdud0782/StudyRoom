@@ -2,6 +2,7 @@ package com.green.StudyRoom.board.service;
 
 import com.green.StudyRoom.board.vo.BoardVO;
 import com.green.StudyRoom.board.vo.CommentVO;
+import com.green.StudyRoom.board.vo.SearchVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface BoardService {
     void insertBoard(BoardVO boardVO);
 
     //게시판 조회
-    List<BoardVO> selectBoard();
+    List<BoardVO> selectBoard(SearchVO searchVO);
 
     //멤버정보변경
     void updateMember(MemberVO memberVO);

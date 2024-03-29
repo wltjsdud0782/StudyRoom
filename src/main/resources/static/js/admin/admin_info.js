@@ -1,3 +1,8 @@
+//원래 쓰던 info(백업용)
+
+
+
+
 //수정 불가능한 info 나오기
 function allInfo(memberCode) {
     fetch('/admin/viewInfo', { //요청경로
@@ -29,7 +34,7 @@ function allInfo(memberCode) {
             let str = '';
             str += `  
                         <input type="hidden" name="memberCode" value="${memberCode}">
-                            <h4>&nbsp;Member</h4>
+                            <h4>&nbsp;회원 정보</h4>
                             <table class="adminContainer-table">
                                 <colgroup>
                                     <col width="11%">
@@ -96,7 +101,7 @@ function allInfo(memberCode) {
                                         <td class="info-border-title">
                                             <div class="row">
                                                 <div class="col">
-                                                    우편 주소
+                                                    우편 번호
                                                 </div>
                                             </div>
                                         </td>
@@ -295,7 +300,7 @@ function memberInfo(memberCode) {
             str += `  
                         <form action="/admin/uptInfo" method="post">
                         <input type="hidden" name="memberCode" value="${memberCode}">
-                            <h4>&nbsp;Member</h4>
+                            <h4>&nbsp;회원정보</h4>
                             <table class="adminContainer-table">
                                 <colgroup>
                                     <col width="11%">
@@ -363,7 +368,7 @@ function memberInfo(memberCode) {
                                         <td class="info-border-title">
                                             <div class="row">
                                                 <div class="col">
-                                                    우편 주소
+                                                    우편 번호
                                                 </div>
                                             </div>
                                         </td>

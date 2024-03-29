@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{fragment/main_layout}" >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/main_layout}">
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴 때 같이 실행되는 css -->
@@ -13,50 +12,52 @@
         <div class="col">
             <div class="main-myPage-box">
 
-                    <div class="page-box">
-                        <a onclick="location.href='/board/personalInfo'">
-                            <img src="/img/main_myPage_icon.png" alt="#">
-                            <h4>개인정보변경</h4>
-                            <div class="page-box-text">
-                                고객님의 정보를 <br>
-                                수정하실 수 있습니다.
-                            </div>
-                        </a>
-                    </div>
+                <div class="page-box">
+                    <a onclick="location.href='/board/personalInfo'">
+                        <img src="/img/main_myPage_icon.png" alt="#">
+                        <h4>개인정보변경</h4>
+                        <div class="page-box-text">
+                            고객님의 정보를 <br>
+                            수정하실 수 있습니다.
+                        </div>
+                    </a>
+                </div>
 
-                    <div class="page-box">
-                        <a onclick="location.href='/board/myBuyDetail'">
-                            <img src="/img/main_myPage_icon.png" alt="#">
-                            <h4>이용권/쿠폰</h4>
-                            <div class="page-box-text">
-                                보유하신 이용권 정보와 쿠폰을 <br>
-                                확인하실 수 있습니다. 
-                            </div>
-                        </a>
-                    </div>
+                <div class="page-box">
+                    <a onclick="location.href='/board/myBuyDetail'">
+                        <img src="/img/main_myPage_icon.png" alt="#">
+                        <h4>이용권/쿠폰</h4>
+                        <div class="page-box-text">
+                            보유하신 이용권 정보와 쿠폰을 <br>
+                            확인하실 수 있습니다.
+                        </div>
+                    </a>
+                </div>
 
-                    <div class="page-box">
-                        <a>
-                            <img src="/img/main_myPage_icon.png" alt="#">
-                            <h4>입실조회</h4>
-                            <div class="page-box-text">
-                                고객님께서 입실하신 정보를 <br>
-                                조회할 수 있습니다.
-                            </div>
-                        </a>
-                    </div>
+                <div class="page-box">
+                    <a onclick="location.href='/board/mySeat'">
+                        <img src="/img/main_myPage_icon.png" alt="#">
+                        <h4>입실조회</h4>
+                        <div class="page-box-text">
+                            고객님께서 입실하신 정보를 <br>
+                            조회할 수 있습니다.
+                        </div>
+                    </a>
+                </div>
 
 
-                    <div class="page-box">
-                        <a onclick="location.href='/board/myWriting'">
-                            <img src="/img/main_myPage_icon.png" alt="#">
-                            <h4>내 문의</h4>
-                            <div class="page-box-text">
-                                적어주신 문의내역을 <br>
-                                확인하실 수 있습니다.
-                            </div>
-                        </a>
-                    </div>
+                <div class="page-box">
+                    <a onclick="location.href='/board/myWriting'">
+                        <img src="/img/main_myPage_icon.png" alt="#">
+                        <h4>내 문의</h4>
+                        <div class="page-box-text">
+                            적어주신 문의내역을 <br>
+                            확인하실 수 있습니다.
+                        </div>
+                    </a>
+                </div>
+
+
             </div>
 
         </div>
@@ -67,4 +68,5 @@
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
     <!-- <script src="/"></script> -->
 </th:block>
+
 </html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="salesMapper">
+
+    <!-- 매출 관리 -->
+    <select id="selectSales" resultMap="memberMapper.approval">
+        SELECT APPROVAL_FEE
+        FROM approval;
+    </select>
+
+    <!-- 매출 합계 -->
+    <select id="salesSum" resultMap="memberMapper.approval">
+        SELECT SUM(APPROVAL_FEE) AS APPROVAL_FEE
+        FROM approval;
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,6 +6,7 @@ import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatService;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
+import com.green.StudyRoom.seat.vo.MemberCouponVO;
 import com.green.StudyRoom.seat.vo.SeatVO;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
@@ -103,8 +104,11 @@ public class SeatController {
 
     @ResponseBody
     @PostMapping("/buyDetail") // 이용권 상품 눌렀을때
-    public ChargeVO buyDetail(@RequestParam(name = "chargeCode")int chargeCode){
-        return seatService.chargeBuy(chargeCode);
+    public Map<String, Object> buyDetail(@RequestParam(name = "chargeCode")int chargeCode, @RequestParam(name = "memberCode")int memberCode){
+        Map<String, Object> a = new HashMap<String, Object>();
+        a.put("chargeBuy", seatService.chargeBuy(chargeCode));
+        a.put("ownCouponList", seatService.ownCoupon(memberCode));
+        return a;
     }
 
     @ResponseBody
@@ -116,15 +120,28 @@ public class SeatController {
         Map<String, Object> buyInfo = new HashMap<String, Object>();
         buyInfo.put("buyMem", buyMem);
         buyInfo.put("buyOne", buyOne);
-        int buyCode = (int)(Math.random()*100000000+1);
-        buyInfo.put("merchant_uid", seatService.buyToday()+buyCode);
+        int buyCode = (int)(Math.random()*10000000+1);
+        buyInfo.put("merchant_uid", buyCode);
 
         return buyInfo;
     }
 
     @ResponseBody
-    @PostMapping("/buySuccess")
-    public void buySuccess(@RequestBody ApprovalVO approvalVO){
+    @PostMapping("/buySuccess") // 사용시 삭제되는지 확인해야함!!!!!!!!!!!!!!!
+    public void buySuccess(@RequestBody HashMap<String, String> data){
+        System.out.println(data);
+        ApprovalVO approvalVO = new ApprovalVO();
+        approvalVO.setApprovalCode(Integer.parseInt(data.get("approvalCode")));
+        approvalVO.setApprovalFee(Integer.parseInt(data.get("approvalFee")));
+        approvalVO.setMemberCode(Integer.parseInt(data.get("memberCode")));
+        approvalVO.setChargeCode(Integer.parseInt(data.get("chargeCode")));
+        approvalVO.setCouponUse((String)data.get("couponUse"));
+        int result = Integer.parseInt(data.get("ownCouponCode"));
+
         seatService.buyCard(approvalVO);
+        if (result != 0){
+            seatService.deleteCoupon(result);
+        }
     }
+
 }

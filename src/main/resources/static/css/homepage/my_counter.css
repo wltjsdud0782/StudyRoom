@@ -1,0 +1,41 @@
+.counter-header {
+    width: 81.5%;
+    text-align: start;
+    margin-top: 12px;
+    margin-left: 190px;
+    border-bottom: 3px solid black;
+}
+
+.userChat {
+    display: flex;
+    height: 520px;
+    overflow: auto;
+    flex-direction: column-reverse;
+}
+
+.userChat tr {
+    display: table;
+    width: 100%;
+}
+
+.userChat::-webkit-scrollbar {
+    width: 10px;
+    /* 스크롤바의 너비 */
+}
+
+.userChat::-webkit-scrollbar-thumb {
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: #4d6d49;
+    /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.userChat::-webkit-scrollbar-track {
+    background: #ccc;
+    /*스크롤바 뒷 배경 색상*/
+}
+
+.user-chat-table tfoot {
+    border-top: 1px solid #ccc;
+}

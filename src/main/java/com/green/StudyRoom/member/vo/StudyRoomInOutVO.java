@@ -10,7 +10,8 @@ import lombok.ToString;
 public class StudyRoomInOutVO {
     private int dayInput;
     private int memberCode;
-    private String InOut;
+    private String inOut;
+    private String inOutTime;
 
     private MemberVO memberVO;
 }

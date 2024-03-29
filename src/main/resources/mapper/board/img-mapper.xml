@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="imgMapper">
+      <resultMap id="img" type="com.green.StudyRoom.board.vo.ImgVO">
+            <id     column="IMG_CODE"               property="imgCode"/>
+            <result column="ORIGIN_FILE_NAME"       property="originFileName"/>
+            <result column="ATTACHED_FILE_NAME"     property="attachedFileName"/>
+            <result column="BOARD_CODE"             property="boardCode"/>
+      </resultMap>
+
+    <!-- 다음에 INSERT 할 board_Code를 조회-->
+    <select id="selectNextBoardCode" resultType="int">
+        SELECT IFNULL(MAX(BOARD_CODE), 0) +1 FROM STUDYROOM_BOARD
+    </select>
+
+    <!-- 여러개 이미지 반복문 돌려 insert-->
+    <insert id="insertImgs">
+        INSERT INTO BOARD_IMG (
+            ORIGIN_FILE_NAME
+            ,ATTACHED_FILE_NAME
+            ,BOARD_CODE
+        ) VALUES
+            <foreach collection="imgList" item="img" separator=",">
+                (
+                    #{img.originFileName}
+                   , #{img.attachedFileName}
+                   , #{boardCode}
+                )
+            </foreach>
+
+    </insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

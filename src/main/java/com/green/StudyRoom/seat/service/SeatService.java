@@ -1,8 +1,12 @@
 package com.green.StudyRoom.seat.service;
 
 import com.green.StudyRoom.admin.vo.ChargeVO;
+import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
+import com.green.StudyRoom.member.vo.StudyRoomInOutVO;
+import com.green.StudyRoom.seat.vo.CouponVO;
+import com.green.StudyRoom.seat.vo.MemberCouponVO;
 import com.green.StudyRoom.seat.vo.SeatVO;
 
 import java.util.List;
@@ -13,6 +17,8 @@ public interface SeatService {
     List<SeatVO> seatList();
     SeatVO moveAndOut(int memberCode); // 예약 상태 좌석 이동,퇴실 버튼 띄우기
 
+    List<StudyRoomInOutVO> inOutTime(int memberCode); // 입퇴실 시간
+
     // 이용권 관련
     String haveCharge(int memberCode); // 구매한 이용권 유무
     String haveChargeApprovalDate(int memberCode); // 구매한 이용권의 결제일
@@ -20,7 +26,7 @@ public interface SeatService {
     String haveChargeEndDate(int memberCode); // 구매한 이용권의 끝나는 날짜
     int haveChargeRemainDate(int memberCode); // 구매한 이용권의 남은 일 수
     String today();
-    String isExpires(int memberCode);
+//    String isExpires(int memberCode);
     void chargeDelete(int memberCode);
 
     // 입실
@@ -50,4 +56,15 @@ public interface SeatService {
 
     // 마이페이지 이용권
     ApprovalVO myBuyDetail(int memberCode);
+
+    // 쿠폰 관련
+    List<CouponVO> coupon(); // admin 관련
+    List<MemberCouponVO> ownCoupon(int memberCode);
+
+    void deleteCoupon(int ownCouponCode);
+
+    // 채팅
+    List<MessageVO> userMsg(int memberCode);
+    void userSend(MessageVO messageVO);
+
 }
