@@ -40,12 +40,39 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <th:block th:if="${haveCharge} == null">
+                            <th:block th:if="${haveCharge.length == 0}">
                                 <tr>
                                     <td colspan="2">보유한 이용권이 없습니다.</td>
                                 </tr>
                             </th:block>
-                            <th:block th:if="${haveCharge} != null">
+                            <th:block th:if="${haveCharge.length == 1}">
+                                <!-- 확인하세요!!!!!!!!!!!!! -->
+                                <tr style="height: 50px;">
+                                    <td>상품명</td>
+                                    <td>[[${haveCharge[0]}]]</td>
+                                </tr>
+                                <tr style="height: 50px;">
+                                    <td>구입날짜</td>
+                                    <td>[[${buyDetailInfo[0].approvalDate}]]</td>
+                                </tr>
+                                <tr style="height: 50px;">
+                                    <td>쿠폰사용 여부</td>
+                                    <td>[[${buyDetailInfo[0].couponUse}]]</td>
+                                </tr>
+                                <tr style="height: 50px;">
+                                    <td>결제금액</td>
+                                    <td>[[${#numbers.formatCurrency(buyDetailInfo[0].approvalFee)}]]</td>
+                                </tr>
+                                <tr style="height: 50px;">
+                                    <td>만료날짜</td>
+                                    <td>[[${endDate}]] 만료</td>
+                                </tr>
+                                <tr style="height: 50px;">
+                                    <td>남은일수</td>
+                                    <td>[[${remainDate}]]일</td>
+                                </tr>
+                            </th:block>
+                            <th:block th:if="${haveCharge.length == 2}">
                                 <tr style="height: 50px;">
                                     <td>상품명</td>
                                     <td>[[${haveCharge}]]</td>

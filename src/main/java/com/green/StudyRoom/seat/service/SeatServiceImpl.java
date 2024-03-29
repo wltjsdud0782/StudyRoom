@@ -36,18 +36,18 @@ public class SeatServiceImpl implements SeatService{
     }
 
     @Override // 구매한 이용권 유무
-    public String haveCharge(int memberCode) {
-        return sqlSession.selectOne("seatMapper.haveCharge", memberCode);
+    public List<ApprovalVO> haveCharge(int memberCode) {
+        return sqlSession.selectList("seatMapper.haveCharge", memberCode);
     }
 
     @Override // 결제일
-    public String haveChargeApprovalDate(int memberCode) {
-        return sqlSession.selectOne("seatMapper.haveChargeApprovalDate", memberCode);
+    public List<ApprovalVO> haveChargeApprovalDate(int memberCode) {
+        return sqlSession.selectList("seatMapper.haveChargeApprovalDate", memberCode);
     }
 
     @Override // 이용 가능 일 수
-    public int haveChargeDate(int memberCode) {
-        return sqlSession.selectOne("seatMapper.haveChargeDate", memberCode);
+    public List<ApprovalVO> haveChargeDate(int memberCode) {
+        return sqlSession.selectList("seatMapper.haveChargeDate", memberCode);
     }
 
     @Override // 이용권의 끝나는 날짜
@@ -58,6 +58,11 @@ public class SeatServiceImpl implements SeatService{
     @Override // 이용권의 남은 일 수
     public int haveChargeRemainDate(int memberCode) {
         return sqlSession.selectOne("seatMapper.haveChargeRemainDate", memberCode);
+    }
+
+    @Override
+    public void updateApp(int memberCode) {
+        sqlSession.update("seatMapper.updateApp", memberCode);
     }
 
     @Override
