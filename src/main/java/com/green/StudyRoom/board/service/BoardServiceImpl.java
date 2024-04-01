@@ -16,10 +16,14 @@ public class BoardServiceImpl implements BoardService {
     @Autowired
     private SqlSessionTemplate sqlSession;
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     // 글쓰기
     public void insertBoard(BoardVO boardVO) {
         sqlSession.insert("boardMapper.insertBoard", boardVO);
+        if(boardVO.getImgList().size() != 0){
+            sqlSession.insert("imgMapper.insertImgs", boardVO);
+        }
     }
 
     // 글쓰기 첫 화면, 작성한 글 조회
