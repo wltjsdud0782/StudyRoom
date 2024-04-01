@@ -7,6 +7,7 @@ import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
 import com.green.StudyRoom.seat.vo.CouponVO;
+import com.green.StudyRoom.seat.vo.SeatStatusVO;
 import com.green.StudyRoom.seat.vo.SeatVO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
@@ -69,17 +70,24 @@ public class AdminController {
             map.put("charRemDate", seatService.haveChargeRemainDate(memberCode));
             map.put("charEndDate", seatService.haveChargeEndDate(memberCode));
         }
-
         return map;
     }
 
-    //회원정보/좌석정보 업데이트
-//    @PostMapping("/uptInfo")
-//    public String uptAllInfo(MemberVO memberVO, SeatVO seatVO){
-//        adminService.uptMemberInfo(memberVO);
-//        adminService.uptSeatInfo(seatVO);
-//        return "redirect:/admin/info";
-//    }
+    // 회원정보 업데이트
+    @PostMapping("/uptMemberInfo")
+    public String uptMemberInfo(MemberVO memberVO){
+        adminService.uptMemberInfo(memberVO);
+        return "redirect:/admin/info";
+    }
+
+    // 좌석정보 업데이트
+    @PostMapping("/uptSeatInfo")
+    public String uptSeatInfo(SeatVO seatVO){
+        adminService.uptSeatInfo(seatVO);
+        //adminService.uptSeatStatus(seatStatusVO);
+        //seatService.adminUpdateSeat(seatVO);
+        return "redirect:/admin/info";
+    }
 
     //회원정보/좌석정보 조회하기
 //    @ResponseBody

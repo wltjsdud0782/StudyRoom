@@ -177,7 +177,8 @@ function allInfo(memberCode) {
                 str += `<div style="padding-top: 7px;">${data.seatMap.seatFloor}층&ensp;${data.seatMap.seatNum}번석</div>
                                             </div>
                                                 <div class="col-5 text-center">                                                
-                                                    <input type="button" value="시간 조회" 
+                                                    <input type="button" value="시간 조회"
+                                                    <div style="float: right;"></div> 
                                                     onclick="useTime(${memberCode})" class="btn btn-dark">&nbsp;
                                                 </div>                                                                               
                                         </div>
