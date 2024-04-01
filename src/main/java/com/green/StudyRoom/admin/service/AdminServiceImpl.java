@@ -3,6 +3,7 @@ package com.green.StudyRoom.admin.service;
 import com.green.StudyRoom.admin.vo.InfoSearchVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.vo.MemberCouponVO;
+import com.green.StudyRoom.seat.vo.SeatStatusVO;
 import com.green.StudyRoom.seat.vo.SeatVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,12 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void uptSeatInfo(SeatVO seatVO) {
         sqlSession.update("adminMapper.uptSeatInfo", seatVO);
+    }
+
+    //좌석정보 업데이트 하기2
+    @Override
+    public void uptSeatStatus(SeatStatusVO seatStatusVO) {
+        sqlSession.update("adminMapper.uptSeatStatus", seatStatusVO);
     }
 
     //쿠폰정보 보여주기

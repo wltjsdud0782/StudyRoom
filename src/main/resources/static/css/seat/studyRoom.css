@@ -45,7 +45,7 @@ a {
 .sideMenu {
     margin-top: 30px;
     position: fixed;
-    top: 100px;
+    top: 100px;         
     left: 30px;
 }   
 .sideMenu > ul {

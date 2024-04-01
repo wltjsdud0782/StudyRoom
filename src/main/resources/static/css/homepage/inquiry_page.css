@@ -42,3 +42,13 @@
     border: 1px solid #ccc;
     background-color: #fff;
 }
+.paging{
+    margin-top: 20px;
+    text-align: center;
+}
+.paging a{
+    padding: 5px;
+}
+.paging a:hover{
+    background-color: #ccc;
+}
