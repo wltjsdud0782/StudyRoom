@@ -29,7 +29,7 @@
 
             <div class="row scrollbar mt-4 mb-5" style="height: 600px; overflow: auto; line-height: 4;">
                 <div class="col">
-                    <table class="table table-hover text-center align-middle table-bordered" style="font-size: 12pt;">
+                    <table class="table text-center align-middle table-bordered" style="font-size: 12pt;">
                         <colgroup>
                             <col width="50%">
                             <col width="50%">
@@ -40,16 +40,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <th:block th:if="${haveCharge.length == 0}">
+                            <th:block th:if="${#lists.isEmpty(haveCharge)}">
                                 <tr>
                                     <td colspan="2">보유한 이용권이 없습니다.</td>
                                 </tr>
                             </th:block>
-                            <th:block th:if="${haveCharge.length == 1}">
-                                <!-- 확인하세요!!!!!!!!!!!!! -->
+                            <th:block th:if="${#lists.size(haveCharge)} == 1">
                                 <tr style="height: 50px;">
                                     <td>상품명</td>
-                                    <td>[[${haveCharge[0]}]]</td>
+                                    <td>[[${haveCharge[0].chargeVO.chargeName}]]</td>
                                 </tr>
                                 <tr style="height: 50px;">
                                     <td>구입날짜</td>
@@ -72,29 +71,41 @@
                                     <td>[[${remainDate}]]일</td>
                                 </tr>
                             </th:block>
-                            <th:block th:if="${haveCharge.length == 2}">
+                            <th:block th:if="${#lists.size(haveCharge)} == 2">
                                 <tr style="height: 50px;">
-                                    <td>상품명</td>
-                                    <td>[[${haveCharge}]]</td>
+                                    <td rowspan="2">상품명</td>
+                                    <td>[[${haveCharge[0].chargeVO.chargeName}]]</td>
+                                </tr>
+                                <tr>
+                                    <td>[[${haveCharge[1].chargeVO.chargeName}]]</td>
                                 </tr>
                                 <tr style="height: 50px;">
-                                    <td>구입날짜</td>
-                                    <td>[[${buyDetailInfo.approvalDate}]]</td>
+                                    <td rowspan="2">이용권 시작 날짜</td>
+                                    <td>[[${buyDetailInfo[0].approvalDate}]]</td>
+                                </tr>
+                                <tr>
+                                    <td>[[${buyDetailInfo[1].approvalDate}]]</td>
                                 </tr>
                                 <tr style="height: 50px;">
-                                    <td>쿠폰사용 여부</td>
-                                    <td>[[${buyDetailInfo.couponUse}]]</td>
+                                    <td rowspan="2">쿠폰사용 여부</td>
+                                    <td>[[${buyDetailInfo[0].couponUse}]]</td>
+                                </tr>
+                                <tr>
+                                    <td>[[${buyDetailInfo[1].couponUse}]]</td>
                                 </tr>
                                 <tr style="height: 50px;">
-                                    <td>결제금액</td>
-                                    <td>[[${#numbers.formatCurrency(buyDetailInfo.approvalFee)}]]</td>
+                                    <td rowspan="2">결제금액</td>
+                                    <td>[[${#numbers.formatCurrency(buyDetailInfo[0].approvalFee)}]]</td>
+                                </tr>
+                                <tr>
+                                    <td>[[${#numbers.formatCurrency(buyDetailInfo[1].approvalFee)}]]</td>
                                 </tr>
                                 <tr style="height: 50px;">
-                                    <td>만료날짜</td>
+                                    <td>첫번째 이용권 만료날짜</td>
                                     <td>[[${endDate}]] 만료</td>
                                 </tr>
                                 <tr style="height: 50px;">
-                                    <td>남은일수</td>
+                                    <td>첫번째 이용권 남은일수</td>
                                     <td>[[${remainDate}]]일</td>
                                 </tr>
                             </th:block>

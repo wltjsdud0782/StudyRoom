@@ -69,12 +69,12 @@ public class StudyRoomBoardController {
             SeatVO seatVO = new SeatVO();
             seatVO.setMemberCode(memberCode);
 
-            if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
-                if((seatService.haveChargeRemainDate(memberCode) == 0) && (seatService.moveAndOut(memberCode) != null)){ // 자리가 있는 상태로 이용권이 만료 되었을 때
+            if (!seatService.haveCharge(memberCode).isEmpty()) { // 이용권을 가지고 있으면
+                if((seatService.haveChargeRemainDate(memberCode) <= 0) && (seatService.moveAndOut(memberCode) != null)){ // 자리가 있는 상태로 이용권이 만료 되었을 때
                         seatService.outSeat(seatVO);
                         seatService.chargeDelete(memberCode);
                 }
-                else if (seatService.haveChargeRemainDate(memberCode) == 0){ // 자리는 없고 이용권이 만료 되었을 때
+                else if (seatService.haveChargeRemainDate(memberCode) <= 0){ // 자리는 없고 이용권이 만료 되었을 때
                 seatService.chargeDelete(memberCode);
                 }
             }
@@ -265,7 +265,7 @@ public class StudyRoomBoardController {
         int memberCode = loginInfo.getMemberCode();
 
         model.addAttribute("haveCharge", seatService.haveCharge(memberCode));
-        if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
+        if (!seatService.haveCharge(memberCode).isEmpty()) { // 이용권을 가지고 있으면
             model.addAttribute("buyDetailInfo", seatService.myBuyDetail(memberCode));
             model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
             model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));

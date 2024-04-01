@@ -69,7 +69,7 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
                         str +=`
                         <div class="row mt-5" style="font-size: 18pt;">
                             <div class="col">
-                                먼저 구매한 이용권의 기간이 만료가 된 후에<br>
+                                먼저 구매한 이용권의 기간이 만료된 후<br>
                                 추가 구입해주시길 바랍니다.
                             </div>
                         </div>
