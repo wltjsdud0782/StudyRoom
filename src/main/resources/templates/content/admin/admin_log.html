@@ -123,8 +123,8 @@
                                     <h4>&nbsp;입실 회원</h4>
                                 </div>
                             </div>
-                            <div class="col" style="border: 1px solid #ccc;">
-                                <table class="table" style="text-align: center">
+                            <div class="col">
+                                <table class="table" style="text-align: center;">
                                     <colgroup>
                                         <col width="19.8%">
                                         <col width="19.8%">
@@ -133,7 +133,7 @@
                                         <col width="*">
                                         <col width="6px">
                                     </colgroup>
-                                    <thead class="table-light">
+                                    <thead class="table-success">
                                         <tr>
                                             <td>좌석 정보</td>
                                             <td>좌석 상태</td>
@@ -144,17 +144,22 @@
                                         </tr>
                                     </thead>
                                 </table>
-                                <table class="table table-hover" style="text-align: center; margin-top: -16px;">
+                                <table class="table table-hover"
+                                    style="text-align: center; margin-top: -16px; border-bottom: 1px solid #dee2e6; border-left: 1px solid #dee2e6;">
                                     <tbody class="adminContainer-table-tbody44">
                                         <tr th:each="status : ${statusList}">
                                             <td style="width: 20%;">
                                                 [[${status.seatFloor}]]층&ensp;[[${status.seatNum}]]번석</td>
                                             <td style="width: 20%;">[[${status.seatStatusVO.statusName}]]</td>
                                             <th:block th:if="${status.seatPower == '켜짐'}">
-                                                <td style="width: 20%;"><font color="orange">[[${status.seatPower}]]</font></td>
+                                                <td style="width: 20%;">
+                                                    <font color="orange">[[${status.seatPower}]]</font>
+                                                </td>
                                             </th:block>
                                             <th:block th:unless="${status.seatPower == '켜짐'}">
-                                                <td style="width: 20%;"><font color="gray">[[${status.seatPower}]]</font></td>
+                                                <td style="width: 20%;">
+                                                    <font color="gray">[[${status.seatPower}]]</font>
+                                                </td>
                                             </th:block>
                                             <td style="width: 20%;">[[${status.memberVO.memberName}]]</td>
                                             <td style="width: 20%;">[[${status.memberVO.memberId}]]</td>

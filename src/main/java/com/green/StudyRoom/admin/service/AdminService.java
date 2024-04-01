@@ -26,9 +26,6 @@ public interface AdminService {
     //좌석정보 업데이트하기
     void uptSeatInfo(SeatVO seatVO);
 
-    //좌석정보 업데이트하기2
-    void uptSeatStatus(SeatStatusVO seatStatusVO);
-
     //쿠폰정보 보여주기
     List<MemberCouponVO> selectInfoCoupon(int memberCode);
 }

@@ -73,15 +73,14 @@
     <!-- 좌석 정보 조회 -->
     <select id="selectSeatDetailInfo" resultMap="seatMapper.seat">
         SELECT SEAT_NUM
-                , CASE
-                    WHEN SEAT_POWER = 'ON' THEN '켜짐'
-                    WHEN SEAT_POWER = 'OFF' THEN '꺼짐'
-                    END SEAT_POWER
-                , SEAT_FLOOR
-                , SEAT.STATUS_NUM
-                , STATUS_NAME
-                , AGE_CODE
-                , SEAT.MEMBER_CODE
+            , CASE
+                WHEN SEAT_POWER = 'ON' THEN '켜짐'
+                WHEN SEAT_POWER = 'OFF' THEN '꺼짐'
+                END SEAT_POWER
+            , SEAT_FLOOR
+            , SEAT.STATUS_NUM
+            , AGE_CODE
+            , SEAT.MEMBER_CODE
         FROM STUDYROOM_SEAT SEAT
         INNER JOIN STUDYROOM_MEMBER MEMBER
         ON SEAT.MEMBER_CODE = MEMBER.MEMBER_CODE
@@ -96,17 +95,9 @@
         UPDATE STUDYROOM_SEAT
         SET
         SEAT_POWER = #{seatPower}
+        , STATUS_NUM = #{statusNum}
         WHERE MEMBER_CODE = #{memberCode}
     </update>
-
-    <!-- 좌석 상태 바꾸기 (작동안함) -->
-    <update id="uptSeatStatus">
-        UPDATE SEAT_STATUS
-        SET
-        STATUS_NAME = #{statusName}
-        WHERE STATUS_NUM = #{statusNum}
-    </update>
-
 
     <!-- 쿠폰 정보 띄우기 -->
     <select id="selectInfoCoupon" resultMap="seatMapper.memberCoupon">

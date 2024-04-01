@@ -48,7 +48,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr style="border-top: 3px solid #4d6d49;">
+                                            <tr>
                                                 <td class="text-end">
                                                     <span style="font-size: small;">
                                                         <font color="red">*</font> 메시지를 보낼 회원을 오른쪽 창에서 선택해주세요.
@@ -118,10 +118,14 @@
                                                             name="memberName" readonly>&nbsp;
                                                     </span>
                                                     <!-- 채팅 -->
-                                                    <input type="text" style="width: 60%; text-align: start;"
-                                                        name="messageContent" id="admin_message_content">&nbsp;
+                                                    <span>
+                                                        <input type="text" style="width: 60%; text-align: start; width: 61.7%;"
+                                                        name="messageContent" id="admin_message_content">
+                                                    </span>              
                                                     <!-- ---- -->
-                                                    <input type="button" value="전송" onclick="StartChat()">
+                                                    <div style="float: right;">
+                                                        <input type="button" value="전송" onclick="StartChat()">
+                                                    </div>                     
                                                 </div>
                                             </td>
                                         </tr>
@@ -132,7 +136,7 @@
                         <div class="col">
                             <div class="row">
                                 <table class="table table-hover adminContainer-table">
-                                    <thead class="table-light">
+                                    <thead class="table-success">
                                         <form action="/admin/msg" method="post">
                                             <tr>
                                                 <td>

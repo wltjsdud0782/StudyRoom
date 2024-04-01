@@ -50,7 +50,7 @@ function selectService(value) {
                         </div>
                     </td>
                     <td class="charge-td">
-                        <input type="text" name="chargeName" class="enInput" placeholder="이용권 명을 입력해주세요."
+                        <input type="text" name="chargeName" class="form-control enInput" placeholder="이용권 명을 입력해주세요."
                             style="font-style: oblique;">
                     </td>
                     <td>
@@ -61,7 +61,7 @@ function selectService(value) {
                         </div>
                     </td>
                     <td class="charge-td">
-                        <input type="text" name="chargeDate" class="enInput" placeholder="기간을 입력해주세요."
+                        <input type="text" name="chargeDate" class="form-control enInput" placeholder="기간을 입력해주세요."
                             style="font-style: oblique;">
                     </td>
                     <td>
@@ -72,7 +72,7 @@ function selectService(value) {
                         </div>
                     </td>
                     <td class="charge-td">
-                        <input type="text" name="chargeFee" class="enInput" placeholder="가격을 입력해주세요."
+                        <input type="text" name="chargeFee" class="form-control enInput" placeholder="가격을 입력해주세요."
                             style="font-style: oblique;">
                     </td>
                     <td>
@@ -91,7 +91,7 @@ function selectService(value) {
         </table>
         <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
         <div>
-            <div class="btnDiv">
+            <div class="btnDiv" style="padding-left: 10.2px;">
                 <input type="button" value="삭제" disabled>
             </div>
         </div>
@@ -132,7 +132,7 @@ function selectService(value) {
                         </div>
                     </td>
                     <td class="charge-td">
-                        <input type="text" name="couponName" class="enInput" placeholder="쿠폰 명을 입력해주세요."
+                        <input type="text" name="couponName" class="form-control enInput" placeholder="쿠폰 명을 입력해주세요."
                             style="font-style: oblique;">
                     </td>
                     <td>
@@ -143,7 +143,7 @@ function selectService(value) {
                         </div>
                     </td>
                     <td class="charge-td">
-                        <input type="text" name="discountPercent" class="enInput" placeholder="할인율을 입력해주세요."
+                        <input type="text" name="discountPercent" class="form-control enInput" placeholder="할인율을 입력해주세요."
                             style="font-style: oblique;">
                     </td>
                     <td>
@@ -162,7 +162,7 @@ function selectService(value) {
         </table>
         <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
         <div>
-            <div class="btnDiv">
+            <div class="btnDiv" style="padding-left: 10.2px;">
                 <input type="button" value="삭제" disabled>
             </div>
         </div>
@@ -233,7 +233,7 @@ function changeCharge(chargeCode) {
                                             </div>
                                         </td>                                       
                                         <td class="charge-td">
-                                            <input type="text" name="chargeName" value="${data.chargeName}" class="enInput" placeholder="입력해주세요." style="font-style: oblique;">
+                                            <input type="text" name="chargeName" value="${data.chargeName}" class="form-control enInput" placeholder="입력해주세요." style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
@@ -243,7 +243,7 @@ function changeCharge(chargeCode) {
                                             </div>
                                         </td>
                                         <td class="charge-td">
-                                            <input type="text" name="chargeDate" value="${data.chargeDate}" class="enInput" placeholder="입력해주세요." style="font-style: oblique;">
+                                            <input type="text" name="chargeDate" value="${data.chargeDate}" class="form-control enInput" placeholder="입력해주세요." style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
@@ -253,7 +253,7 @@ function changeCharge(chargeCode) {
                                             </div>
                                         </td>                                        
                                         <td class="charge-td">
-                                            <input type="text" name="chargeFee" value="${data.chargeFee}" class="enInput" placeholder="입력해주세요." style="font-style: oblique;">
+                                            <input type="text" name="chargeFee" value="${data.chargeFee}" class="form-control enInput" placeholder="입력해주세요." style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
@@ -270,7 +270,7 @@ function changeCharge(chargeCode) {
                             </table>
                             <div style="padding: 1vh;"></div>
                             <div>
-                                <div class="btnDiv">                                           
+                                <div class="btnDiv" style="padding-left: 10.2px;">                                           
                                     <input type="button" value="삭제" onclick="deleteCharge(${chargeCode})" style="color: red;">
                                     <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
                                     <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 이용권을 이용하는 회원이 있는지 확인해주세요.</span>                              
@@ -357,7 +357,7 @@ function changeCoupon(couponCode) {
                             </div>
                         </td>
                         <td class="charge-td">
-                            <input type="text" name="couponName" value="${data.couponName}" class="enInput" placeholder="입력해주세요."
+                            <input type="text" name="couponName" value="${data.couponName}" class="form-control enInput" placeholder="입력해주세요."
                                 style="font-style: oblique;">
                         </td>
                         <td>
@@ -368,7 +368,7 @@ function changeCoupon(couponCode) {
                             </div>
                         </td>
                         <td class="charge-td">
-                            <input type="text" name="discountPercent" value="${data.discountPercent}" class="enInput" placeholder="입력해주세요."
+                            <input type="text" name="discountPercent" value="${data.discountPercent}" class="form-control enInput" placeholder="입력해주세요."
                                 style="font-style: oblique;">
                         </td>
                         <td>
@@ -387,11 +387,11 @@ function changeCoupon(couponCode) {
             </table>
             <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
             <div>
-                <div class="btnDiv">
+                <div class="btnDiv" style="padding-left: 10.2px;">
                     <input type="button" value="삭제" onclick="deleteCoupon(${couponCode})" style="color: red;">
+                    <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
+                    <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 쿠폰을 이용하는 회원이 있는지 확인해주세요.</span>
                 </div>
-                <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
-                <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 쿠폰을 이용하는 회원이 있는지 확인해주세요.</span>
             </div>         
         </form>
         <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->

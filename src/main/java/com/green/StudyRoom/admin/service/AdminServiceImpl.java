@@ -47,12 +47,6 @@ public class AdminServiceImpl implements AdminService {
         sqlSession.update("adminMapper.uptSeatInfo", seatVO);
     }
 
-    //좌석정보 업데이트 하기2
-    @Override
-    public void uptSeatStatus(SeatStatusVO seatStatusVO) {
-        sqlSession.update("adminMapper.uptSeatStatus", seatStatusVO);
-    }
-
     //쿠폰정보 보여주기
     @Override
     public List<MemberCouponVO> selectInfoCoupon(int memberCode) {
