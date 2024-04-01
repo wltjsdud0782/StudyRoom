@@ -37,7 +37,7 @@ public class MemberController {
         if(loginInfo != null){
             session.setAttribute("loginInfo", loginInfo);
         }
-        return "content/member/login_result";
+        return "content/c";
     }
 
 
