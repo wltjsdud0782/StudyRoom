@@ -23,6 +23,7 @@ public class MemberController {
         System.out.println(memberVO);
         return "redirect:/board/mainHomepage";
     }
+
     // 로그인 화면
     @GetMapping("/loginForm")
     public String loginForm(){
