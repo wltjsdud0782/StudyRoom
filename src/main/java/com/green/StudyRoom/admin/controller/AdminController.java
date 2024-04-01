@@ -65,7 +65,7 @@ public class AdminController {
 
         map.put("charName", seatService.haveCharge(memberCode));
         if (seatService.haveCharge(memberCode) != null){
-            map.put("charDate", seatService.haveChargeDate(memberCode));
+//            map.put("charDate", seatService.haveChargeDate(memberCode));
             map.put("charAppDate", seatService.haveChargeApprovalDate(memberCode));
             map.put("charRemDate", seatService.haveChargeRemainDate(memberCode));
             map.put("charEndDate", seatService.haveChargeEndDate(memberCode));
