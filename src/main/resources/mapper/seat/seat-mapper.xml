@@ -100,72 +100,87 @@
 <!--  이용권 관련 필요 쿼리  -->
 
     <!--  지정한 회원의 이용권 유무  -->
-    <select id="haveCharge" resultType="String">
+    <select id="haveCharge" resultMap="memberMapper.approval">
         SELECT
-            CHARGE_NAME
+        CHARGE_NAME
         FROM approval APP
         INNER JOIN STUDYROOM_CHARGE CHARG
         ON APP.CHARGE_CODE = CHARG.CHARGE_CODE
         WHERE MEMBER_CODE = #{memberCode}
+        ORDER BY APPROVAL_DATE;
     </select>
 
     <!--  지정한 회원의 이용권 결제일  -->
-    <select id="haveChargeApprovalDate" resultType="String">
+    <select id="haveChargeApprovalDate" resultMap="memberMapper.approval">
         SELECT
-            DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') APPROVAL_DATE
+        DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') APPROVAL_DATE
         FROM approval
         WHERE MEMBER_CODE = #{memberCode}
+        ORDER BY APPROVAL_DATE;
     </select>
 
     <!--  지정한 회원의 이용권 이용 가능 일 수  -->
-    <select id="haveChargeDate" resultType="int">
-        SELECT
-            CHARGE_DATE
+    <select id="haveChargeDate" resultMap="memberMapper.approval">
+        SELECT CHARGE_DATE
         FROM STUDYROOM_CHARGE CHARGE
         INNER JOIN APPROVAL APP
         ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
-        WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
+        WHERE MEMBER_CODE = #{memberCode}
+        ORDER BY APPROVAL_DATE;
     </select>
 
     <!--  지정한 회원의 이용권 끝나는 날짜  -->
     <select id="haveChargeEndDate" resultType="String">
-    SELECT
-        (SELECT DATE_ADD(
-            (SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode})
-            , INTERVAL (
-                SELECT
-                    CHARGE_DATE
-                FROM STUDYROOM_CHARGE CHARGE
-                INNER JOIN APPROVAL APP
-                ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
-                WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
-            ) DAY)
-        ) AS END_DATE
-    FROM approval
-    WHERE MEMBER_CODE = #{memberCode}
+        SELECT DATE_ADD(
+        (SELECT DATE_FORMAT(MIN(APPROVAL_DATE), '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode})
+        , INTERVAL (
+        SELECT
+        CHARGE_DATE
+        FROM STUDYROOM_CHARGE CHARGE
+        INNER JOIN APPROVAL APP
+        ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
+        WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode} AND APPROVAL_DATE = (SELECT MIN(APPROVAL_DATE) FROM approval WHERE MEMBER_CODE = #{memberCode}))
+        )
+        DAY) AS END_DATE;
     </select>
 
     <!--  지정한 회원의 이용권 남은 일 수  -->
     <select id="haveChargeRemainDate" resultType="int">
         SELECT
-            TIMESTAMPDIFF(DAY, DATE_FORMAT(now(), '%Y-%m-%d')
-            , (SELECT
-                (SELECT DATE_ADD(
-                    (SELECT DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode})
-                    , INTERVAL (
-                        SELECT CHARGE_DATE
-                        FROM STUDYROOM_CHARGE CHARGE
-                        INNER JOIN APPROVAL APP
-                        ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
-                        WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
-                        ) DAY)
-                    ) AS END_DATE
-                FROM approval
-                WHERE MEMBER_CODE = #{memberCode})
-            ) AS REMAIN_DATE
+        TIMESTAMPDIFF(DAY, DATE_FORMAT(now(), '%Y-%m-%d')
+        , (SELECT DATE_ADD(
+        (SELECT DATE_FORMAT(MIN(APPROVAL_DATE), '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode})
+        , INTERVAL (
+        SELECT CHARGE_DATE
+        FROM STUDYROOM_CHARGE CHARGE
+        INNER JOIN APPROVAL APP
+        ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
+        WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode} AND APPROVAL_DATE = (SELECT MIN(APPROVAL_DATE) FROM approval WHERE MEMBER_CODE = #{memberCode}))
+        ) DAY))
+        ) AS REMAIN_DATE
         FROM approval
-        WHERE MEMBER_CODE = #{memberCode}
+        WHERE MEMBER_CODE = #{memberCode} AND APPROVAL_DATE = (SELECT MIN(APPROVAL_DATE) FROM approval WHERE MEMBER_CODE = #{memberCode});
     </select>
+
+    <update id="updateApp">
+        UPDATE approval
+        SET
+        APPROVAL_DATE
+        = (
+        SELECT DATE_ADD(
+        (SELECT MIN(APPROVAL_DATE) FROM approval WHERE MEMBER_CODE = #{memberCode})
+        , INTERVAL (
+        SELECT
+        CHARGE_DATE
+        FROM STUDYROOM_CHARGE CHARGE
+        INNER JOIN APPROVAL APP
+        ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
+        WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode} AND APPROVAL_DATE = (SELECT MIN(APPROVAL_DATE) FROM approval WHERE MEMBER_CODE = #{memberCode}))
+        )
+        DAY)
+        )
+        WHERE APPROVAL_DATE = (SELECT MAX(APPROVAL_DATE) FROM approval WHERE MEMBER_CODE = #{memberCode});
+    </update>
 
     <!--  오늘 날짜 구하기  -->
     <select id="today" resultType="String">
@@ -199,9 +214,9 @@
 
     <!--  이용권 만료 삭제  -->
     <delete id="chargeDelete">
-    DELETE
-    FROM APPROVAL
-    WHERE MEMBER_CODE = #{memberCode}
+        DELETE
+        FROM APPROVAL
+        WHERE APPROVAL_DATE = (SELECT MIN(APPROVAL_DATE) FROM approval WHERE MEMBER_CODE = #{memberCode});
     </delete>
 
 <!-- 입실 필요 쿼리  -->
@@ -297,14 +312,17 @@
 <!--  보유한 이용권 정보 조회  -->
     <select id="myBuyDetail" resultMap="memberMapper.approval">
         SELECT
-            DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') APPROVAL_DATE
-            , CASE
-                WHEN COUPON_USE = 'Y' THEN '사용함'
-                WHEN COUPON_USE = 'N' THEN '사용안함'
-                END COUPON_USE
-            , APPROVAL_FEE
+        DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') APPROVAL_DATE
+        , CASE
+        WHEN COUPON_USE = 'Y' THEN '사용함'
+        WHEN COUPON_USE = 'N' THEN '사용안함'
+        END COUPON_USE
+        , APPROVAL_FEE
         FROM APPROVAL APP
-        WHERE APPROVAL_CODE = (SELECT APPROVAL_CODE FROM APPROVAL WHERE MEMBER_CODE = #{memberCode})
+        INNER JOIN STUDYROOM_CHARGE CHARGE
+        ON APP.CHARGE_CODE = CHARGE.CHARGE_CODE
+        WHERE MEMBER_CODE = #{memberCode}
+        ORDER BY APPROVAL_DATE;
     </select>
 
 

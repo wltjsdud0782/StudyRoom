@@ -678,7 +678,6 @@ function twofloor() {
 const modal_open = new bootstrap.Modal('#seat-modal');
 
 function reservation(loginInfo, haveCharge, remainDate, endDate) {
-
     if (loginInfo == null) { // 로그인 X
         alert("로그인이 필요한 기능입니다.");
         location.href = "/member/loginForm"
@@ -692,8 +691,7 @@ function reservation(loginInfo, haveCharge, remainDate, endDate) {
             alert("좌석을 선택해주세요.")
         }
         else {
-            if (haveCharge == null) {
-                console.log(haveCharge);
+            if (haveCharge.length == 0) {
                 alert("보유한 이용권이 없습니다.")
                 location.href = "/seat/chargeBuy"
             }
@@ -724,7 +722,7 @@ function reservation(loginInfo, haveCharge, remainDate, endDate) {
                     <div class="row">
                         <div class="col-6 text-end">보유한 이용권</div>
                         <div class="col-5 text-start">
-                            ${haveCharge}
+                            ${haveCharge[0].chargeVO.chargeName}
                             <span style="font-size: 10pt;">
                                 (${remainDate}일 남음)
                             </span>

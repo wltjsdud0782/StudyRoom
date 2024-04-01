@@ -20,11 +20,12 @@ public interface SeatService {
     List<StudyRoomInOutVO> inOutTime(int memberCode); // 입퇴실 시간
 
     // 이용권 관련
-    String haveCharge(int memberCode); // 구매한 이용권 유무
-    String haveChargeApprovalDate(int memberCode); // 구매한 이용권의 결제일
-    int haveChargeDate(int memberCode); // 구매한 이용권의 이용 가능 일 수
+    List<ApprovalVO> haveCharge(int memberCode); // 구매한 이용권 유무
+    List<ApprovalVO> haveChargeApprovalDate(int memberCode); // 구매한 이용권의 결제일
+    List<ApprovalVO> haveChargeDate(int memberCode); // 구매한 이용권의 이용 가능 일 수
     String haveChargeEndDate(int memberCode); // 구매한 이용권의 끝나는 날짜
     int haveChargeRemainDate(int memberCode); // 구매한 이용권의 남은 일 수
+    void updateApp(int memberCode);
     String today();
 //    String isExpires(int memberCode);
     void chargeDelete(int memberCode);
@@ -55,7 +56,7 @@ public interface SeatService {
     void adminUpdateSeat(SeatVO seatVO);
 
     // 마이페이지 이용권
-    ApprovalVO myBuyDetail(int memberCode);
+    List<ApprovalVO> myBuyDetail(int memberCode);
 
     // 쿠폰 관련
     List<CouponVO> coupon(); // admin 관련

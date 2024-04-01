@@ -39,10 +39,12 @@
                         <td>내용</td>
                         <td colspan="3" style="height: 200px;">[[${boardList.boardContent}]]
                             <div style="margin-top: 20px;">
-                                <th:block th:each="img : ${boardList.imgList}">
-                                    <img th:src="@{'/upload/'+ ${img.attachedFileName}}"
-                                    style=" width: 150px; height: 150px; margin-right: 0;">
-                                </th:block>
+                                <th:block th:if="${#lists.isEmpty(boardList.imgList)}">
+                                    <th:block th:each="img : ${boardList.imgList}">
+                                        <img th:src="@{'/upload/'+ ${img.attachedFileName}}"
+                                        style=" width: 150px; height: 150px; margin-right: 0;">
+                                    </th:block>
+                                </th:if>
                             </div>
                         </td>
                     </tr>

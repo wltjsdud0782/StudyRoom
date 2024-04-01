@@ -37,7 +37,7 @@ public class SeatController {
 
             model.addAttribute("reservationMem", seatService.moveAndOut(memberCode));
             model.addAttribute("haveCharge", seatService.haveCharge(memberCode));
-            if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
+            if (!seatService.haveCharge(memberCode).isEmpty()) { // 이용권을 가지고 있으면
                 model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
                 model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
             }
