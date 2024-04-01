@@ -39,10 +39,15 @@ public class MemberController {
         return "content/member/login_result";
     }
 
+
     //아이디 찾기 폼
-    @GetMapping("/idFindForm")
-    public String id_find(@RequestParam(name="errorMsg", required = false , defaultValue = "success") String errorMsg, Model model){
-        model.addAttribute("errorMsg",errorMsg);
+//    @GetMapping("/idFindForm")
+//    public String id_find(@RequestParam(name="errorMsg", required = false , defaultValue = "success") String errorMsg, Model model){
+//        return "content/member/id_find";
+//    }
+
+    @GetMapping("idFindForm")
+    public String idFindForm(@RequestParam(name="errorMsg", required = false) String errorMsg, Model model){
         return "content/member/id_find";
     }
 

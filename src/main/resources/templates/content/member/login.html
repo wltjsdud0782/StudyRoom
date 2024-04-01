@@ -12,7 +12,7 @@
     <!--html 코드 작성-->
     <div class="row justify-content-center" id="loginInfo" style="height: 550px;">
         <div class="col-3">
-            <div class="form-floating mb-3" style="margin-top: 250px;">
+            <div class="form-floating mb-3" style="margin-top: 150px;">
                 <input name="memberId" type="text" class="form-control" id="memberId" placeholder="아이디">
                 <label for="memberId" style="font-size: 0.8rem;">I.D.</label>
             </div>
@@ -22,6 +22,17 @@
             </div>
             <div class="d-grid">
                 <input type="button" class="btn btn-success" value="로그인" onclick="login()">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class=" col-1">
+                <a onclick="location.href='/member/termsUse'">이용약관</a>
+            </div>
+            <div class="col-1">
+                <a onclick="location.href='/member/privacyPolicy'">개인정보처리방침</a>
+            </div>
+            <div class="col-1" id="idFind">
+                <a onclick="location.href='/member/idFindForm'">아이디 찾기</a>
             </div>
         </div>
     </div>

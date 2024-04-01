@@ -106,6 +106,7 @@
         AND MEMBER_PW=#{memberPw}
     </select>
 
+
     <select id="idFindSelect" resultMap="member">
         SELECT MEMBER_ID
         , DATE_FORMAT(MEMBER_BIRTH,'%Y-%m-%d') as BIRTH
@@ -114,6 +115,7 @@
         WHERE MEMBER_NAME=#{memberName}
         AND MEMBER_BIRTH=#{memberBirth}
     </select>
+
 </mapper>
 
 
