@@ -132,8 +132,8 @@ public class SeatServiceImpl implements SeatService{
     }
 
     @Override // 내 이용권 조회
-    public ApprovalVO myBuyDetail(int memberCode) {
-        return sqlSession.selectOne("seatMapper.myBuyDetail", memberCode);
+    public List<ApprovalVO> myBuyDetail(int memberCode) {
+        return sqlSession.selectList("seatMapper.myBuyDetail", memberCode);
     }
 
     @Override // 모든 쿠폰 조회
