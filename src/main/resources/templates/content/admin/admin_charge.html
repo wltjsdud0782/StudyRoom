@@ -48,12 +48,12 @@
                     </div>           
                     <table class="table table-hover adminContainer-table">
                         <tbody class="adminContainer-table-tbody5">
-                            <th:block th:if="${#lists.isEmpty(chargeList)}">
+                            <th:block th:if="${#lists.isEmpty(couponList)}">
                                 <tr>
                                     <td>※ 등록된 쿠폰이 없습니다.</td>
                                 </tr>
                             </th:block>
-                            <th:block th:unless="${#lists.isEmpty(chargeList)}">
+                            <th:block th:unless="${#lists.isEmpty(couponList)}">
                                 <tr th:each="coupon : ${couponList}">
                                     <td th:onclick="changeCoupon([[${coupon.couponCode}]])">
                                         <div>[[${coupon.couponName}]]</div>
@@ -85,8 +85,8 @@
                             <tr>
                                 <td>
                                     <select id="selectOption" onchange="selectService(this.value)">
-                                        <option value="CHARGE-option" selected>CHARGE</option>
-                                        <option value="COUPON-option">COUPON</option>
+                                        <option value="CHARGE-option" selected>이용권</option>
+                                        <option value="COUPON-option">쿠폰</option>
                                     </select>
                                 </td>
                                 <!-- 이용권 -->

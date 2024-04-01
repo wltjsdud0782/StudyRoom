@@ -32,6 +32,20 @@ select {
 
 /* (Info)----------------------------------------------- */
 
+.memberInfo-table {
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.memberInfo-table tr td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.infoIndex {
+    background-color: #ececec;
+}
+
 .adminContainer-table-tbody {
     display: block;
     height: 269px;
@@ -43,16 +57,10 @@ select {
     width: 100%;
 }
 
-.changeInfo tr td {
+/* .changeInfo tr td {
     border: 1px solid #ccc;
     height: 63px;
-}
-
-.info-border-title {
-    background-color: #4d6d49;
-    color: white;
-    text-align: center;
-}
+} */
 
 .adminContainer-table-tbody::-webkit-scrollbar {
     width: 10px;
@@ -72,11 +80,40 @@ select {
     /*스크롤바 뒷 배경 색상*/
 }
 
-.numUpDown::-webkit-outer-spin-button,
+.adminContainer-table-tbody1 {
+    display: block;
+    height: 331px;
+    overflow-y: scroll;
+}
+
+.adminContainer-table-tbody1 tr {
+    display: table;
+    width: 100%;
+}
+
+.adminContainer-table-tbody1::-webkit-scrollbar {
+    width: 10px;
+    /* 스크롤바의 너비 */
+}
+
+.adminContainer-table-tbody1::-webkit-scrollbar-thumb {
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: #4d6d49;
+    /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.adminContainer-table-tbody1::-webkit-scrollbar-track {
+    background: #ccc;
+    /*스크롤바 뒷 배경 색상*/
+}
+
+/* .numUpDown::-webkit-outer-spin-button,
 .numUpDown::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
+} */
 
 /* (Message)----------------------------------------------- */
 

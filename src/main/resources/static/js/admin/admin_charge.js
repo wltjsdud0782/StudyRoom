@@ -37,8 +37,8 @@ function selectService(value) {
                 <tr>
                     <td>
                         <select id="selectOption" onchange="selectService(this.value)">
-                            <option value="CHARGE-option" selected>CHARGE</option>
-                            <option value="COUPON-option">COUPON</option>
+                            <option value="CHARGE-option" selected>이용권</option>
+                            <option value="COUPON-option">쿠폰</option>
                         </select>
                     </td>
                     <!-- 이용권 -->
@@ -119,8 +119,8 @@ function selectService(value) {
                 <tr>
                     <td>
                         <select id="selectOption" onchange="selectService(this.value)">
-                            <option value="CHARGE-option">CHARGE</option>
-                            <option value="COUPON-option" selected>COUPON</option>
+                            <option value="CHARGE-option">이용권</option>
+                            <option value="COUPON-option" selected>쿠폰</option>
                         </select>
                     </td>
                     <!-- 쿠폰 -->
@@ -221,8 +221,8 @@ function changeCharge(chargeCode) {
                             <tr>
                                 <td>
                                 <select id="selectOption" onchange="selectService(this.value)">
-                                    <option value="CHARGE-option" selected>CHARGE</option>
-                                    <option value="COUPON-option">COUPON</option>
+                                    <option value="CHARGE-option" selected>이용권</option>
+                                    <option value="COUPON-option">쿠폰</option>
                                 </select>
                                 </td>
                                         <td>
@@ -271,7 +271,9 @@ function changeCharge(chargeCode) {
                             <div style="padding: 1vh;"></div>
                             <div>
                                 <div class="btnDiv">                                           
-                                    <input type="button" value="삭제" onclick="deleteCharge(${chargeCode})" style="color: red;">                               
+                                    <input type="button" value="삭제" onclick="deleteCharge(${chargeCode})" style="color: red;">
+                                    <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
+                                    <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 이용권을 이용하는 회원이 있는지 확인해주세요.</span>                              
                                 </div>
                             </div>
             </form>
@@ -342,8 +344,8 @@ function changeCoupon(couponCode) {
                     <tr>
                         <td>
                             <select id="selectOption" onchange="selectService(this.value)">
-                                <option value="CHARGE-option">CHARGE</option>
-                                <option value="COUPON-option" selected>COUPON</option>
+                                <option value="CHARGE-option">이용권</option>
+                                <option value="COUPON-option" selected>쿠폰</option>
                             </select>
                         </td>
                         <!-- 쿠폰 -->
@@ -388,6 +390,8 @@ function changeCoupon(couponCode) {
                 <div class="btnDiv">
                     <input type="button" value="삭제" onclick="deleteCoupon(${couponCode})" style="color: red;">
                 </div>
+                <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
+                <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 쿠폰을 이용하는 회원이 있는지 확인해주세요.</span>
             </div>         
         </form>
         <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
