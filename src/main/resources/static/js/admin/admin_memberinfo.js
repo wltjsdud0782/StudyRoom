@@ -316,7 +316,7 @@ function allInfo(memberCode) {
                         <div style="padding: 3vh;"></div>`;
                 }
                 //이용권 정보 불러오기
-                if (data.charName[0] != null) {
+                if (data.charName != '') {
                 str += 
                         `<h4>&nbsp;보유한 이용권</h4>
                         <table class="memberInfo-table">
@@ -390,7 +390,7 @@ function allInfo(memberCode) {
                                         </div>`;
                     }
                     else {
-                    str +=                  `<font color="red">기간이 만료되었습니다.</font>`;              
+                    str +=                  `<font color="red">기간이 만료되었습니다.</font>[오류]`;          
                     }
                     str +=          `</td>
                                 </tr>

@@ -65,11 +65,20 @@ public class AdminController {
 
         map.put("charName", seatService.haveCharge(memberCode));
         if (seatService.haveCharge(memberCode) != null){
-//            map.put("charDate", seatService.haveChargeDate(memberCode));
+            //map.put("charDate", seatService.haveChargeDate(memberCode));
             map.put("charAppDate", seatService.haveChargeApprovalDate(memberCode));
-            map.put("charRemDate", seatService.haveChargeRemainDate(memberCode));
+            //map.put("charRemDate", seatService.haveChargeRemainDate(memberCode));
             map.put("charEndDate", seatService.haveChargeEndDate(memberCode));
         }
+
+        //myBuyDetail.html에 가져가는 데이터 그대로 나도 쓰기
+//        model.addAttribute("buyDetailInfo", seatService.myBuyDetail(memberCode));
+//        model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
+//        model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
+//
+//        model.addAttribute("ownCouponList", seatService.ownCoupon(memberCode));
+
+
         return map;
     }
 
