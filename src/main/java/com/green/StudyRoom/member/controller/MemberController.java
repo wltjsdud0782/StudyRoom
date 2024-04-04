@@ -32,12 +32,18 @@ public class MemberController {
 
     // 로그인
     @PostMapping("/login")
-    public String login(MemberVO memberVO, HttpSession session){
+    public String login(MemberVO memberVO, HttpSession session, Model model){
         MemberVO loginInfo=memberService.login(memberVO);
+        String str = "";
         if(loginInfo != null){
             session.setAttribute("loginInfo", loginInfo);
         }
-        return "content/c";
+        else {
+            str="아이디와 password가 틀립니다.";
+            model.addAttribute("str",str);
+            return "redirect:/member/loginForm";
+        }
+        return  "redirect:/board/mainHomepage";
     }
 
 
