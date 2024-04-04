@@ -65,11 +65,12 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
                         <td>${loginInfo.memberTel}</td>
                     </tr>
                 </table>`
-                    if (haveCharge != null) {
+                    if (haveCharge.length > 1) {
                         str +=`
                         <div class="row mt-5" style="font-size: 18pt;">
                             <div class="col">
-                                이미 이용권을 보유하고 있습니다.
+                                먼저 구매한 이용권의 기간이 만료된 후<br>
+                                추가 구입해주시길 바랍니다.
                             </div>
                         </div>
                         `
@@ -79,7 +80,8 @@ function buyDetail(chargeCode, loginInfo, haveCharge) {
                         <div class="row mt-5" style="font-size: 18pt;">
                             <div class="col">
                                 <div style="font-size: 11pt; color: red;">
-                                * 구매 후 교환 및 환불이 불가능합니다.
+                                * 구매 후 교환 및 환불이 불가능합니다. <br>
+                                * 이용권 1장을 이미 보유하고 계신 경우에는 이용기간이 연장됩니다.
                                 </div>
                             </div>
                         </div>

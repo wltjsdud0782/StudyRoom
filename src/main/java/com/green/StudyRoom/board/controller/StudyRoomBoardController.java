@@ -69,12 +69,12 @@ public class StudyRoomBoardController {
             SeatVO seatVO = new SeatVO();
             seatVO.setMemberCode(memberCode);
 
-            if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
-                if((seatService.haveChargeRemainDate(memberCode) == 0) && (seatService.moveAndOut(memberCode) != null)){ // 자리가 있는 상태로 이용권이 만료 되었을 때
+            if (!seatService.haveCharge(memberCode).isEmpty()) { // 이용권을 가지고 있으면
+                if((seatService.haveChargeRemainDate(memberCode) <= 0) && (seatService.moveAndOut(memberCode) != null)){ // 자리가 있는 상태로 이용권이 만료 되었을 때
                         seatService.outSeat(seatVO);
                         seatService.chargeDelete(memberCode);
                 }
-                else if (seatService.haveChargeRemainDate(memberCode) == 0){ // 자리는 없고 이용권이 만료 되었을 때
+                else if (seatService.haveChargeRemainDate(memberCode) <= 0){ // 자리는 없고 이용권이 만료 되었을 때
                 seatService.chargeDelete(memberCode);
                 }
             }
@@ -93,12 +93,13 @@ public class StudyRoomBoardController {
 
 
     //문의 홈페이지
-    @GetMapping("/inquiry")
-    public String studyRoomInquiry(Model model, SearchVO searchVO){
+    @RequestMapping("/inquiry")
+    public String studyRoomInquiry(Model model, SearchVO searchVO,@RequestParam(name = "isSearch", required = false ,defaultValue = "0")int isSearch){
 
         //페이징처리 interface
         PagingService page = () -> sqlSession.selectOne("boardMapper.selectBoardCnt");
 
+        System.out.println("!!!!!!!" + searchVO);
 
         // 전체 데이터 수
         searchVO.setTotalDateCnt(page.selectBoardCnt());
@@ -109,6 +110,15 @@ public class StudyRoomBoardController {
         System.out.println("!!!!!!!!!!! " + searchVO.getDisplayDateCnt() + "!!!!!!!!" + page.selectBoardCnt());
 
         List<BoardVO> boardList = boardService.selectBoard(searchVO);
+        if(isSearch == 1){
+            searchVO.setTotalDateCnt(boardList.size());
+            searchVO.setPageInfo();
+            if(searchVO.getTotalDateCnt() == 0){
+                isSearch = 2;
+            }
+            model.addAttribute("isSearch",isSearch);
+        }
+
 
         model.addAttribute("boardList", boardList);
 
@@ -255,7 +265,7 @@ public class StudyRoomBoardController {
         int memberCode = loginInfo.getMemberCode();
 
         model.addAttribute("haveCharge", seatService.haveCharge(memberCode));
-        if (seatService.haveCharge(memberCode) != null) { // 이용권을 가지고 있으면
+        if (!seatService.haveCharge(memberCode).isEmpty()) { // 이용권을 가지고 있으면
             model.addAttribute("buyDetailInfo", seatService.myBuyDetail(memberCode));
             model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
             model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
@@ -311,6 +321,7 @@ public class StudyRoomBoardController {
         return seatService.userMsg(Integer.parseInt(data.get("memberCode")));
     }
 
+    //상세정보
     @GetMapping("/deleteBoard")
     public String deleteBoard(@RequestParam(name = "boardCode") int boardCode){
 
@@ -325,34 +336,28 @@ public class StudyRoomBoardController {
     public String insertWriting(BoardVO boardVO, @RequestParam(name= "file")MultipartFile[] boardImg
                                 , HttpSession session){
 
+        //로그인 회원의 아이디 정보
         MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
         boardVO.setBoardWriter(loginInfo.getMemberId());
 
-        SelectNextService selectCode = () -> sqlSession.selectOne("imgMapper.selectNextBoardCode");
-
-        // ImgInterface
-        ImgService imgService = board -> {
-            sqlSession.insert("boardMapper.insertBoard", board);
-            sqlSession.insert("imgMapper.insertImgs", board);
-        };
-
+        //파일 첨부 실행
+        //첨부 파일이 없으면 imgList는 데이터가 없음.
         List<ImgVO> imgList = ImgUploadUtil.multiUploadFile(boardImg);
-        
+
+        //다음에 insert 할 boardCode
+        SelectNextService selectCode = () -> sqlSession.selectOne("imgMapper.selectNextBoardCode");
         int boardCode = selectCode.selectNextBoardCode();
-        
+
         //boardVO에 boardCode값 세팅
         boardVO.setBoardCode(boardCode);
-        
+
         for(ImgVO img : imgList){
             img.setImgCode(boardCode);
         }
 
         boardVO.setImgList(imgList);
 
-        imgList.forEach(s -> System.out.println(s));
-
-        imgService.insertBoard(boardVO);
-
+        boardService.insertBoard(boardVO);
         return "redirect:/board/inquiry";
     }
 
