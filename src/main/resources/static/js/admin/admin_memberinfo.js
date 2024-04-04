@@ -381,18 +381,13 @@ function allInfo(memberCode) {
                                             </div>
                                         </div>
                                     </td>
-                                    <td>`;
-                    if (data.charRemDate >= 0) {
-                    str+=               `<div class="row">
+                                    <td>
+                                        <div class="row">
                                             <div class="col charRemDate-data">             
                                                 ${data.charRemDate}일
                                             </div>
-                                        </div>`;
-                    }
-                    else {
-                    str +=                  `<font color="red">기간이 만료되었습니다.</font>[오류]`;          
-                    }
-                    str +=          `</td>
+                                        </div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

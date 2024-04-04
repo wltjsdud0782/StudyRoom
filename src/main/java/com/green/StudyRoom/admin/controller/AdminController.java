@@ -64,10 +64,10 @@ public class AdminController {
         map.put("couponMap", adminService.selectInfoCoupon(memberCode));
 
         map.put("charName", seatService.haveCharge(memberCode));
-        if (seatService.haveCharge(memberCode) != null){
+        if (!seatService.haveCharge(memberCode).isEmpty()){
             //map.put("charDate", seatService.haveChargeDate(memberCode));
             map.put("charAppDate", seatService.haveChargeApprovalDate(memberCode));
-            //map.put("charRemDate", seatService.haveChargeRemainDate(memberCode));
+            map.put("charRemDate", seatService.haveChargeRemainDate(memberCode));
             map.put("charEndDate", seatService.haveChargeEndDate(memberCode));
         }
 
@@ -77,6 +77,10 @@ public class AdminController {
 //        model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
 //
 //        model.addAttribute("ownCouponList", seatService.ownCoupon(memberCode));
+
+// 이용권은 최대 2개까지 보유가능
+// 기간이 만료된 이용권은 해당 회원이 로그인할때 자동으로 삭제됨!!
+
 
 
         return map;
