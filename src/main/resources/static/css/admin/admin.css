@@ -46,7 +46,7 @@ select {
     padding: 10px;
 }
 
-.memberInfo-table tr {
+.memberInfo-table tr, .couponInfo, .couponInfo td {
     border: 1px solid #dee2e6;
 }
 
@@ -87,7 +87,7 @@ select {
 
 .adminContainer-table-tbody1 {
     display: block;
-    height: 331px;
+    height: 269px;
     overflow-y: scroll;
 }
 

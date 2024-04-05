@@ -40,7 +40,7 @@
                                                 <span>[[${recent.messageDate}]]&ensp;&ensp;</span>
                                             </div>
                                         </td>
-                                        <td width="60%">&nbsp;</td>
+                                        <td width="60%"></td>
                                     </tr>
                                     <tr>
                                         <td class="msgTopMenu">
@@ -51,7 +51,7 @@
                                 <th:block th:unless="${memberCode == 0}">
                                     <tr th:each="chat : ${chtList}">
                                         <th:block th:if="${chat.toFrom == 'TO'}">
-                                            <td width="60%">&nbsp;</td>
+                                            <td width="60%"></td>
                                             <td>
                                                 <div class="toMsg">
                                                     <div class="botMsg">
@@ -78,7 +78,7 @@
                                                     <span>[[${chat.messageDate}]]&ensp;&ensp;</span>
                                                 </div>
                                             </td>
-                                            <td width="60%">&nbsp;</td>
+                                            <td width="60%"></td>
                                         </th:block>
                                     </tr>
                                 </th:block>
@@ -94,7 +94,7 @@
                                             <!-- 채팅 -->
                                             <span>
                                                 <input type="text"
-                                                    style="width: 60%; text-align: start; width: 67.5%; background-color: #f2f4f7;"
+                                                    style="text-align: start; width: 67.5%; background-color: #f2f4f7;"
                                                     name="messageContent" id="admin_message_content">
                                             </span>
                                             <!-- ---- -->

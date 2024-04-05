@@ -48,7 +48,7 @@ function goChat(memberCode) {
             <tr>`;
                 if (e.toFrom == 'TO') {
                     str += `
-                <td width="60%">&nbsp;</td>    
+                <td width="60%"></td>    
                 <td>
                     <div class="toMsg">
                         <div class="botMsg">
@@ -74,7 +74,7 @@ function goChat(memberCode) {
                         <span>${e.messageDate}&ensp;&ensp;</span>
                     </div>
                 </td>
-                <td width="60%">&nbsp;</td>
+                <td width="60%"></td>
             </tr>
             `;}
         })

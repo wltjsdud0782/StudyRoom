@@ -25,7 +25,7 @@ function selectService(value) {
         <table class="adminContainer-table">
             <colgroup>
                 <col width="11%">
-                <col width="7%">
+                <col width="6%">
                 <col width="16%">
                 <col width="7%">
                 <col width="16%">
@@ -45,12 +45,12 @@ function selectService(value) {
                     <td>
                         <div class="row">
                             <div class="col text-end charge-title">
-                                이용권 명
+                                이용권
                             </div>
                         </div>
                     </td>
                     <td class="charge-td">
-                        <input type="text" name="chargeName" class="form-control enInput" placeholder="이용권 명을 입력해주세요."
+                        <input type="text" name="chargeName" class="form-control enInput" placeholder="이름을 입력해주세요."
                             style="font-style: oblique; border: 1px solid #ccc;">
                     </td>
                     <td>
@@ -80,7 +80,7 @@ function selectService(value) {
                             <div class="col text-end">
                                 <div class="btnDiv">
                                     <input type="button" value="이용권 등록" onclick="enroll()">&nbsp;
-                                    <input type="button" value="취소" onclick="window.location.reload()">
+                                    <input type="button" value="취소" style="background-color: #f2f4f7;" onclick="window.location.reload()">
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@ function selectService(value) {
         <table class="adminContainer-table">
             <colgroup>
                 <col width="11%">
-                <col width="7%">
+                <col width="6%">
                 <col width="26%">
                 <col width="9%">
                 <col width="26%">
@@ -127,12 +127,12 @@ function selectService(value) {
                     <td>
                         <div class="row">
                             <div class="col text-end charge-title">
-                                쿠폰 명
+                                쿠폰
                             </div>
                         </div>
                     </td>
                     <td class="charge-td">
-                        <input type="text" name="couponName" class="form-control enInput" placeholder="쿠폰 명을 입력해주세요."
+                        <input type="text" name="couponName" class="form-control enInput" placeholder="이름을 입력해주세요."
                             style="font-style: oblique; border: 1px solid #ccc;">
                     </td>
                     <td>
@@ -151,7 +151,7 @@ function selectService(value) {
                             <div class="col text-end">
                                 <div class="btnDiv">
                                     <input type="button" value="쿠폰 등록" onclick="enroll()">&nbsp;
-                                    <input type="button" value="취소" onclick="window.location.reload()">
+                                    <input type="button" value="취소" style="background-color: #f2f4f7;" onclick="window.location.reload()">
                                 </div>
                             </div>
                         </div>
@@ -209,7 +209,7 @@ function changeCharge(chargeCode) {
                             <table class="adminContainer-table">
                             <colgroup>
                             <col width="11%">
-                            <col width="7%">
+                            <col width="6%">
                             <col width="16%">
                             <col width="7%">
                             <col width="16%">
@@ -228,7 +228,7 @@ function changeCharge(chargeCode) {
                                         <td>
                                             <div class="row">
                                                 <div class="col text-end charge-title">
-                                                    이용권 명
+                                                    이용권
                                                 </div>
                                             </div>
                                         </td>                                       
@@ -263,7 +263,7 @@ function changeCharge(chargeCode) {
                                                 <div class="col text-end">
                                                     <div class="btnDiv">
                                                         <input type="button" value="이용권 변경" onclick="enroll()">&nbsp;
-                                                        <input type="button" value="취소" onclick="window.location.reload()">
+                                                        <input type="button" value="취소" style="background-color: #f2f4f7;" onclick="window.location.reload()">
                                                     </div>
                                                 </div>
                                             </div>
@@ -337,7 +337,7 @@ function changeCoupon(couponCode) {
             <table class="adminContainer-table">
                 <colgroup>
                     <col width="11%">
-                    <col width="7%">
+                    <col width="6%">
                     <col width="26%">
                     <col width="9%">
                     <col width="26%">
@@ -355,7 +355,7 @@ function changeCoupon(couponCode) {
                         <td>
                             <div class="row">
                                 <div class="col text-end charge-title">
-                                    쿠폰 명
+                                    쿠폰
                                 </div>
                             </div>
                         </td>
@@ -379,7 +379,7 @@ function changeCoupon(couponCode) {
                                 <div class="col text-end">
                                     <div class="btnDiv">
                                         <input type="button" value="쿠폰 변경" onclick="enroll()">&nbsp;
-                                        <input type="button" value="취소" onclick="window.location.reload()">
+                                        <input type="button" value="취소" style="background-color: #f2f4f7;" onclick="window.location.reload()">
                                     </div>
                                 </div>
                             </div>

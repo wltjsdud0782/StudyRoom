@@ -90,24 +90,43 @@
                         </div>
                         <div class="col-5">
                             <h4>&nbsp;쿠폰 지급</h4>
-                            <table class="table table-hover adminContainer-table">
-                                <tbody class="adminContainer-table-tbody1">
-                                    <th:block th:if="${#lists.isEmpty(couponList)}">
-                                        <tr>
-                                            <td>※ 등록된 쿠폰이 없습니다.</td>
-                                        </tr>
-                                    </th:block>
-                                    <th:block th:unless="${#lists.isEmpty(couponList)}">
-                                        <tr th:each="coupon : ${couponList}">
-                                            <td th:onclick="changeCoupon([[${coupon.couponCode}]])">
-                                                <div>[[${coupon.couponName}]]</div>
-                                                <div style="font-size: larger;">&ensp;[[${coupon.discountPercent}]]% 할인
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </th:block>
-                                </tbody>
-                            </table>
+                            <form action="/admin/coupon" method="post">
+                                <table class="table table-hover adminContainer-table">
+                                    <thead class="table-success">
+                                        <form action="/admin/info" method="post">
+                                            <tr>
+                                                <td>
+                                                    <div class="goCoupon">
+                                                        <div class="btnDiv">
+                                                            <input type="text" value="지급대상" readonly>
+                                                            <div style="float: right;">
+                                                                <input type="text" value="지급하기" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </form>
+                                    </thead>
+                                    <tbody class="adminContainer-table-tbody1 checkCoupon">
+                                        <th:block th:if="${#lists.isEmpty(couponList)}">
+                                            <tr>
+                                                <td>※ 등록된 쿠폰이 없습니다.</td>
+                                            </tr>
+                                        </th:block>
+                                        <th:block th:unless="${#lists.isEmpty(couponList)}">
+                                            <tr th:each="coupon : ${couponList}">
+                                                <td>
+                                                    <div>[[${coupon.couponName}]]</div>
+                                                    <div style="font-size: larger;">&ensp;[[${coupon.discountPercent}]]%
+                                                        할인
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </th:block>
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
                     </div>
                     <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->

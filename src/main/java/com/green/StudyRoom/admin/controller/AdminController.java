@@ -59,6 +59,7 @@ public class AdminController {
     @PostMapping("/viewInfo")
     public Map<String, Object> viewInfo(@RequestParam(name="memberCode") int memberCode){
         Map<String, Object> map = new HashMap<>();
+        map.put("couponList", chargeService.selectCoupon());
         map.put("memberMap", adminService.selectMemberDetailInfo(memberCode));
         map.put("seatMap", adminService.selectSeatDetailInfo(memberCode));
         map.put("couponMap", adminService.selectInfoCoupon(memberCode));
@@ -66,23 +67,10 @@ public class AdminController {
         map.put("charName", seatService.haveCharge(memberCode));
         if (!seatService.haveCharge(memberCode).isEmpty()){
             //map.put("charDate", seatService.haveChargeDate(memberCode));
-            map.put("charAppDate", seatService.haveChargeApprovalDate(memberCode));
-            map.put("charRemDate", seatService.haveChargeRemainDate(memberCode));
-            map.put("charEndDate", seatService.haveChargeEndDate(memberCode));
+            map.put("buyDetail", seatService.myBuyDetail(memberCode)); //결재정보
+            map.put("charRemDate", seatService.haveChargeRemainDate(memberCode)); //남은시간
+            map.put("charEndDate", seatService.haveChargeEndDate(memberCode)); //만료시간
         }
-
-        //myBuyDetail.html에 가져가는 데이터 그대로 나도 쓰기
-//        model.addAttribute("buyDetailInfo", seatService.myBuyDetail(memberCode));
-//        model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
-//        model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
-//
-//        model.addAttribute("ownCouponList", seatService.ownCoupon(memberCode));
-
-// 이용권은 최대 2개까지 보유가능
-// 기간이 만료된 이용권은 해당 회원이 로그인할때 자동으로 삭제됨!!
-
-
-
         return map;
     }
 
