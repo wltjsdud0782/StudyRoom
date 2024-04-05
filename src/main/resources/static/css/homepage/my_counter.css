@@ -6,11 +6,21 @@
     border-bottom: 3px solid black;
 }
 
+.user-chat-table{
+    width: 100%;
+    border: 1px solid #dee2e6;
+}
+.user-chat-table tr td {
+    padding: 20px;
+}
+
+
 .userChat {
     display: flex;
     height: 520px;
-    overflow: auto;
+    overflow-y: scroll;
     flex-direction: column-reverse;
+    background-color: #92aac9;
 }
 
 .userChat tr {
@@ -19,23 +29,58 @@
 }
 
 .userChat::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
     /* 스크롤바의 너비 */
 }
 
 .userChat::-webkit-scrollbar-thumb {
     height: 30%;
     /* 스크롤바의 길이 */
-    background: #4d6d49;
+    background: #352a9e;
     /* 스크롤바의 색상 */
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .userChat::-webkit-scrollbar-track {
-    background: #ccc;
+    background: #6b7c91;
     /*스크롤바 뒷 배경 색상*/
 }
 
 .user-chat-table tfoot {
     border-top: 1px solid #ccc;
+}
+
+
+
+
+.botMsg {
+    padding-bottom: 10px;
+}
+
+.topMsg {
+    font-size: 10px;
+    padding-top: 10px;
+    padding-bottom: 18px;
+}
+
+.toMsg {
+    background-color: #b1eb6b;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.fromMsg {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.btnDiv input,
+select {
+    width: 120px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background-color: #fff;
+    text-align: center;
 }
