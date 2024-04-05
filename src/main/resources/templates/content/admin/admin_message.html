@@ -40,7 +40,7 @@
                                                 <span>[[${recent.messageDate}]]&ensp;&ensp;</span>
                                             </div>
                                         </td>
-                                        <td width="60%">&ensp;</td>
+                                        <td width="60%">&nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td class="msgTopMenu">
@@ -51,7 +51,7 @@
                                 <th:block th:unless="${memberCode == 0}">
                                     <tr th:each="chat : ${chtList}">
                                         <th:block th:if="${chat.toFrom == 'TO'}">
-                                            <td width="60%">&ensp;</td>
+                                            <td width="60%">&nbsp;</td>
                                             <td>
                                                 <div class="toMsg">
                                                     <div class="botMsg">
@@ -78,7 +78,7 @@
                                                     <span>[[${chat.messageDate}]]&ensp;&ensp;</span>
                                                 </div>
                                             </td>
-                                            <td width="60%">&ensp;</td>
+                                            <td width="60%">&nbsp;</td>
                                         </th:block>
                                     </tr>
                                 </th:block>

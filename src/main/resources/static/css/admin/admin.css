@@ -130,21 +130,21 @@ select {
 }
 
 .adminContainer-table-tbody2::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
     /* 스크롤바의 너비 */
 }
 
 .adminContainer-table-tbody2::-webkit-scrollbar-thumb {
     height: 30%;
     /* 스크롤바의 길이 */
-    background: #B6CFB6;
+    background: #352a9e;
     /* 스크롤바의 색상 */
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .adminContainer-table-tbody2::-webkit-scrollbar-track {
-    background: #dee2e6;
-    /*스크롤바 뒷 배경 색상*/
+    background: #6b7c91;
+    /* 스크롤바 뒷 배경 색상 */
 }
 
 .adminContainer-table tfoot {
