@@ -26,19 +26,22 @@ function allInfo(memberCode) {
         .then((data) => {//data -> controller에서 리턴되는 데이터!
             console.log(data);
 
+            //쿠폰 지급
             const goCoupon = document.querySelector('.goCoupon');
             goCoupon.innerHTML = '';
             let str_1 = '';
             str_1 += `
+                <input type="hidden" name="memberCode" value="${memberCode}">
                 <div class="btnDiv">
-                    <input type="text" value="${data.memberMap.memberName}" name="memberName" readonly>
+                    <input type="text" value="${data.memberMap.memberName}" name="memberName" style="color: green;" readonly>
                     <div style="float: right;">
-                        <input type="submit" value="지급하기" style="color: red;">
+                        <input type="button" value="지급하기" style="color: red;" onclick="yourCoupon()" class="enInput">
                     </div>                                              
-                </div>      
+                </div>
             `;
             goCoupon.insertAdjacentHTML('afterbegin', str_1);
 
+            //쿠폰 지급창 출력
             const checkCoupon = document.querySelector('.checkCoupon');
             checkCoupon.innerHTML = '';
             let str_2 = '';  
@@ -46,7 +49,7 @@ function allInfo(memberCode) {
                     str_2 += `
                         <tr>
                             <td style="width: 5%; vertical-align: middle;">
-                                <input type="checkbox" class="form-check-input" name="couponCode">
+                                <input type="checkbox" class="form-check-input" name="couponCode" value="${data.couponList[i].couponCode}">
                             </td>
                             <td>
                                 <div>${data.couponList[i].couponName}</div>
@@ -58,8 +61,7 @@ function allInfo(memberCode) {
                 }
             checkCoupon.insertAdjacentHTML('afterbegin', str_2);
 
-
-
+            //회원정보 출력
             const changeInfo = document.querySelector('.changeInfo-div');
             changeInfo.innerHTML = '';
             let str = '';
@@ -362,14 +364,14 @@ function allInfo(memberCode) {
                         `<h4>&nbsp;보유한 이용권</h4>
                         <table class="memberInfo-table">
                             <colgroup>
-                                <col width="12%">
-                                <col width="16%">
-                                <col width="12%">
-                                <col width="12%">                 
-                                <col width="12%">
+                                <col width="11%">
+                                <col width="15%">
+                                <col width="11%">
+                                <col width="15%">                 
+                                <col width="11%">
+                                <col width="15%">
+                                <col width="11%">
                                 <col width="*">
-                                <col width="12%">
-                                <col width="12%">
                             </colgroup>
                             <tbody>
                                 <tr>
@@ -390,7 +392,7 @@ function allInfo(memberCode) {
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;결제 날짜
+                                                &ensp;시작 날짜
                                             </div>
                                         </div>
                                     </td>
@@ -404,7 +406,7 @@ function allInfo(memberCode) {
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;시작 날짜
+                                                &ensp;만료 날짜
                                             </div>
                                         </div>
                                     </td>
@@ -439,14 +441,14 @@ function allInfo(memberCode) {
                             `<h4>&nbsp;보유한 이용권</h4>
                             <table class="memberInfo-table">
                                 <colgroup>
-                                    <col width="12%">
-                                    <col width="16%">
-                                    <col width="12%">
-                                    <col width="12%">                 
-                                    <col width="12%">
+                                    <col width="11%">
+                                    <col width="15%">
+                                    <col width="11%">
+                                    <col width="15%">                 
+                                    <col width="11%">
+                                    <col width="15%">
+                                    <col width="11%">
                                     <col width="*">
-                                    <col width="12%">
-                                    <col width="12%">
                                 </colgroup>
                                 <tbody>
                                     <tr>
@@ -525,7 +527,7 @@ function allInfo(memberCode) {
                                         <td class="infoIndex">
                                             <div class="row">
                                                 <div class="col">
-                                                    &ensp;결제 날짜
+                                                    &ensp;시작 날짜
                                                 </div>
                                             </div>
                                         </td>
@@ -538,19 +540,19 @@ function allInfo(memberCode) {
                                         </td> 
                                         <td class="infoIndex">
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col charEndDate-data">
                                                     &ensp;만료 날짜
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col charEndDate-data text-center">
+                                                <div class="col text-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#dee2e6" class="bi bi-x-circle" viewBox="0 0 16 16">
                                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                                                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                                                     </svg>
-                                                </div>
+                                                    </div>
                                             </div>
                                         </td>
                                         <td class="infoIndex">
@@ -580,14 +582,14 @@ function allInfo(memberCode) {
                         `<h4>&nbsp;보유한 이용권</h4>
                         <table class="memberInfo-table">
                             <colgroup>
-                                <col width="12%">
-                                <col width="16%">
-                                <col width="12%">
-                                <col width="12%">                 
-                                <col width="12%">
+                                <col width="11%">
+                                <col width="15%">
+                                <col width="11%">
+                                <col width="15%">                 
+                                <col width="11%">
+                                <col width="15%">
+                                <col width="11%">
                                 <col width="*">
-                                <col width="12%">
-                                <col width="12%">
                             </colgroup>
                             <tbody>
                                 <tr>
@@ -922,7 +924,7 @@ function seatInfo(memberCode) {
             let str_1 = '';
             str_1 += `
             <input type="submit" value="정보 변경" class="btn btn-warning">&ensp;   
-            <input type="button" value="변경 취소" class="btn btn-light" onclick="allInfo(${memberCode})">
+            <input type="reset" value="변경 취소" class="btn btn-light" onclick="allInfo(${memberCode})">
             <input type="hidden" name="memberCode" value="${memberCode}">
             `;
             changeSeatBtn.insertAdjacentHTML('afterbegin', str_1);
@@ -979,4 +981,34 @@ function seatInfo(memberCode) {
             alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
             console.log(err);
         });
+}
+
+
+//쿠폰 지급하기
+function yourCoupon(){
+    const sendCouponForm = document.querySelector('.sendCouponForm');
+    const chksValue = []
+    //체크된 체크박스들
+    const chks = document.querySelectorAll('input[name="couponCode"]:checked');
+    for(const chk of chks){
+        console.log(chk.value);
+        chksValue.push(chk.value);
+    }
+    
+    //체크박스 체크여부 (미완)
+    // if (document.querySelector('.enInput').ariaChecked == true) {
+    //     alert('빈칸에 값을 입력해주세요!');
+    // }
+    // else {
+    //     confirm('정말로 지급하시겠습니까?');
+    //     sendCouponForm.submit();
+        
+    // }
+
+    if (confirm("정말로 지급하시겠습니까?")){
+		alert("쿠폰을 지급했습니다.");
+        sendCouponForm.submit();
+	} else {
+		alert("취소되었습니다.");
+	}
 }

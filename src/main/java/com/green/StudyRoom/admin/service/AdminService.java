@@ -2,6 +2,7 @@ package com.green.StudyRoom.admin.service;
 
 import com.green.StudyRoom.admin.vo.InfoSearchVO;
 
+import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.vo.MemberCouponVO;
 import com.green.StudyRoom.seat.vo.SeatStatusVO;
@@ -26,7 +27,10 @@ public interface AdminService {
     //좌석정보 업데이트하기
     void uptSeatInfo(SeatVO seatVO);
 
-    //쿠폰정보 보여주기
-    List<MemberCouponVO> selectInfoCoupon(int memberCode);
+    //사용할 날짜 보여주기
+    List<ApprovalVO> chargeInfoDate(int memberCode);
+
+    //쿠폰 지급하기
+    void sendCoupon(MemberCouponVO memberCouponVO);
 }
 

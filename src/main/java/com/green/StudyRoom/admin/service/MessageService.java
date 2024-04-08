@@ -17,9 +17,6 @@ public interface MessageService {
     //관리자 메세지 보내기
     void insertAdmMsg(MessageVO messageVO);
 
-    //유저 메세지 저장
-    //void insertMessage(MessageVO messageVO);
-
     //메세지 조회
     List<MessageVO> selectMessage(int memberCode);
 

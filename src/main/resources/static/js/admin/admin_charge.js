@@ -80,7 +80,7 @@ function selectService(value) {
                             <div class="col text-end">
                                 <div class="btnDiv">
                                     <input type="button" value="이용권 등록" onclick="enroll()">&nbsp;
-                                    <input type="button" value="취소" style="background-color: #f2f4f7;" onclick="window.location.reload()">
+                                    <input type="reset" value="취소" style="background-color: #f2f4f7;">
                                 </div>
                             </div>
                         </div>
@@ -151,7 +151,7 @@ function selectService(value) {
                             <div class="col text-end">
                                 <div class="btnDiv">
                                     <input type="button" value="쿠폰 등록" onclick="enroll()">&nbsp;
-                                    <input type="button" value="취소" style="background-color: #f2f4f7;" onclick="window.location.reload()">
+                                    <input type="reset" value="취소" style="background-color: #f2f4f7;">
                                 </div>
                             </div>
                         </div>
@@ -221,8 +221,9 @@ function changeCharge(chargeCode) {
                             <tr>
                                 <td>
                                 <select id="selectOption" onchange="selectService(this.value)">
-                                    <option value="CHARGE-option" selected>이용권</option>
+                                    <option value="CHARGE-option">이용권</option>
                                     <option value="COUPON-option">쿠폰</option>
+                                    <option selected>이용권 변경</option>
                                 </select>
                                 </td>
                                         <td>
@@ -263,7 +264,7 @@ function changeCharge(chargeCode) {
                                                 <div class="col text-end">
                                                     <div class="btnDiv">
                                                         <input type="button" value="이용권 변경" onclick="enroll()">&nbsp;
-                                                        <input type="button" value="취소" style="background-color: #f2f4f7;" onclick="window.location.reload()">
+                                                        <input type="reset" value="취소" style="background-color: #f2f4f7;">
                                                     </div>
                                                 </div>
                                             </div>
@@ -348,7 +349,8 @@ function changeCoupon(couponCode) {
                         <td>
                             <select id="selectOption" onchange="selectService(this.value)">
                                 <option value="CHARGE-option">이용권</option>
-                                <option value="COUPON-option" selected>쿠폰</option>
+                                <option value="COUPON-option">쿠폰</option>
+                                <option selected>쿠폰 변경</option>
                             </select>
                         </td>
                         <!-- 쿠폰 -->
@@ -379,7 +381,7 @@ function changeCoupon(couponCode) {
                                 <div class="col text-end">
                                     <div class="btnDiv">
                                         <input type="button" value="쿠폰 변경" onclick="enroll()">&nbsp;
-                                        <input type="button" value="취소" style="background-color: #f2f4f7;" onclick="window.location.reload()">
+                                        <input type="reset" value="취소" style="background-color: #f2f4f7;">
                                     </div>
                                 </div>
                             </div>

@@ -90,10 +90,9 @@
                         </div>
                         <div class="col-5">
                             <h4>&nbsp;쿠폰 지급</h4>
-                            <form action="/admin/coupon" method="post">
+                            <form action="/admin/sendCoupon" method="post" class="sendCouponForm">
                                 <table class="table table-hover adminContainer-table">
                                     <thead class="table-success">
-                                        <form action="/admin/info" method="post">
                                             <tr>
                                                 <td>
                                                     <div class="goCoupon">
@@ -106,7 +105,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        </form>
+                                        
                                     </thead>
                                     <tbody class="adminContainer-table-tbody1 checkCoupon">
                                         <th:block th:if="${#lists.isEmpty(couponList)}">

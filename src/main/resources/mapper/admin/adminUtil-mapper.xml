@@ -99,19 +99,24 @@
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 
-    <!-- 쿠폰 정보 띄우기 -->
-    <select id="selectInfoCoupon" resultMap="seatMapper.memberCoupon">
-        SELECT COU.COUPON_CODE
-            , COU.MEMBER_CODE
-            , COUPON_NAME
-            , DISCOUNT_PERCENT
-        FROM member_coupon COU
-        INNER JOIN STUDYROOM_MEMBER MEMBER
-        ON COU.MEMBER_CODE = MEMBER.MEMBER_CODE
-        INNER JOIN coupon PON
-        ON COU.COUPON_CODE = PON.COUPON_CODE
-        WHERE COU.MEMBER_CODE = #{memberCode};
+    <!-- 이용일자 정보 띄우기 -->
+    <select id="chargeInfoDate" resultMap="memberMapper.approval">
+        SELECT CHARGE_DATE
+        FROM APPROVAL AP
+        INNER JOIN STUDYROOM_CHARGE CH
+        ON AP.CHARGE_CODE = CH.CHARGE_CODE
     </select>
+
+    <!-- 쿠폰 지급하기~ -->
+    <insert id="sendCoupon">
+        INSERT MEMBER_COUPON (
+            COUPON_CODE
+            , MEMBER_CODE
+        ) VALUES (
+            #{couponCode}
+            , #{memberCode}
+        )
+    </insert>
 
 </mapper>
 
