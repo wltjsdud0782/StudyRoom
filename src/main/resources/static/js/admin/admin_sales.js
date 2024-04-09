@@ -1,4 +1,4 @@
-// 바차트
+// 막대바 차트
 new Chart(document.querySelector('#bar-chart'), {
     type: 'bar',
     data: {
@@ -12,7 +12,7 @@ new Chart(document.querySelector('#bar-chart'), {
         ]
     },
     options: {
-        maxBarThickness: 35,
+        maxBarThickness: 40,
         legend: { display: true },
         title: {
             display: true,

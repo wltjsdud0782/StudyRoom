@@ -14,12 +14,12 @@
             <div class="title">
                 <h3>이용권/쿠폰</h3>
             </div>
-            <div style="padding: 3vh;"></div> <!-- 띄어쓰기 -->
+            <div style="padding: 2.5vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
                     <h4>&nbsp;이용권</h4>
                     <table class="table table-hover adminContainer-table">
-                        <tbody class="adminContainer-table-tbody5">
+                        <tbody class="adminContainer-table-tbody5 scroll-table">
                             <th:block th:if="${#lists.isEmpty(chargeList)}">
                                 <tr>
                                     <td>※ 등록된 이용권이 없습니다.</td>
@@ -47,7 +47,7 @@
                         <h4>&nbsp;쿠폰</h4>
                     </div>           
                     <table class="table table-hover adminContainer-table">
-                        <tbody class="adminContainer-table-tbody5">
+                        <tbody class="adminContainer-table-tbody5 scroll-table">
                             <th:block th:if="${#lists.isEmpty(couponList)}">
                                 <tr>
                                     <td>※ 등록된 쿠폰이 없습니다.</td>

@@ -35,6 +35,25 @@ select {
     border: 1px solid #a7b9b1;
 }
 
+/* 스크롤바 */
+.scroll-table::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+    /* background-color: #fcfcfc; */
+    background-color: transparent;
+}
+
+.scroll-table::-webkit-scrollbar {
+    width: 8px;
+    /* background-color: #fcfcfc; */
+}
+
+.scroll-table::-webkit-scrollbar-thumb {
+    outline: none;
+    border-radius: 8px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+    background : linear-gradient(to bottom, #edffea, #c0e1bd);
+}
+
 /* (Info)----------------------------------------------- */
 
 .memberInfo-table {
@@ -46,7 +65,9 @@ select {
     padding: 10px;
 }
 
-.memberInfo-table tr, .couponInfo, .couponInfo td {
+.memberInfo-table tr,
+.couponInfo,
+.couponInfo td {
     border: 1px solid #dee2e6;
 }
 
@@ -59,7 +80,7 @@ select {
 .adminContainer-table-tbody {
     display: block;
     height: 269px;
-    overflow-y: scroll;
+    overflow-y: overlay;
 }
 
 .adminContainer-table-tbody tr {
@@ -67,59 +88,12 @@ select {
     width: 100%;
 }
 
-.adminContainer-table-tbody::-webkit-scrollbar {
-    width: 10px;
-    /* 스크롤바의 너비 */
-}
-
-.adminContainer-table-tbody::-webkit-scrollbar-thumb {
-    height: 30%;
-    /* 스크롤바의 길이 */
-    background: #B6CFB6;
-    /* 스크롤바의 색상 */
-    border-radius: 10px;
-}
-
-.adminContainer-table-tbody::-webkit-scrollbar-track {
-    background: #dee2e6;
-    /*스크롤바 뒷 배경 색상*/
-}
-
-.adminContainer-table-tbody1 {
-    display: block;
-    height: 269px;
-    overflow-y: scroll;
-}
-
-.adminContainer-table-tbody1 tr {
-    display: table;
-    width: 100%;
-}
-
-.adminContainer-table-tbody1::-webkit-scrollbar {
-    width: 10px;
-    /* 스크롤바의 너비 */
-}
-
-.adminContainer-table-tbody1::-webkit-scrollbar-thumb {
-    height: 30%;
-    /* 스크롤바의 길이 */
-    background: #B6CFB6;
-    /* 스크롤바의 색상 */
-    border-radius: 10px;
-}
-
-.adminContainer-table-tbody1::-webkit-scrollbar-track {
-    background: #dee2e6;
-    /*스크롤바 뒷 배경 색상*/
-}
-
 /* (Message)----------------------------------------------- */
 
 .adminContainer-table-tbody2 {
     display: flex;
     height: 520px;
-    overflow-y: scroll;
+    overflow-y: overlay;
     flex-direction: column-reverse;
     background-color: #92aac9;
 }
@@ -130,20 +104,18 @@ select {
 }
 
 .adminContainer-table-tbody2::-webkit-scrollbar {
-    width: 5px;
+    width: 3px;
     /* 스크롤바의 너비 */
 }
 
 .adminContainer-table-tbody2::-webkit-scrollbar-thumb {
-    height: 30%;
-    /* 스크롤바의 길이 */
     background: #352a9e;
     /* 스크롤바의 색상 */
     border-radius: 20px;
 }
 
 .adminContainer-table-tbody2::-webkit-scrollbar-track {
-    background: #6b7c91;
+    background: none;
     /* 스크롤바 뒷 배경 색상 */
 }
 
@@ -154,35 +126,13 @@ select {
 .adminContainer-table-tbody22 {
     display: block;
     height: 520px;
-    overflow-y: scroll;
+    overflow-y: overlay;
 }
 
 .adminContainer-table-tbody22 tr {
     display: table;
     width: 100%;
 }
-
-.adminContainer-table-tbody22::-webkit-scrollbar {
-    width: 10px;
-    /* 스크롤바의 너비 */
-}
-
-.adminContainer-table-tbody22::-webkit-scrollbar-thumb {
-    height: 30%;
-    /* 스크롤바의 길이 */
-    background: #B6CFB6;
-    /* 스크롤바의 색상 */
-    border-radius: 10px;
-}
-
-.adminContainer-table-tbody22::-webkit-scrollbar-track {
-    background: #dee2e6;
-    /*스크롤바 뒷 배경 색상*/
-}
-
-/* .userMsg {
-    padding-bottom: 10px;
-} */
 
 .msgTopMenu {
     background-color: #2a354b;
@@ -217,33 +167,11 @@ select {
 .adminContainer-table-tbody5 {
     display: block;
     height: 294px;
-    overflow-y: scroll;
+    overflow-y: overlay;
 }
 
 .adminContainer-table-tbody5 tr {
     display: table;
-    width: 100%;
-}
-
-.adminContainer-table-tbody5::-webkit-scrollbar {
-    width: 10px;
-    /* 스크롤바의 너비 */
-}
-
-.adminContainer-table-tbody5::-webkit-scrollbar-thumb {
-    height: 30%;
-    /* 스크롤바의 길이 */
-    background: #B6CFB6;
-    /* 스크롤바의 색상 */
-    border-radius: 10px;
-}
-
-.adminContainer-table-tbody5::-webkit-scrollbar-track {
-    background: #dee2e6;
-    /*스크롤바 뒷 배경 색상*/
-}
-
-#charge-container {
     width: 100%;
 }
 
@@ -256,7 +184,7 @@ select {
     border: 1px solid #a7b9b1;
 }
 
-#selectOption{
+#selectOption {
     border: 1px solid #ccc;
 }
 
@@ -286,28 +214,10 @@ select {
     width: 100%;
 }
 
-.adminContainer-table-tbody4::-webkit-scrollbar {
-    width: 10px;
-    /* 스크롤바의 너비 */
-}
-
-.adminContainer-table-tbody4::-webkit-scrollbar-thumb {
-    height: 30%;
-    /* 스크롤바의 길이 */
-    background: #B6CFB6;
-    /* 스크롤바의 색상 */
-    border-radius: 10px;
-}
-
-.adminContainer-table-tbody4::-webkit-scrollbar-track {
-    background: #dee2e6;
-    /*스크롤바 뒷 배경 색상*/
-}
-
 .adminContainer-table-tbody44 {
     display: block;
     height: 571px;
-    overflow-y: scroll;
+    overflow-y: overlay;
 }
 
 .adminContainer-table-tbody44 tr {
@@ -315,23 +225,46 @@ select {
     width: 100%;
 }
 
-.adminContainer-table-tbody44::-webkit-scrollbar {
-    width: 10px;
-    /* 스크롤바의 너비 */
+/* (Sales)------------------------------------------ */
+
+.layer {
+    background-color: #effaee;
+    /* border: 1px solid #dee2e6; */
+    border-radius: 15px;
+    padding: 30px;
+    /* height: 40vh; */
+    /* box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); */
 }
 
-.adminContainer-table-tbody44::-webkit-scrollbar-thumb {
-    height: 30%;
-    /* 스크롤바의 길이 */
-    background: #B6CFB6;
-    /* 스크롤바의 색상 */
-    border-radius: 10px;
+/* .large-layer {
+    height: 45vh;
+} */
+
+.layer-first {
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 15px;
+    padding: 30px;
+    margin-right: 10px;
+    margin-top: -10px;
+    margin-bottom: -10px;
 }
 
-.adminContainer-table-tbody44::-webkit-scrollbar-track {
-    background: #dee2e6;
-    /*스크롤바 뒷 배경 색상*/
+.layer-second {
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 15px;
+    padding: 30px;
+    margin-left: 10px;
+    margin-top: -10px;
+    margin-bottom: -10px;
 }
 
-
-/* ----------------------- */
+.layer-third {
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 15px;
+    padding: 30px;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}

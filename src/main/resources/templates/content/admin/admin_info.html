@@ -14,7 +14,7 @@
             <div class="title">
                 <h3>회원 관리</h3>
             </div>
-            <div style="padding: 3vh;"></div> <!-- 띄어쓰기 -->
+            <div style="padding: 2.5vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
                     <div class="row">
@@ -53,7 +53,7 @@
                                         </tr>
                                     </form>
                                 </thead>
-                                <tbody class="adminContainer-table-tbody">
+                                <tbody class="adminContainer-table-tbody scroll-table">
                                     <th:block th:if="${#lists.isEmpty(memberList)}">
                                         <tr>
                                             <td>※ 회원정보가 존재하지 않습니다.</td>
@@ -108,7 +108,7 @@
                                         </tr>
 
                                     </thead>
-                                    <tbody class="adminContainer-table-tbody1 checkCoupon">
+                                    <tbody class="adminContainer-table-tbody checkCoupon scroll-table">
                                         <th:block th:if="${#lists.isEmpty(couponList)}">
                                             <tr>
                                                 <td>※ 등록된 쿠폰이 없습니다.</td>
