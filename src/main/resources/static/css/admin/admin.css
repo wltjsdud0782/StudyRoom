@@ -256,6 +256,10 @@ select {
     border: 1px solid #a7b9b1;
 }
 
+#selectOption{
+    border: 1px solid #ccc;
+}
+
 /* (Log)----------------------------------------------- */
 
 .logDate {

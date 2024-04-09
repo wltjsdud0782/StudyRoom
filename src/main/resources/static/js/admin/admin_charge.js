@@ -36,7 +36,7 @@ function selectService(value) {
             <tbody class="enrollBody">
                 <tr>
                     <td>
-                        <select id="selectOption" onchange="selectService(this.value)">
+                        <select id="selectOption" onchange="selectService(this.value)" class="form-select">
                             <option value="CHARGE-option" selected>이용권</option>
                             <option value="COUPON-option">쿠폰</option>
                         </select>
@@ -118,7 +118,7 @@ function selectService(value) {
             <tbody class="enrollBody">
                 <tr>
                     <td>
-                        <select id="selectOption" onchange="selectService(this.value)">
+                        <select id="selectOption" onchange="selectService(this.value)" class="form-select">
                             <option value="CHARGE-option">이용권</option>
                             <option value="COUPON-option" selected>쿠폰</option>
                         </select>
@@ -220,10 +220,10 @@ function changeCharge(chargeCode) {
                         <tbody class="enrollBody">
                             <tr>
                                 <td>
-                                <select id="selectOption" onchange="selectService(this.value)">
+                                <select id="selectOption" onchange="selectService(this.value)" class="form-select">
                                     <option value="CHARGE-option">이용권</option>
                                     <option value="COUPON-option">쿠폰</option>
-                                    <option selected>이용권 변경</option>
+                                    <option selected>변경하기</option>
                                 </select>
                                 </td>
                                         <td>
@@ -351,10 +351,10 @@ function changeCoupon(couponCode) {
                 <tbody class="enrollBody">
                     <tr>
                         <td>
-                            <select id="selectOption" onchange="selectService(this.value)">
+                            <select id="selectOption" onchange="selectService(this.value)" class="form-select">
                                 <option value="CHARGE-option">이용권</option>
                                 <option value="COUPON-option">쿠폰</option>
-                                <option selected>쿠폰 변경</option>
+                                <option selected>변경하기</option>
                             </select>
                         </td>
                         <!-- 쿠폰 -->
