@@ -33,7 +33,7 @@ function allInfo(memberCode) {
             str_1 += `
                 <input type="hidden" name="memberCode" value="${memberCode}">
                 <div class="btnDiv">
-                    <input type="text" value="${data.memberMap.memberName}" name="memberName" style="color: green;" readonly>
+                    <input type="text" value="${data.memberMap.memberName}" name="memberName" readonly>
                     <div style="float: right;">
                         <input type="button" value="지급하기" style="color: red;" onclick="yourCoupon()" class="enInput">
                     </div>                                              
@@ -126,7 +126,7 @@ function allInfo(memberCode) {
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;생년 월일
+                                                &ensp;생년 월일 <font color="red">*</font>
                                             </div>
                                         </div>
                                     </td>
@@ -142,7 +142,7 @@ function allInfo(memberCode) {
                                     <td rowspan="2" class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;주소
+                                                &ensp;주소 <font color="red">*</font>
                                             </div>
                                         </div>
                                     </td>
@@ -157,7 +157,7 @@ function allInfo(memberCode) {
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;전화 번호
+                                                &ensp;전화 번호 <font color="red">*</font>
                                             </div>
                                         </div>
                                     </td>
@@ -185,7 +185,7 @@ function allInfo(memberCode) {
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;권한
+                                                &ensp;권한 <font color="red">*</font>
                                             </div>
                                             
                                         </div>
@@ -240,7 +240,7 @@ function allInfo(memberCode) {
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;좌석 상태
+                                                &ensp;좌석 상태 <font color="red">*</font>
                                             </div>
                                         </div>
                                     </td>
@@ -263,7 +263,7 @@ function allInfo(memberCode) {
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;점등 상태
+                                                &ensp;점등 상태 <font color="red">*</font>
                                             </div>
                                         </div>
                                     </td>
@@ -385,7 +385,10 @@ function allInfo(memberCode) {
                                     <td>
                                         <div class="row">
                                             <div class="col charName-data">
-                                                ${data.charName[0].chargeVO.chargeName}                         
+                                                ${data.charName[0].chargeVO.chargeName}             
+                                            </div>
+                                            <div>
+                                                <font color="#dee2e6">:</font>&ensp;${data.charDate[0].chargeVO.chargeDate}일 이용권 
                                             </div>
                                         </div>
                                     </td>  
@@ -462,7 +465,10 @@ function allInfo(memberCode) {
                                         <td>
                                             <div class="row">
                                                 <div class="col charName-data">                                                   
-                                                    ${data.charName[0].chargeVO.chargeName}                        
+                                                    ${data.charName[0].chargeVO.chargeName}             
+                                                </div>
+                                                <div>
+                                                    <font color="#dee2e6">:</font>&ensp;${data.charDate[0].chargeVO.chargeDate}일 이용권 
                                                 </div>
                                             </div>
                                         </td>  
@@ -520,7 +526,10 @@ function allInfo(memberCode) {
                                         <td>
                                             <div class="row">
                                                 <div class="col charName-data">                                                   
-                                                    ${data.charName[1].chargeVO.chargeName}                        
+                                                    ${data.charName[1].chargeVO.chargeName}               
+                                                </div>
+                                                <div>
+                                                    <font color="#dee2e6">:</font>&ensp;${data.charDate[1].chargeVO.chargeDate}일 이용권 
                                                 </div>
                                             </div>
                                         </td>  
@@ -534,7 +543,7 @@ function allInfo(memberCode) {
                                         <td>
                                             <div class="row">
                                                 <div class="col charAppDate-data">                                             
-                                                    ${data.buyDetail[1].approvalDate}
+                                                    ${data.buyDetail[1].approvalDate} ~
                                                 </div>
                                             </div>
                                         </td> 
@@ -673,7 +682,7 @@ function allInfo(memberCode) {
                                 <col width="*">
                             </colgroup>
                             <thead class="table-success">
-                                <tr>
+                                <tr style="height: 60px; vertical-align: middle;">
                                     <td style="border: 1px solid #a7b9b1;">
                                         쿠폰
                                     </td>
@@ -686,7 +695,7 @@ function allInfo(memberCode) {
                             <!-- couponMap[i]로 반복문 돌리면 된다 -->`;
                     for(let i = 0; i < data.couponMap.length; i++) {
                     str +=  ` 
-                                <tr>
+                                <tr style="height: 60px; vertical-align: middle;">
                                     
                                     <td>
                                         <div class="row">
@@ -719,7 +728,7 @@ function allInfo(memberCode) {
                                 <col width="*">
                             </colgroup>
                             <thead class="table-success">
-                                <tr>
+                                <tr style="height: 60px; vertical-align: middle;">
                                     <td style="border: 1px solid #a7b9b1;">
                                         쿠폰
                                     </td>
@@ -730,7 +739,7 @@ function allInfo(memberCode) {
                             </thead>
                             <tbody class="couponInfo">
                             <!-- couponMap[i]로 반복문 돌리면 된다/임시 -->
-                                <tr>              
+                                <tr style="height: 60px; vertical-align: middle;">              
                                     <td>    
                                         보유한 쿠폰이 없습니다.
                                     </td>
@@ -986,28 +995,20 @@ function seatInfo(memberCode) {
 
 //쿠폰 지급하기
 function yourCoupon(){
+
     const sendCouponForm = document.querySelector('.sendCouponForm');
     const chksValue = []
+
     //체크된 체크박스들
     const chks = document.querySelectorAll('input[name="couponCode"]:checked');
     for(const chk of chks){
         console.log(chk.value);
         chksValue.push(chk.value);
     }
-    
-    //체크박스 체크여부 (미완)
-    // if (document.querySelector('.enInput').ariaChecked == true) {
-    //     alert('빈칸에 값을 입력해주세요!');
-    // }
-    // else {
-    //     confirm('정말로 지급하시겠습니까?');
-    //     sendCouponForm.submit();
-        
-    // }
 
-    if (confirm("정말로 지급하시겠습니까?")){
-		alert("쿠폰을 지급했습니다.");
+    if (confirm("지급한 쿠폰은 회수할 수 없습니다.\n정말로 지급하시겠습니까?")){
         sendCouponForm.submit();
+        alert("쿠폰을 지급했습니다.");
 	} else {
 		alert("취소되었습니다.");
 	}

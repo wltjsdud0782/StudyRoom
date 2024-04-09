@@ -12,14 +12,14 @@
     <body>
         <div class="adminContainer">
             <div class="title">
-                <h3>회원 관리 (수정필요)</h3>
+                <h3>회원 관리</h3>
             </div>
             <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
                     <div class="row">
                         <div class="col-7">
-                            <h4>&nbsp;검색 <span style="font-size: 15px;">([[${#lists.size(memberList)}]]명)</span></h4>
+                            <h4>&nbsp;검색</h4>
                             <table class="table table-hover adminContainer-table">
                                 <thead class="table-success">
                                     <form action="/admin/info" method="post">
@@ -45,6 +45,7 @@
                                                     <input type="submit" value="검색">
                                                     <div style="float: right;">
                                                         <input type="button" value="새로고침"
+                                                            style="background-color: #f2f4f7;"
                                                             onclick="location.href='/admin/info'">
                                                     </div>
                                                 </div>
@@ -93,19 +94,19 @@
                             <form action="/admin/sendCoupon" method="post" class="sendCouponForm">
                                 <table class="table table-hover adminContainer-table">
                                     <thead class="table-success">
-                                            <tr>
-                                                <td>
-                                                    <div class="goCoupon">
-                                                        <div class="btnDiv">
-                                                            <input type="text" value="지급대상" readonly>
-                                                            <div style="float: right;">
-                                                                <input type="text" value="지급하기" readonly>
-                                                            </div>
+                                        <tr>
+                                            <td>
+                                                <div class="goCoupon">
+                                                    <div class="btnDiv">
+                                                        <input type="button" value="지급대상" disabled>
+                                                        <div style="float: right;">
+                                                            <input type="button" value="지급하기" disabled>
                                                         </div>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                        
+                                                </div>
+                                            </td>
+                                        </tr>
+
                                     </thead>
                                     <tbody class="adminContainer-table-tbody1 checkCoupon">
                                         <th:block th:if="${#lists.isEmpty(couponList)}">
