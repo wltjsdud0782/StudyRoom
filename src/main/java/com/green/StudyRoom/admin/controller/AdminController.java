@@ -67,7 +67,7 @@ public class AdminController {
 
         map.put("charName", seatService.haveCharge(memberCode));
         if (!seatService.haveCharge(memberCode).isEmpty()){
-            //map.put("charDate", adminService.chargeInfoDate(memberCode)); //이용날짜 보여주기
+            map.put("charDate", adminService.chargeInfoDate(memberCode)); //이용날짜 보여주기
             map.put("buyDetail", seatService.myBuyDetail(memberCode)); //결재정보
             map.put("charRemDate", seatService.haveChargeRemainDate(memberCode)); //남은시간
             map.put("charEndDate", seatService.haveChargeEndDate(memberCode)); //만료시간
@@ -93,9 +93,8 @@ public class AdminController {
     //쿠폰 지급
     @PostMapping("/sendCoupon")
     public String sendCoupon(@RequestParam(name="couponCode") List<Integer> cpCode, MemberCouponVO memberCouponVO){
-        System.out.println("!@@#!@#!@#"+cpCode);
-        for (int i = 0; i < cpCode.size(); i++){
-            memberCouponVO.setCouponCode(cpCode.get(i));
+        for (Integer integer : cpCode) {
+            memberCouponVO.setCouponCode(integer);
             adminService.sendCoupon(memberCouponVO);
         }
         return "redirect:/admin/info";

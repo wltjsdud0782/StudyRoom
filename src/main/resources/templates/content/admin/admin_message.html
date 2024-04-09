@@ -120,18 +120,18 @@
                                             <select name="searchType">
                                                 <option value="MEMBER_NAME"
                                                     th:selected="${infoSearchVO.searchType == null or infoSearchVO.searchType == 'MEMBER_NAME'}">
-                                                    이름
+                                                    회원 이름
                                                 </option>
                                                 <option value="MEMBER_ID"
                                                     th:selected="${infoSearchVO.searchType == 'MEMBER_ID'}">
-                                                    아이디
+                                                    회원 아이디
                                                 </option>
                                             </select>&nbsp;
                                             <input type="text" name="searchValue" style="text-align: left;"
                                                 th:value="${infoSearchVO.searchValue}">&nbsp;
                                             <input type="submit" value="검색">
                                             <div style="float: right;">
-                                                <input type="button" value="새로고침" onclick="location.href='/admin/msg'">
+                                                <input type="button" value="새로고침" style="background-color: #f2f4f7;" onclick="location.href='/admin/msg'">
                                             </div>
                                         </div>
                                     </td>

@@ -99,12 +99,13 @@
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 
-    <!-- 이용일자 정보 띄우기 -->
+    <!-- 이용일자 정보 띄우기 / 오류남 -->
     <select id="chargeInfoDate" resultMap="memberMapper.approval">
         SELECT CHARGE_DATE
         FROM APPROVAL AP
         INNER JOIN STUDYROOM_CHARGE CH
         ON AP.CHARGE_CODE = CH.CHARGE_CODE
+        WHERE MEMBER_CODE = #{memberCode}
     </select>
 
     <!-- 쿠폰 지급하기~ -->

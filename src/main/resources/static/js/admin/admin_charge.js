@@ -91,7 +91,7 @@ function selectService(value) {
         </table>
         <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
         <div>
-            <div class="btnDiv" style="padding-left: 10.2px;">
+            <div class="btnDiv" style="padding-left: 10px;">
                 <input type="button" value="삭제" disabled>
             </div>
         </div>
@@ -162,7 +162,7 @@ function selectService(value) {
         </table>
         <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
         <div>
-            <div class="btnDiv" style="padding-left: 10.2px;">
+            <div class="btnDiv" style="padding-left: 10px;">
                 <input type="button" value="삭제" disabled>
             </div>
         </div>
@@ -274,7 +274,7 @@ function changeCharge(chargeCode) {
                             </table>
                             <div style="padding: 1vh;"></div>
                             <div>
-                                <div class="btnDiv" style="padding-left: 10.2px;">                                           
+                                <div class="btnDiv" style="padding-left: 10px;">                                           
                                     <input type="button" value="삭제" onclick="deleteCharge(${chargeCode})" style="color: red;">
                                     <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
                                     <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 이용권을 이용하는 회원이 있는지 확인해주세요.</span>                              
@@ -296,8 +296,12 @@ function changeCharge(chargeCode) {
 
 //charge 삭제
 function deleteCharge(chargeCode) {
-    if (confirm('정말 삭제하시겠습니까?')) {
+    if (confirm('삭제할 경우 되돌릴 수 없습니다.\n정말 삭제하시겠습니까?')) {
         location.href = `/admin/delCharge?chargeCode=${chargeCode}`;
+        alert('해당 이용권이 삭제되었습니다.')
+    }
+    else {
+        alert('취소되었습니다.')
     }
 }
 
@@ -392,7 +396,7 @@ function changeCoupon(couponCode) {
             </table>
             <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
             <div>
-                <div class="btnDiv" style="padding-left: 10.2px;">
+                <div class="btnDiv" style="padding-left: 10px;">
                     <input type="button" value="삭제" onclick="deleteCoupon(${couponCode})" style="color: red;">
                     <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
                     <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 쿠폰을 이용하는 회원이 있는지 확인해주세요.</span>
@@ -416,7 +420,11 @@ function changeCoupon(couponCode) {
 
 //coupon삭제
 function deleteCoupon(couponCode) {
-    if (confirm('정말 삭제하시겠습니까?')) {
+    if (confirm('삭제할 경우 되돌릴 수 없습니다.\n정말 삭제하시겠습니까?')) {
         location.href = `/admin/delCoupon?couponCode=${couponCode}`;
+        alert('해당 쿠폰이 삭제되었습니다.')
+    }
+    else {
+        alert('취소되었습니다.')
     }
 }

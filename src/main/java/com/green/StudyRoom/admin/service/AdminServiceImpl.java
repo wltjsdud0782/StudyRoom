@@ -51,7 +51,7 @@ public class AdminServiceImpl implements AdminService {
     //사용할 날짜 보여주기
     @Override
     public List<ApprovalVO> chargeInfoDate(int memberCode) {
-        return sqlSession.selectOne("adminMapper.chargeInfoDate", memberCode);
+        return sqlSession.selectList("adminMapper.chargeInfoDate", memberCode);
     }
 
     //쿠폰 지급하기
