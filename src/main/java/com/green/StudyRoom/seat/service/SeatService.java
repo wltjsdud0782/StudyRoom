@@ -68,4 +68,5 @@ public interface SeatService {
     List<MessageVO> userMsg(int memberCode);
     void userSend(MessageVO messageVO);
 
+
 }

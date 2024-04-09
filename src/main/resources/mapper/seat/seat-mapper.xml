@@ -10,9 +10,9 @@
         <result column="MEMBER_CODE"    property="memberCode"/>
         <result column="STATUS_NUM"     property="statusNum"/>
         <result column="AGE_CODE"       property="ageCode"/>
-        <association property="seatStatusVO" resultMap="seatStatus"/>
-        <association property="floorAgeVO" resultMap="floorAge"/>
-        <association property="memberVO" resultMap="memberMapper.member"/>
+        <association property="seatStatusVO"    resultMap="seatStatus"/>
+        <association property="floorAgeVO"      resultMap="floorAge"/>
+        <association property="memberVO"        resultMap="memberMapper.member"/>
     </resultMap>
 
     <resultMap id="seatStatus" type="com.green.StudyRoom.seat.vo.SeatStatusVO">
@@ -26,20 +26,29 @@
     </resultMap>
 
     <resultMap id="coupon" type="com.green.StudyRoom.seat.vo.CouponVO">
-        <id     column="COUPON_CODE"     property="couponCode"/>
-        <result column="COUPON_NAME"    property="couponName"/>
-        <result column="DISCOUNT_PERCENT"    property="discountPercent"/>
+        <id     column="COUPON_CODE"        property="couponCode"/>
+        <result column="COUPON_NAME"        property="couponName"/>
+        <result column="DISCOUNT_PERCENT"   property="discountPercent"/>
     </resultMap>
 
     <resultMap id="memberCoupon" type="com.green.StudyRoom.seat.vo.MemberCouponVO">
-        <id     column="OWN_COUPON_CODE"     property="ownCouponCode"/>
-        <result column="COUPON_CODE"    property="couponCode"/>
-        <result column="MEMBER_CODE"    property="memberCode"/>
-        <association property="memberVO" resultMap="memberMapper.member"/>
+        <id     column="OWN_COUPON_CODE"    property="ownCouponCode"/>
+        <result column="COUPON_CODE"        property="couponCode"/>
+        <result column="MEMBER_CODE"        property="memberCode"/>
+        <association property="memberVO"    resultMap="memberMapper.member"/>
         <collection property="couponVOList" resultMap="coupon"/>
     </resultMap>
 
-<!--  좌석 선택 화면 필요 쿼리  -->
+    <resultMap id="salesInfo" type="com.green.StudyRoom.seat.vo.SalesInfoVO">
+        <id column="SALES_CODE"         property="salesCode"/>
+        <result column="SALES_FEE"      property="salesFee"/>
+        <result column="SALES_DATE"     property="salesDate"/>
+        <result column="CHARGE_CODE"    property="chargeCode"/>
+    </resultMap>
+
+<!--~~~~~~~~~~~~~~~~~~~~~좌석 선택 관련~~~~~~~~~~~~~~~~~~~~~-->
+
+    <!-- 좌석 현황 SELECT  -->
     <select id="seatList" resultMap="seat">
         SELECT
         SEAT_NUM
@@ -72,6 +81,7 @@
         ORDER BY SEAT_NUM ASC
     </select>
 
+    <!-- 회원의 좌석 SELECT  -->
     <select id="moveAndOut" resultMap="seat">
         SELECT
             SEAT_NUM
@@ -84,6 +94,7 @@
         WHERE MEMBER_CODE = #{memberCode}
     </select>
 
+    <!-- 회원의 입실, 퇴실 SELECT  -->
     <select id="inOutTime" resultMap="memberMapper.inOut">
         SELECT
             DATE_FORMAT(INOUT_TIME, '%y/%m/%d  %h:%i') INOUT_TIME
@@ -97,9 +108,9 @@
     </select>
 
 
-<!--  이용권 관련 필요 쿼리  -->
+<!--~~~~~~~~~~~~~~~~~~~~~이용권 관련~~~~~~~~~~~~~~~~~~~~~-->
 
-    <!--  지정한 회원의 이용권 유무  -->
+    <!--  회원의 이용권 유무 SELECT  -->
     <select id="haveCharge" resultMap="memberMapper.approval">
         SELECT
         CHARGE_NAME
@@ -110,7 +121,7 @@
         ORDER BY APPROVAL_DATE;
     </select>
 
-    <!--  지정한 회원의 이용권 결제일  -->
+    <!--  회원의 이용권 결제일 SELECT  -->
     <select id="haveChargeApprovalDate" resultMap="memberMapper.approval">
         SELECT
         DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') APPROVAL_DATE
@@ -119,7 +130,7 @@
         ORDER BY APPROVAL_DATE;
     </select>
 
-    <!--  지정한 회원의 이용권 이용 가능 일 수  -->
+    <!--  회원의 이용권 이용 가능일 수 SELECT  -->
     <select id="haveChargeDate" resultMap="memberMapper.approval">
         SELECT CHARGE_DATE
         FROM STUDYROOM_CHARGE CHARGE
@@ -129,7 +140,7 @@
         ORDER BY APPROVAL_DATE;
     </select>
 
-    <!--  지정한 회원의 이용권 끝나는 날짜  -->
+    <!--  회원의 이용권이 끝나는 날짜 SELECT  -->
     <select id="haveChargeEndDate" resultType="String">
         SELECT DATE_ADD(
         (SELECT DATE_FORMAT(MIN(APPROVAL_DATE), '%Y-%m-%d') FROM approval WHERE MEMBER_CODE = #{memberCode})
@@ -144,7 +155,7 @@
         DAY) AS END_DATE;
     </select>
 
-    <!--  지정한 회원의 이용권 남은 일 수  -->
+    <!--  회원의 이용권 남은일 수 SELECT  -->
     <select id="haveChargeRemainDate" resultType="int">
         SELECT
         TIMESTAMPDIFF(DAY, DATE_FORMAT(now(), '%Y-%m-%d')
@@ -162,6 +173,7 @@
         WHERE MEMBER_CODE = #{memberCode} AND APPROVAL_DATE = (SELECT MIN(APPROVAL_DATE) FROM approval WHERE MEMBER_CODE = #{memberCode});
     </select>
 
+    <!-- 두번째 이용권 구입시 결재일 첫번째 이용권의 끝나는 날짜로 자동 UPDATE  -->
     <update id="updateApp">
         UPDATE approval
         SET
@@ -182,14 +194,16 @@
         WHERE APPROVAL_DATE = (SELECT MAX(APPROVAL_DATE) FROM approval WHERE MEMBER_CODE = #{memberCode});
     </update>
 
-    <!--  오늘 날짜 구하기  -->
+    <!--  오늘 날짜 SELECT  20240410  -->
     <select id="today" resultType="String">
         SELECT DATE_FORMAT(now(), '%Y%m%d')
     </select>
+    <!-- 오늘 날짜 SELECT(2)  240410  -->
     <select id="buyToday" resultType="int">
         SELECT DATE_FORMAT(now(), '%y%m%d')
     </select>
 
+    <!-- 이용권 만료일이 됐는지 안됐는지 SELECT  -->
 <!--    <select id="isExpires" resultType="String">-->
 <!--    SELECT-->
 <!--    IF(-->
@@ -212,14 +226,16 @@
 <!--    , '만료일이 오늘보다 이후')AS EXPIRES-->
 <!--    </select>-->
 
-    <!--  이용권 만료 삭제  -->
+    <!--  이용권 만료 삭제 DELETE  -->
     <delete id="chargeDelete">
         DELETE
         FROM APPROVAL
         WHERE APPROVAL_DATE = (SELECT MIN(APPROVAL_DATE) FROM approval WHERE MEMBER_CODE = #{memberCode});
     </delete>
 
-<!-- 입실 필요 쿼리  -->
+<!--~~~~~~~~~~~~~~~~~~~~~입실 관련~~~~~~~~~~~~~~~~~~~~~-->
+
+    <!-- 자리 입실 UPDATE  -->
     <update id="inSeat">
         UPDATE STUDYROOM_SEAT
         SET
@@ -229,6 +245,7 @@
         WHERE SEAT_NUM = #{seatNum}
     </update>
 
+    <!-- 회원 입실 INSERT  -->
     <insert id="inMem">
         INSERT INTO STUDYROOM_INOUT (
             MEMBER_CODE
@@ -239,7 +256,9 @@
         )
     </insert>
 
-<!-- 퇴실 필요 쿼리  -->
+<!--~~~~~~~~~~~~~~~~~~~~~퇴실 관련~~~~~~~~~~~~~~~~~~~~~-->
+
+    <!-- 자리 퇴실 UPDATE  -->
     <update id="outSeat">
         UPDATE STUDYROOM_SEAT
         SET
@@ -248,6 +267,8 @@
         , MEMBER_CODE = NULL
         WHERE MEMBER_CODE = #{memberCode}
     </update>
+
+    <!-- 회원 퇴실 INSERT  -->
     <insert id="outMem">
         INSERT INTO STUDYROOM_INOUT (
         MEMBER_CODE
@@ -258,7 +279,9 @@
         )
     </insert>
 
-<!--  이용권 구매 화면 필요 쿼리  -->
+<!--~~~~~~~~~~~~~~~~~~~~~이용권 구매 관련~~~~~~~~~~~~~~~~~~~~~-->
+
+    <!-- 이용권 목록 SELECT  -->
     <select id="chargeList" resultMap="chargeMapper.charge">
         SELECT
         CHARGE_CODE
@@ -268,6 +291,7 @@
         ORDER BY CHARGE_CODE DESC
     </select>
 
+    <!-- 선택한 이용권 SELECT  -->
     <select id="chargeBuy" resultMap="chargeMapper.charge">
         SELECT
         CHARGE_NAME
@@ -277,13 +301,16 @@
         WHERE CHARGE_CODE = #{chargeCode}
     </select>
 
-<!--  카드 결제 필요 쿼리  -->
+<!--~~~~~~~~~~~~~~~~~~~~~카드 결제 관련~~~~~~~~~~~~~~~~~~~~~-->
+
+    <!-- 구입을 위한 회원의 정보 SELECT  -->
     <select id="selMem" resultMap="memberMapper.member">
         SELECT *
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_CODE = #{memberCode}
     </select>
 
+    <!-- 구입 완료 정보 INSERT  -->
     <insert id="buyCard">
         INSERT INTO APPROVAL (
             APPROVAL_CODE
@@ -300,7 +327,9 @@
         )
     </insert>
 
-<!-- 관리자 좌석 관리 필요 쿼리  -->
+<!--~~~~~~~~~~~~~~~~~~~~~관리자 좌석 관리 관련~~~~~~~~~~~~~~~~~~~~~-->
+
+    <!-- 관리자 좌석 관리 UPDATE  -->
     <update id="adminUpdateSeat">
         UPDATE
         STUDYROOM_SEAT
@@ -309,7 +338,7 @@
         WHERE SEAT_NUM = #{seatNum}
     </update>
 
-<!--  보유한 이용권 정보 조회  -->
+    <!--  회원의 보유한 이용권 정보 조회  -->
     <select id="myBuyDetail" resultMap="memberMapper.approval">
         SELECT
         DATE_FORMAT(APPROVAL_DATE, '%Y-%m-%d') APPROVAL_DATE
@@ -326,7 +355,9 @@
     </select>
 
 
-<!--  쿠폰 관련 쿼리  -->
+<!--~~~~~~~~~~~~~~~~~~~~~쿠폰 관련~~~~~~~~~~~~~~~~~~~~~-->
+
+    <!-- 쿠폰 목록 SELECT  -->
     <select id="coupon" resultMap="coupon">
         SELECT
         *
@@ -334,7 +365,7 @@
     </select>
 
 
-<!--  회원이 가진 쿠폰 관련 쿼리  -->
+    <!--  회원이 보유한 쿠폰 SELECT  -->
     <select id="ownCoupon" resultMap="memberCoupon">
         SELECT
             OWN_COUPON_CODE
@@ -352,12 +383,15 @@
         ORDER BY OWN_COUPON_CODE
     </select>
 
+    <!-- 사용 한 쿠폰 삭제 DELETE  -->
     <delete id="deleteCoupon">
         DELETE FROM MEMBER_COUPON
         WHERE OWN_COUPON_CODE = #{ownCouponCode}
     </delete>
 
-<!--  채팅  -->
+<!--~~~~~~~~~~~~~~~~~~~~~채팅 관련~~~~~~~~~~~~~~~~~~~~~-->
+
+    <!-- 대화 내용 SELECT  -->
     <select id="userMsg" resultMap="messageMapper.message">
         SELECT
             MESSAGE_CONTENT
@@ -369,6 +403,7 @@
         ORDER BY MESSAGE_CODE DESC LIMIT 100
     </select>
 
+    <!-- 회원이 대화 전송 시 INSERT  -->
     <insert id="userSend">
         INSERT INTO STUDYROOM_MESSAGE (
             MESSAGE_CONTENT
@@ -381,5 +416,22 @@
         )
     </insert>
 
+<!--~~~~~~~~~~~~~~~~~~~~~매출 관련~~~~~~~~~~~~~~~~~~~~~-->
 
+    <!-- 구입 시 매출 INSERT  -->
+    <insert id="insertSales">
+        INSERT INTO sales_info (
+            SALES_FEE
+            , CHARGE_CODE
+        ) VALUES (
+            #{approvalFee}
+            , #{chargeCode}
+        )
+    </insert>
+
+    <!-- 전체 매출 SELECT  -->
+    <select id="selectSales">
+        SELECT *
+        FROM SALES_INFO;
+    </select>
 </mapper>
