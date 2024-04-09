@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="reviewMapper">
+    <resultMap id="review" type="com.green.StudyRoom.board.vo.ReviewVO">
+        <id     column="REVIEW_CODE"    property="reviewCode"/>
+        <result column="REVIEW_WRITER"  property="reviewWriter"/>
+        <result column="REVIEW_CONTENT" property="reviewContent"/>
+        <result column="REVIEW_DATE"    property="reviewDate"/>
+    </resultMap>
+
+    <insert id="insertReview">
+        INSERT INTO REVIEW(
+            REVIEW_WRITER
+            , REVIEW_CONTENT
+        ) VALUES (
+            #{reviewWriter}
+            , #{reviewContent}
+        )
+    </insert>
+
+    <select id="selectReview" resultMap="review">
+        SELECT REVIEW_CODE
+            , RPAD(SUBSTRING(REVIEW_WRITER,1,2), 5 ,'*') REVIEW_WRITER
+            , REVIEW_CONTENT
+            , DATE_FORMAT(REVIEW_DATE, '%Y-%m-%d') REVIEW_DATE
+        FROM REVIEW
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
