@@ -47,12 +47,7 @@ public class MemberController {
     }
 
 
-    //아이디 찾기 폼
-//    @GetMapping("/idFindForm")
-//    public String id_find(@RequestParam(name="errorMsg", required = false , defaultValue = "success") String errorMsg, Model model){
-//        return "content/member/id_find";
-//    }
-
+    //아이디 찾기 화면
     @GetMapping("idFindForm")
     public String idFindForm(@RequestParam(name="errorMsg", required = false) String errorMsg, Model model){
         return "content/member/id_find";
@@ -73,6 +68,22 @@ public class MemberController {
         }
         return str;
     }
+
+    //비동기 아이디찾기
+    @ResponseBody
+    @PostMapping("/idFindFetch")
+    public String idFindFetch(MemberVO memberVO, Model model){
+        MemberVO idFind = memberService.idFindSelect(memberVO);
+        System.out.println(idFind);
+        //아이디 찾았을 때
+        if(idFind != null){
+            idFind.setMemberId(idFind.getMemberId().replace(idFind.getMemberId().substring(idFind.getMemberId().length()-2, idFind.getMemberId().length()),"**"));
+            model.addAttribute("idFind", idFind);
+        }
+        return idFind == null ? "" : idFind.getMemberId();
+    }
+
+
 
     //이용약관
     @GetMapping("/termsUse")

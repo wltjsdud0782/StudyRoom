@@ -14,19 +14,22 @@
 
     <div class="row mainContent">
         <div class="row login_studyRoom" style="text-align: center; height: 500px;">
-            <form action="idFind" method="post">
-                <div class="row justify-content-center " id="idFind">
-                    <div class="col-3">
+            <form action="idFind" method="post" id="idfind-form">
+                <div class="row justify-content-center ">
+                    <div class="idfind-form col-3">
                         <div class="form-floating mb-3 mt-5">
-                            <input name="memberName" type="text" class="form-control">
+                            <input name="memberName" type="text" class="form-control" id="memberName">
                             <label for="" style="font-size: 0.8rem;">이름</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="memberBirth" type="text" class="form-control" id="">
+                            <input name="memberBirth" type="text" class="form-control" id="memberBirth">
                             <label for="" style="font-size: 0.8rem;">생년월일</label>
                         </div>
                         <div class="d-grid">
-                            <input type="submit" class="btn btn-success" value="아이디찾기">
+                            <input type="submit" class="btn btn-success" value="동기아이디찾기">
+                        </div>
+                        <div class="d-grid">
+                            <input type="button" class="btn btn-success" value="비동기아이디 찾기" onclick="idFind()">
                         </div>
                     </div>
                 </div>
