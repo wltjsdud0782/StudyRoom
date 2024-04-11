@@ -127,9 +127,8 @@ public class SeatController {
     }
 
     @ResponseBody
-    @PostMapping("/buySuccess") // 사용시 삭제되는지 확인해야함!!!!!!!!!!!!!!!
+    @PostMapping("/buySuccess")
     public void buySuccess(@RequestBody HashMap<String, String> data){
-        System.out.println(data);
         ApprovalVO approvalVO = new ApprovalVO();
         approvalVO.setApprovalCode(Integer.parseInt(data.get("approvalCode")));
         approvalVO.setApprovalFee(Integer.parseInt(data.get("approvalFee")));
