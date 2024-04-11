@@ -32,10 +32,10 @@ function allInfo(memberCode) {
             let str_1 = '';
             str_1 += `
                 <input type="hidden" name="memberCode" value="${memberCode}">
-                <div class="btnDiv">
-                    <input type="text" value="${data.memberMap.memberName}" name="memberName" readonly>
+                <div class="btn-origin">
+                    <input type="button" value="${data.memberMap.memberName}" name="memberName" class="btn btn-success" disabled data-bs-toggle>
                     <div style="float: right;">
-                        <input type="button" value="지급하기" style="color: red;" onclick="yourCoupon()" class="enInput">
+                        <input type="button" value="지급하기" class="btn btn-danger" onclick="yourCoupon()" class="enInput">
                     </div>                                              
                 </div>
             `;
@@ -44,9 +44,9 @@ function allInfo(memberCode) {
             //쿠폰 지급창 출력
             const checkCoupon = document.querySelector('.checkCoupon');
             checkCoupon.innerHTML = '';
-            let str_2 = '';  
-                for(let i = 0; i < data.couponList.length; i++){
-                    str_2 += `
+            let str_2 = '';
+            for (let i = 0; i < data.couponList.length; i++) {
+                str_2 += `
                         <tr>
                             <td style="width: 5%; vertical-align: middle;">
                                 <input type="checkbox" class="form-check-input" name="couponCode" value="${data.couponList[i].couponCode}">
@@ -58,7 +58,7 @@ function allInfo(memberCode) {
                                 </div>
                             </td>
                         </tr>`;
-                }
+            }
             checkCoupon.insertAdjacentHTML('afterbegin', str_2);
 
             //회원정보 출력
@@ -209,7 +209,7 @@ function allInfo(memberCode) {
             if (data.memberMap.isAdmin == '회원') {
                 //좌석 정보 불러오기
                 if (data.seatMap != null) {
-                str +=  
+                    str +=
                         `<h4>&nbsp;좌석 정보</h4>
                         <form action="/admin/uptSeatInfo" method="post">
                         <table class="memberInfo-table">
@@ -248,13 +248,13 @@ function allInfo(memberCode) {
                                         <div class="row">
                                             <div class="col statusNum-data">`;
                     if (data.seatMap.statusNum == 1) {
-                    str += `사용중`;
+                        str += `사용중`;
                     }
                     else if (data.seatMap.statusNum == 2) {
-                    str += `사용가능`;
+                        str += `사용가능`;
                     }
                     else {
-                    str += `수리중`
+                        str += `수리중`
                     }
                     str += `
                                             </div>
@@ -271,12 +271,12 @@ function allInfo(memberCode) {
                                         <div class="row">
                                             <div class="col seatPower-data">`;
                     if (data.seatMap.seatPower == '켜짐') {
-                    str +=                      `<font color="orange">켜짐</font>`;
+                        str += `<font color="orange">켜짐</font>`;
                     }
                     else {
-                    str +=                      `<font color="gray">꺼짐</font>`;
+                        str += `<font color="gray">꺼짐</font>`;
                     }
-                    str +=`                    
+                    str += `                    
                                             </div>
                                         </div>
                                     </td>
@@ -292,7 +292,7 @@ function allInfo(memberCode) {
                 }
                 //못한다면
                 else {
-                str += `
+                    str += `
                         <h4>&nbsp;좌석 정보</h4>
                         <table class="memberInfo-table">
                             <colgroup>
@@ -360,7 +360,7 @@ function allInfo(memberCode) {
                 }
                 //이용권 정보 불러오기
                 if (data.charName.length == 1) {
-                str += 
+                    str +=
                         `<h4>&nbsp;보유한 이용권</h4>
                         <table class="memberInfo-table">
                             <colgroup>
@@ -440,8 +440,8 @@ function allInfo(memberCode) {
                         <div style="padding: 3vh;"></div>`;
                 }
                 else if (data.charName.length == 2) {
-                    str += 
-                            `<h4>&nbsp;보유한 이용권</h4>
+                    str +=
+                        `<h4>&nbsp;보유한 이용권</h4>
                             <table class="memberInfo-table">
                                 <colgroup>
                                     <col width="11%">
@@ -587,7 +587,7 @@ function allInfo(memberCode) {
                             <div style="padding: 3vh;"></div>`;
                 }
                 else {
-                str += 
+                    str +=
                         `<h4>&nbsp;보유한 이용권</h4>
                         <table class="memberInfo-table">
                             <colgroup>
@@ -674,7 +674,7 @@ function allInfo(memberCode) {
                 }
                 //쿠폰 정보 불러오기
                 if (data.couponMap.length != 0) {
-                str += `
+                    str += `
                         <h4>&nbsp;보유한 쿠폰</h4>
                         <table class="table text-center">
                             <colgroup>
@@ -693,8 +693,8 @@ function allInfo(memberCode) {
                             </thead>
                             <tbody class="couponInfo">
                             <!-- couponMap[i]로 반복문 돌리면 된다 -->`;
-                    for(let i = 0; i < data.couponMap.length; i++) {
-                    str +=  ` 
+                    for (let i = 0; i < data.couponMap.length; i++) {
+                        str += ` 
                                 <tr style="height: 60px; vertical-align: middle;">
                                     
                                     <td>
@@ -715,12 +715,12 @@ function allInfo(memberCode) {
                                 </tr>`;
                     }
                     str +=
-                            `<!-- 반복문 여기까지 -->    
+                        `<!-- 반복문 여기까지 -->    
                             </tbody>
                         </table>`;
                 }
                 else {
-                str += `
+                    str += `
                         <h4>&nbsp;보유한 쿠폰</h4>
                         <table class="table text-center">
                             <colgroup>
@@ -756,7 +756,7 @@ function allInfo(memberCode) {
                 }
             }
             else {
-            str += ``;
+                str += ``;
             }
 
             changeInfo.insertAdjacentHTML('afterbegin', str)
@@ -994,22 +994,22 @@ function seatInfo(memberCode) {
 
 
 //쿠폰 지급하기
-function yourCoupon(){
+function yourCoupon() {
 
     const sendCouponForm = document.querySelector('.sendCouponForm');
     const chksValue = []
 
     //체크된 체크박스들
     const chks = document.querySelectorAll('input[name="couponCode"]:checked');
-    for(const chk of chks){
+    for (const chk of chks) {
         console.log(chk.value);
         chksValue.push(chk.value);
     }
 
-    if (confirm("지급한 쿠폰은 회수할 수 없습니다.\n정말로 지급하시겠습니까?")){
+    if (confirm("지급한 쿠폰은 회수할 수 없습니다.\n정말로 지급하시겠습니까?")) {
         sendCouponForm.submit();
         alert("쿠폰을 지급했습니다.");
-	} else {
-		alert("취소되었습니다.");
-	}
+    } else {
+        alert("취소되었습니다.");
+    }
 }

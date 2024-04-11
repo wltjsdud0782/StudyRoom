@@ -79,8 +79,8 @@ function selectService(value) {
                         <div class="row">
                             <div class="col text-end">
                                 <div class="btnDiv">
-                                    <input type="button" value="이용권 등록" onclick="enroll()">&nbsp;
-                                    <input type="reset" value="취소" style="background-color: #f2f4f7;">
+                                    <input type="button" value="이용권 등록" class="btn btn-light btn-origin" onclick="enroll()">&nbsp;
+                                    <input type="reset" value="취소" class="btn btn-light btn-origin">
                                 </div>
                             </div>
                         </div>
@@ -91,8 +91,8 @@ function selectService(value) {
         </table>
         <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
         <div>
-            <div class="btnDiv" style="padding-left: 10px;">
-                <input type="button" value="삭제" disabled>
+            <div class="btn-origin" style="padding-left: 10px;">
+                <input type="button" value="삭제" class="btn btn-outline-dark" disabled>
             </div>
         </div>
     </form>
@@ -150,8 +150,8 @@ function selectService(value) {
                         <div class="row">
                             <div class="col text-end">
                                 <div class="btnDiv">
-                                    <input type="button" value="쿠폰 등록" onclick="enroll()">&nbsp;
-                                    <input type="reset" value="취소" style="background-color: #f2f4f7;">
+                                    <input type="button" value="쿠폰 등록" class="btn btn-light btn-origin" onclick="enroll()">&nbsp;
+                                    <input type="reset" value="취소" class="btn btn-light btn-origin">
                                 </div>
                             </div>
                         </div>
@@ -162,8 +162,8 @@ function selectService(value) {
         </table>
         <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
         <div>
-            <div class="btnDiv" style="padding-left: 10px;">
-                <input type="button" value="삭제" disabled>
+            <div class="btn-origin" style="padding-left: 10px;">
+                <input type="button" value="삭제" class="btn btn-outline-dark" disabled>
             </div>
         </div>
     </form>
@@ -263,8 +263,8 @@ function changeCharge(chargeCode) {
                                             <div class="row">
                                                 <div class="col text-end">
                                                     <div class="btnDiv">
-                                                        <input type="button" value="이용권 변경" onclick="enroll()">&nbsp;
-                                                        <input type="reset" value="취소" style="background-color: #f2f4f7;">
+                                                        <input type="button" value="이용권 변경" class="btn btn-light btn-origin" onclick="enroll()">&nbsp;
+                                                        <input type="reset" value="취소" class="btn btn-light btn-origin">
                                                     </div>
                                                 </div>
                                             </div>
@@ -274,10 +274,10 @@ function changeCharge(chargeCode) {
                             </table>
                             <div style="padding: 1vh;"></div>
                             <div>
-                                <div class="btnDiv" style="padding-left: 10px;">                                           
-                                    <input type="button" value="삭제" onclick="deleteCharge(${chargeCode})" style="color: red;">
+                                <div class="btn-origin" style="padding-left: 10px;">
+                                    <input type="button" value="삭제" class="btn btn-outline-danger" onclick="deleteCharge(${chargeCode})">
                                     <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
-                                    <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 이용권을 이용하는 회원이 있는지 확인해주세요.</span>                              
+                                    <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 이용권을 이용하는 회원이 있는지 확인해주세요.</span>                    
                                 </div>
                             </div>
             </form>
@@ -384,8 +384,8 @@ function changeCoupon(couponCode) {
                             <div class="row">
                                 <div class="col text-end">
                                     <div class="btnDiv">
-                                        <input type="button" value="쿠폰 변경" onclick="enroll()">&nbsp;
-                                        <input type="reset" value="취소" style="background-color: #f2f4f7;">
+                                        <input type="button" value="쿠폰 변경" class="btn btn-light btn-origin" onclick="enroll()">&nbsp;
+                                        <input type="reset" value="취소" class="btn btn-light btn-origin">
                                     </div>
                                 </div>
                             </div>
@@ -396,12 +396,12 @@ function changeCoupon(couponCode) {
             </table>
             <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
             <div>
-                <div class="btnDiv" style="padding-left: 10px;">
-                    <input type="button" value="삭제" onclick="deleteCoupon(${couponCode})" style="color: red;">
+                <div class="btn-origin" style="padding-left: 10px;">
+                    <input type="button" value="삭제" class="btn btn-outline-danger" onclick="deleteCoupon(${couponCode})">
                     <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
-                    <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 쿠폰을 이용하는 회원이 있는지 확인해주세요.</span>
+                    <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 쿠폰을 이용하는 회원이 있는지 확인해주세요.</span>                    
                 </div>
-            </div>         
+            </div> 
         </form>
         <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
         <!-- <h4>&nbsp;쿠폰 지급하기</h4> -->

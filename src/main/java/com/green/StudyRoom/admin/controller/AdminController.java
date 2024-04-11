@@ -6,10 +6,7 @@ import com.green.StudyRoom.admin.vo.InfoSearchVO;
 import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
-import com.green.StudyRoom.seat.vo.CouponVO;
-import com.green.StudyRoom.seat.vo.MemberCouponVO;
-import com.green.StudyRoom.seat.vo.SeatStatusVO;
-import com.green.StudyRoom.seat.vo.SeatVO;
+import com.green.StudyRoom.seat.vo.*;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -87,6 +84,10 @@ public class AdminController {
     @PostMapping("/uptSeatInfo")
     public String uptSeatInfo(SeatVO seatVO){
         adminService.uptSeatInfo(seatVO);
+        //사용중 이외엔 강제퇴실
+        if(seatVO.getStatusNum() != 1){
+            seatService.outSeat(seatVO);
+        }
         return "redirect:/admin/info";
     }
 
@@ -236,8 +237,8 @@ public class AdminController {
     //(매출 관리)///////////////////////////////////////////// //
     @GetMapping("/sales")
     public String adminSales(Model model){
-        model.addAttribute("salesList", salesService.selectSales());
-        model.addAttribute("sumAll", salesService.salesSum());
+        model.addAttribute("chargeList",salesService.chargeSalesList());
+        System.out.println(salesService.chargeSalesList());
         return "content/admin/admin_sales";
     }
 
