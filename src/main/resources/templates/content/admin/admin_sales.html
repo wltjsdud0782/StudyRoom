@@ -29,36 +29,29 @@
                     </div>
                     <div class="col layer-second">
                         <div th:each="charge : ${chargeList}">
-                            <table class="table">
+                            <table class="table table-hover">
                                 <colgroup>
                                     <col width="20%">
-                                    <col width="12%">
-                                    <col width="20%">
-                                    <col width="12%">
+                                    <col width="30%">
                                     <col width="20%">
                                     <col width="*">
                                 </colgroup>
-                                <thead>
-                                    <tr>
-                                        <td>이용권</td>
-                                        <td>[[${charge.chargeCode}]]</td>
-                                        <td>수량</td>
-                                        <td>023</td>
-                                        <td>가격</td>
-                                        <td>123123</td>
-                                    </tr>
-                                </thead>
                                 <tbody>
                                     <tr>
-                                        <td>이용권 이름</td>
-                                        <td>3</td>
-                                        <td>총 판매 수량</td>
-                                        <td>3</td>
-                                        <td>총 판매 가격</td>
-                                        <td>[[${charge.salesFee}]]</td>
+                                        <td>이용권</td>
+                                        <td>[[${charge.chargeVOList[0].chargeName}]]</td>
+                                        <td>구매횟수</td>
+                                        <td>[[${charge.cnt}]]회</td>
+                                    </tr>
+                                    <tr>
+                                        <td>개별 가격</td>
+                                        <td>[[${charge.chargeVOList[0].chargeFee}]]원</td>
+                                        <td>총 판매가</td>
+                                        <td>[[${charge.salesFee}]]원</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <br>
                         </div>
                     </div>
                 </div>

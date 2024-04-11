@@ -27,7 +27,7 @@
         INNER JOIN STUDYROOM_CHARGE CHARG
         ON SALE.CHARGE_CODE = CHARG.CHARGE_CODE
         GROUP BY CHARGE_CODE
-        ORDER BY CNT DESC;
+        ORDER BY SALES_FEE DESC;
     </select>
 
     <!-- 월별 -->

@@ -44,6 +44,8 @@
         <result column="SALES_FEE"      property="salesFee"/>
         <result column="SALES_DATE"     property="salesDate"/>
         <result column="CHARGE_CODE"    property="chargeCode"/>
+        <result column="CNT" property="cnt"/>
+        <collection property="chargeVOList" resultMap="chargeMapper.charge"/>
     </resultMap>
 
 <!--~~~~~~~~~~~~~~~~~~~~~좌석 선택 관련~~~~~~~~~~~~~~~~~~~~~-->
