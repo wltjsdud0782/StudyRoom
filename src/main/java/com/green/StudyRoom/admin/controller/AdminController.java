@@ -6,9 +6,7 @@ import com.green.StudyRoom.admin.vo.InfoSearchVO;
 import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatServiceImpl;
-import com.green.StudyRoom.seat.vo.CouponVO;
-import com.green.StudyRoom.seat.vo.SeatStatusVO;
-import com.green.StudyRoom.seat.vo.SeatVO;
+import com.green.StudyRoom.seat.vo.*;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,26 +57,18 @@ public class AdminController {
     @PostMapping("/viewInfo")
     public Map<String, Object> viewInfo(@RequestParam(name="memberCode") int memberCode){
         Map<String, Object> map = new HashMap<>();
+        map.put("couponList", chargeService.selectCoupon());
         map.put("memberMap", adminService.selectMemberDetailInfo(memberCode));
         map.put("seatMap", adminService.selectSeatDetailInfo(memberCode));
-        map.put("couponMap", adminService.selectInfoCoupon(memberCode));
+        map.put("couponMap", seatService.ownCoupon(memberCode));
 
         map.put("charName", seatService.haveCharge(memberCode));
-        if (seatService.haveCharge(memberCode) != null){
-            //map.put("charDate", seatService.haveChargeDate(memberCode));
-            map.put("charAppDate", seatService.haveChargeApprovalDate(memberCode));
-            //map.put("charRemDate", seatService.haveChargeRemainDate(memberCode));
-            map.put("charEndDate", seatService.haveChargeEndDate(memberCode));
+        if (!seatService.haveCharge(memberCode).isEmpty()){
+            map.put("charDate", adminService.chargeInfoDate(memberCode)); //이용날짜 보여주기
+            map.put("buyDetail", seatService.myBuyDetail(memberCode)); //결재정보
+            map.put("charRemDate", seatService.haveChargeRemainDate(memberCode)); //남은시간
+            map.put("charEndDate", seatService.haveChargeEndDate(memberCode)); //만료시간
         }
-
-        //myBuyDetail.html에 가져가는 데이터 그대로 나도 쓰기
-//        model.addAttribute("buyDetailInfo", seatService.myBuyDetail(memberCode));
-//        model.addAttribute("remainDate", seatService.haveChargeRemainDate(memberCode));
-//        model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
-//
-//        model.addAttribute("ownCouponList", seatService.ownCoupon(memberCode));
-
-
         return map;
     }
 
@@ -94,6 +84,20 @@ public class AdminController {
     @PostMapping("/uptSeatInfo")
     public String uptSeatInfo(SeatVO seatVO){
         adminService.uptSeatInfo(seatVO);
+        //사용중 이외엔 강제퇴실
+        if(seatVO.getStatusNum() != 1){
+            seatService.outSeat(seatVO);
+        }
+        return "redirect:/admin/info";
+    }
+
+    //쿠폰 지급
+    @PostMapping("/sendCoupon")
+    public String sendCoupon(@RequestParam(name="couponCode") List<Integer> cpCode, MemberCouponVO memberCouponVO){
+        for (Integer integer : cpCode) {
+            memberCouponVO.setCouponCode(integer);
+            adminService.sendCoupon(memberCouponVO);
+        }
         return "redirect:/admin/info";
     }
 
@@ -233,8 +237,8 @@ public class AdminController {
     //(매출 관리)///////////////////////////////////////////// //
     @GetMapping("/sales")
     public String adminSales(Model model){
-        model.addAttribute("salesList", salesService.selectSales());
-        model.addAttribute("sumAll", salesService.salesSum());
+        model.addAttribute("chargeList",salesService.chargeSalesList());
+        System.out.println(salesService.chargeSalesList());
         return "content/admin/admin_sales";
     }
 

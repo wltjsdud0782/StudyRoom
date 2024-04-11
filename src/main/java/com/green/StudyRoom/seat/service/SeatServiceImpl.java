@@ -122,8 +122,10 @@ public class SeatServiceImpl implements SeatService{
     }
 
     @Override // 카드 결제 성공시 정보 추가
+    @Transactional(rollbackFor = Exception.class)
     public void buyCard(ApprovalVO approvalVO) {
         sqlSession.insert("seatMapper.buyCard", approvalVO);
+        sqlSession.insert("seatMapper.insertSales", approvalVO);
     }
 
     @Override // 관리자 좌석 상태 변경

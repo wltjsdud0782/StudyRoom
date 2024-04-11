@@ -1,3 +1,7 @@
+.review-main{
+    display: flex;
+}
+
 .review-header {
     width: 81.5%;
     text-align: start;
@@ -6,17 +10,26 @@
     border-bottom: 3px solid black;
 }
 .review-body{
+    margin-right: 30px;
     background-color: #ffff99;
     border: 1px;
-    width: 200px;
-    height: 200px;
+    width: 270px;
+    height: 250px;
     /* 회전 */
     transform: rotate(5deg);
     padding: 10px;
     text-align: center;
+    position: relative;
 }
 .review-body h6{
-    padding: 10px;
+    position: absolute;
+    top: 30%;
+    margin-top: 5px;
+    font-size: 20px;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .review-main{
     width: 100%;
@@ -33,6 +46,15 @@
     border-width: 0 0 30px 50px;
     border-style: solid;
     border-color: transparent transparent rgba(255, 255, 255, 0.9);
+}
+.review-date {
+    text-align: left;
+    position: absolute;
+    top: 80%;
+}
+.review-date span{
+    padding: 10px;
+    font-size: 15px;
 }
 .review-footer{
     text-align: right;
@@ -54,6 +76,35 @@
     color: #000;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 별점 */
 .starpoint_wrap{
     display:inline-block;
 }

@@ -4,6 +4,13 @@
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴 때 같이 실행되는 css -->
+    <!-- <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+
+    <!-- 부트스트랩 키면 사이드메뉴 이상해짐 -->
+    <!-- bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="/css/admin/admin.css">
 </th:block>
 
@@ -11,29 +18,69 @@
 
     <body>
         <div class="adminContainer">
-            <label class="title">
-                <h3>매출 관리</h3>
-            </label>
-            <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
-            <table class="adminContainer-table">
-                <tr th:each="sales : ${salesList}">
-                    <td>
-                        [[${sales.approvalFee}]]원
-                    </td>
-                </tr>
-                <tr th:each="sum : ${sumAll}">
-                    <td>
-                        총 매출 : [[${sum.approvalFee}]]원
-                    </td>
-                </tr>
-            </table>
+            <div class="title">
+                <h3>매출 관리 (일별, 주별, 월별)</h3>
+            </div>
+            <div style="padding: 2.5vh;"></div> <!-- 띄어쓰기 -->
+            <div class="layer large-layer">
+                <div class="row">
+                    <div class="col-6 layer-first">
+                        <canvas id="bar-chart" style="height: 100%; vertical-align: middle;"></canvas>
+                    </div>
+                    <div class="col layer-second">
+                        <div th:each="charge : ${chargeList}">
+                            <table class="table">
+                                <colgroup>
+                                    <col width="20%">
+                                    <col width="12%">
+                                    <col width="20%">
+                                    <col width="12%">
+                                    <col width="20%">
+                                    <col width="*">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <td>이용권</td>
+                                        <td>[[${charge.chargeCode}]]</td>
+                                        <td>수량</td>
+                                        <td>023</td>
+                                        <td>가격</td>
+                                        <td>123123</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>이용권 이름</td>
+                                        <td>3</td>
+                                        <td>총 판매 수량</td>
+                                        <td>3</td>
+                                        <td>총 판매 가격</td>
+                                        <td>[[${charge.salesFee}]]</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col layer-third">
+                        3번째 공간
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </th:block>
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
-    <!-- <script src="/"></script> -->
+    <!-- bootstrap JS -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script> -->
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/admin/admin_sales.js"></script>
 </th:block>
 
 </html>

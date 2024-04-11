@@ -16,6 +16,27 @@
         FROM approval;
     </select>
 
+    <!-- 이용권 매출 리스트 -->
+    <select id="chargeSalesList" resultMap="seatMapper.salesInfo">
+        SELECT COUNT(SALES_CODE) CNT
+            , SALE.CHARGE_CODE
+            , SUM(SALES_FEE) SALES_FEE
+            , CHARGE_NAME
+            , CHARGE_FEE
+        FROM SALES_INFO SALE
+        INNER JOIN STUDYROOM_CHARGE CHARG
+        ON SALE.CHARGE_CODE = CHARG.CHARGE_CODE
+        GROUP BY CHARGE_CODE
+        ORDER BY CNT DESC;
+    </select>
+
+    <!-- 월별 -->
+    <select id="">
+        SELECT DATE_FORMAT(SALES_DATE, '%m') MONTH
+        FROM SALES_INFO
+        GROUP BY DATE_FORMAT(SALES_DATE, '%m')
+    </select>
+
 </mapper>
 
 

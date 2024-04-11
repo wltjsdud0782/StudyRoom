@@ -12,14 +12,14 @@
     <body>
         <div class="adminContainer">
             <div class="title">
-                <h3>회원 관리 (수정필요)</h3>
+                <h3>회원 관리</h3>
             </div>
-            <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
+            <div style="padding: 2.5vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
                     <div class="row">
                         <div class="col-7">
-                            <h4>&nbsp;검색 <span style="font-size: 15px;">([[${#lists.size(memberList)}]]명)</span></h4>
+                            <h4>&nbsp;검색</h4>
                             <table class="table table-hover adminContainer-table">
                                 <thead class="table-success">
                                     <form action="/admin/info" method="post">
@@ -42,9 +42,10 @@
                                                     </select>&nbsp;
                                                     <input type="text" name="searchValue" style="text-align: left;"
                                                         th:value="${infoSearchVO.searchValue}">&nbsp;
-                                                    <input type="submit" value="검색">
+                                                    <input type="submit" value="검색" class="btn btn-light btn-origin">
                                                     <div style="float: right;">
                                                         <input type="button" value="새로고침"
+                                                            class="btn btn-light btn-origin"
                                                             onclick="location.href='/admin/info'">
                                                     </div>
                                                 </div>
@@ -52,7 +53,7 @@
                                         </tr>
                                     </form>
                                 </thead>
-                                <tbody class="adminContainer-table-tbody">
+                                <tbody class="adminContainer-table-tbody scroll-table">
                                     <th:block th:if="${#lists.isEmpty(memberList)}">
                                         <tr>
                                             <td>※ 회원정보가 존재하지 않습니다.</td>
@@ -90,24 +91,42 @@
                         </div>
                         <div class="col-5">
                             <h4>&nbsp;쿠폰 지급</h4>
-                            <table class="table table-hover adminContainer-table">
-                                <tbody class="adminContainer-table-tbody1">
-                                    <th:block th:if="${#lists.isEmpty(couponList)}">
+                            <form action="/admin/sendCoupon" method="post" class="sendCouponForm">
+                                <table class="table table-hover adminContainer-table">
+                                    <thead class="table-success">
                                         <tr>
-                                            <td>※ 등록된 쿠폰이 없습니다.</td>
-                                        </tr>
-                                    </th:block>
-                                    <th:block th:unless="${#lists.isEmpty(couponList)}">
-                                        <tr th:each="coupon : ${couponList}">
-                                            <td th:onclick="changeCoupon([[${coupon.couponCode}]])">
-                                                <div>[[${coupon.couponName}]]</div>
-                                                <div style="font-size: larger;">&ensp;[[${coupon.discountPercent}]]% 할인
+                                            <td>
+                                                <div class="goCoupon">
+                                                    <div class="btnDiv">
+                                                        <input type="button" value="지급대상" disabled>
+                                                        <div style="float: right;">
+                                                            <input type="button" value="지급하기" disabled>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
-                                    </th:block>
-                                </tbody>
-                            </table>
+
+                                    </thead>
+                                    <tbody class="adminContainer-table-tbody checkCoupon scroll-table">
+                                        <th:block th:if="${#lists.isEmpty(couponList)}">
+                                            <tr>
+                                                <td>※ 등록된 쿠폰이 없습니다.</td>
+                                            </tr>
+                                        </th:block>
+                                        <th:block th:unless="${#lists.isEmpty(couponList)}">
+                                            <tr th:each="coupon : ${couponList}">
+                                                <td>
+                                                    <div>[[${coupon.couponName}]]</div>
+                                                    <div style="font-size: larger;">&ensp;[[${coupon.discountPercent}]]%
+                                                        할인
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </th:block>
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
                     </div>
                     <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->

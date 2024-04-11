@@ -1,6 +1,7 @@
 package com.green.StudyRoom.admin.service;
 
 import com.green.StudyRoom.member.vo.ApprovalVO;
+import com.green.StudyRoom.seat.vo.SalesInfoVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,4 +25,12 @@ public class SalesServiceImpl implements SalesService{
     public List<ApprovalVO> salesSum() {
         return sqlSession.selectList("salesMapper.salesSum");
     }
+
+    //이용권 매출리스트
+    @Override
+    public List<SalesInfoVO> chargeSalesList() {
+        return sqlSession.selectList("salesMapper.chargeSalesList");
+    }
+
+
 }

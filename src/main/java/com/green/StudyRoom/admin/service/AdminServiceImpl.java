@@ -1,6 +1,7 @@
 package com.green.StudyRoom.admin.service;
 
 import com.green.StudyRoom.admin.vo.InfoSearchVO;
+import com.green.StudyRoom.member.vo.ApprovalVO;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.vo.MemberCouponVO;
 import com.green.StudyRoom.seat.vo.SeatStatusVO;
@@ -47,10 +48,18 @@ public class AdminServiceImpl implements AdminService {
         sqlSession.update("adminMapper.uptSeatInfo", seatVO);
     }
 
-    //쿠폰정보 보여주기
+    //사용할 날짜 보여주기
     @Override
-    public List<MemberCouponVO> selectInfoCoupon(int memberCode) {
-        return sqlSession.selectList("adminMapper.selectInfoCoupon", memberCode);
+    public List<ApprovalVO> chargeInfoDate(int memberCode) {
+        return sqlSession.selectList("adminMapper.chargeInfoDate", memberCode);
     }
+
+    //쿠폰 지급하기
+    @Override
+    public void sendCoupon(MemberCouponVO memberCouponVO) {
+        sqlSession.insert("adminMapper.sendCoupon", memberCouponVO);
+    }
+
+
 
 }

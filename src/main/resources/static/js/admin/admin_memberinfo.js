@@ -25,6 +25,43 @@ function allInfo(memberCode) {
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
             console.log(data);
+
+            //쿠폰 지급
+            const goCoupon = document.querySelector('.goCoupon');
+            goCoupon.innerHTML = '';
+            let str_1 = '';
+            str_1 += `
+                <input type="hidden" name="memberCode" value="${memberCode}">
+                <div class="btn-origin">
+                    <input type="button" value="${data.memberMap.memberName}" name="memberName" class="btn btn-success" disabled data-bs-toggle>
+                    <div style="float: right;">
+                        <input type="button" value="지급하기" class="btn btn-danger" onclick="yourCoupon()" class="enInput">
+                    </div>                                              
+                </div>
+            `;
+            goCoupon.insertAdjacentHTML('afterbegin', str_1);
+
+            //쿠폰 지급창 출력
+            const checkCoupon = document.querySelector('.checkCoupon');
+            checkCoupon.innerHTML = '';
+            let str_2 = '';
+            for (let i = 0; i < data.couponList.length; i++) {
+                str_2 += `
+                        <tr>
+                            <td style="width: 5%; vertical-align: middle;">
+                                <input type="checkbox" class="form-check-input" name="couponCode" value="${data.couponList[i].couponCode}">
+                            </td>
+                            <td>
+                                <div>${data.couponList[i].couponName}</div>
+                                <div style="font-size: larger;">
+                                    &ensp;${data.couponList[i].discountPercent}% 할인
+                                </div>
+                            </td>
+                        </tr>`;
+            }
+            checkCoupon.insertAdjacentHTML('afterbegin', str_2);
+
+            //회원정보 출력
             const changeInfo = document.querySelector('.changeInfo-div');
             changeInfo.innerHTML = '';
             let str = '';
@@ -89,7 +126,7 @@ function allInfo(memberCode) {
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;생년 월일
+                                                &ensp;생년 월일 <font color="red">*</font>
                                             </div>
                                         </div>
                                     </td>
@@ -105,14 +142,14 @@ function allInfo(memberCode) {
                                     <td rowspan="2" class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;주소
+                                                &ensp;주소 <font color="red">*</font>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="row">
                                             <div class="col postCode-data">                                                                                  
-                                                <input type="button" value="우편 번호" class="btn btn-outline-danger">&ensp;                                            
+                                                <input type="button" value="우편 번호" class="btn btn-outline-danger" disabled>&ensp;                                            
                                                 ${data.memberMap.postCode}
                                             </div>                  
                                         </div>
@@ -120,7 +157,7 @@ function allInfo(memberCode) {
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;전화 번호
+                                                &ensp;전화 번호 <font color="red">*</font>
                                             </div>
                                         </div>
                                     </td>
@@ -148,7 +185,7 @@ function allInfo(memberCode) {
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;권한
+                                                &ensp;권한 <font color="red">*</font>
                                             </div>
                                             
                                         </div>
@@ -172,7 +209,7 @@ function allInfo(memberCode) {
             if (data.memberMap.isAdmin == '회원') {
                 //좌석 정보 불러오기
                 if (data.seatMap != null) {
-                str +=  
+                    str +=
                         `<h4>&nbsp;좌석 정보</h4>
                         <form action="/admin/uptSeatInfo" method="post">
                         <table class="memberInfo-table">
@@ -189,7 +226,7 @@ function allInfo(memberCode) {
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;좌석
+                                                &ensp;이용 중인 좌석
                                             </div>
                                         </div>
                                     </td>
@@ -203,7 +240,7 @@ function allInfo(memberCode) {
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;좌석 상태
+                                                &ensp;좌석 상태 <font color="red">*</font>
                                             </div>
                                         </div>
                                     </td>
@@ -211,13 +248,13 @@ function allInfo(memberCode) {
                                         <div class="row">
                                             <div class="col statusNum-data">`;
                     if (data.seatMap.statusNum == 1) {
-                    str += `사용중`;
+                        str += `사용중`;
                     }
                     else if (data.seatMap.statusNum == 2) {
-                    str += `사용가능`;
+                        str += `사용가능`;
                     }
                     else {
-                    str += `수리중`
+                        str += `수리중`
                     }
                     str += `
                                             </div>
@@ -226,7 +263,7 @@ function allInfo(memberCode) {
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;점등 상태
+                                                &ensp;점등 상태 <font color="red">*</font>
                                             </div>
                                         </div>
                                     </td>
@@ -234,12 +271,12 @@ function allInfo(memberCode) {
                                         <div class="row">
                                             <div class="col seatPower-data">`;
                     if (data.seatMap.seatPower == '켜짐') {
-                    str +=                      `<font color="orange">켜짐</font>`;
+                        str += `<font color="orange">켜짐</font>`;
                     }
                     else {
-                    str +=                      `<font color="gray">꺼짐</font>`;
+                        str += `<font color="gray">꺼짐</font>`;
                     }
-                    str +=`                    
+                    str += `                    
                                             </div>
                                         </div>
                                     </td>
@@ -255,7 +292,7 @@ function allInfo(memberCode) {
                 }
                 //못한다면
                 else {
-                str += `
+                    str += `
                         <h4>&nbsp;좌석 정보</h4>
                         <table class="memberInfo-table">
                             <colgroup>
@@ -291,8 +328,11 @@ function allInfo(memberCode) {
                                     </td>
                                     <td>
                                         <div class="row">
-                                            <div class="col statusNum-data">
-                                                -
+                                            <div class="col statusNum-data text-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#dee2e6" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                                </svg>
                                             </div>
                                         </div>
                                     </td>  
@@ -305,8 +345,11 @@ function allInfo(memberCode) {
                                     </td>
                                     <td>
                                         <div class="row">
-                                            <div class="col seatPower-data">
-                                                -
+                                            <div class="col seatPower-data text-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#dee2e6" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                                </svg>
                                             </div>
                                         </div>
                                     </td>
@@ -316,47 +359,50 @@ function allInfo(memberCode) {
                         <div style="padding: 3vh;"></div>`;
                 }
                 //이용권 정보 불러오기
-                if (data.charName != '') {
-                str += 
+                if (data.charName.length == 1) {
+                    str +=
                         `<h4>&nbsp;보유한 이용권</h4>
                         <table class="memberInfo-table">
                             <colgroup>
                                 <col width="11%">
-                                <col width="17%">
+                                <col width="15%">
                                 <col width="11%">
-                                <col width="11%">                 
+                                <col width="15%">                 
+                                <col width="11%">
+                                <col width="15%">
                                 <col width="11%">
                                 <col width="*">
-                                <col width="11%">
-                                <col width="17%">
                             </colgroup>
                             <tbody>
                                 <tr>
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;이용권 명
+                                                &ensp;사용 중인 이용권
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="row">
                                             <div class="col charName-data">
-                                                ${data.charName[0].chargeVO.chargeName}
+                                                ${data.charName[0].chargeVO.chargeName}             
+                                            </div>
+                                            <div>
+                                                <font color="#dee2e6">:</font>&ensp;${data.charDate[0].chargeVO.chargeDate}일 이용권 
                                             </div>
                                         </div>
                                     </td>  
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;결제 날짜
+                                                &ensp;시작 날짜
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="row">
                                             <div class="col charAppDate-data">
-                                                ${data.charAppDate[0].approvalDate}
+                                                ${data.buyDetail[0].approvalDate}
                                             </div>
                                         </div>
                                     </td> 
@@ -381,43 +427,185 @@ function allInfo(memberCode) {
                                             </div>
                                         </div>
                                     </td>
-                                    <td>`;
-                    if (data.charRemDate >= 0) {
-                    str+=               `<div class="row">
+                                    <td>
+                                        <div class="row">
                                             <div class="col charRemDate-data">             
                                                 ${data.charRemDate}일
                                             </div>
-                                        </div>`;
-                    }
-                    else {
-                    str +=                  `<font color="red">기간이 만료되었습니다.</font>[오류]`;          
-                    }
-                    str +=          `</td>
+                                        </div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div style="padding: 3vh;"></div>`;
                 }
+                else if (data.charName.length == 2) {
+                    str +=
+                        `<h4>&nbsp;보유한 이용권</h4>
+                            <table class="memberInfo-table">
+                                <colgroup>
+                                    <col width="11%">
+                                    <col width="15%">
+                                    <col width="11%">
+                                    <col width="15%">                 
+                                    <col width="11%">
+                                    <col width="15%">
+                                    <col width="11%">
+                                    <col width="*">
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td class="infoIndex">
+                                            <div class="row">
+                                                <div class="col">
+                                                    &ensp;사용 중인 이용권
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col charName-data">                                                   
+                                                    ${data.charName[0].chargeVO.chargeName}             
+                                                </div>
+                                                <div>
+                                                    <font color="#dee2e6">:</font>&ensp;${data.charDate[0].chargeVO.chargeDate}일 이용권 
+                                                </div>
+                                            </div>
+                                        </td>  
+                                        <td class="infoIndex">
+                                            <div class="row">
+                                                <div class="col">
+                                                    &ensp;시작 날짜
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col charAppDate-data">                                             
+                                                    ${data.buyDetail[0].approvalDate}
+                                                </div>
+                                            </div>
+                                        </td> 
+                                        <td class="infoIndex">
+                                            <div class="row">
+                                                <div class="col">
+                                                    &ensp;만료 날짜
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col charEndDate-data">
+                                                    ${data.charEndDate}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="infoIndex">
+                                            <div class="row">
+                                                <div class="col">
+                                                    &ensp;남은 기간
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col charRemDate-data">             
+                                                    ${data.charRemDate}일
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="infoIndex">
+                                            <div class="row">
+                                                <div class="col">
+                                                    &ensp;남은 이용권
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col charName-data">                                                   
+                                                    ${data.charName[1].chargeVO.chargeName}               
+                                                </div>
+                                                <div>
+                                                    <font color="#dee2e6">:</font>&ensp;${data.charDate[1].chargeVO.chargeDate}일 이용권 
+                                                </div>
+                                            </div>
+                                        </td>  
+                                        <td class="infoIndex">
+                                            <div class="row">
+                                                <div class="col">
+                                                    &ensp;시작 날짜
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col charAppDate-data">                                             
+                                                    ${data.buyDetail[1].approvalDate} ~
+                                                </div>
+                                            </div>
+                                        </td> 
+                                        <td class="infoIndex">
+                                            <div class="row">
+                                                <div class="col charEndDate-data">
+                                                    &ensp;만료 날짜
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#dee2e6" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                                    </svg>
+                                                    </div>
+                                            </div>
+                                        </td>
+                                        <td class="infoIndex">
+                                            <div class="row">
+                                                <div class="col">
+                                                    &ensp;남은 기간
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col charRemDate-data text-center">             
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#dee2e6" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style="padding: 3vh;"></div>`;
+                }
                 else {
-                str += 
+                    str +=
                         `<h4>&nbsp;보유한 이용권</h4>
                         <table class="memberInfo-table">
                             <colgroup>
                                 <col width="11%">
-                                <col width="17%">
+                                <col width="15%">
                                 <col width="11%">
-                                <col width="11%">      
+                                <col width="15%">                 
+                                <col width="11%">
+                                <col width="15%">
                                 <col width="11%">
                                 <col width="*">
-                                <col width="11%">
-                                <col width="17%">
                             </colgroup>
                             <tbody>
                                 <tr>
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;이용권 명
+                                                &ensp;이용권
                                             </div>
                                         </div>
                                     </td>
@@ -427,23 +615,21 @@ function allInfo(memberCode) {
                                                 보유한 이용권이 없습니다.
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col charDate-data">
-                                                이용권을 구매해주세요.
-                                            </div>
-                                        </div>
                                     </td>  
                                     <td class="infoIndex">
                                         <div class="row">
                                             <div class="col">
-                                                &ensp;결제 날짜
+                                                &ensp;시작 날짜
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="row">
-                                            <div class="col charAppDate-data">
-                                                -
+                                            <div class="col charAppDate-data text-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#dee2e6" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                                </svg>
                                             </div>
                                         </div>
                                     </td>                  
@@ -456,8 +642,11 @@ function allInfo(memberCode) {
                                     </td>
                                     <td>
                                         <div class="row">
-                                            <div class="col charEndDate-data">
-                                                -
+                                            <div class="col charEndDate-data text-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#dee2e6" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                                </svg>
                                             </div>
                                         </div>
                                     </td>
@@ -470,8 +659,11 @@ function allInfo(memberCode) {
                                     </td>
                                     <td>
                                         <div class="row">
-                                            <div class="col charRemDate-data">
-                                                -
+                                            <div class="col charRemDate-data text-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#dee2e6" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                                </svg>
                                             </div>
                                         </div>
                                     </td>
@@ -481,92 +673,81 @@ function allInfo(memberCode) {
                         <div style="padding: 3vh;"></div>`;
                 }
                 //쿠폰 정보 불러오기
-                if (data.couponMap != '') {
-                str += `
+                if (data.couponMap.length != 0) {
+                    str += `
                         <h4>&nbsp;보유한 쿠폰</h4>
-                        <table class="memberInfo-table">
+                        <table class="table text-center">
                             <colgroup>
-                                <col width="25%">
-                                <col width="25%">
-                                <col width="25%">                
+                                <col width="60%">
                                 <col width="*">
                             </colgroup>
-                            <tbody>
-                            <!-- couponMap[i]로 반복문 돌리면 된다 -->
-                                <tr>
-                                    <td class="infoIndex">
-                                        <div class="row">
-                                            <div class="col">
-                                                &ensp;쿠폰 명
-                                            </div>
-                                        </div>
+                            <thead class="table-success">
+                                <tr style="height: 60px; vertical-align: middle;">
+                                    <td style="border: 1px solid #a7b9b1;">
+                                        쿠폰
                                     </td>
+                                    <td style="border: 1px solid #a7b9b1;">
+                                        할인률
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody class="couponInfo">
+                            <!-- couponMap[i]로 반복문 돌리면 된다 -->`;
+                    for (let i = 0; i < data.couponMap.length; i++) {
+                        str += ` 
+                                <tr style="height: 60px; vertical-align: middle;">
+                                    
                                     <td>
                                         <div class="row">
                                             <div class="col couponName-data">
-                                                ${data.couponMap[0].couponVOList[0].couponName}
+                                                ${data.couponMap[i].couponVOList[0].couponName}
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="infoIndex">
-                                        <div class="row">
-                                            <div class="col">
-                                                &ensp;할인율
-                                            </div>
-                                        </div>
-                                    </td>
+                                    
                                     <td>
                                         <div class="row">
                                             <div class="col">
-                                                ${data.couponMap[0].couponVOList[0].discountPercent}%
+                                                ${data.couponMap[i].couponVOList[0].discountPercent}% 할인
                                             </div>
                                         </div>
                                     </td>
-                                </tr>
-                            <!-- 반복문 여기까지 -->    
+                                </tr>`;
+                    }
+                    str +=
+                        `<!-- 반복문 여기까지 -->    
                             </tbody>
                         </table>`;
                 }
                 else {
-                str += `
+                    str += `
                         <h4>&nbsp;보유한 쿠폰</h4>
-                        <table class="memberInfo-table">
+                        <table class="table text-center">
                             <colgroup>
-                                <col width="25%">
-                                <col width="25%">
-                                <col width="25%">                
+                                <col width="60%">
                                 <col width="*">
                             </colgroup>
-                            <tbody>
+                            <thead class="table-success">
+                                <tr style="height: 60px; vertical-align: middle;">
+                                    <td style="border: 1px solid #a7b9b1;">
+                                        쿠폰
+                                    </td>
+                                    <td style="border: 1px solid #a7b9b1;">
+                                        할인률
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody class="couponInfo">
                             <!-- couponMap[i]로 반복문 돌리면 된다/임시 -->
-                                <tr>
-                                    <td class="infoIndex">
-                                        <div class="row">
-                                            <div class="col">
-                                                &ensp;쿠폰 명
-                                            </div>
-                                        </div>
+                                <tr style="height: 60px; vertical-align: middle;">              
+                                    <td>    
+                                        보유한 쿠폰이 없습니다.
                                     </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col couponName-data">
-                                                보유한 쿠폰이 없습니다.
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="infoIndex">
-                                        <div class="row">
-                                            <div class="col">
-                                                &ensp;할인율
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col">
-                                                -
-                                            </div>
-                                        </div>
+                                    <td class="text-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#dee2e6" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                        </svg>
                                     </td>
                                 </tr>
                             <!-- 반복문 여기까지 -->    
@@ -575,7 +756,7 @@ function allInfo(memberCode) {
                 }
             }
             else {
-            str += ``;
+                str += ``;
             }
 
             changeInfo.insertAdjacentHTML('afterbegin', str)
@@ -752,7 +933,7 @@ function seatInfo(memberCode) {
             let str_1 = '';
             str_1 += `
             <input type="submit" value="정보 변경" class="btn btn-warning">&ensp;   
-            <input type="button" value="변경 취소" class="btn btn-light" onclick="allInfo(${memberCode})">
+            <input type="reset" value="변경 취소" class="btn btn-light" onclick="allInfo(${memberCode})">
             <input type="hidden" name="memberCode" value="${memberCode}">
             `;
             changeSeatBtn.insertAdjacentHTML('afterbegin', str_1);
@@ -809,4 +990,26 @@ function seatInfo(memberCode) {
             alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
             console.log(err);
         });
+}
+
+
+//쿠폰 지급하기
+function yourCoupon() {
+
+    const sendCouponForm = document.querySelector('.sendCouponForm');
+    const chksValue = []
+
+    //체크된 체크박스들
+    const chks = document.querySelectorAll('input[name="couponCode"]:checked');
+    for (const chk of chks) {
+        console.log(chk.value);
+        chksValue.push(chk.value);
+    }
+
+    if (confirm("지급한 쿠폰은 회수할 수 없습니다.\n정말로 지급하시겠습니까?")) {
+        sendCouponForm.submit();
+        alert("쿠폰을 지급했습니다.");
+    } else {
+        alert("취소되었습니다.");
+    }
 }

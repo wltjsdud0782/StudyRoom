@@ -37,7 +37,7 @@ function goChat(memberCode) {
             console.log(data);
 
             document.querySelector('input[name="memberCode"]').value = memberCode;
-            document.querySelector('#send_memberName').value = `@${data.member.memberName}`;
+            document.querySelector('#send_memberName').value = `+${data.member.memberName}`;
 
             const oneByone = document.querySelector('.adminContainer-table-tbody2');
             oneByone.innerHTML = '';
@@ -48,47 +48,33 @@ function goChat(memberCode) {
             <tr>`;
                 if (e.toFrom == 'TO') {
                     str += `
-                <td class="toMsg">
-                    <div class="userMsg">
-                        <span>${data.member.memberName} (${data.member.memberId}) 님에게&nbsp;
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                height="16" fill="currentColor"
-                                class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5" />
-                            </svg>
-                        </span>
+                <td width="60%"></td>    
+                <td>
+                    <div class="toMsg">
+                        <div class="botMsg">
+                            <span>${e.messageContent}</span>
+                        </div>
                     </div>
-                    <div class="botMsg">
-                        <span>${e.messageContent}</span>
-                    </div>
-                    <div class="topMsg text-end">
-                        <span>${e.messageDate}&ensp;</span>
+                    <div class="topMsg" style="float: left;">
+                        <span>&ensp;&ensp;${e.messageDate}</span>
                     </div>
                 </td>`;}
                 else {
                     str += `                                   
-                <td class="fromMsg">
+                <td>
                     <div class="userMsg">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                height="16" fill="currentColor"
-                                class="bi bi-arrow-return-right"
-                                viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5" />
-                            </svg>
-                        </span>
-                        <span>&nbsp;${data.member.memberName} (${data.member.memberId}) 님</span>
+                        &ensp;${data.member.memberName} (${data.member.memberId}) 님
                     </div>
-                    <div class="botMsg">
-                        <span>${e.messageContent}</span>
+                    <div class="fromMsg">
+                        <div class="botMsg">
+                            <span>${e.messageContent}</span>
+                        </div>
                     </div>
-                    <div class="topMsg text-end">
-                        <span>${e.messageDate}&ensp;</span>
+                    <div class="topMsg" style="float: right;">
+                        <span>${e.messageDate}&ensp;&ensp;</span>
                     </div>
                 </td>
+                <td width="60%"></td>
             </tr>
             `;}
         })

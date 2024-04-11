@@ -28,47 +28,37 @@ function sendMsg(loginInfo) {
             data.forEach(e => {
                 if (e.toFrom == 'FROM') {
                     str += `<tr>
-                <td class="msgTalk">
-                <div class="userMsg">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                            fill="currentColor" class="bi bi-arrow-return-right"
-                            viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5" />
-                        </svg>
-                    </span>
-                    <span>카운터에게</span>
-                </div>
-                <div class="botMsg">
-                    <span>${e.messageContent}</span>
-                </div>
-                <div class="text-end">
-                    <span>${e.messageDate}</span>
-                </div>
-            </td>
+                    <td width="60%">&nbsp;</td>
+                    <td>
+                        <div>
+                            <span>발신</span>
+                        </div>
+                        <div class="toMsg">
+                            <div class="botMsg">
+                                <span>${e.messageContent}</span>
+                            </div>
+                        </div>
+                        <div class="topMsg" style="float: left;">
+                            <span>&ensp;&ensp;${e.messageDate}</span>
+                        </div>
+                    </td>
                 </tr>`
                 } else {
                     str += `<tr>
-                <td>
-                <div>
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                            fill="currentColor" class="bi bi-arrow-return-right"
-                            viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5" />
-                        </svg>
-                    </span>
-                    <span>카운터에서 나에게</span>
-                </div>
-                <div>
-                    <span>${e.messageContent}</span>
-                </div>
-                <div class="text-end">
-                    <span>${e.messageDate}</span>
-                </div>
-            </td>
+                    <td>
+                    <div class="userMsg">
+                        <span>&ensp;수신</span>
+                    </div>
+                    <div class="fromMsg">
+                        <div class="botMsg">
+                            <span>${e.messageContent}</span>
+                        </div>
+                    </div>
+                    <div class="topMsg" style="float: right;">
+                        <span>${e.messageDate}&ensp;&ensp;</span>
+                    </div>
+                </td>
+                <td width="60%">&nbsp;</td>
                 </tr>`
                 }
 

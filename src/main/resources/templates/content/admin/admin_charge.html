@@ -12,14 +12,14 @@
     <body>
         <div class="adminContainer">
             <div class="title">
-                <h3>이용권/쿠폰 등록</h3>
+                <h3>이용권/쿠폰</h3>
             </div>
-            <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
+            <div style="padding: 2.5vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
                     <h4>&nbsp;이용권</h4>
                     <table class="table table-hover adminContainer-table">
-                        <tbody class="adminContainer-table-tbody5">
+                        <tbody class="adminContainer-table-tbody5 scroll-table">
                             <th:block th:if="${#lists.isEmpty(chargeList)}">
                                 <tr>
                                     <td>※ 등록된 이용권이 없습니다.</td>
@@ -47,7 +47,7 @@
                         <h4>&nbsp;쿠폰</h4>
                     </div>           
                     <table class="table table-hover adminContainer-table">
-                        <tbody class="adminContainer-table-tbody5">
+                        <tbody class="adminContainer-table-tbody5 scroll-table">
                             <th:block th:if="${#lists.isEmpty(couponList)}">
                                 <tr>
                                     <td>※ 등록된 쿠폰이 없습니다.</td>
@@ -73,7 +73,7 @@
                     <table class="adminContainer-table">
                         <colgroup>
                             <col width="11%">
-                            <col width="7%">
+                            <col width="6%">
                             <col width="16%">
                             <col width="7%">
                             <col width="16%">
@@ -81,10 +81,10 @@
                             <col width="16%">
                             <col width="*">
                         </colgroup>
-                        <tbody>
+                        <tbody class="enrollBody">
                             <tr>
                                 <td>
-                                    <select id="selectOption" onchange="selectService(this.value)">
+                                    <select id="selectOption" onchange="selectService(this.value)" class="form-select">
                                         <option value="CHARGE-option" selected>이용권</option>
                                         <option value="COUPON-option">쿠폰</option>
                                     </select>
@@ -93,13 +93,13 @@
                                 <td>
                                     <div class="row">
                                         <div class="col text-end charge-title">
-                                            이용권 명
+                                            이용권
                                         </div>
                                     </div>
                                 </td>
                                 <td class="charge-td">
-                                    <input type="text" name="chargeName" class="form-control enInput" placeholder="이용권 명을 입력해주세요."
-                                        style="font-style: oblique;">
+                                    <input type="text" name="chargeName" class="form-control enInput" placeholder="이름을 입력해주세요."
+                                        style="font-style: oblique; border: 1px solid #ccc;">
                                 </td>
                                 <td>
                                     <div class="row">
@@ -110,7 +110,7 @@
                                 </td>
                                 <td class="charge-td">
                                     <input type="text" name="chargeDate" class="form-control enInput" placeholder="기간을 입력해주세요."
-                                        style="font-style: oblique;">
+                                        style="font-style: oblique; border: 1px solid #ccc;">
                                 </td>
                                 <td>
                                     <div class="row">
@@ -121,14 +121,14 @@
                                 </td>
                                 <td class="charge-td">
                                     <input type="text" name="chargeFee" class="form-control enInput" placeholder="가격을 입력해주세요."
-                                        style="font-style: oblique;">
+                                        style="font-style: oblique; border: 1px solid #ccc;">
                                 </td>
                                 <td>
                                     <div class="row">
                                         <div class="col text-end">
                                             <div class="btnDiv">
-                                                <input type="button" value="이용권 등록" onclick="enroll()">&nbsp;
-                                                <input type="button" value="취소" onclick="window.location.reload()">
+                                                <input type="button" value="이용권 등록" class="btn btn-light btn-origin" onclick="enroll()">&nbsp;
+                                                <input type="reset" value="취소" class="btn btn-light btn-origin">
                                             </div>
                                         </div>
                                     </div>
@@ -139,8 +139,8 @@
                     </table>
                     <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
                     <div>
-                        <div class="btnDiv" style="padding-left: 10.2px;">
-                            <input type="button" value="삭제" class="not-null-btn" disabled>
+                        <div class="btn-origin" style="padding-left: 10px;">
+                            <input type="button" value="삭제" class="btn btn-outline-dark" disabled>
                         </div>
                     </div>
                 </form>
