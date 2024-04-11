@@ -24,7 +24,7 @@
                     <tbody class="userChat">
                         <tr th:each="msg : ${msgList}">
                             <th:block th:if="${msg.toFrom == 'FROM'}">
-                                <td width="50%">&nbsp;</td>
+                                <td width="60%">&nbsp;</td>
                                 <td>
                                     <div>
                                         <span>발신</span>
@@ -54,7 +54,7 @@
                                         <span>[[${msg.messageDate}]]&ensp;&ensp;</span>
                                     </div>
                                 </td>
-                                <td width="50%">&nbsp;</td>
+                                <td width="60%">&nbsp;</td>
                             </th:block>
                         </tr>
                     </tbody>
