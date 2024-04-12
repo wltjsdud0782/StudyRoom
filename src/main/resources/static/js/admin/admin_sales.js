@@ -23,18 +23,19 @@ function getChartData() {
         console.log(data); //04
         
         //월별매출 차트 그림
-        new Chart(document.querySelector('#bar-chart'), {
+        const monthChart = document.querySelector('#bar-chart');
+        new Chart(monthChart, {
             type: 'bar',
             data: {
                 labels: [
-                    '1월', '2월', '3월', '4월', '5월', '6월',
+                    '1월', '2월', '3월', '4월', '5월', '6월',   
                     '7월', '8월', '9월', '10월', '11월', '12월'],
                 datasets: [
                     {
-                        label: "월 매출",
+                        label: "월 매출 (만원)",
                         backgroundColor: "#3CB371",
                         data: [
-                            10.5, 11.5, 15.7, 8.5, 13.0, 10.5
+                            data[0].salesFee, data[1].salesFee, data[2].salesFee, data[3].salesFee, 13.0, 10.5
                             , 11.5, 15.7, 8.5, 13.0, 12.3, 21.2]
                     }
                 ]
@@ -49,11 +50,28 @@ function getChartData() {
                 scales: {
                     y: {
                         min: 0,
-                        max: 30
+                        max: 30000000
                     }
                 }
             }
         });
+
+
+        //월말 매출 데이터
+        const month = document.querySelector('#testing')
+        month.innerHTML = '';
+        let str_month = '';
+
+        str_month += `<div>`;
+        for (let i = 0; i < data.length; i++){
+            str_month += `
+            <div>${data[i].monthSales} / ${data[i].salesFee}</div>
+            `;
+        }
+        str_month += `</div>`;
+
+        month.insertAdjacentHTML('afterbegin', str_month);
+
 
     })
     //fetch 통신 실패 시 실행 영역

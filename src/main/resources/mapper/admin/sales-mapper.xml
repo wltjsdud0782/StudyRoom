@@ -40,6 +40,7 @@
     <!-- 월별 매출 -->
     <select id="monthSales" resultMap="seatMapper.salesInfo">
         SELECT DATE_FORMAT(SALES_DATE, '%m') MONTH_SALES
+            , SUM(SALES_FEE) SALES_FEE
         FROM SALES_INFO
         GROUP BY DATE_FORMAT(SALES_DATE, '%m')
     </select>

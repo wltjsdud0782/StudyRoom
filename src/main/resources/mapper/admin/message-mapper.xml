@@ -34,7 +34,7 @@
         ORDER BY MESSAGE_CODE DESC LIMIT 100
     </select>
 
-    <!-- 최근 댓글 조회하기 (FROM의 경우만 조회하기 / 미완성) -->
+    <!-- 최근 댓글 조회하기 -->
     <select id="selectRecentMsg" resultMap="message">
         SELECT MESSAGE_CONTENT
             , MESSAGE.MEMBER_CODE
@@ -53,6 +53,7 @@
     <select id="selectWho" resultMap="memberMapper.member">
         SELECT MEMBER_NAME
             , MEMBER_ID
+            , MEMBER_TEL
             , MEMBER_CODE
         FROM studyroom_member
         WHERE IS_ADMIN = 'USER'
