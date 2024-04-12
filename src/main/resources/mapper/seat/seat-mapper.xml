@@ -45,6 +45,11 @@
         <result column="SALES_DATE"     property="salesDate"/>
         <result column="CHARGE_CODE"    property="chargeCode"/>
         <result column="CNT" property="cnt"/>
+
+        <result column="WEEK_SALES" property="weekSales"/>
+        <result column="MONTH_SALES" property="monthSales"/>
+        <result column="YEAR_SALES" property="yearSales"/>
+
         <collection property="chargeVOList" resultMap="chargeMapper.charge"/>
     </resultMap>
 

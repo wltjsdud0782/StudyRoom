@@ -99,7 +99,7 @@
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 
-    <!-- 이용일자 정보 띄우기 / 오류남 -->
+    <!-- 이용일자 정보 띄우기  -->
     <select id="chargeInfoDate" resultMap="memberMapper.approval">
         SELECT CHARGE_DATE
         FROM APPROVAL AP

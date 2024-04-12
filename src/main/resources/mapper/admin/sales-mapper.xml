@@ -5,16 +5,16 @@
 <mapper namespace="salesMapper">
 
     <!-- 매출 관리 -->
-    <select id="selectSales" resultMap="memberMapper.approval">
-        SELECT APPROVAL_FEE
-        FROM approval;
-    </select>
+<!--    <select id="selectSales" resultMap="memberMapper.approval">-->
+<!--        SELECT APPROVAL_FEE-->
+<!--        FROM approval;-->
+<!--    </select>-->
 
     <!-- 매출 합계 -->
-    <select id="salesSum" resultMap="memberMapper.approval">
-        SELECT SUM(APPROVAL_FEE) AS APPROVAL_FEE
-        FROM approval;
-    </select>
+<!--    <select id="salesSum" resultMap="memberMapper.approval">-->
+<!--        SELECT SUM(APPROVAL_FEE) AS APPROVAL_FEE-->
+<!--        FROM approval;-->
+<!--    </select>-->
 
     <!-- 이용권 매출 리스트 -->
     <select id="chargeSalesList" resultMap="seatMapper.salesInfo">
@@ -27,15 +27,29 @@
         INNER JOIN STUDYROOM_CHARGE CHARG
         ON SALE.CHARGE_CODE = CHARG.CHARGE_CODE
         GROUP BY CHARGE_CODE
-        ORDER BY SALES_FEE DESC;
+        ORDER BY CNT DESC;
     </select>
 
-    <!-- 월별 -->
-    <select id="">
-        SELECT DATE_FORMAT(SALES_DATE, '%m') MONTH
+    <!-- 주간 매출 -->
+<!--    <select id="">-->
+<!--        SELECT DATE_FORMAT(SALES_DATE, '%m') WEEK-->
+<!--        FROM SALES_INFO-->
+<!--        GROUP BY DATE_FORMAT(SALES_DATE, '%m')-->
+<!--    </select>-->
+
+    <!-- 월별 매출 -->
+    <select id="monthSales" resultMap="seatMapper.salesInfo">
+        SELECT DATE_FORMAT(SALES_DATE, '%m') MONTH_SALES
         FROM SALES_INFO
         GROUP BY DATE_FORMAT(SALES_DATE, '%m')
     </select>
+
+    <!-- 일별 매출 -->
+<!--    <select id="">-->
+<!--        SELECT DATE_FORMAT(SALES_DATE, '%d') DAY-->
+<!--        FROM SALES_INFO-->
+<!--        GROUP BY DATE_FORMAT(SALES_DATE, '%d')-->
+<!--    </select>-->
 
 </mapper>
 

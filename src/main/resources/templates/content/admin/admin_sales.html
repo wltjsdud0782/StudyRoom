@@ -19,42 +19,63 @@
     <body>
         <div class="adminContainer">
             <div class="title">
-                <h3>매출 관리 (일별, 주별, 월별)</h3>
+                <h3>매출 관리 (주별, <font color="red">월별</font>, 연별)</h3>
             </div>
             <div style="padding: 2.5vh;"></div> <!-- 띄어쓰기 -->
             <div class="layer large-layer">
                 <div class="row">
+                    <!-- 차트 -->
                     <div class="col-6 layer-first">
                         <canvas id="bar-chart" style="height: 100%; vertical-align: middle;"></canvas>
                     </div>
+                    <!-- 이용권 판매현황 -->
                     <div class="col layer-second">
-                        <div th:each="charge : ${chargeList}">
-                            <table class="table table-hover">
+                        <h5 class="mb-4">판매된 이용권 ([[${#lists.size(chargeList)}]]종류)</h5>
+                        <table class="table">
+                            <colgroup>
+                                <col width="28%">
+                                <col width="16%">
+                                <col width="28%">
+                                <col width="28%">
+                            </colgroup>
+                            <thead class="table-light">
+                                <tr>
+                                    <td>이용권</td>
+                                    <td class="text-center">판매 수량</td>
+                                    <td class="text-end">개별 가격</td>
+                                    <td class="text-end">총 판매가</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div class="salesTable">
+                            <table class="table table-hover mb-4">
                                 <colgroup>
-                                    <col width="20%">
-                                    <col width="30%">
-                                    <col width="20%">
-                                    <col width="*">
+                                    <col width="28%">
+                                    <col width="16%">
+                                    <col width="28%">
+                                    <col width="28%">
                                 </colgroup>
                                 <tbody>
-                                    <tr>
-                                        <td>이용권</td>
-                                        <td>[[${charge.chargeVOList[0].chargeName}]]</td>
-                                        <td>구매횟수</td>
-                                        <td>[[${charge.cnt}]]회</td>
-                                    </tr>
-                                    <tr>
-                                        <td>개별 가격</td>
-                                        <td>[[${charge.chargeVOList[0].chargeFee}]]원</td>
-                                        <td>총 판매가</td>
-                                        <td>[[${charge.salesFee}]]원</td>
+                                    <tr th:each="charge, state : ${chargeList}">
+                                        <td>
+                                            [[${charge.chargeVOList[0].chargeName}]]
+                                        </td>
+                                        <td class="text-center">
+                                            [[${charge.cnt}]]EA
+                                        </td>
+                                        <td class="text-end">
+                                            [[${#numbers.formatCurrency(charge.chargeVOList[0].chargeFee)}]]
+                                        </td>
+                                        <td class="text-end">
+                                            [[${#numbers.formatCurrency(charge.salesFee)}]]
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <br>
                         </div>
                     </div>
                 </div>
+                <!-- 3번째 레이어 -->
                 <div class="row mt-3">
                     <div class="col layer-third">
                         3번째 공간
