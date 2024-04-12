@@ -14,4 +14,8 @@ public class SalesInfoVO {
     private int cnt;
 
     private List<ChargeVO> chargeVOList;
+
+    private String weekSales;
+    private String monthSales;
+    private String yearSales;
 }

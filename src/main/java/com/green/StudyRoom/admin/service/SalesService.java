@@ -8,11 +8,14 @@ import java.util.List;
 public interface SalesService {
 
     //매출 조회
-    List<ApprovalVO> selectSales();
+//    List<ApprovalVO> selectSales();
 
     //매출 합계
-    List<ApprovalVO> salesSum();
+//    List<ApprovalVO> salesSum();
 
     //이용권 매출리스트
     List<SalesInfoVO> chargeSalesList();
+
+    //월별 매출
+    List<SalesInfoVO> monthSales();
 }
