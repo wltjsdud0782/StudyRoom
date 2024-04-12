@@ -61,6 +61,36 @@ public class SeatController {
         return data;
     }
 
+    @ResponseBody
+    @PostMapping("adminSeat") // 관리자전용 좌석현황
+    public List<SeatVO> adminSeat(){
+        List<SeatVO> data = seatService.adminSeatList();
+        return data;
+    }
+
+    @ResponseBody
+    @PostMapping("adminSeatMove") // 관리자 좌석이동
+    public Map<String, Object> adminSeatMove(@RequestBody Map<String, String> map){
+        Map<String, Object> data = new HashMap<>();
+
+        MemberVO mem = seatService.adminSeatMem(Integer.parseInt(map.get("memberCode")));
+        List<SeatVO> floor = seatService.adminSeatFloor();
+        if (Integer.parseInt(map.get("seatFloor")) == 0){
+            List<SeatVO> num = seatService.adminSeatNum(1);
+            data.put("num", num);
+            data.put("resultFloor", 1);
+        }
+        else {
+            List<SeatVO> num = seatService.adminSeatNum(Integer.parseInt(map.get("seatFloor")));
+            data.put("num", num);
+            data.put("resultFloor", map.get("seatFloor"));
+        }
+        data.put("mem", mem);
+        data.put("floor", floor);
+
+        return data;
+    }
+
     @GetMapping("/inSeat") // 입실하기 눌렀을때
     public String reservationSeat(HttpSession session, SeatVO seatVO){
         MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");

@@ -436,4 +436,48 @@
         SELECT *
         FROM SALES_INFO;
     </select>
+
+<!-- Admin 전용  -->
+    <!-- Admin 전용 좌석 현황 SELECT  -->
+    <select id="adminSeatList" resultMap="seat">
+        SELECT
+        SEAT_NUM
+        , SEAT_POWER
+        , SEAT_FLOOR
+        , SEAT.MEMBER_CODE
+        , MEMBER_TEL
+        , MEMBER_NAME
+        , MEMBER_ID
+        , SEAT.STATUS_NUM
+        , STATUS_NAME
+        , SEAT.AGE_CODE
+        , AGE_NAME
+        FROM studyroom_seat SEAT
+        LEFT OUTER JOIN studyroom_member MEM
+        ON SEAT.MEMBER_CODE = MEM.MEMBER_CODE
+        INNER JOIN seat_status STA
+        ON SEAT.STATUS_NUM = STA.STATUS_NUM
+        INNER JOIN floor_age AGE
+        ON SEAT.AGE_CODE = AGE.AGE_CODE
+        ORDER BY SEAT_NUM ASC
+    </select>
+
+    <select id="adminSeatMem" resultMap="memberMapper.member">
+        SELECT
+            MEMBER_ID
+            , MEMBER_NAME
+            , MEMBER_TEL
+        FROM STUDYROOM_MEMBER
+        WHERE MEMBER_CODE = #{memberCode}
+    </select>
+
+    <select id="adminSeatFloor" resultMap="seat">
+        SELECT SEAT_FLOOR FROM studyroom_seat GROUP BY SEAT_FLOOR
+    </select>
+
+    <select id="adminSeatNum" resultMap="seat">
+        SELECT SEAT_NUM FROM studyroom_seat WHERE SEAT_FLOOR = #{seatFloor}
+    </select>
+
+
 </mapper>

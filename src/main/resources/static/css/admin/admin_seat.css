@@ -1,0 +1,62 @@
+.seatLive {
+    margin: 0 auto;
+    width: 100%;
+    font-size: 11pt;
+}
+
+.modal-title{
+    text-align: start;
+    font-size: 23pt;
+    margin-left: 20px;
+}
+
+.rest {
+    border: 1px solid black;
+    height: 650px;
+}
+
+.room {
+    padding-top: 5px;
+    border: 1px solid black;
+}
+
+.up-room {
+    height: 280px;
+}
+
+.down-room {
+    height: 330px;
+    margin-top: 40px;
+}
+
+.one-seat {
+    padding-top: 2px;
+    border: 1px solid black;
+    margin: 3px auto;
+    width: 105px;
+    height: 90px;
+    cursor: pointer;
+}
+.greenSeat{
+    background-color:rgb(226, 239, 218);
+    cursor: default;
+}
+.non-click{
+    background-color:rgb(217, 225, 242);
+}
+.click{
+    background-color: rgb(255, 199, 206);
+}
+
+.floor-title {
+    font-size: 20pt;
+}
+
+.floor-btn {
+    width: 100px;
+}
+
+.line-height {
+    line-height: 3;
+    font-size: 15pt;
+}
