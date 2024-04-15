@@ -107,7 +107,21 @@
                 <div class="study_info_content" style="margin-top: 20px;"> 
 
                     <div class="con3_text">
-                        현재 작성된 리뷰가 없습니다.😊
+                        <th:block th:if="${#lists.isEmpty(reviewList)}">
+                            현재 작성된 리뷰가 없습니다.😊
+                        </th:block>
+                        <th:block th:unless="${#lists.isEmpty(reviewList)}">
+                            <th:block th:each="review : ${reviewList}">
+                                <div class="review-body">
+                                    <h6>[[${review.reviewContent}]]</h6>
+                                    <div class="review-date">
+                                        <span>[[${review.reviewDate}]]</span>
+                                        <span>[[${review.reviewWriter}]]</span>
+                                    </div>
+                                </div>
+                            </th:block>
+                        </th:block>
+                        
                     </div>
 
                 </div>
