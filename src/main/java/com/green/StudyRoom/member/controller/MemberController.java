@@ -69,6 +69,13 @@ public class MemberController {
         return str;
     }
 
+    //비밀번호 찾기 화면
+    @GetMapping("passwordFindForm")
+    public String passwordFindForm(@RequestParam(name="errorMsg", required = false) String errorMsg, Model model){
+        return "content/member/password_find";
+    }
+
+
     //비동기 아이디찾기
     @ResponseBody
     @PostMapping("/idFindFetch")
