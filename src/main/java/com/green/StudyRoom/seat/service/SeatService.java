@@ -13,9 +13,9 @@ import java.util.List;
 
 public interface SeatService {
     
-    // 좌석예약 조회
+    // 좌석 조회
     List<SeatVO> seatList();
-    SeatVO moveAndOut(int memberCode); // 예약 상태 좌석 이동,퇴실 버튼 띄우기
+    SeatVO moveAndOut(int memberCode); // 좌석 이동,퇴실 버튼 띄우기
 
     List<StudyRoomInOutVO> inOutTime(int memberCode); // 입퇴실 시간
 
@@ -68,5 +68,17 @@ public interface SeatService {
     List<MessageVO> userMsg(int memberCode);
     void userSend(MessageVO messageVO);
 
+
+    // Admin 전용 좌석 조회
+    List<SeatVO> adminSeatList();
+
+    // Admin 좌석이동
+    MemberVO adminSeatMem(int memberCode);
+
+    // Admin 좌석 층
+    List<SeatVO> adminSeatFloor();
+
+    // Admin 좌석 번호
+    List<SeatVO> adminSeatNum(int seatFloor);
 
 }

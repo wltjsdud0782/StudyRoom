@@ -121,7 +121,7 @@ public class AdminController {
     //채팅보낼 사람 정하기(비동기)
     @ResponseBody
     @PostMapping("/who")
-    public  Map<String, Object> selectMan(@RequestParam(name="memberCode") int memberCode){
+    public Map<String, Object> selectMan(@RequestParam(name="memberCode") int memberCode){
         Map<String, Object> map = new HashMap<>();
         map.put("member", messageService.selectMan(memberCode));
         map.put("chtList", messageService.selectMessage(memberCode));
@@ -235,11 +235,20 @@ public class AdminController {
     }
 
     //(매출 관리)///////////////////////////////////////////// //
-    @GetMapping("/sales")
+    @RequestMapping("/sales")
     public String adminSales(Model model){
         model.addAttribute("chargeList",salesService.chargeSalesList());
         System.out.println(salesService.chargeSalesList());
         return "content/admin/admin_sales";
+    }
+
+    //매출 막대 그래프
+    @ResponseBody
+    @PostMapping("/getChart")
+    public List<SalesInfoVO> getChart(){
+        //월별매출
+        List<SalesInfoVO> monthData =  salesService.monthSales();
+        return monthData;
     }
 
 

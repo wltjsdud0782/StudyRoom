@@ -20,12 +20,12 @@ public class SeatServiceImpl implements SeatService{
     @Autowired
     private SqlSessionTemplate sqlSession;
 
-    @Override // 좌석예약 조회
+    @Override // 좌석 조회
     public List<SeatVO> seatList() {
         return sqlSession.selectList("seatMapper.seatList");
     }
 
-    @Override // 예약되어있는 상태로 좌석예약 조회
+    @Override // 예약되어있는 상태로 좌석 조회
     public SeatVO moveAndOut(int memberCode) {
         return sqlSession.selectOne("seatMapper.moveAndOut", memberCode);
     }
@@ -163,4 +163,24 @@ public class SeatServiceImpl implements SeatService{
         sqlSession.insert("seatMapper.userSend", messageVO);
     }
 
+
+    @Override // Admin 전용 좌석 조회
+    public List<SeatVO> adminSeatList() {
+        return sqlSession.selectList("seatMapper.adminSeatList");
+    }
+
+    @Override // Admin 좌석 이동
+    public MemberVO adminSeatMem(int memberCode) {
+        return sqlSession.selectOne("seatMapper.adminSeatMem", memberCode);
+    }
+
+    @Override
+    public List<SeatVO> adminSeatFloor() {
+        return sqlSession.selectList("seatMapper.adminSeatFloor");
+    }
+
+    @Override
+    public List<SeatVO> adminSeatNum(int seatFloor) {
+        return sqlSession.selectList("seatMapper.adminSeatNum", seatFloor);
+    }
 }
