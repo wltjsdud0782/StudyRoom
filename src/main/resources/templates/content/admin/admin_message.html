@@ -147,15 +147,17 @@
                             </th:block>
                             <th:block th:unless="${#lists.isEmpty(msgList)}">
                                 <tr th:each="member : ${msgList}" th:onclick="goChat([[${member.memberCode}]])">
-                                    <td width="70%">
+                                    <td width="69%">
                                         <div>
                                             <span>[[${member.memberName}]]
                                                 ([[${member.memberId}]])
                                             </span>
                                         </div>
                                     </td>
-                                    <td width="30%">
-                                        [[${member.memberTel}]]
+                                    <td width="31%">
+                                        <div class="msgMemberTel" style="letter-spacing: 1px;">
+                                            [[${member.memberTel}]]
+                                        </div>
                                     </td>
                                 </tr>
                             </th:block>
