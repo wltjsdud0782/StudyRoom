@@ -14,11 +14,10 @@
     padding: 20px;
 }
 
-
 .userChat {
     display: flex;
     height: 520px;
-    overflow-y: scroll;
+    overflow-y: overlay;
     flex-direction: column-reverse;
     background-color: #92aac9;
 }
@@ -34,24 +33,19 @@
 }
 
 .userChat::-webkit-scrollbar-thumb {
-    height: 30%;
-    /* 스크롤바의 길이 */
     background: #352a9e;
     /* 스크롤바의 색상 */
     border-radius: 20px;
 }
 
 .userChat::-webkit-scrollbar-track {
-    background: #6b7c91;
+    background: none;
     /*스크롤바 뒷 배경 색상*/
 }
 
 .user-chat-table tfoot {
     border-top: 1px solid #ccc;
 }
-
-
-
 
 .botMsg {
     padding-bottom: 10px;

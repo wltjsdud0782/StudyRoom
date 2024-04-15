@@ -24,11 +24,11 @@
                     <tbody class="userChat">
                         <tr th:each="msg : ${msgList}">
                             <th:block th:if="${msg.toFrom == 'FROM'}">
-                                <td width="60%">&nbsp;</td>
+                                <td width="60%"></td>
                                 <td>
-                                    <div>
-                                        <span>발신</span>
-                                    </div>
+                                    <!-- <div>
+                                        <span>&ensp;발신</span>
+                                    </div> -->
                                     <div class="toMsg">
                                         <div class="botMsg">
                                             <span>[[${msg.messageContent}]]</span>
@@ -43,7 +43,7 @@
                             <th:block th:if="${msg.toFrom == 'TO'}">
                                 <td>
                                     <div class="userMsg">
-                                        <span>&ensp;수신</span>
+                                        <span>&ensp;카운터</span>
                                     </div>
                                     <div class="fromMsg">
                                         <div class="botMsg">
@@ -54,7 +54,7 @@
                                         <span>[[${msg.messageDate}]]&ensp;&ensp;</span>
                                     </div>
                                 </td>
-                                <td width="60%">&nbsp;</td>
+                                <td width="60%"></td>
                             </th:block>
                         </tr>
                     </tbody>
@@ -63,16 +63,17 @@
                             <td>
                                 <div class="btnDiv input">
                                     <span>
-                                        <input type="text" value="카운터에게" style="background-color: #f2f4f7;" readonly>&nbsp;
+                                        <input type="text" value="카운터에게" style="background-color: #f2f4f7;"
+                                            readonly>&ensp;
                                     </span>
                                     <!-- 채팅 -->
                                     <span>
-                                    <input type="text" style="text-align: start; width: 79%; background-color: #f2f4f7;"
-                                        id="user_message_content">
+                                        <input type="text"
+                                            style="text-align: start; width: 79%; background-color: #f2f4f7;"
+                                            id="user_message_content">
                                     </span>
                                     <div style="float: right;">
-                                        <input type="button" value="전송"
-                                            style="background-color: #5685e4; color: white;"
+                                        <input type="button" value="전송" style="background-color: #5685e4; color: white;"
                                             th:onclick="sendMsg([[${session.loginInfo}]])">
                                     </div>
                                 </div>

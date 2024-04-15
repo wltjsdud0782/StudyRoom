@@ -163,7 +163,7 @@ function allInfo(memberCode) {
                                     </td>
                                     <td colspan="2">
                                         <div class="row">
-                                            <div class="col memberTel-data">
+                                            <div class="col memberTel-data" style="letter-spacing: 1px;">
                                                 ${data.memberMap.memberTel}
                                             </div>
                                         </div>
@@ -851,7 +851,7 @@ function memberInfo(memberCode) {
             memberTel_data.innerHTML = '';
             let str_5 = '';
             str_5 += `
-            <input type="text" value="${data.memberMap.memberTel}" name="memberTel" style="font-style: oblique;" class="form-control">
+            <input type="text" value="${data.memberMap.memberTel}" name="memberTel" style="font-style: oblique; letter-spacing: 1px;" class="form-control">
             `;
             memberTel_data.insertAdjacentHTML('afterbegin', str_5);
 
