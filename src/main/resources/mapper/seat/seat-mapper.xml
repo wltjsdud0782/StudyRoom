@@ -469,7 +469,8 @@
 
     <select id="adminSeatMem" resultMap="memberMapper.member">
         SELECT
-            MEMBER_ID
+            MEMBER_CODE
+            , MEMBER_ID
             , MEMBER_NAME
             , MEMBER_TEL
         FROM STUDYROOM_MEMBER
@@ -481,7 +482,10 @@
     </select>
 
     <select id="adminSeatNum" resultMap="seat">
-        SELECT SEAT_NUM FROM studyroom_seat WHERE SEAT_FLOOR = #{seatFloor}
+        SELECT
+        SEAT_NUM FROM studyroom_seat
+        WHERE SEAT_FLOOR = #{seatFloor}
+        AND STATUS_NUM = 2
     </select>
 
 

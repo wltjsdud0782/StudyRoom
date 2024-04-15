@@ -2,7 +2,6 @@ onefloor();
 
 // 선택한 층 및 좌석번호
 let selected_floor = 0;
-// let selected_seat = 0;
 let selected_memberCode = 0;
 
 function onefloor() {
@@ -26,9 +25,20 @@ function onefloor() {
             document.querySelector(".seatLive").innerHTML = '';
             let str = '';
             str = `
-        <div class="row" style="width: 80%;">
-        <h3>1층</h3>
-        <div class="col">
+            <div class="row mb-2">
+            <div class="col floor-title">
+            1층
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-2">
+            <div class="rest" style="padding:280px 0;">
+                휴<br>
+                게<br>
+                실
+            </div>
+        </div>
+        <div class="col-10">
             <div class="row">
                 <div class="offset-1 col-5 room up-room">
                     <div>
@@ -318,6 +328,7 @@ function onefloor() {
             str += `</div>
                 </div>
             </div>
+            </div>
         </div>
     </div>
         `;
@@ -331,7 +342,7 @@ function onefloor() {
 }
 
 function twofloor() {
-    fetch('/seat/seat2Floor', { //요청경로
+    fetch('/seat/adminSeat', { //요청경로
         method: 'POST',
         cache: 'no-cache',
         headers: {
@@ -352,9 +363,20 @@ function twofloor() {
             document.querySelector(".seatLive").innerHTML = '';
             let str = '';
             str = `
-        <div class="row" style="width: 80%;">
-        <h3>2층</h3>
-        <div class="col">
+            <div class="row mb-2">
+            <div class="col floor-title">
+            2층
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-2">
+            <div class="rest" style="padding:280px 0;">
+                휴<br>
+                게<br>
+                실
+            </div>
+        </div>
+        <div class="col-10">
             <div class="row">
                 <div class="offset-1 col room down-room" style="margin-top: 0;">
                     <div>
@@ -654,7 +676,6 @@ function twofloor() {
 }
 
 function selectSeat(event, memberCode) {
-    // selected_seat = seatNum;
     selected_memberCode = memberCode;
 
     const nonClick = document.querySelectorAll('.non-click');
@@ -665,7 +686,7 @@ function selectSeat(event, memberCode) {
     event.classList.add("click")
 }
 
-function changeFloor(){
+function changeFloor() {
     selected_floor = document.querySelector('.seatFloor').value;
     moveMember();
 }
@@ -709,16 +730,17 @@ function moveMember() {
                 <div class="col">
                     <div class="row">
                         <div class="col-6 text-end">이동할 좌석</div>
-                        <div class="col-5 text-start">
-                        <select class="form-select text-center seatFloor" onchange="changeFloor()" style="width: 60px;">`
+                        <div class="col-5 text-start" style="display: flex; align-items: center;">
+                        <select class="form-select text-center seatFloor" onchange="changeFloor()" style="width: 70px;">`
                 data.floor.forEach(e => {
                     str += `
                             <option ${data.resultFloor == e.seatFloor ? 'selected' : ''} value=${e.seatFloor}>${e.seatFloor}</option>
                             `
                 });
                 str += `
-                        </select> 층
-                        <select class="form-select text-center" style="width: 60px;">`
+                        </select>
+                        <span class="ms-2">층</span>
+                        <select class="form-select text-center seatNum ms-2" style="width: 90px;">`
                 data.num.forEach(e => {
                     str += `
                     <option value=${e.seatNum}>${e.seatNum}</option>
@@ -726,12 +748,13 @@ function moveMember() {
                 });
 
                 str += `
-                        </select> 번
+                        </select>
+                        <span class="ms-2">번</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6 text-end">이용자 아이디</div>
-                        <div class="col-5 text-start">${data.mem.memberId}</div>
+                        <div class="col-5 text-start memberId">${data.mem.memberId}</div>
                     </div>
                     <div class="row">
                         <div class="col-6 text-end">이용자명</div>
@@ -769,8 +792,35 @@ function moveMember() {
 function oneMore() {
     const result = confirm('선택한 회원의 좌석을 이동시키겠습니까?')
     if (result) {
-        alert('좌석이동이 완료되었습니다.')
-        // location.href = `/seat/moveSeat?seatNum=${selected_seat}`;
+
+        fetch('/seat/adminSeatMoveSuccess', { //요청경로
+            method: 'POST',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            //컨트롤러로 전달할 데이터
+            body: JSON.stringify({
+                // 데이터명 : 데이터값
+                seatNum: document.querySelector('.seatNum').value
+                , memberCode: selected_memberCode
+            })
+        })
+            .then((response) => {
+                return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
+                //return response.json(); //나머지 경우에 사용
+            })
+            //fetch 통신 후 실행 영역
+            .then((data) => {//data -> controller에서 리턴되는 데이터!
+                alert('좌석이동이 완료되었습니다.')
+                location.href = `/admin/seat`;
+            })
+            //fetch 통신 실패 시 실행 영역
+            .catch(err => {
+                alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+                console.log(err);
+            });
+
 
     }
     else {
@@ -778,28 +828,40 @@ function oneMore() {
     }
 }
 
-function seatMove() {
-    if (selected_memberCode == 0) {
-        alert("좌석을 선택해주세요.")
-    }
-    else {
-        const result = confirm('선택한 좌석으로 이동하시겠습니까?')
-        if (result) {
-            alert('자리가 이동되었습니다.')
-            location.href = `/seat/moveSeat?seatNum=${selected_seat}`;
-        }
-        else {
-            return;
-        }
-
-    }
-}
-
-function seatOut() {
-    const result = confirm('정말 퇴실하시겠습니까?')
+function adminSeatOut() {
+    const result = confirm('선택한 회원을 퇴실시키겠습니까?')
     if (result) {
-        alert('퇴실이 완료되었습니다. 감사합니다.')
-        location.href = "/seat/outSeat"
+        fetch('/seat/adminSeatOut', { //요청경로
+            method: 'POST',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            //컨트롤러로 전달할 데이터
+            body: new URLSearchParams({
+                // 데이터명 : 데이터값
+                memberCode: selected_memberCode
+            })
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    alert('fetch error!\n컨트롤러로 통신중에 오류가 발생했습니다.');
+                    return;
+                }
+
+                return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
+                //return response.json(); //나머지 경우에 사용
+            })
+            //fetch 통신 후 실행 영역
+            .then((data) => {//data -> controller에서 리턴되는 데이터!
+                alert('퇴실이 완료되었습니다. 감사합니다.')
+                location.href = "/admin/seat"
+            })
+            //fetch 통신 실패 시 실행 영역
+            .catch(err => {
+                alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+                console.log(err);
+            });
     }
     else {
         return;

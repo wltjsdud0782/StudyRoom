@@ -388,7 +388,7 @@ function allInfo(memberCode) {
                                                 ${data.charName[0].chargeVO.chargeName}             
                                             </div>
                                             <div>
-                                                <font color="#dee2e6">:</font>&ensp;${data.charDate[0].chargeVO.chargeDate}일 이용권 
+                                                &ensp;${data.charDate[0].chargeVO.chargeDate}일 이용권 
                                             </div>
                                         </div>
                                     </td>  
@@ -468,7 +468,7 @@ function allInfo(memberCode) {
                                                     ${data.charName[0].chargeVO.chargeName}             
                                                 </div>
                                                 <div>
-                                                    <font color="#dee2e6">:</font>&ensp;${data.charDate[0].chargeVO.chargeDate}일 이용권 
+                                                    &ensp;${data.charDate[0].chargeVO.chargeDate}일 이용권 
                                                 </div>
                                             </div>
                                         </td>  
@@ -529,7 +529,7 @@ function allInfo(memberCode) {
                                                     ${data.charName[1].chargeVO.chargeName}               
                                                 </div>
                                                 <div>
-                                                    <font color="#dee2e6">:</font>&ensp;${data.charDate[1].chargeVO.chargeDate}일 이용권 
+                                                    &ensp;${data.charDate[1].chargeVO.chargeDate}일 이용권 
                                                 </div>
                                             </div>
                                         </td>  

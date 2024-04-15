@@ -4,18 +4,6 @@
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="salesMapper">
 
-    <!-- 매출 관리 -->
-<!--    <select id="selectSales" resultMap="memberMapper.approval">-->
-<!--        SELECT APPROVAL_FEE-->
-<!--        FROM approval;-->
-<!--    </select>-->
-
-    <!-- 매출 합계 -->
-<!--    <select id="salesSum" resultMap="memberMapper.approval">-->
-<!--        SELECT SUM(APPROVAL_FEE) AS APPROVAL_FEE-->
-<!--        FROM approval;-->
-<!--    </select>-->
-
     <!-- 이용권 매출 리스트 -->
     <select id="chargeSalesList" resultMap="seatMapper.salesInfo">
         SELECT COUNT(SALES_CODE) CNT
@@ -30,27 +18,24 @@
         ORDER BY CNT DESC;
     </select>
 
-    <!-- 주간 매출 -->
-<!--    <select id="">-->
-<!--        SELECT DATE_FORMAT(SALES_DATE, '%m') WEEK-->
-<!--        FROM SALES_INFO-->
-<!--        GROUP BY DATE_FORMAT(SALES_DATE, '%m')-->
-<!--    </select>-->
-
-    <!-- 월별 매출 -->
-    <select id="monthSales" resultMap="seatMapper.salesInfo">
-        SELECT DATE_FORMAT(SALES_DATE, '%m') MONTH_SALES
+    <!-- 올해 기준으로 연간 매출 -->
+    <select id="yearSales" resultMap="seatMapper.salesInfo">
+        SELECT YEAR(SALES_DATE) YEAR_SALES
             , SUM(SALES_FEE) SALES_FEE
         FROM SALES_INFO
-        GROUP BY DATE_FORMAT(SALES_DATE, '%m')
+        GROUP BY YEAR(SALES_DATE)
+        ORDER BY YEAR(SALES_DATE) DESC;
     </select>
 
-    <!-- 일별 매출 -->
-<!--    <select id="">-->
-<!--        SELECT DATE_FORMAT(SALES_DATE, '%d') DAY-->
-<!--        FROM SALES_INFO-->
-<!--        GROUP BY DATE_FORMAT(SALES_DATE, '%d')-->
-<!--    </select>-->
+    <!-- 올해의 월별 매출 -->
+    <select id="monthSales" resultMap="seatMapper.salesInfo">
+        SELECT MONTH(SALES_DATE) MONTH_SALES
+            , SUM(SALES_FEE) SALES_FEE
+        FROM SALES_INFO
+        WHERE YEAR(SALES_DATE) = YEAR(NOW())
+        GROUP BY MONTH(SALES_DATE)
+        ORDER BY MONTH(SALES_DATE) ASC;
+    </select>
 
 </mapper>
 

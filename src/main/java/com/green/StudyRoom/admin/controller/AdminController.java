@@ -242,13 +242,22 @@ public class AdminController {
         return "content/admin/admin_sales";
     }
 
-    //매출 막대 그래프
+    //월 매출 막대 그래프
     @ResponseBody
-    @PostMapping("/getChart")
-    public List<SalesInfoVO> getChart(){
-        //월별매출
+    @PostMapping("/getMonthChart")
+    public List<SalesInfoVO> getMonthChart(){
+        //월별 매출
         List<SalesInfoVO> monthData =  salesService.monthSales();
         return monthData;
+    }
+
+    //연 매출 막대 그래프
+    @ResponseBody
+    @PostMapping("/getYearChart")
+    public List<SalesInfoVO> getYearChart(){
+        //연간 매출
+        List<SalesInfoVO> yearData =  salesService.yearSales();
+        return yearData;
     }
 
 

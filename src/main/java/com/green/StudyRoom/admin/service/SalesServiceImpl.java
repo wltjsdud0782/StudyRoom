@@ -14,18 +14,6 @@ public class SalesServiceImpl implements SalesService{
     @Autowired
     private SqlSessionTemplate sqlSession;
 
-    //매출 조회
-//    @Override
-//    public List<ApprovalVO> selectSales() {
-//        return sqlSession.selectList("salesMapper.selectSales");
-//    }
-
-    //매출 총합
-//    @Override
-//    public List<ApprovalVO> salesSum() {
-//        return sqlSession.selectList("salesMapper.salesSum");
-//    }
-
     //이용권 매출리스트
     @Override
     public List<SalesInfoVO> chargeSalesList() {
@@ -36,6 +24,12 @@ public class SalesServiceImpl implements SalesService{
     @Override
     public List<SalesInfoVO> monthSales() {
         return sqlSession.selectList("salesMapper.monthSales");
+    }
+
+    //연별 매출
+    @Override
+    public List<SalesInfoVO> yearSales() {
+        return sqlSession.selectList("salesMapper.yearSales");
     }
 
 

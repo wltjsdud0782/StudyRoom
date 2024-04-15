@@ -4,44 +4,46 @@
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴 때 같이 실행되는 css -->
-    <link rel="stylesheet" href="/css/admin/admin_seat.css"> <!-- 일단 seat에 이어둠 -->
+    <link rel="stylesheet" href="/css/admin/admin_seat.css">
 </th:block>
 
 <th:block layout:fragment="contentFragment">
 
     <body>
-        <div class="adminContainer">
-            <label style="padding-top: 60px; border-bottom: 3px solid #000000;">
-                <div style="float: left;">
-                    <h3>좌석 관리&ensp;</h3>
-                </div>
-                <div style="float: right;">
-                    <span>
-                        <button type="button" class="btn btn-light floor-btn" onclick="onefloor()">1층</button>
-                    </span>&nbsp;
-                    <span>
-                        <button type="button" class="btn btn-light floor-btn" onclick="twofloor()">2층</button>
-                    </span>&nbsp;
-                    <span>
-                        <button type="button" class="btn btn-danger" onclick="moveMember()">회원이동</button>
-                    </span>&nbsp;
-                    <span>
-                        <button type="button" class="btn btn-danger" onclick="seatOut()">회원퇴실</button>
-                    </span>
-                </div>
-            </label>
-        </div>
-        <div class="container text-center">
+        <div class="adminContainer text-center">
+            <div class="title">
+                <h3>좌석 관리</h3>
+            </div>
+            <div style="padding: 2.5vh;"></div>
+
             <div class="row">
                 <div class="col">
+
+                    <div class="row mb-5">
+                        <div class="col">
+                            <button type="button" class="btn btn-light floor-btn" onclick="onefloor()">1층</button>
+                            <button type="button" class="btn btn-light floor-btn" onclick="twofloor()">2층</button>
+                        </div>
+                    </div>
+
                     <div class="seatLive">
                         <!-- 자바스크립트 채울공간 -->
                     </div>
+
+
+                    <div class="reservationBtn mt-4">
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="btn btn-danger" onclick="moveMember()">회원이동</button>
+                                <button type="button" class="btn btn-danger" onclick="adminSeatOut()">회원퇴실</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
 
-        </select>
         <!-- Modal -->
         <div class="modal" id="adminSeat-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">

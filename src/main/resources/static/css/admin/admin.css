@@ -234,6 +234,7 @@ select {
 /* (Sales)------------------------------------------ */
 
 .layer {
+    border: 1px solid #dee2e6;
     background-color: #effaee;
     /* border: 1px solid #dee2e6; */
     border-radius: 15px;
@@ -271,12 +272,9 @@ select {
     margin-bottom: -10px;
 }
 
-.layer-border {
-    border-right: 1px solid #dee2e6;
-}
-
 .salesTable {
-    height: 200px;
+    /* border: 1px solid #dee2e6; */
+    height: 250px;
     -ms-overflow-style: none;
     /* for Internet Explorer, Edge */
     scrollbar-width: none;
