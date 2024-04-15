@@ -62,14 +62,14 @@ public class SeatController {
     }
 
     @ResponseBody
-    @PostMapping("adminSeat") // 관리자전용 좌석현황
+    @PostMapping("/adminSeat") // 관리자전용 좌석현황
     public List<SeatVO> adminSeat(){
         List<SeatVO> data = seatService.adminSeatList();
         return data;
     }
 
     @ResponseBody
-    @PostMapping("adminSeatMove") // 관리자 좌석이동
+    @PostMapping("/adminSeatMove") // 관리자 좌석이동 모달 조회
     public Map<String, Object> adminSeatMove(@RequestBody Map<String, String> map){
         Map<String, Object> data = new HashMap<>();
 
@@ -89,6 +89,25 @@ public class SeatController {
         data.put("floor", floor);
 
         return data;
+    }
+
+    @ResponseBody
+    @PostMapping("/adminSeatMoveSuccess") // 관리자 좌석이동 실행
+    public void adminSeatMoveSuccess(@RequestBody Map<String, String> map){
+        SeatVO seatVO = new SeatVO();
+        seatVO.setMemberCode(Integer.parseInt(map.get("memberCode")));
+        seatVO.setSeatNum(Integer.parseInt(map.get("seatNum")));
+
+        seatService.outSeat(seatVO);
+        seatService.inSeat(seatVO);
+    }
+
+    @ResponseBody
+    @PostMapping("/adminSeatOut")
+    public void adminSeatOut(@RequestParam(name = "memberCode")int memberCode){
+        SeatVO seatVO = new SeatVO();
+        seatVO.setMemberCode(memberCode);
+        seatService.outSeat(seatVO);
     }
 
     @GetMapping("/inSeat") // 입실하기 눌렀을때

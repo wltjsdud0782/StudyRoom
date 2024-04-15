@@ -1,6 +1,14 @@
+.adminContainer {
+    width: 90%;
+}
+
+.title {
+    border-bottom: 3px solid #000000;
+    margin-top: 60px;
+    text-align: start;
+}
+
 .seatLive {
-    margin: 0 auto;
-    width: 100%;
     font-size: 11pt;
 }
 
