@@ -20,16 +20,22 @@ public class SalesServiceImpl implements SalesService{
         return sqlSession.selectList("salesMapper.chargeSalesList");
     }
 
-    //월별 매출
-    @Override
-    public List<SalesInfoVO> monthSales() {
-        return sqlSession.selectList("salesMapper.monthSales");
-    }
+//    //월별 매출
+//    @Override
+//    public List<SalesInfoVO> monthSales() {
+//        return sqlSession.selectList("salesMapper.monthSales");
+//    }
 
     //연별 매출
     @Override
     public List<SalesInfoVO> yearSales() {
         return sqlSession.selectList("salesMapper.yearSales");
+    }
+
+    //종합 월별 매출
+    @Override
+    public List<SalesInfoVO> monthSales() {
+        return sqlSession.selectList("salesMapper.monthSales");
     }
 
 
