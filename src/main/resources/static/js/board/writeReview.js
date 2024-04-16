@@ -7,8 +7,6 @@ function getClock(){
     const minutes = String(date.getMinutes()).padStart(2, "0");
 
     clock.innerText = `${hours}:${minutes}`
-
-    console.log(1111)
 }
 
 getClock();

@@ -1,5 +1,6 @@
 .review-main{
     display: flex;
+    position: relative;
 }
 
 .review-header {
@@ -77,8 +78,48 @@
 }
 
 
+.review-pop{
+    display: none;
+    text-align: center;
+    width: 350px;
+    height: 200px;
+    background-color: #ffffff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    position: absolute;
+    transition: all 400ms;
+}
 
-
+.pop-header {
+    height: 30px;
+    border: 2px solid #1a5504;
+    background-color: #1a5504;
+}
+.pop-con{
+    height: 170px;
+    padding: 10px;
+    border-top: none;
+    border: 2px solid #ccc;
+}
+.pop-con1{
+    margin-top: 10px;
+    padding: 10px;
+}
+.review-pop button {
+    width: 80px;
+    height: 30px;
+    background-color: #1a5504;
+    color: #fff;
+    border-radius: 15px;
+    border: none;
+    margin-top: 10px;
+}
+.review-pop button:hover {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #3b8a1f;
+}
 
 
 

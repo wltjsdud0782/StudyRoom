@@ -58,6 +58,8 @@ public class StudyRoomBoardController {
     @Resource(name="chargeService")
     private ChargeServiceImpl chargeService;
 
+    @Resource(name="reviewService")
+    private ReviewService reviewService;
 
     //메인 홈페이지
     @GetMapping("/mainHomepage")
@@ -248,6 +250,7 @@ public class StudyRoomBoardController {
         List<BoardVO> boardList = boardService.selectPageInfo();
         model.addAttribute("boardList", boardList);
 
+        model.addAttribute("reviewList", reviewService.selectReviewPage());
         return "content/homepage/studyInfo";
     }
 

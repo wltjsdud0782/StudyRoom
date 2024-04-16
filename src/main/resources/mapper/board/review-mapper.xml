@@ -10,6 +10,10 @@
         <result column="REVIEW_DATE"    property="reviewDate"/>
     </resultMap>
 
+<!--    <resultMap id="" type="">-->
+<!--        -->
+<!--    </resultMap>-->
+
     <insert id="insertReview">
         INSERT INTO REVIEW(
             REVIEW_WRITER
@@ -26,6 +30,22 @@
             , REVIEW_CONTENT
             , DATE_FORMAT(REVIEW_DATE, '%Y-%m-%d') REVIEW_DATE
         FROM REVIEW
+    </select>
+
+    <select id="selectReviewPage" resultMap="review">
+        SELECT REVIEW_CODE
+        , RPAD(SUBSTRING(REVIEW_WRITER,1,2), 5 ,'*') REVIEW_WRITER
+        , REVIEW_CONTENT
+        , DATE_FORMAT(REVIEW_DATE, '%Y-%m-%d') REVIEW_DATE
+        FROM REVIEW
+        LIMIT 3;
+    </select>
+
+    <select id="selectInout" resultMap="memberMapper.studyRoomInOut">
+        SELECT IN_OUT
+        ,DAY_INPUT
+        FROM STUDYROOM_INOUT
+        WHERE MEMBER_CODE = #{memberCode};
     </select>
 
 </mapper>

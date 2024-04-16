@@ -3,6 +3,7 @@ package com.green.StudyRoom.board.controller;
 import com.green.StudyRoom.board.service.ReviewService;
 import com.green.StudyRoom.board.vo.ReviewVO;
 import com.green.StudyRoom.member.vo.MemberVO;
+import com.green.StudyRoom.member.vo.StudyRoomInOutVO;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -20,8 +21,15 @@ public class ReviewController {
 
     //리뷰
     @GetMapping("/review")
-    public String review(Model model){
+    public String review(Model model, StudyRoomInOutVO inOutVO, HttpSession session){
+
+        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+
+        inOutVO.setMemberCode(loginInfo.getMemberCode());
+
         model.addAttribute("reviewList", reviewService.selectReview());
+        model.addAttribute("inoutList", reviewService.selectInout(inOutVO.getMemberCode()));
+
         return "content/homepage/review";
     }
 

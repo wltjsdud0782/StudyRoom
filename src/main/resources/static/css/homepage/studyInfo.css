@@ -128,3 +128,67 @@
 .map-tel tr, td{
     border: none;
 }
+
+/* 리뷰 */
+
+.review-body{
+    margin-right: 50px;
+    background-color: #ffff99;
+    border: 1px;
+    width: 270px;
+    height: 250px;
+    /* 회전 */
+    transform: rotate(5deg);
+    padding: 10px;
+    text-align: center;
+    position: relative;
+}
+.review-body h6{
+    position: absolute;
+    top: 30%;
+    margin-top: 5px;
+    font-size: 20px;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.review-body::before{
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffc7;
+    border-width: 0 0 30px 50px;
+    border-style: solid;
+    border-color: transparent transparent rgba(255, 255, 255, 0.9);
+}
+.review-date {
+    text-align: left;
+    position: absolute;
+    top: 80%;
+}
+.review-date span{
+    padding: 10px;
+    font-size: 15px;
+}
+.review-footer{
+    text-align: right;
+    width: 100%;
+    height: 200px;
+}
+.review-footer input{
+    border-radius: 15px;
+    margin-top: 20px;
+    width: 120px;
+    height: 40px;
+    background-color: #000;
+    color: #fff;
+    
+    border: 2px solid #000;
+}
+.review-footer input:hover{
+    background-color: #fff;
+    color: #000;
+}

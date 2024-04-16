@@ -1,6 +1,7 @@
 package com.green.StudyRoom.board.service;
 
 import com.green.StudyRoom.board.vo.ReviewVO;
+import com.green.StudyRoom.member.vo.StudyRoomInOutVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,15 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<ReviewVO> selectReview() {
         return sqlSession.selectList("reviewMapper.selectReview");
+    }
+
+    @Override
+    public List<StudyRoomInOutVO> selectInout(int memberCode) {
+        return sqlSession.selectList("reviewMapper.selectInout", memberCode);
+    }
+
+    @Override
+    public List<StudyRoomInOutVO> selectReviewPage() {
+        return sqlSession.selectList("reviewMapper.selectReviewPage");
     }
 }
