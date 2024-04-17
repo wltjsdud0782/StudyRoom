@@ -29,6 +29,7 @@
         <id     column="COUPON_CODE"        property="couponCode"/>
         <result column="COUPON_NAME"        property="couponName"/>
         <result column="DISCOUNT_PERCENT"   property="discountPercent"/>
+        <result column="CNT" property="cnt"/>
     </resultMap>
 
     <resultMap id="memberCoupon" type="com.green.StudyRoom.seat.vo.MemberCouponVO">
@@ -45,10 +46,8 @@
         <result column="SALES_DATE"     property="salesDate"/>
         <result column="CHARGE_CODE"    property="chargeCode"/>
         <result column="CNT" property="cnt"/>
-
         <result column="YEAR_SALES" property="yearSales"/>
         <result column="MONTH_SALES" property="monthSales"/>
-
         <collection property="chargeVOList" resultMap="chargeMapper.charge"/>
     </resultMap>
 

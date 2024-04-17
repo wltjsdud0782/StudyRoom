@@ -22,9 +22,11 @@
     <select id="yearSales" resultMap="seatMapper.salesInfo">
         SELECT
         COALESCE(SUM(sales_fee), 0) AS sales_fee,
-        DATE_FORMAT(months.month, '%Y년') AS year
+        DATE_FORMAT(months.month, '%Y년') AS YEAR_SALES
         FROM (
-        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 4 YEAR), '%Y-01-01') AS month
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 5 YEAR), '%Y-01-01') AS month
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 4 YEAR), '%Y-01-01')
         UNION ALL
         SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 YEAR), '%Y-01-01')
         UNION ALL
