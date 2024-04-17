@@ -20,22 +20,102 @@
 
     <!-- 올해 기준으로 연간 매출 -->
     <select id="yearSales" resultMap="seatMapper.salesInfo">
-        SELECT YEAR(SALES_DATE) YEAR_SALES
-            , SUM(SALES_FEE) SALES_FEE
+        SELECT
+        COALESCE(SUM(sales_fee), 0) AS sales_fee,
+        DATE_FORMAT(months.month, '%Y년') AS year
+        FROM (
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 4 YEAR), '%Y-01-01') AS month
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 YEAR), '%Y-01-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 2 YEAR), '%Y-01-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 YEAR), '%Y-01-01')
+        UNION ALL
+        SELECT DATE_FORMAT(NOW(), '%Y-01-01')
+        ) AS months
+        LEFT JOIN (
+        SELECT DATE_FORMAT(SALES_DATE, '%Y-01-01') AS month, SALES_FEE
         FROM SALES_INFO
-        GROUP BY YEAR(SALES_DATE)
-        ORDER BY YEAR(SALES_DATE) DESC;
+        ) AS sales_info ON months.month = sales_info.month
+        GROUP BY YEAR(months.month)
+        ORDER BY YEAR(months.month);
     </select>
 
-    <!-- 올해의 월별 매출 -->
+    <!-- 향상된 종합 월별 매출 -->
+<!--    <select id="monthSales" resultMap="seatMapper.salesInfo">-->
+<!--        WITH RECURSIVE YEAR_DATE AS (-->
+<!--        SELECT *-->
+<!--        FROM-->
+<!--        (-->
+<!--            WITH RECURSIVE CUR_DATE AS (-->
+<!--            SELECT MONTH(NOW()) AS MONTH-->
+<!--            UNION ALL-->
+<!--            SELECT MONTH + 1 FROM CUR_DATE-->
+<!--            WHERE MONTH &lt; 12-->
+<!--        )-->
+<!--        SELECT CONCAT(DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 YEAR), '%Y년 '), MONTH, '월') AS MONTH_SALES FROM CUR_DATE-->
+<!--        ) A-->
+<!--            UNION ALL-->
+<!--            SELECT *-->
+<!--            FROM-->
+<!--        (-->
+<!--            WITH RECURSIVE PRE_DATE AS (-->
+<!--            SELECT 1 AS MONTH-->
+<!--            UNION ALL-->
+<!--            SELECT MONTH + 1 FROM PRE_DATE-->
+<!--            WHERE MONTH &lt; MONTH(NOW())-->
+<!--        )-->
+<!--            SELECT CONCAT(DATE_FORMAT(NOW(), '%Y년 '), MONTH, '월') AS MONTH_SALES FROM PRE_DATE-->
+<!--        ) B-->
+<!--        )-->
+<!--        SELECT MONTH_SALES-->
+<!--            , IFNULL(SUM(SALES_FEE), 0) SALES_FEE-->
+<!--        FROM  YEAR_DATE A-->
+<!--        LEFT OUTER JOIN-->
+<!--        SALES_INFO B-->
+<!--        ON A.MONTH_SALES = DATE_FORMAT(SALES_DATE, '%Y년 %c월')-->
+<!--        GROUP BY MONTH_SALES-->
+<!--        ORDER BY SALES_CODE ASC;-->
+<!--    </select>-->
+
+    <!-- 향상된 종합 월별 매출 -->
     <select id="monthSales" resultMap="seatMapper.salesInfo">
-        SELECT MONTH(SALES_DATE) MONTH_SALES
-            , SUM(SALES_FEE) SALES_FEE
-        FROM SALES_INFO
-        WHERE YEAR(SALES_DATE) = YEAR(NOW())
-        GROUP BY MONTH(SALES_DATE)
-        ORDER BY MONTH(SALES_DATE) ASC;
+        SELECT
+        COALESCE(SUM(SALES_FEE), 0) AS sales_fee,
+        DATE_FORMAT(months.month, '%y년 %c월') AS MONTH_SALES
+        FROM (
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 12 MONTH), '%Y-%m-01') AS month
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 11 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 10 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 9 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 8 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 7 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 6 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 5 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 4 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 2 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(NOW(), '%Y-%m-01')
+        ) AS months
+        LEFT JOIN SALES_INFO ON DATE_FORMAT(SALES_DATE, '%Y-%m-01') = months.month
+        GROUP BY DATE_FORMAT(months.month, '%y년%c월')
+        ORDER BY months.month;
     </select>
+
 
 </mapper>
 
