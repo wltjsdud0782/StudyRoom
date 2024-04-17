@@ -56,7 +56,6 @@ public class MemberController {
     //아이디 찾기
     @PostMapping("/idFind")
     public String idFindSelect(MemberVO memberVO, Model model) {
-
         MemberVO idFind=memberService.idFindSelect(memberVO);
         String str="";
         if (idFind != null) {
@@ -69,29 +68,6 @@ public class MemberController {
         return str;
     }
 
-    //비밀번호 찾기 화면
-    @GetMapping("passwordFindForm")
-    public String passwordFindForm(@RequestParam(name="errorMsg", required = false) String errorMsg, Model model){
-        return "content/member/password_find";
-    }
-
-
-    //비동기 아이디찾기
-    @ResponseBody
-    @PostMapping("/idFindFetch")
-    public String idFindFetch(MemberVO memberVO, Model model){
-        MemberVO idFind = memberService.idFindSelect(memberVO);
-        System.out.println(idFind);
-        //아이디 찾았을 때
-        if(idFind != null){
-            idFind.setMemberId(idFind.getMemberId().replace(idFind.getMemberId().substring(idFind.getMemberId().length()-2, idFind.getMemberId().length()),"**"));
-            model.addAttribute("idFind", idFind);
-        }
-        return idFind == null ? "" : idFind.getMemberId();
-    }
-
-
-
     //이용약관
     @GetMapping("/termsUse")
     public String terms_use(){
@@ -102,7 +78,6 @@ public class MemberController {
     @GetMapping("/privacyPolicy")
     public String privacy_policy(){
         return "content/member/privacy_policy";
-
     }
 
     // 비동기 로그인

@@ -2,8 +2,8 @@
 
 function idFind(){
 
-    const memberName = document.querySelector('#idfind-form').querySelector('#memberName').value;
-    const memberBirth = document.querySelector('#idfind-form').querySelector('#memberBirth').value;
+    const memberName = document.querySelector('#idfind-form').querySelector('#member-Name').value;
+    const memberBirth = document.querySelector('#idfind-form').querySelector('#member-Birth').value;
 
     fetch('/member/idFindFetch', { //요청경로
         method: 'POST',
