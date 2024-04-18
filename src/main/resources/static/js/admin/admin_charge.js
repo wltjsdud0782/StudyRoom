@@ -24,7 +24,7 @@ function selectService(value) {
         <form action="/admin/setCharge" method="post" class="sendCharge">
         <table class="adminContainer-table">
             <colgroup>
-                <col width="11%">
+                <col width="10%">
                 <col width="6%">
                 <col width="16%">
                 <col width="7%">
@@ -51,7 +51,7 @@ function selectService(value) {
                     </td>
                     <td class="charge-td">
                         <input type="text" name="chargeName" class="form-control enInput" placeholder="이름을 입력해주세요."
-                            style="font-style: oblique; border: 1px solid #ccc;">
+                            style="font-style: oblique;">
                     </td>
                     <td>
                         <div class="row">
@@ -62,7 +62,7 @@ function selectService(value) {
                     </td>
                     <td class="charge-td">
                         <input type="text" name="chargeDate" class="form-control enInput" placeholder="기간을 입력해주세요."
-                            style="font-style: oblique; border: 1px solid #ccc;">
+                            style="font-style: oblique;">
                     </td>
                     <td>
                         <div class="row">
@@ -73,7 +73,7 @@ function selectService(value) {
                     </td>
                     <td class="charge-td">
                         <input type="text" name="chargeFee" class="form-control enInput" placeholder="가격을 입력해주세요."
-                            style="font-style: oblique; border: 1px solid #ccc;">
+                            style="font-style: oblique;">
                     </td>
                     <td>
                         <div class="row">
@@ -108,7 +108,7 @@ function selectService(value) {
         <form action="/admin/setCoupon" method="post" class="sendCharge">
         <table class="adminContainer-table">
             <colgroup>
-                <col width="11%">
+                <col width="10%">
                 <col width="6%">
                 <col width="26%">
                 <col width="9%">
@@ -133,7 +133,7 @@ function selectService(value) {
                     </td>
                     <td class="charge-td">
                         <input type="text" name="couponName" class="form-control enInput" placeholder="이름을 입력해주세요."
-                            style="font-style: oblique; border: 1px solid #ccc;">
+                            style="font-style: oblique;">
                     </td>
                     <td>
                         <div class="row">
@@ -144,7 +144,7 @@ function selectService(value) {
                     </td>
                     <td class="charge-td">
                         <input type="text" name="discountPercent" class="form-control enInput" placeholder="할인율을 입력해주세요."
-                            style="font-style: oblique; border: 1px solid #ccc;">
+                            style="font-style: oblique;">
                     </td>
                     <td>
                         <div class="row">
@@ -206,17 +206,17 @@ function changeCharge(chargeCode) {
             str += `
             <form action="/admin/uptCharge" method="post" class="sendCharge">
             <input type="hidden" name="chargeCode" value="${chargeCode}">
-                            <table class="adminContainer-table">
-                            <colgroup>
-                            <col width="11%">
-                            <col width="6%">
-                            <col width="16%">
-                            <col width="7%">
-                            <col width="16%">
-                            <col width="7%">
-                            <col width="16%">
-                            <col width="*">
-                        </colgroup>
+                <table class="adminContainer-table">
+                    <colgroup>
+                        <col width="10%">
+                        <col width="6%">
+                        <col width="16%">
+                        <col width="7%">
+                        <col width="16%">
+                        <col width="7%">
+                        <col width="16%">
+                        <col width="*">
+                    </colgroup>
                         <tbody class="enrollBody">
                             <tr>
                                 <td>
@@ -235,7 +235,7 @@ function changeCharge(chargeCode) {
                                         </td>                                       
                                         <td class="charge-td">
                                             <input type="text" name="chargeName" value="${data.chargeName}" class="form-control enInput" 
-                                            placeholder="입력해주세요." style="font-style: oblique; border: 1px solid #ccc;">
+                                            placeholder="입력해주세요." style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
@@ -246,7 +246,7 @@ function changeCharge(chargeCode) {
                                         </td>
                                         <td class="charge-td">
                                             <input type="text" name="chargeDate" value="${data.chargeDate}" class="form-control enInput" 
-                                            placeholder="입력해주세요." style="font-style: oblique; border: 1px solid #ccc;">
+                                            placeholder="입력해주세요." style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
@@ -257,7 +257,7 @@ function changeCharge(chargeCode) {
                                         </td>                                        
                                         <td class="charge-td">
                                             <input type="text" name="chargeFee" value="${data.chargeFee}" class="form-control enInput" 
-                                            placeholder="입력해주세요." style="font-style: oblique; border: 1px solid #ccc;">
+                                            placeholder="입력해주세요." style="font-style: oblique;">
                                         </td>
                                         <td>
                                             <div class="row">
@@ -341,7 +341,7 @@ function changeCoupon(couponCode) {
             <input type="hidden" name="couponCode" value="${couponCode}">
             <table class="adminContainer-table">
                 <colgroup>
-                    <col width="11%">
+                    <col width="10%">
                     <col width="6%">
                     <col width="26%">
                     <col width="9%">
@@ -367,7 +367,7 @@ function changeCoupon(couponCode) {
                         </td>
                         <td class="charge-td">
                             <input type="text" name="couponName" value="${data.couponName}" class="form-control enInput" 
-                            placeholder="입력해주세요." style="font-style: oblique; border: 1px solid #ccc;">
+                            placeholder="입력해주세요." style="font-style: oblique;">
                         </td>
                         <td>
                             <div class="row">
@@ -378,7 +378,7 @@ function changeCoupon(couponCode) {
                         </td>
                         <td class="charge-td">
                             <input type="text" name="discountPercent" value="${data.discountPercent}" class="form-control enInput" 
-                            placeholder="입력해주세요." style="font-style: oblique; border: 1px solid #ccc;">
+                            placeholder="입력해주세요." style="font-style: oblique;">
                         </td>
                         <td>
                             <div class="row">

@@ -136,7 +136,7 @@ function getMonthChart() {
                     scales: {
                         y: {
                             min: 0,
-                            max: 60000000
+                            max: 50000000
                             // , ticks: { // y축 줄당 표시 값
                             //     stepSize: 1
                             // }

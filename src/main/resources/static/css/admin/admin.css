@@ -11,10 +11,10 @@ body {
 select {
     width: 120px;
     height: 40px;
-    border: 1px solid #ccc;
     border-radius: 7px;
     background-color: #fff;
     text-align: center;
+    border: 1px solid #dee2e6;
 }
 
 .btn-origin input {
@@ -192,7 +192,8 @@ select {
 }
 
 #selectOption {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
+    width: 120px;
 }
 
 /* (Log)----------------------------------------------- */
