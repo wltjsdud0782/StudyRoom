@@ -74,7 +74,7 @@ function goChat(memberCode) {
                     str += `                                   
                 <td>
                     <div class="userMsg">
-                        &ensp;${data.member.memberName} (${data.member.memberId}) 님
+                        &ensp;${data.member.memberName} (${data.member.memberId}) 회원님
                     </div>
                     <div class="fromMsg">
                         <div class="botMsg">
@@ -112,7 +112,7 @@ function StartChat() {
     document.querySelector('#receiver').value = receiverName;
 
     if (document.querySelector('#admin_message_content').value == '') {
-        alert('빈칸에 값을 입력해주세요!');
+        alert('메시지를 입력해주세요!');
     }
     else {
         sendForm.submit();

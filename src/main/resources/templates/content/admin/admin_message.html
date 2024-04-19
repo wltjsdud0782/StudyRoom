@@ -29,7 +29,7 @@
                                         <td>
                                             <div class="userMsg">
                                                 &ensp;[[${recent.memberVO.memberName}]]
-                                                ([[${recent.memberVO.memberId}]]) 님
+                                                ([[${recent.memberVO.memberId}]]) 회원님
                                             </div>
                                             <div class="fromMsg">
                                                 <div class="botMsg">
@@ -67,7 +67,7 @@
                                             <td>
                                                 <div class="userMsg">
                                                     &ensp;[[${chat.memberVO.memberName}]]
-                                                    ([[${chat.memberVO.memberId}]]) 님
+                                                    ([[${chat.memberVO.memberId}]]) 회원님
                                                 </div>
                                                 <div class="fromMsg">
                                                     <div class="botMsg">
@@ -150,12 +150,13 @@
                         </thead>
                         <tbody class="adminContainer-table-tbody22 scroll-table">
                             <th:block th:if="${#lists.isEmpty(msgList)}">
-                                <tr>
+                                <tr style="height: 4.7rem; vertical-align: middle;">
                                     <td>※ 회원정보가 존재하지 않습니다.</td>
                                 </tr>
                             </th:block>
                             <th:block th:unless="${#lists.isEmpty(msgList)}">
-                                <tr th:each="member, state : ${msgList}" th:onclick="goChat([[${member.memberCode}]])">
+                                <tr th:each="member, state : ${msgList}" th:onclick="goChat([[${member.memberCode}]])"
+                                    style="height: 4.7rem; vertical-align: middle;">
                                     <td class="text-center" width="7%" style="background-color: #8bc0ae; color: white;">
                                         <span style="font-size: small;">[[${#lists.size(msgList) -
                                             state.index}]].</span>

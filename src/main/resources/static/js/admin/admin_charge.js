@@ -26,7 +26,6 @@ function selectService(value) {
             <colgroup>
                 <col width="9%">
                 <col width="*">
-                <col width="18%">
                 <col width="9%">
             </colgroup>
             <tbody class="enrollBody">
@@ -41,27 +40,19 @@ function selectService(value) {
                     <td>
                         <div class="input-group">
                             <span class="input-group-text"
-                            style="width: 120px; height: 40px; align-items: center;  justify-content: center;">등록하기</span>
+                            style="width: 120px; height: 40px; justify-content: center;">등록하기</span>
                             <input type="text" class="form-control enInput" name="chargeName"
                             placeholder="이용권 이름">
                             <input type="text" class="form-control enInput" name="chargeDate"
                             placeholder="이용 기간">
                             <input type="text" class="form-control enInput" name="chargeFee"
                             placeholder="판매 가격">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="row">
-                            <div class="col">
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn"
-                                    onclick="enroll()" style="width: 120px; background-color: #8bc0ae; color: white;">이용권 등록
-                                    </button>
-                                    <button type="reset" class="btn btn-light"
-                                    style="width: 120px;">취소
-                                    </button>
-                                </div>
-                            </div>
+                            <button type="button" class="btn"
+                            onclick="enroll()" style="width: 120px; background-color: #8bc0ae; color: white;">이용권 등록
+                            </button>
+                            <button type="reset" class="btn btn-light"
+                            style="width: 120px;">취소
+                            </button>
                         </div>
                     </td>
                     <td>
@@ -98,7 +89,6 @@ function selectService(value) {
             <colgroup>
                 <col width="9%">
                 <col width="*">
-                <col width="18%">
                 <col width="9%">
             </colgroup>
             <tbody class="enrollBody">
@@ -113,24 +103,16 @@ function selectService(value) {
                     <td>
                         <div class="input-group">
                             <span class="input-group-text"
-                            style="width: 120px; height: 40px; align-items: center;  justify-content: center;">등록하기</span>
+                            style="width: 120px; height: 40px; justify-content: center;">등록하기</span>
                             <input type="text" class="form-control enInput" name="couponName"
                             placeholder="쿠폰 이름">
                             <input type="text" class="form-control enInput" name="discountPercent"
                             placeholder="할인율(%)">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="row">
-                            <div class="col">
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn"
-                                    onclick="enroll()" style="width: 120px; background-color: #8bc0ae; color: white;">쿠폰 등록
-                                    </button>
-                                    <button type="reset" class="btn btn-light"
-                                    style="width: 120px;">취소
-                                </div>
-                            </div>
+                            <button type="button" class="btn"
+                            onclick="enroll()" style="width: 120px; background-color: #8bc0ae; color: white;">쿠폰 등록
+                            </button>
+                            <button type="reset" class="btn btn-light"
+                            style="width: 120px;">취소
                         </div>
                     </td>
                     <td>
@@ -196,7 +178,6 @@ function changeCharge(chargeCode) {
                     <colgroup>
                         <col width="9%">
                         <col width="*">
-                        <col width="18%">
                         <col width="9%">
                     </colgroup>
                     <tbody class="enrollBody">
@@ -210,27 +191,19 @@ function changeCharge(chargeCode) {
                             <td>
                                 <div class="input-group">
                                     <span class="input-group-text"
-                                    style="width: 120px; height: 40px; align-items: center;  justify-content: center;">변경하기</span>
+                                    style="width: 120px; height: 40px; justify-content: center;">변경하기</span>
                                     <input type="text" class="form-control enInput" name="chargeName"
                                     placeholder="이용권 이름" value="${data.chargeName}">
                                     <input type="text" class="form-control enInput" name="chargeDate"
                                     placeholder="이용 기간" value="${data.chargeDate}">
                                     <input type="text" class="form-control enInput" name="chargeFee"
                                     placeholder="판매 가격" value="${data.chargeFee}">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="btn-group" role="group">
-                                            <button type="button" class="btn"
-                                            onclick="enroll()" style="width: 120px; background-color: #8bc0ae; color: white;">이용권 변경
-                                            </button>
-                                            <button type="reset" class="btn btn-light"
-                                            style="width: 120px;">취소
-                                            </button>
-                                        </div>                  
-                                    </div>
+                                    <button type="button" class="btn"
+                                    onclick="enroll()" style="width: 120px; background-color: #8bc0ae; color: white;">이용권 변경
+                                    </button>
+                                    <button type="reset" class="btn btn-light"
+                                    style="width: 120px;">취소
+                                    </button>
                                 </div>
                             </td>
                             <td>
@@ -253,7 +226,7 @@ function changeCharge(chargeCode) {
                 </table>
                 <div style="padding: 1vh;"></div>
                 <div style="float: right;">     
-                    <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 이용권을 이용하는 회원이 있는지 확인해주세요.</span>   
+                    <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 이용권을 보유 중인 회원이 있는지 확인해주세요.</span>   
                 </div>
             </form>
             `;
@@ -318,7 +291,6 @@ function changeCoupon(couponCode) {
                 <colgroup>
                     <col width="9%">
                     <col width="*">
-                    <col width="18%">
                     <col width="9%">
                 </colgroup>
                 <tbody class="enrollBody">
@@ -333,25 +305,17 @@ function changeCoupon(couponCode) {
                         <td>
                             <div class="input-group">
                                 <span class="input-group-text"
-                                style="width: 120px; height: 40px; align-items: center;  justify-content: center;">변경하기</span>
+                                style="width: 120px; height: 40px; justify-content: center;">변경하기</span>
                                 <input type="text" class="form-control enInput" name="couponName"
                                 placeholder="쿠폰 이름" value="${data.couponName}">
                                 <input type="text" class="form-control enInput" name="discountPercent"
                                 placeholder="할인율(%)" value="${data.discountPercent}">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn"
-                                        onclick="enroll()" style="width: 120px; background-color: #8bc0ae; color: white;">쿠폰 변경
-                                        </button>
-                                        <button type="reset" class="btn btn-light"
-                                        style="width: 120px;">취소
-                                        </button>                           
-                                    </div>
-                                </div>
+                                <button type="button" class="btn"
+                                onclick="enroll()" style="width: 120px; background-color: #8bc0ae; color: white;">쿠폰 변경
+                                </button>
+                                <button type="reset" class="btn btn-light"
+                                style="width: 120px;">취소
+                                </button>     
                             </div>
                         </td>
                         <td>
@@ -375,7 +339,7 @@ function changeCoupon(couponCode) {
             </table>
             <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
             <div style="float: right;">      
-                <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 쿠폰을 이용하는 회원이 있는지 확인해주세요.</span>                   
+                <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 쿠폰을 보유 중인 회원이 있는지 확인해주세요.</span>                   
             </div> 
         </form>
         <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->

@@ -50,7 +50,7 @@ function allInfo(memberCode) {
                             disabled>${data.memberMap.memberName}
                         </button>
                         <button type="button" class="btn btn-light enInput" 
-                            onclick="yourCoupon()">
+                            onclick="yourCoupon()" style="color: red;">
                             지급하기
                         </button>
                     </div>                                              
@@ -65,9 +65,6 @@ function allInfo(memberCode) {
             for (let i = 0; i < data.couponList.length; i++) {
                 str_2 += `
                         <tr>
-                            <td class="text-center" width="2%"
-                                style="background-color: #8bc0ae; color: white;">
-                            </td>
                             <td style="width: 5%; vertical-align: middle;">
                                 <input type="checkbox" class="form-check-input" name="couponCode" value="${data.couponList[i].couponCode}">
                             </td>

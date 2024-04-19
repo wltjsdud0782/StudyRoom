@@ -19,7 +19,6 @@
                 <div class="col">
                     <div class="row">
                         <div class="col-7">
-                            <h4>&nbsp;검색</h4>
                             <table class="table table-hover adminContainer-table">
                                 <thead class="table-success">
                                     <form action="/admin/info" method="post" class="infoSearch">
@@ -65,13 +64,14 @@
                                 </thead>
                                 <tbody class="adminContainer-table-tbody scroll-table">
                                     <th:block th:if="${#lists.isEmpty(memberList)}">
-                                        <tr>
+                                        <tr style="height: 4.6rem; vertical-align: middle;">
                                             <td>※ 회원정보가 존재하지 않습니다.</td>
                                         </tr>
                                     </th:block>
                                     <th:block th:unless="${#lists.isEmpty(memberList)}">
                                         <tr th:each="member, state : ${memberList}"
-                                            th:onclick="allInfo([[${member.memberCode}]])">
+                                            th:onclick="allInfo([[${member.memberCode}]])" 
+                                            style="height: 4.6rem; vertical-align: middle;">
                                             <td class="text-center" width="5%"
                                                 style="background-color: #8bc0ae; color: white;">
                                                 <span style="font-size: small;">[[${#lists.size(memberList) -
@@ -103,16 +103,19 @@
                             </table>
                         </div>
                         <div class="col-5">
-                            <h4>&nbsp;쿠폰 지급</h4>
                             <form action="/admin/sendCoupon" method="post" class="sendCouponForm">
                                 <table class="table table-hover adminContainer-table">
                                     <thead class="table-success">
                                         <tr>
                                             <td>
-                                                <div class="goCoupon">
+                                                <div style="float: left;">
+                                                    <label class="input-group-text" style="width: 120px; height: 40px; 
+                                                    justify-content: center;">쿠폰 지급</label>
+                                                </div>
+                                                <div class="goCoupon" style="float: right;">
                                                     <div class="btnDiv">                                              
-                                                        <div class="btn-group" role="group" style="float: right;">
-                                                            <button type="button" class="btn btn-secondary" disabled>지급대상</button>
+                                                        <div class="btn-group" role="group">
+                                                            <button type="button" class="btn btn-secondary" disabled>지급 대상</button>
                                                             <button type="button" class="btn btn-light" style="background-color: white;" disabled>지급하기</button>
                                                         </div>
                                                     </div>
@@ -128,9 +131,6 @@
                                         </th:block>
                                         <th:block th:unless="${#lists.isEmpty(couponList)}">
                                             <tr th:each="coupon : ${couponList}">
-                                                <td class="text-center" width="2%"
-                                                    style="background-color: #8bc0ae; color: white;">
-                                                </td>
                                                 <td>
                                                     <div>[[${coupon.couponName}]]</div>
                                                     <div style="font-size: larger;">&ensp;[[${coupon.discountPercent}]]%
