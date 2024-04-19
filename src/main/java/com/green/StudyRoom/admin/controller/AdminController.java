@@ -225,12 +225,13 @@ public class AdminController {
     public String adminLog(Model model){
         //결재 기록
         model.addAttribute("appList", timeLogService.selectBuyList());
-        //예약 기록 (안쓸 기능)
-        model.addAttribute("resList", timeLogService.selectReserveList());
         //입퇴실 기록
         model.addAttribute("inotList", timeLogService.selectInOutList());
         //좌석상태 조회
         model.addAttribute("statusList", timeLogService.selectSeatStatusList());
+        //보유 쿠폰 조회
+        model.addAttribute("couponList", timeLogService.showCoupon());
+        System.out.println(timeLogService.showCoupon());
         return "content/admin/admin_log";
     }
 

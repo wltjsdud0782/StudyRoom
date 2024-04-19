@@ -10,6 +10,8 @@
 
 .seatLive {
     font-size: 11pt;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .modal-title{

@@ -1,3 +1,14 @@
+//submit
+function infoSearch() {
+    const sendCharge = document.querySelector('.infoSearch');
+
+    if (document.querySelector('.searchInput').value == '') {
+        alert('빈칸에 값을 입력해주세요!');
+    }
+    else {
+        sendCharge.submit();
+    }
+}
 
 //수정 불가능한 info 나오기
 function allInfo(memberCode) {

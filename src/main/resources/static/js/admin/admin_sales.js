@@ -28,7 +28,7 @@ function getYearChart() {
             //리스트 만들기
             const yearList = [];
             const salesList = [];
-            for(const each of data){
+            for (const each of data) {
                 yearList.push(each.yearSales);
                 salesList.push(each.salesFee);
             }
@@ -44,13 +44,12 @@ function getYearChart() {
             ifChart = new Chart(yearChart, {
                 type: 'bar',
                 data: {
-                    labels: [data[0].yearSales-5+"년", data[0].yearSales-4+"년", data[0].yearSales-3+"년", 
-                            data[0].yearSales-2+"년", data[0].yearSales-1+"년", data[0].yearSales+"년"],
+                    labels: yearList,
                     datasets: [
                         {
                             label: "연 매출",
-                            backgroundColor: "#3CB371",
-                            data: [11.5, 15.7, 8.5, 13.0, data[1].salesFee, data[0].salesFee]
+                            backgroundColor: "#A1CE5D",
+                            data: salesList
                         }
                     ]
                 },
@@ -64,27 +63,13 @@ function getYearChart() {
                     scales: {
                         y: {
                             min: 0,
-                            max: 200000000
+                            max: 300000000
                         }
                     }
                 }
             });
-
-            //연말 매출 데이터 테스트
-            const year = document.querySelector('#testing')
-            year.innerHTML = '';
-            let str_year = '';
-            str_year += `<div>`;
-            for (let i = 0; i < data.length; i++) {
-                str_year += `
-                    <div>${data[i].yearSales}년 매출 : ${data[i].salesFee}원</div>
-                `;
-            }
-            str_year += `</div>`;
-            year.insertAdjacentHTML('afterbegin', str_year);
-
-
         })
+
         //fetch 통신 실패 시 실행 영역
         .catch(err => {
             alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
@@ -116,7 +101,7 @@ function getMonthChart() {
             //리스트 만들기
             const monthList = [];
             const salesList = [];
-            for(const each of data){
+            for (const each of data) {
                 monthList.push(each.monthSales);
                 salesList.push(each.salesFee);
             }
@@ -136,7 +121,7 @@ function getMonthChart() {
                     datasets: [
                         {
                             label: "월 매출",
-                            backgroundColor: "#3CB371",
+                            backgroundColor: "#4CC764",
                             data: salesList
                         }
                     ]
@@ -151,8 +136,12 @@ function getMonthChart() {
                     scales: {
                         y: {
                             min: 0,
-                            max: 100000000
-                        }
+                            max: 50000000
+                            // , ticks: { // y축 줄당 표시 값
+                            //     stepSize: 1
+                            // }
+                        },
+                        
                     }
                 }
             });
