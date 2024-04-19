@@ -32,5 +32,8 @@ public interface AdminService {
 
     //쿠폰 지급하기
     void sendCoupon(MemberCouponVO memberCouponVO);
+
+    //쿠폰 조회하기
+    List<MemberCouponVO> eachCoupon(int memberCode);
 }
 

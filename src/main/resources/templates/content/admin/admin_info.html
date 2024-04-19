@@ -44,8 +44,8 @@
                                                         <input type="text" class="form-control searchInput"
                                                             name="searchValue" style="width: 361px;"
                                                             th:value="${infoSearchVO.searchValue}">
-                                                        <button class="btn" type="button"
-                                                            onclick="infoSearch()" style="width: 120px; background-color: #8bc0ae; color: white;">
+                                                        <button class="btn" type="button" onclick="infoSearch()"
+                                                            style="width: 120px; background-color: #8bc0ae; color: white;">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18"
                                                                 height="18" fill="currentColor" class="bi bi-search"
                                                                 viewBox="0 0 16 16">
@@ -72,26 +72,29 @@
                                     <th:block th:unless="${#lists.isEmpty(memberList)}">
                                         <tr th:each="member, state : ${memberList}"
                                             th:onclick="allInfo([[${member.memberCode}]])">
+                                            <td class="text-center" width="5%"
+                                                style="background-color: #8bc0ae; color: white;">
+                                                <span style="font-size: small;">[[${#lists.size(memberList) -
+                                                    state.index}]].</span>
+                                            </td>
                                             <td>
                                                 <div>
                                                     <span>
-                                                        <span style="font-size: small;">#[[${#lists.size(memberList) -
-                                                            state.index}]]</span>
-                                                        &ensp;[[${member.memberName}]] ([[${member.memberId}]])
+                                                        [[${member.memberName}]] ([[${member.memberId}]])
                                                     </span>
-                                                    <span style="float: right;">
-                                                        <div>
-                                                            <th:block th:if="${member.isAdmin == '회원'}">
-                                                                회원
-                                                            </th:block>
-                                                            <th:block th:if="${member.isAdmin == '알바생'}">
-                                                                알바생
-                                                            </th:block>
-                                                            <th:block th:if="${member.isAdmin == '관리자'}">
-                                                                관리자
-                                                            </th:block>
-                                                        </div>
-                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td class="text-center" width="9%" style="border-left: 1px solid #dee2e6;">
+                                                <div>
+                                                    <th:block th:if="${member.isAdmin == '회원'}">
+                                                        회원
+                                                    </th:block>
+                                                    <th:block th:if="${member.isAdmin == '알바생'}">
+                                                        알바생
+                                                    </th:block>
+                                                    <th:block th:if="${member.isAdmin == '관리자'}">
+                                                        관리자
+                                                    </th:block>
                                                 </div>
                                             </td>
                                         </tr>
@@ -107,16 +110,15 @@
                                         <tr>
                                             <td>
                                                 <div class="goCoupon">
-                                                    <div class="btnDiv">
-                                                        <input type="button" value="지급대상" disabled>
-                                                        <div style="float: right;">
-                                                            <input type="button" value="지급하기" disabled>
+                                                    <div class="btnDiv">                                              
+                                                        <div class="btn-group" role="group" style="float: right;">
+                                                            <button type="button" class="btn btn-secondary" disabled>지급대상</button>
+                                                            <button type="button" class="btn btn-light" style="background-color: white;" disabled>지급하기</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
-
                                     </thead>
                                     <tbody class="adminContainer-table-tbody checkCoupon scroll-table">
                                         <th:block th:if="${#lists.isEmpty(couponList)}">
@@ -126,6 +128,9 @@
                                         </th:block>
                                         <th:block th:unless="${#lists.isEmpty(couponList)}">
                                             <tr th:each="coupon : ${couponList}">
+                                                <td class="text-center" width="2%"
+                                                    style="background-color: #8bc0ae; color: white;">
+                                                </td>
                                                 <td>
                                                     <div>[[${coupon.couponName}]]</div>
                                                     <div style="font-size: larger;">&ensp;[[${coupon.discountPercent}]]%

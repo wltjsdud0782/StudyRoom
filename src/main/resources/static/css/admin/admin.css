@@ -7,12 +7,16 @@ body {
     width: 90%;
 }
 
+/* tfoot {
+    background-color: #000000;
+} */
+
 .btnDiv input,
-select {
+select, button {
     width: 120px;
     height: 40px;
     border-radius: 7px;
-    background-color: #fff;
+    background-color: white;
     text-align: center;
     border: 1px solid #dee2e6;
 }
@@ -29,6 +33,7 @@ select {
 
 .adminContainer-table {
     width: 100%;
+    /* 테이블 테두리!!!! */
     border: 1px solid #dee2e6;
 }
 
@@ -36,8 +41,9 @@ select {
     padding: 10px;
 }
 
+ /* 테이블 테두리!!!! */
 .table-success {
-    border: 1px solid #a7b9b1;
+    border: 1px solid #dee2e6;
 }
 
 /* 스크롤바 */
@@ -55,8 +61,9 @@ select {
 .scroll-table::-webkit-scrollbar-thumb {
     outline: none;
     border-radius: 8px;
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(to bottom, #edffea, #c0e1bd);
+    /* box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2); */
+    /* background: linear-gradient(to bottom, #edffea, #c0e1bd); */
+    background-color: #8bc0ae;
     cursor: pointer;
 }
 
@@ -64,7 +71,6 @@ select {
 
 .memberInfo-table {
     width: 100%;
-    border: 1px solid #ccc;
 }
 
 .memberInfo-table tr td {
@@ -80,7 +86,8 @@ select {
 .infoIndex {
     background-color: #d1e7dd;
     height: 70px;
-    border: 1px solid #a7b9b1;
+    /* border: 1px solid #a7b9b1; */
+    border: 1px solid #dee2e6;
 }
 
 .adminContainer-table-tbody {
@@ -125,10 +132,6 @@ select {
     /* 스크롤바 뒷 배경 색상 */
 }
 
-.adminContainer-table tfoot {
-    border-top: 1px solid #ccc;
-}
-
 .adminContainer-table-tbody22 {
     display: block;
     height: 520px;
@@ -164,7 +167,7 @@ select {
 }
 
 .fromMsg {
-    background-color: #ffffff;
+    background-color: white;
     border-radius: 20px;
     padding: 15px;
 }
@@ -188,7 +191,7 @@ select {
 
 .enrollBody {
     background-color: #d1e7dd;
-    border: 1px solid #a7b9b1;
+    border: 1px solid #dee2e6;
 }
 
 #selectOption {
@@ -208,7 +211,7 @@ select {
 
 .adminContainer-table-tbody4 {
     display: flex;
-    height: 238px;
+    height: 239px;
     overflow-y: scroll;
     flex-direction: column-reverse;
 }
@@ -220,7 +223,7 @@ select {
 
 .adminContainer-table-tbody44 {
     display: block;
-    height: 245px;
+    height: 246px;
     overflow-y: overlay;
 }
 

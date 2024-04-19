@@ -60,7 +60,7 @@ public class AdminController {
         map.put("couponList", chargeService.selectCoupon());
         map.put("memberMap", adminService.selectMemberDetailInfo(memberCode));
         map.put("seatMap", adminService.selectSeatDetailInfo(memberCode));
-        map.put("couponMap", seatService.ownCoupon(memberCode));
+        map.put("couponMap", adminService.eachCoupon(memberCode));
 
         map.put("charName", seatService.haveCharge(memberCode));
         if (!seatService.haveCharge(memberCode).isEmpty()){
