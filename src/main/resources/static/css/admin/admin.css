@@ -12,7 +12,8 @@ body {
 } */
 
 .btnDiv input,
-select, button {
+select,
+button {
     width: 120px;
     height: 40px;
     border-radius: 7px;
@@ -41,7 +42,7 @@ select, button {
     padding: 10px;
 }
 
- /* 테이블 테두리!!!! */
+/* 테이블 테두리!!!! */
 .table-success {
     border: 1px solid #dee2e6;
 }
@@ -199,6 +200,17 @@ select, button {
     width: 120px;
 }
 
+.chartButton {
+    display: flex;
+    justify-content: center;
+}
+
+.chartButton button {
+    width: 120px;
+    height: 40px;
+    border: 1px solid #dee2e6;
+}
+
 /* (Log)----------------------------------------------- */
 
 .logDate {
@@ -234,9 +246,9 @@ select, button {
 
 .logTable {
     text-align: center;
-    margin-top: -16px; 
-    border-bottom: 1px solid #dee2e6; 
-    border-left: 1px solid #dee2e6; 
+    margin-top: -16px;
+    border-bottom: 1px solid #dee2e6;
+    border-left: 1px solid #dee2e6;
     border-right: 1px solid #dee2e6;
 }
 
@@ -283,7 +295,7 @@ select, button {
 
 .salesTable {
     /* border: 1px solid #dee2e6; */
-    height: 250px;
+    height: 290px;
     -ms-overflow-style: none;
     /* for Internet Explorer, Edge */
     scrollbar-width: none;

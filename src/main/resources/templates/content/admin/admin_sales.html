@@ -26,13 +26,18 @@
                 <div class="row">
                     <!-- 차트 -->
                     <div class="col-6 layer-first">
-                        <div class="text-center mb-4">
+                        <div class="input-group chartButton mb-5" role="group">
                             <button type="button" class="btn btn-light" onclick="getMonthChart()">월 매출</button>
-                            &ensp;
-                            <!-- <button type="button" class="btn btn-light" onclick="getMonthChart()">월 매출</button>
-                            &ensp; -->
+                            <span class="input-group-text"></span>
                             <button type="button" class="btn btn-light" onclick="getYearChart()">연 매출</button>
                         </div>
+                        <!-- <div class="text-center mb-4">
+                            <button type="button" class="btn btn-light" onclick="getMonthChart()">월 매출</button>
+                            &ensp;
+                            <button type="button" class="btn btn-light" onclick="getMonthChart()">월 매출</button>
+                            &ensp;
+                            <button type="button" class="btn btn-light" onclick="getYearChart()">연 매출</button>
+                        </div> -->
                         <canvas id="bar-chart" style="vertical-align: middle;" height="20vh" width="40vw"></canvas>
                     </div>
                     <!-- 이용권 판매현황 -->
@@ -48,9 +53,9 @@
                             <thead class="table-light">
                                 <tr>
                                     <td>이용권 ([[${#lists.size(chargeList)}]]종류)</td>
-                                    <td class="text-center">판매 수량</td>
-                                    <td class="text-end">개별 가격</td>
-                                    <td class="text-end">총 판매가</td>
+                                    <td class="text-center">판매량</td>
+                                    <td class="text-end">판매가</td>
+                                    <td class="text-end">총 매출</td>
                                 </tr>
                             </thead>
                         </table>
@@ -86,7 +91,8 @@
                 <div class="row mt-3">
                     <div class="col layer-third">
                         <div id="testing">
-                            이번 달 최고 매출 : ???
+                            올해 가장 많이 팔린 이용권 : 
+                            올해 최고 매출 이용권 :
                         </div>
                     </div>
                 </div>

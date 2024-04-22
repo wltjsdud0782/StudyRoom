@@ -139,7 +139,7 @@
                             <table class="table table-hover logTable">
                                 <tbody class="adminContainer-table-tbody44 scroll-table">
                                     <tr th:each="status : ${statusList}">
-                                        <td style="width: 18%;">
+                                        <td style="width: 18%; text-align: left; padding-left: 25px;">
                                             [[${status.seatFloor}]]층&ensp;[[${status.seatNum}]]번석</td>
                                         <th:block th:if="${status.seatPower == '켜짐'}">
                                             <td style="width: 18%;">
@@ -153,7 +153,9 @@
                                         </th:block>
                                         <td style="width: 18%;">[[${status.memberVO.memberName}]]</td>
                                         <td style="width: 18%;">[[${status.memberVO.memberId}]]</td>
-                                        <td style="width: 28%; letter-spacing: 1px;">[[${status.memberVO.memberTel}]]</td>
+                                        <td style="width: 28%; letter-spacing: 1px; text-align: left; padding-left: 25px;">
+                                            [[${status.memberVO.memberTel}]]
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

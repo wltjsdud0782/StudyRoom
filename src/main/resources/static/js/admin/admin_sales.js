@@ -25,6 +25,15 @@ function getYearChart() {
         .then((data) => {//data -> controller에서 리턴되는 데이터!
             console.log(data); //04
 
+            document.querySelector(".chartButton").innerHTML = '';
+            let str_1 = '';
+            str_1 += `
+                <button type="button" class="btn btn-outline-secondary" onclick="getMonthChart()">월 매출</button>
+                <span class="input-group-text"></span>
+                <button type="button" class="btn btn-light" onclick="getYearChart()">연 매출</button>
+            `;
+            document.querySelector(".chartButton").insertAdjacentHTML('afterbegin', str_1);
+
             //리스트 만들기
             const yearList = [];
             const salesList = [];
@@ -97,6 +106,16 @@ function getMonthChart() {
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
             console.log(data); //04
+
+            document.querySelector(".chartButton").innerHTML = '';
+            let str_2 = '';
+            str_2 += `
+                <button type="button" class="btn btn-light" onclick="getMonthChart()">월 매출</button>
+                <span class="input-group-text"></span>
+                <button type="button" class="btn btn-outline-secondary" onclick="getYearChart()">연 매출</button>
+            `;
+            document.querySelector(".chartButton").insertAdjacentHTML('afterbegin', str_2);
+
 
             //리스트 만들기
             const monthList = [];

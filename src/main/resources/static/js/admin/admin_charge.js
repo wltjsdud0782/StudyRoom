@@ -40,11 +40,15 @@ function selectService(value) {
                     <td>
                         <div class="input-group">
                             <span class="input-group-text"
-                            style="width: 120px; height: 40px; justify-content: center;">등록하기</span>
+                            style="width: 80px; height: 40px; justify-content: center;">이름</span>
                             <input type="text" class="form-control enInput" name="chargeName"
                             placeholder="이용권 이름">
+                            <span class="input-group-text"
+                            style="width: 80px; height: 40px; justify-content: center;">기간</span>
                             <input type="text" class="form-control enInput" name="chargeDate"
                             placeholder="이용 기간">
+                            <span class="input-group-text"
+                            style="width: 80px; height: 40px; justify-content: center;">가격</span>
                             <input type="text" class="form-control enInput" name="chargeFee"
                             placeholder="판매 가격">
                             <button type="button" class="btn"
@@ -103,9 +107,11 @@ function selectService(value) {
                     <td>
                         <div class="input-group">
                             <span class="input-group-text"
-                            style="width: 120px; height: 40px; justify-content: center;">등록하기</span>
+                            style="width: 80px; height: 40px; justify-content: center;">이름</span>
                             <input type="text" class="form-control enInput" name="couponName"
                             placeholder="쿠폰 이름">
+                            <span class="input-group-text"
+                            style="width: 80px; height: 40px; justify-content: center;">할인율</span>
                             <input type="text" class="form-control enInput" name="discountPercent"
                             placeholder="할인율(%)">
                             <button type="button" class="btn"
@@ -191,11 +197,15 @@ function changeCharge(chargeCode) {
                             <td>
                                 <div class="input-group">
                                     <span class="input-group-text"
-                                    style="width: 120px; height: 40px; justify-content: center;">변경하기</span>
+                                    style="width: 80px; height: 40px; justify-content: center;">이름</span>
                                     <input type="text" class="form-control enInput" name="chargeName"
                                     placeholder="이용권 이름" value="${data.chargeName}">
+                                    <span class="input-group-text"
+                                    style="width: 80px; height: 40px; justify-content: center;">기간</span>
                                     <input type="text" class="form-control enInput" name="chargeDate"
                                     placeholder="이용 기간" value="${data.chargeDate}">
+                                    <span class="input-group-text"
+                                    style="width: 80px; height: 40px; justify-content: center;">가격</span>
                                     <input type="text" class="form-control enInput" name="chargeFee"
                                     placeholder="판매 가격" value="${data.chargeFee}">
                                     <button type="button" class="btn"
@@ -226,7 +236,7 @@ function changeCharge(chargeCode) {
                 </table>
                 <div style="padding: 1vh;"></div>
                 <div style="float: right;">     
-                    <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 이용권을 보유 중인 회원이 있는지 확인해주세요.</span>   
+                    <span style="font-size: small;"><font color="red">*</font> 이용권을 삭제하기 전에, 해당 이용권을 보유 중인 회원이 있는지 확인해주세요.</span>   
                 </div>
             </form>
             `;
@@ -305,9 +315,11 @@ function changeCoupon(couponCode) {
                         <td>
                             <div class="input-group">
                                 <span class="input-group-text"
-                                style="width: 120px; height: 40px; justify-content: center;">변경하기</span>
+                                style="width: 80px; height: 40px; justify-content: center;">이름</span>
                                 <input type="text" class="form-control enInput" name="couponName"
                                 placeholder="쿠폰 이름" value="${data.couponName}">
+                                <span class="input-group-text"
+                                style="width: 80px; height: 40px; justify-content: center;">할인율</span>
                                 <input type="text" class="form-control enInput" name="discountPercent"
                                 placeholder="할인율(%)" value="${data.discountPercent}">
                                 <button type="button" class="btn"
@@ -339,7 +351,7 @@ function changeCoupon(couponCode) {
             </table>
             <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
             <div style="float: right;">      
-                <span style="font-size: small;"><font color="red">*</font> 삭제하기 전에 해당 쿠폰을 보유 중인 회원이 있는지 확인해주세요.</span>                   
+                <span style="font-size: small;"><font color="red">*</font> 쿠폰을 삭제하기 전에, 해당 쿠폰을 보유 중인 회원이 있는지 확인해주세요.</span>                   
             </div> 
         </form>
         <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
