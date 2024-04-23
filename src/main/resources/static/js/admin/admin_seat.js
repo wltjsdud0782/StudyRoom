@@ -388,7 +388,7 @@ function twofloor() {
             document.querySelector(".seatLive").innerHTML = '';
             let str = '';
             str = `
-            <div class="row mb-2">
+            <div class="row mb-3">
             <div class="col floor-title">
             2층
             </div>
