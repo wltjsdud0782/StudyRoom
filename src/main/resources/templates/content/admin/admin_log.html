@@ -105,10 +105,10 @@
                                         <td width="40%">
                                             [[${coupon.couponVOList[0].couponName}]]
                                         </td>
-                                        <td width="30%">
+                                        <td width="30%" style="border-left: 1px solid #dee2e6;">
                                             [[${coupon.couponVOList[0].discountPercent}]]% 할인
                                         </td>
-                                        <td width="30%">
+                                        <td width="30%" style="border-left: 1px solid #dee2e6;">
                                             [[${coupon.couponVOList[0].cnt}]]EA
                                         </td>
                                     </tr>
@@ -142,18 +142,22 @@
                                         <td style="width: 18%; text-align: left; padding-left: 25px;">
                                             [[${status.seatFloor}]]층&ensp;[[${status.seatNum}]]번석</td>
                                         <th:block th:if="${status.seatPower == '켜짐'}">
-                                            <td style="width: 18%;">
+                                            <td style="width: 18%; border-left: 1px solid #dee2e6;">
                                                 <font color="orange">[[${status.seatPower}]]</font>
                                             </td>
                                         </th:block>
                                         <th:block th:unless="${status.seatPower == '켜짐'}">
-                                            <td style="width: 18%;">
+                                            <td style="width: 18%; border-left: 1px solid #dee2e6;">
                                                 <font color="gray">[[${status.seatPower}]]</font>
                                             </td>
                                         </th:block>
-                                        <td style="width: 18%;">[[${status.memberVO.memberName}]]</td>
-                                        <td style="width: 18%;">[[${status.memberVO.memberId}]]</td>
-                                        <td style="width: 28%; letter-spacing: 1px; text-align: left; padding-left: 25px;">
+                                        <td style="width: 18%; border-left: 1px solid #dee2e6;">
+                                            [[${status.memberVO.memberName}]]</td>
+                                        <td style="width: 18%; border-left: 1px solid #dee2e6;">
+                                            [[${status.memberVO.memberId}]]</td>
+                                        <td
+                                            style="width: 28%; letter-spacing: 1px; 
+                                            text-align: left; padding-left: 25px; border-left: 1px solid #dee2e6;">
                                             [[${status.memberVO.memberTel}]]
                                         </td>
                                     </tr>

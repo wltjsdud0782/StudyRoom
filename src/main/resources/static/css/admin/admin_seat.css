@@ -3,7 +3,7 @@
 }
 
 .title {
-    border-bottom: 3px solid #000000;
+    border-bottom: 3px solid black;
     margin-top: 60px;
     text-align: start;
 }
@@ -22,14 +22,14 @@
 }
 
 .rest {
-    border: 1px solid black;
+    border: 1px solid #999999;
     height: 650px;
     background-color: white;
 }
 
 .room {
     padding-top: 5px;
-    border: 1px solid black;
+    border: 1px solid #999999;
     background-color: white;
 }
 
@@ -44,7 +44,7 @@
 
 .one-seat {
     padding-top: 2px;
-    border: 1px solid black;
+    border: 1px solid #999999;
     margin: 3px auto;
     width: 105px;
     height: 90px;
@@ -79,7 +79,7 @@
 
 .room_border {
     border: 1px solid #dee2e6;
-    border-radius: 30px;
+    border-radius: 20px;
     padding-right: 20px;
     padding-top: 20px;
     padding-bottom: 65px;
