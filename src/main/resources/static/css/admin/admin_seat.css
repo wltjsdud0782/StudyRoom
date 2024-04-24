@@ -1,5 +1,5 @@
 .adminContainer {
-    width: 95%;
+    width: 90%;
 }
 
 .title {
@@ -11,7 +11,6 @@
 .seatLive {
     font-size: 11pt;
     width: 90%;
-    height: 100%;
     margin: 0 auto;
 }
 
