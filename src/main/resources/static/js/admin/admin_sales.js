@@ -1,8 +1,6 @@
-//차트 기본값
-let ifChart = null;
-
-//월매출 바로 실행시키기
+//바로 실행시키기
 getMonthChart();
+getYearChart()
 
 //연매출 차트 호출
 function getYearChart() {
@@ -25,14 +23,17 @@ function getYearChart() {
         .then((data) => {//data -> controller에서 리턴되는 데이터!
             console.log(data); //04
 
-            document.querySelector(".chartButton").innerHTML = '';
-            let str_1 = '';
-            str_1 += `
-                <button type="button" class="btn btn-outline-secondary" onclick="getMonthChart()">월 매출</button>
-                <span class="input-group-text"></span>
-                <button type="button" class="btn btn-light" onclick="getYearChart()">연 매출</button>
+            const date = new Date();
+            //let year = date.getFullYear();
+            let month = date.getMonth() + 1;
+
+            const month1 = document.querySelector('.month1');
+            month1.innerHTML = '';
+            let str = '';
+            str += `
+                <h5 class="mb-4">${month}월 판매된 이용권 (날짜 구분 안해둠)</h5>          
             `;
-            document.querySelector(".chartButton").insertAdjacentHTML('afterbegin', str_1);
+            month1.insertAdjacentHTML('afterbegin', str);
 
             //리스트 만들기
             const yearList = [];
@@ -43,14 +44,9 @@ function getYearChart() {
             }
 
             //연간 매출 차트 그림
-            const yearChart = document.querySelector('#bar-chart');
+            const yearChart = document.querySelector('#bar-chart2');
 
-            //기존의 차트를 파괴
-            if (ifChart !== null) {
-                ifChart.destroy();
-            }
-
-            ifChart = new Chart(yearChart, {
+            new Chart(yearChart, {
                 type: 'bar',
                 data: {
                     labels: yearList,
@@ -107,15 +103,17 @@ function getMonthChart() {
         .then((data) => {//data -> controller에서 리턴되는 데이터!
             console.log(data); //04
 
-            document.querySelector(".chartButton").innerHTML = '';
-            let str_2 = '';
-            str_2 += `
-                <button type="button" class="btn btn-light" onclick="getMonthChart()">월 매출</button>
-                <span class="input-group-text"></span>
-                <button type="button" class="btn btn-outline-secondary" onclick="getYearChart()">연 매출</button>
-            `;
-            document.querySelector(".chartButton").insertAdjacentHTML('afterbegin', str_2);
+            const date = new Date();
+            let year = date.getFullYear();
+            //let month = date.getMonth() + 1;
 
+            const year1 = document.querySelector('.year1');
+            year1.innerHTML = '';
+            let str = '';
+            str += `
+                <h5 class="mb-4">${year}년 판매된 이용권 (날짜 구분 안해둠)</h5>          
+            `;
+            year1.insertAdjacentHTML('afterbegin', str);
 
             //리스트 만들기
             const monthList = [];
@@ -126,14 +124,9 @@ function getMonthChart() {
             }
 
             //월별매출 차트 그림
-            const monthChart = document.querySelector('#bar-chart');
+            const monthChart = document.querySelector('#bar-chart1');
 
-            //기존의 차트를 파괴
-            if (ifChart !== null) {
-                ifChart.destroy();
-            }
-
-            ifChart = new Chart(monthChart, {
+            new Chart(monthChart, {
                 type: 'bar',
                 data: {
                     labels: monthList,
@@ -160,7 +153,7 @@ function getMonthChart() {
                             //     stepSize: 1
                             // }
                         },
-                        
+
                     }
                 }
             });
