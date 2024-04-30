@@ -34,7 +34,6 @@ function onefloor() {
             `;
             document.querySelector(".input-group").insertAdjacentHTML('afterbegin', str_1);
 
-
             document.querySelector(".seatLive").innerHTML = '';
             let str = '';
             str = `

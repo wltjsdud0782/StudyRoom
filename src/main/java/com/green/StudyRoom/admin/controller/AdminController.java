@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -238,8 +239,10 @@ public class AdminController {
     //(매출 관리)///////////////////////////////////////////// //
     @RequestMapping("/sales")
     public String adminSales(Model model){
-        model.addAttribute("chargeList",salesService.chargeSalesList());
-        System.out.println(salesService.chargeSalesList());
+        model.addAttribute("yearCharge",salesService.chargeYearSales());
+        model.addAttribute("monthCharge",salesService.chargeMonthSales());
+//        model.addAttribute("salesCharge",salesService.chargeSalesList());
+//        model.addAttribute("chargeList", chargeService.selectCharge());
         return "content/admin/admin_sales";
     }
 
@@ -259,6 +262,33 @@ public class AdminController {
         //월별 매출
         List<SalesInfoVO> monthData = salesService.monthSales();
         return monthData;
+    }
+
+    //표 데이터
+    @ResponseBody
+    @PostMapping("/getTableData")
+    public Map<String, Object> getTableData(){
+        //요금 목록 조회
+        List<ChargeVO> chargeList = chargeService.selectCharge();
+
+        //실제 데이터
+        List<Map<String, Object>> mapList = salesService.selectTableList(chargeList);
+
+        //현재 월 기준 이전 1년치 월 데이터
+        List<String> monthList = salesService.selectOneYearMonth();
+
+        //
+        List<String> chargeNameList = new ArrayList<>();
+        for(ChargeVO e : chargeList){
+            chargeNameList.add(e.getChargeName());
+        }
+
+        Map<String, Object> finalData = new HashMap<>();
+        finalData.put("chargeNameList", chargeNameList);
+        finalData.put("mapList", mapList);
+        finalData.put("monthList", monthList);
+
+        return finalData;
     }
 
 
