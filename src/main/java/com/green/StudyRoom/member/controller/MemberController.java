@@ -48,25 +48,25 @@ public class MemberController {
 
 
     //아이디 찾기 화면
-    @GetMapping("idFindForm")
-    public String idFindForm(@RequestParam(name="errorMsg", required = false) String errorMsg, Model model){
-        return "content/member/id_find";
-    }
+//    @GetMapping("idFindForm")
+//    public String idFindForm(@RequestParam(name="errorMsg", required = false) String errorMsg, Model model){
+//        return "content/member/id_find";
+//    }
 
     //아이디 찾기
-    @PostMapping("/idFind")
-    public String idFindSelect(MemberVO memberVO, Model model) {
-        MemberVO idFind=memberService.idFindSelect(memberVO);
-        String str="";
-        if (idFind != null) {
-            idFind.setMemberId(idFind.getMemberId().replace(idFind.getMemberId().substring(idFind.getMemberId().length()-2, idFind.getMemberId().length()),"**"));
-            model.addAttribute("idFind", idFind);
-            str = "content/member/id_find_result";
-        } else {
-            str="redirect:/member/idFindForm";
-        }
-        return str;
-    }
+//    @PostMapping("/idFind")
+//    public String idFindSelect(MemberVO memberVO, Model model) {
+//        MemberVO idFind=memberService.idFindSelect(memberVO);
+//        String str="";
+//        if (idFind != null) {
+//            idFind.setMemberId(idFind.getMemberId().replace(idFind.getMemberId().substring(idFind.getMemberId().length()-2, idFind.getMemberId().length()),"**"));
+//            model.addAttribute("idFind", idFind);
+//            str = "content/member/id_find_result";
+//        } else {
+//            str="redirect:/member/idFindForm";
+//        }
+//        return str;
+//    }
 
     //이용약관
     @GetMapping("/termsUse")
@@ -81,17 +81,17 @@ public class MemberController {
     }
 
     // 비동기 로그인
-    @ResponseBody
-    @PostMapping("/loginFetch")
-    public String loginFetch(MemberVO memberVO, HttpSession session){
-        MemberVO loginInfo = memberService.login(memberVO);
-
-    //로그인 성공 시 세션에 데이터 저장
-        if(loginInfo != null){
-            session.setAttribute("loginInfo", loginInfo);
-        }
-        return loginInfo == null ? "" : loginInfo.getMemberId();
-    }
+//    @ResponseBody
+//    @PostMapping("/loginFetch")
+//    public String loginFetch(MemberVO memberVO, HttpSession session){
+//        MemberVO loginInfo = memberService.login(memberVO);
+//
+//    //로그인 성공 시 세션에 데이터 저장
+//        if(loginInfo != null){
+//            session.setAttribute("loginInfo", loginInfo);
+//        }
+//        return loginInfo == null ? "" : loginInfo.getMemberId();
+//    }
 
     // 로그아웃
     @GetMapping("/logout")
