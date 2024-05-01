@@ -15,45 +15,58 @@
                 <h3>좌석 관리</h3>
             </div>
             <div style="padding: 2.5vh;"></div>
-
             <div class="row">
                 <div class="col">
-
-                    <div class="row mb-5">
+                    <div class="row">
                         <div class="col">
-                            <button type="button" class="btn btn-light floor-btn" onclick="onefloor()">1층</button>
-                            &ensp;
-                            <button type="button" class="btn btn-light floor-btn" onclick="twofloor()">2층</button>
-                        </div>
-                    </div>
-
-                    <div class="seatLive">
-                        <!-- 자바스크립트 채울공간 -->
-                    </div>
-
-
-                    <div class="reservationBtn mt-4">
-                        <div class="row">
-                            <div class="col">
-                                <button type="button" class="btn btn-danger" onclick="moveMember()">회원이동</button>
-                                <button type="button" class="btn btn-danger" onclick="adminSeatOut()">회원퇴실</button>
+                            <div class="input-group" role="group">
+                                <button type="button" class="btn btn-secondary floor-btn"
+                                    onclick="onefloor()">1층</button>
+                                <button type="button" class="btn btn-outline-secondary floor-btn"
+                                    onclick="twofloor()">2층</button>
+                                <span class="input-group-text"></span>
+                                <button type="button" class="btn btn-outline-danger"
+                                    onclick="moveMember()">회원이동</button>
+                                <button type="button" class="btn btn-outline-danger"
+                                    onclick="adminSeatOut()">회원퇴실</button>
                             </div>
+                            <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
+                            <!-- <div class="row mb-5">
+                                <div class="col">
+                                    <button type="button" class="btn btn-light floor-btn" onclick="onefloor()">1층</button>
+                                    &ensp;
+                                    <button type="button" class="btn btn-light floor-btn" onclick="twofloor()">2층</button>
+                                </div>
+                            </div> -->
+                            <div class="room_border">
+                                <div class="seatLive">
+                                    <!-- 자바스크립트 채울공간 -->
+                                </div>
+                            </div>
+                            <!-- <div class="reservationBtn mt-4">
+                                <div class="row">
+                                    <div class="col">
+                                        <button type="button" class="btn btn-danger" onclick="moveMember()">회원이동</button>
+                                        &ensp;
+                                        <button type="button" class="btn btn-danger" onclick="adminSeatOut()">회원퇴실</button>
+                                    </div>
+                                </div>
+                            </div> -->
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
 
         <!-- Modal -->
-        <div class="modal" id="adminSeat-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal" id="adminSeat-modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content detail-modal">
                     <div class="modal-header">
                         <h5 class="modal-title">좌석 이동</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body adminSeat-modal-body text-center">
+                    <div class="modal-body adminSeat-modal-body text-left">
                         <!-- 자바스크립트로 내용 채우기 -->
                     </div>
                 </div>

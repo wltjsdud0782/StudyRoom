@@ -43,10 +43,16 @@ function allInfo(memberCode) {
             let str_1 = '';
             str_1 += `
                 <input type="hidden" name="memberCode" value="${memberCode}">
-                <div class="btn-origin">
-                    <input type="button" value="${data.memberMap.memberName}" name="memberName" class="btn btn-success" disabled data-bs-toggle>
-                    <div style="float: right;">
-                        <input type="button" value="지급하기" class="btn btn-danger" onclick="yourCoupon()" class="enInput">
+                <div class="btnDiv">             
+                    <div class="btn-group" role="group" style="float: right;">
+                        <button type="button" name="memberName" class="btn"
+                            style="background-color: rgb(101, 170, 149); border: 1px solid #8bc0ae; color: white;"
+                            disabled>${data.memberMap.memberName}
+                        </button>
+                        <button type="button" class="btn btn-light enInput" 
+                            onclick="yourCoupon()" style="color: red;">
+                            지급하기
+                        </button>
                     </div>                                              
                 </div>
             `;
@@ -689,16 +695,20 @@ function allInfo(memberCode) {
                         <h4>&nbsp;보유한 쿠폰</h4>
                         <table class="table text-center">
                             <colgroup>
-                                <col width="60%">
+                                <col width="50%">
+                                <col width="25%">
                                 <col width="*">
                             </colgroup>
                             <thead class="table-success">
                                 <tr style="height: 60px; vertical-align: middle;">
-                                    <td style="border: 1px solid #a7b9b1;">
+                                    <td style="border: 1px solid #dee2e6;">
                                         쿠폰
                                     </td>
-                                    <td style="border: 1px solid #a7b9b1;">
-                                        할인률
+                                    <td style="border: 1px solid #dee2e6;">
+                                        할인율
+                                    </td>
+                                    <td style="border: 1px solid #dee2e6;">
+                                        보유 수량
                                     </td>
                                 </tr>
                             </thead>
@@ -723,6 +733,14 @@ function allInfo(memberCode) {
                                             </div>
                                         </div>
                                     </td>
+
+                                    <td>
+                                        <div class="row">
+                                            <div class="col couponCnt-data">
+                                                ${data.couponMap[i].couponVOList[0].cnt}EA
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>`;
                     }
                     str +=
@@ -735,17 +753,15 @@ function allInfo(memberCode) {
                         <h4>&nbsp;보유한 쿠폰</h4>
                         <table class="table text-center">
                             <colgroup>
-                                <col width="60%">
+                                <col width="50%">
+                                <col width="25%">
                                 <col width="*">
                             </colgroup>
                             <thead class="table-success">
                                 <tr style="height: 60px; vertical-align: middle;">
-                                    <td style="border: 1px solid #a7b9b1;">
-                                        쿠폰
-                                    </td>
-                                    <td style="border: 1px solid #a7b9b1;">
-                                        할인률
-                                    </td>
+                                    <td>쿠폰</td>
+                                    <td>할인율</td>
+                                    <td>보유 수량</td>
                                 </tr>
                             </thead>
                             <tbody class="couponInfo">
@@ -754,6 +770,12 @@ function allInfo(memberCode) {
                                     <td>    
                                         보유한 쿠폰이 없습니다.
                                     </td>
+                                    <td class="text-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#dee2e6" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                        </svg>
+                                    </td>                                
                                     <td class="text-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#dee2e6" class="bi bi-x-circle" viewBox="0 0 16 16">
                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
@@ -1018,8 +1040,14 @@ function yourCoupon() {
     }
 
     if (confirm("지급한 쿠폰은 회수할 수 없습니다.\n정말로 지급하시겠습니까?")) {
-        sendCouponForm.submit();
-        alert("쿠폰을 지급했습니다.");
+        if(sendCouponForm.checked){
+            sendCouponForm.submit();
+            alert("쿠폰을 지급했습니다.");
+        }
+        else {
+            alert("지급할 쿠폰을 선택해주세요.")
+        }
+        
     } else {
         alert("취소되었습니다.");
     }

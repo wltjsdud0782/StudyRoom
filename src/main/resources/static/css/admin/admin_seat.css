@@ -3,7 +3,7 @@
 }
 
 .title {
-    border-bottom: 3px solid #000000;
+    border-bottom: 3px solid black;
     margin-top: 60px;
     text-align: start;
 }
@@ -14,20 +14,22 @@
     margin: 0 auto;
 }
 
-.modal-title{
+.modal-title {
     text-align: start;
     font-size: 23pt;
     margin-left: 20px;
 }
 
 .rest {
-    border: 1px solid black;
+    border: 1px solid #999999;
     height: 650px;
+    background-color: white;
 }
 
 .room {
     padding-top: 5px;
-    border: 1px solid black;
+    border: 1px solid #999999;
+    background-color: white;
 }
 
 .up-room {
@@ -41,20 +43,23 @@
 
 .one-seat {
     padding-top: 2px;
-    border: 1px solid black;
+    border: 1px solid #999999;
     margin: 3px auto;
     width: 105px;
     height: 90px;
     cursor: pointer;
 }
-.greenSeat{
-    background-color:rgb(226, 239, 218);
+
+.greenSeat {
+    background-color: rgb(226, 239, 218);
     cursor: default;
 }
-.non-click{
-    background-color:rgb(217, 225, 242);
+
+.non-click {
+    background-color: rgb(217, 225, 242);
 }
-.click{
+
+.click {
     background-color: rgb(255, 199, 206);
 }
 
@@ -69,4 +74,37 @@
 .line-height {
     line-height: 3;
     font-size: 15pt;
+}
+
+.room_border {
+    border: 1px solid #dee2e6;
+    border-radius: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 65px;
+    background-color: #effaee;
+}
+
+.adminSeat-modal-body>.modal-table {
+    margin-left: 25%;
+}
+
+.modal-table {
+    width: 80%;
+    font-size: 20px;
+}
+
+.modal-table tr td {
+    padding-bottom: 30px;
+}
+
+.input-group button {
+    width: 120px;
+    height: 40px;
+    border: 1px solid #dee2e6;
+}
+
+.input-group {
+    display: flex;
+    justify-content: center;
 }

@@ -22,10 +22,22 @@ function onefloor() {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
+
+            document.querySelector(".input-group").innerHTML = '';
+            let str_1 = '';
+            str_1 += `
+                <button type="button" class="btn btn-light floor-btn" onclick="onefloor()">1층</button>
+                <button type="button" class="btn btn-outline-secondary floor-btn" onclick="twofloor()">2층</button>
+                <span class="input-group-text"></span>
+                <button type="button" class="btn btn-outline-danger" onclick="moveMember()">회원이동</button>
+                <button type="button" class="btn btn-outline-danger" onclick="adminSeatOut()">회원퇴실</button>
+            `;
+            document.querySelector(".input-group").insertAdjacentHTML('afterbegin', str_1);
+
             document.querySelector(".seatLive").innerHTML = '';
             let str = '';
             str = `
-        <div class="row mb-2">
+        <div class="row mb-3">
             <div class="col floor-title">
             1층
             </div>
@@ -360,10 +372,22 @@ function twofloor() {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
+
+            document.querySelector(".input-group").innerHTML = '';
+            let str_2 = '';
+            str_2 += `
+                <button type="button" class="btn btn-outline-secondary floor-btn" onclick="onefloor()">1층</button>
+                <button type="button" class="btn btn-light floor-btn" onclick="twofloor()">2층</button>
+                <span class="input-group-text"></span>
+                <button type="button" class="btn btn-outline-danger" onclick="moveMember()">회원이동</button>
+                <button type="button" class="btn btn-outline-danger" onclick="adminSeatOut()">회원퇴실</button>
+            `;
+            document.querySelector(".input-group").insertAdjacentHTML('afterbegin', str_2);
+
             document.querySelector(".seatLive").innerHTML = '';
             let str = '';
             str = `
-            <div class="row mb-2">
+            <div class="row mb-3">
             <div class="col floor-title">
             2층
             </div>
@@ -725,53 +749,113 @@ function moveMember() {
 
                 let str = '';
 
-                str = `
-            <div class="row line-height">
-                <div class="col">
-                    <div class="row">
-                        <div class="col-6 text-end">이동할 좌석</div>
-                        <div class="col-5 text-start" style="display: flex; align-items: center;">
-                        <select class="form-select text-center seatFloor" onchange="changeFloor()" style="width: 70px;">`
-                data.floor.forEach(e => {
-                    str += `
-                            <option ${data.resultFloor == e.seatFloor ? 'selected' : ''} value=${e.seatFloor}>${e.seatFloor}</option>
-                            `
-                });
                 str += `
-                        </select>
-                        <span class="ms-2">층</span>
-                        <select class="form-select text-center seatNum ms-2" style="width: 90px;">`
-                data.num.forEach(e => {
-                    str += `
-                    <option value=${e.seatNum}>${e.seatNum}</option>
-                        `
-                });
-
-                str += `
-                        </select>
-                        <span class="ms-2">번</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 text-end">이용자 아이디</div>
-                        <div class="col-5 text-start memberId">${data.mem.memberId}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 text-end">이용자명</div>
-                        <div class="col-6 text-start">${data.mem.memberName}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 text-end">이용자번호</div>
-                        <div class="col-5 text-start">${data.mem.memberTel}</div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col">
-                            <button type="button" class="btn btn-danger mb-4" onclick="oneMore()">좌석이동</button>
-                        </div>
-                    </div>
+                <table class="modal-table">
+                    <colgroup>
+                        <col width="30%">
+                        <col width="*">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td style="padding-top: 20px;">이동할 좌석</td>
+                            <td style="padding-top: 20px;">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <select class="form-select text-center seatFloor" onchange="changeFloor()" style="width: 75px; font-size: 15px;">`
+                                        data.floor.forEach(e => {
+                                        str += `
+                                        <option ${data.resultFloor == e.seatFloor ? 'selected' : ''} value=${e.seatFloor}>${e.seatFloor}</option>
+                                        `
+                                        });
+                                        str += `
+                                        </select>
+                                    </div>
+                                    <div class="col-auto">
+                                        <label style="padding-top: 4px;">층</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <select class="form-select text-center seatNum ms-2" style="width: 75px; font-size: 15px;">`
+                                        data.num.forEach(e => {
+                                        str += `
+                                        <option value=${e.seatNum}>${e.seatNum}</option>
+                                        `
+                                        });
+                                        str += `
+                                        </select>
+                                    </div>
+                                    <div class="col-auto">
+                                        <label style="padding-top: 4px;">번</label>
+                                    </div>                                 
+                                </div>                              
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>이용자 아이디</td>
+                            <td>${data.mem.memberId}</td>
+                        </tr>
+                        <tr>
+                            <td>이용자 이름</td>
+                            <td>${data.mem.memberName}</td>
+                        </tr>
+                        <tr>
+                            <td>전화번호</td>
+                            <td style="letter-spacing: 1px;">${data.mem.memberTel}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <button type="button" class="btn btn-danger mb-4" onclick="oneMore()">좌석이동</button>
                 </div>
-            </div>
-        `;
+                `;
+
+                //         str = `
+                //     <div class="row line-height">
+                //         <div class="col">
+                //             <div class="row">
+                //                 <div class="col-6 text-end">이동할 좌석</div>
+                //                 <div class="col-5 text-start" style="display: flex; align-items: center;">
+                //                 <select class="form-select text-center seatFloor" onchange="changeFloor()" style="width: 70px;">`
+                //         data.floor.forEach(e => {
+                //             str += `
+                //                     <option ${data.resultFloor == e.seatFloor ? 'selected' : ''} value=${e.seatFloor}>${e.seatFloor}</option>
+                //                     `
+                //         });
+                //         str += `
+                //                 </select>
+                //                 <span class="ms-2">층</span>
+                //                 <select class="form-select text-center seatNum ms-2" style="width: 90px;">`
+                //         data.num.forEach(e => {
+                //             str += `
+                //             <option value=${e.seatNum}>${e.seatNum}</option>
+                //                 `
+                //         });
+
+                //         str += `
+                //                 </select>
+                //                 <span class="ms-2">번</span>
+                //                 </div>
+                //             </div>
+                //             <div class="row">
+                //                 <div class="col-6 text-end">이용자 아이디</div>
+                //                 <div class="col-5 text-start memberId">${data.mem.memberId}</div>
+                //             </div>
+                //             <div class="row">
+                //                 <div class="col-6 text-end">이용자명</div>
+                //                 <div class="col-6 text-start">${data.mem.memberName}</div>
+                //             </div>
+                //             <div class="row">
+                //                 <div class="col-6 text-end">이용자번호</div>
+                //                 <div class="col-5 text-start">${data.mem.memberTel}</div>
+                //             </div>
+                //             <div class="row mt-4">
+                //                 <div class="col">
+                //                     <button type="button" class="btn btn-danger mb-4" onclick="oneMore()">좌석이동</button>
+                //                 </div>
+                //             </div>
+                //         </div>
+                //     </div>
+                // `;
 
                 document.querySelector('.adminSeat-modal-body').insertAdjacentHTML('afterbegin', str);
 

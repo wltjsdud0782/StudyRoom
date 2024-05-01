@@ -60,6 +60,11 @@ public class AdminServiceImpl implements AdminService {
         sqlSession.insert("adminMapper.sendCoupon", memberCouponVO);
     }
 
+    //쿠폰 조회하기
+    @Override
+    public List<MemberCouponVO> eachCoupon(int memberCode) {
+        return sqlSession.selectList("adminMapper.eachCoupon", memberCode);
+    }
 
 
 }

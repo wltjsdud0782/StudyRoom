@@ -119,6 +119,23 @@
         )
     </insert>
 
+    <!--  회원이 보유한 쿠폰 조회하기  -->
+    <select id="eachCoupon" resultMap="seatMapper.memberCoupon">
+        SELECT OWN_COUPON_CODE
+            , COUPON_CODE
+            , (SELECT COUPON_NAME
+                FROM coupon
+                WHERE COUPON_CODE = member_coupon.COUPON_CODE) COUPON_NAME
+            , (SELECT DISCOUNT_PERCENT
+                FROM coupon
+                WHERE COUPON_CODE = member_coupon.COUPON_CODE) DISCOUNT_PERCENT
+            , COUNT(*) AS CNT
+        FROM member_coupon
+        WHERE MEMBER_CODE = #{memberCode}
+        GROUP BY COUPON_CODE
+        ORDER BY DISCOUNT_PERCENT DESC;
+    </select>
+
 </mapper>
 
 
