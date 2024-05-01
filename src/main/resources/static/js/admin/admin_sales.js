@@ -167,7 +167,8 @@ function getMonthChart() {
             console.log(err);
         });
 }
-/////////////////////////////////////
+
+//연간 매출 테이블
 function getTableData() {
     //2번째 fetch
     fetch('/admin/getTableData', { //요청경로
@@ -188,9 +189,10 @@ function getTableData() {
         .then((data) => {//data -> controller에서 리턴되는 데이터!
             console.log(data);
 
-            const tableData = [];
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
 
             //데이터 테이블1 - TYPE_NAME과 SUM_FEE(합계) 넣기
+            const tableData = [];
             data.chargeNameList.forEach((element, idx) => {
                 const rowData = {};
                 rowData['type'] = element;
@@ -201,12 +203,11 @@ function getTableData() {
                             find_data = each.SUM_FEE;
                         }
                     });
-                    //console.log(find_data);
                     rowData[data.monthList[i]] = find_data;
                 });
-                //rowData.sumData = 10;
                 tableData.push(rowData);
             });
+
 
             //데이터 테이블2 - 합계 넣기
             tableData.forEach((element, idx) => {
@@ -220,27 +221,89 @@ function getTableData() {
             });
             console.log(tableData);
 
+            /////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+            //갯수 합계 만들기
+            const cntData = [];
+            data.monthList.forEach((element, idx) => {
+                const totalCnt = {};
+                totalCnt['type'] = element;
+                data.chargeNameList.forEach((m, i) => {
+                    let cnt = 0;
+                    data.mapList.forEach((each) => {
+                        if (each.TYPE_NAME == m && each.MONTH == element) {
+                            cnt = each.CNT;
+                        }
+                    });
+                    // console.log("m : " + m + "i : " + i +  " cnt" + cnt);
+                    totalCnt[data.chargeNameList[i]] = cnt;
+                });
+                cntData.push(totalCnt);
+            });
+
+            //개수의 최종 합계 넣기
+            cntData.forEach((element, idx) => {
+                const cntFee = { ...element };
+                delete cntFee.type;
+                let sum = 0;
+                for (const key in cntFee) {
+                    sum = sum + cntFee[key];
+                }
+                element['cnt'] = sum;
+            });
+            console.log(cntData);
+
             //총 합계 만들어 넣기
-            let totalFee = 0;
-            let eachFee = 0;
-            // for (let i = 0; i < data.chargeNameList.length; i++){
-            //     totalFee = totalFee + tableData[i].sumFee
-            // }
+            let totalCnt = 0;
+            let totalSum = 0;
+            for (let i = 0; i < data.monthList.length; i++) {
+                totalSum = totalSum + cntData[i].cnt;
+            }
+            totalCnt = totalSum
 
-            // 23년 4월
-            // 24 / SUM_FEE : 0
-            // 25 / SUM_FEE : 4455644
-            // 26 / SUM_FEE : 0
-            // 27 / SUM_FEE : 0
-            // 28 / SUM_FEE : 0
-            // 29 / SUM_FEE : 0
-            // 30 / SUM_FEE : 0
-            // 31 / SUM_FEE : 0
+            /////////////////////////////////////////////////////////////////////////////////////////////////// 
 
-            // 컬럼의 개수 * j
-            // 8 * 13 = 104
-            
-            
+            //갯수 합계 만들기
+            const feeData = [];
+            data.monthList.forEach((element, idx) => {
+                const totalCnt = {};
+                totalCnt['type'] = element;
+                data.chargeNameList.forEach((m, i) => {
+                    let monthFee = 0;
+                    data.mapList.forEach((each) => {
+                        if (each.TYPE_NAME == m && each.MONTH == element) {
+                            monthFee = each.SUM_FEE;
+                        }
+                    });
+                    // console.log("m : " + m + "i : " + i +  " cnt" + cnt);
+                    totalCnt[data.chargeNameList[i]] = monthFee;
+                });
+                feeData.push(totalCnt);
+            });
+            console.log(feeData);
+
+            //개수의 최종 합계 넣기
+            feeData.forEach((element, idx) => {
+                const cntFee = { ...element };
+                delete cntFee.type;
+                let sum = 0;
+                for (const key in cntFee) {
+                    sum = sum + cntFee[key];
+                }
+                element['monthFee'] = sum;
+            });
+
+            //총 합계 만들어 넣기
+            let totalfee = 0;
+            let sumfee = 0;
+            for (let i = 0; i < data.monthList.length; i++) {
+                sumfee = sumfee + feeData[i].monthFee;
+            }
+            totalfee = sumfee;
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+
             // T-HEAD
             ////////////////////////////////////////////////////////////////////
             const monthSalesHead = document.querySelector('.monthdata-h');
@@ -248,31 +311,28 @@ function getTableData() {
             let str_1 = '';
             str_1 += `              
                 <tr>
-                    <td rowspan="2">구분</td>`;
+                    <td class="table-active">구분</td>
+                    `;
             data.monthList.forEach((element, idx) => {
                 str_1 += `
                     <td>${element}</td>
                 `;
             });
             str_1 += `
-                    <td>합계</td>
-                </tr>`;
+                    <td class="table-active">합계</td>
+                </tr>
+                `;
             str_1 += `
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td class="table-active">개수</td>
+                `;
+            for (let i = 0; i < data.monthList.length; i++) {
+                str_1 += `     
+                    <td class="right">${cntData[i].cnt}EA</td>
+                    `;
+            }
+            str_1 += `
+                    <td class="table-active right">${totalCnt}EA</td>
                 </tr>
             `;
             monthSalesHead.insertAdjacentHTML('afterbegin', str_1);
@@ -287,28 +347,39 @@ function getTableData() {
             for (let i = 0; i < data.chargeNameList.length; i++) {
                 str_2 += `
                 <tr>
-                    <td class="table-active">${tableData[i].type}</td>`;
+                    <td class="table-active left">${tableData[i].type}</td>
+                    `;
                 for (let j = 0; j < data.mapList.length / data.chargeNameList.length; j++) {
-                    str_2 += `<td>${tableData[i][data.monthList[j]]}</td>`;
+                    str_2 += `
+                    <td class="rowFee${i} colFee${j} right">${tableData[i][data.monthList[j]].toLocaleString('ko-KR')}</td>
+                    `;
                 }
                 str_2 += `                            
-                    <td class="totalFee ${i}">${tableData[i].sumFee}</td>
+                    <td class="table-active totalFee ${i} right">${tableData[i].sumFee.toLocaleString('ko-KR')}</td>
                 <tr>`;
             }
-            str_2 += `
-                <tr>
-                    <td class="table-active">합계</td>`;
-            for (let j = 0; j < data.mapList.length / data.chargeNameList.length; j++) {
-                str_2 += `<td>${eachFee}</td>`;
-            }
-            str_2 += `
-                    <td>${totalFee}</td>
-                </tr>
-            `;
             monthSalesBody.insertAdjacentHTML('afterbegin', str_2);
             ////////////////////////////////////////////////////////////////////
 
-
+            // T-FOOTER
+            ////////////////////////////////////////////////////////////////////
+            const monthSalesFooter = document.querySelector('.monthdata-f');
+            monthSalesFooter.innerHTML = '';
+            let str_3 = '';
+            str_3 += `
+                <tr>
+                    <td class="table-active">합계</td>
+                `;
+            for (let i = 0; i < data.monthList.length; i++) {
+                str_3 += `
+                    <td class="right">${feeData[i].monthFee.toLocaleString('ko-KR')}</td>
+                `;
+            }
+                str_3 += `
+                    <td class="table-active right">${totalfee.toLocaleString('ko-KR')}</td>
+                </tr>
+            `;
+            monthSalesFooter.insertAdjacentHTML('afterbegin', str_3);
         })
         //fetch 통신 실패 시 실행 영역
         .catch(err => {
