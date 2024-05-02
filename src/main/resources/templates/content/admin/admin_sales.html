@@ -28,10 +28,12 @@
                 <div class="row layer-top">
                     <!-- 차트() -->
                     <div class="col-6 layer-div">
+                        <h4>&nbsp;연 매출</h4>
                         <canvas id="bar-chart2" style="vertical-align: middle;" height="20vh" width="40vw"></canvas>
                     </div>
                     <!-- 차트() -->
                     <div class="col-6 layer-div">
+                        <h4>&nbsp;월 매출</h4>
                         <canvas id="bar-chart1" style="vertical-align: middle;" height="20vh" width="40vw"></canvas>
                     </div>
                 </div>
@@ -39,7 +41,9 @@
                 <!-- 2번째 레이어 -->
                 <div class="row layer-middle">
                     <div class="col-12 layer-div">
-                        <table class="table table-hover salesTable2">
+                        <div class="sales12"></div>
+                        <table class="table table-hover caption-top salesTable2">
+                            <caption style="font-size: 16px;">&ensp;매출액 추이</caption>
                             <thead class="monthdata-h table-success"></thead>
                             <tbody class="monthdata-b table-group-divider"></tbody>
                             <tfoot class="monthdata-f table-secondary"></tfoot>
@@ -51,9 +55,9 @@
                 <div class="row layer-middle">
                     <!-- 이용권 판매현황 -->
                     <div class="col-6 layer-div">
-                        <div class="year1"></div>
+                        <div class="year2"></div>
                         <table class="table caption-top">
-                            <caption>판매된 이용권</caption>
+                            <caption>&ensp;판매된 이용권</caption>
                             <colgroup>
                                 <col width="28%">
                                 <col width="16%">
@@ -62,7 +66,66 @@
                             </colgroup>
                             <thead class="table-success">
                                 <tr>
-                                    <td class="table-active" style="font-size: small;">[[${#lists.size(yearCharge)}]] 종류</td>
+                                    <td class="table-active" style="font-size: small;">[[${#lists.size(yearCharge)}]] 종류
+                                    </td>
+                                    <td class="text-center">판매량</td>
+                                    <td class="text-end">판매가</td>
+                                    <td class="text-end">총 매출</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div class="salesTable">
+                            <table class="table table-hover mb-4">
+                                <colgroup>
+                                    <col width="28%">
+                                    <col width="16%">
+                                    <col width="28%">
+                                    <col width="28%">
+                                </colgroup>
+                                <tbody class="table-group-divider">
+                                    <tr th:each="yearA, state : ${yearAgo}">
+                                        <td class="table-active">
+                                            [[${yearA.chargeVOList[0].chargeName}]]
+                                        </td>
+                                        <td class="text-center">
+                                            [[${yearA.cnt}]]EA
+                                        </td>
+                                        <td class="text-end">
+                                            [[${#numbers.formatInteger(yearA.chargeVOList[0].chargeFee, 1, 'COMMA')}]]
+                                        </td>
+                                        <td class="text-end">
+                                            <div class="salesYA">
+                                                [[${#numbers.formatInteger(yearA.salesFee, 1, 'COMMA')}]]
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="table-light">
+                                    <tr>
+                                        <td class="table-active">매출 합계</td>
+                                        <td colspan="3" class="text-end salesYA_SUM">
+                                            <div>추후 수정 예정1</div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 이용권 판매현황 -->
+                    <div class="col-6 layer-div">
+                        <div class="year1"></div>
+                        <table class="table caption-top">
+                            <caption>&ensp;판매된 이용권</caption>
+                            <colgroup>
+                                <col width="28%">
+                                <col width="16%">
+                                <col width="28%">
+                                <col width="28%">
+                            </colgroup>
+                            <thead class="table-success">
+                                <tr>
+                                    <td class="table-active" style="font-size: small;">[[${#lists.size(yearCharge)}]] 종류
+                                    </td>
                                     <td class="text-center">판매량</td>
                                     <td class="text-end">판매가</td>
                                     <td class="text-end">총 매출</td>
@@ -86,21 +149,35 @@
                                             [[${year.cnt}]]EA
                                         </td>
                                         <td class="text-end">
-                                            [[${#numbers.formatCurrency(year.chargeVOList[0].chargeFee)}]]
+                                            [[${#numbers.formatInteger(year.chargeVOList[0].chargeFee, 1, 'COMMA')}]]
                                         </td>
                                         <td class="text-end">
-                                            [[${#numbers.formatCurrency(year.salesFee)}]]
+                                            <div class="salesY">
+                                                [[${#numbers.formatInteger(year.salesFee, 1, 'COMMA')}]]
+                                            </div>                             
                                         </td>
                                     </tr>
                                 </tbody>
+                                <tfoot class="table-light">
+                                    <tr>
+                                        <td class="table-active">매출 합계</td>
+                                        <td colspan="3" class="text-end salesY_SUM">
+                                            <div>추후 수정 예정</div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
+                </div>
+
+                <!-- 4번째 레이어 -->
+                <div class="row layer-middle">
                     <!-- 이용권 판매현황 -->
                     <div class="col-6 layer-div">
-                        <div class="month1"></div>
+                        <div class="month2"></div>
                         <table class="table caption-top">
-                            <caption>판매된 이용권</caption>
+                            <caption>&ensp;판매된 이용권</caption>
                             <colgroup>
                                 <col width="28%">
                                 <col width="16%">
@@ -109,7 +186,62 @@
                             </colgroup>
                             <thead class="table-success">
                                 <tr>
-                                    <td class="table-active" style="font-size: small;">[[${#lists.size(monthCharge)}]] 종류</td>
+                                    <td class="table-active" style="font-size: small;">[[${#lists.size(monthCharge)}]]
+                                        종류</td>
+                                    <td class="text-center">판매량</td>
+                                    <td class="text-end">판매가</td>
+                                    <td class="text-end">총 매출</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div class="salesTable">
+                            <table class="table table-hover mb-4">
+                                <colgroup>
+                                    <col width="28%">
+                                    <col width="16%">
+                                    <col width="28%">
+                                    <col width="28%">
+                                </colgroup>
+                                <tbody class="table-group-divider">
+                                    <tr th:each="monthA, state : ${monthAgo}">
+                                        <td class="table-active">
+                                            [[${monthA.chargeVOList[0].chargeName}]]
+                                        </td>
+                                        <td class="text-center">
+                                            [[${monthA.cnt}]]EA
+                                        </td>
+                                        <td class="text-end">
+                                            [[${#numbers.formatInteger(monthA.chargeVOList[0].chargeFee, 1, 'COMMA')}]]
+                                        </td>
+                                        <td class="text-end">
+                                            [[${#numbers.formatInteger(monthA.salesFee, 1, 'COMMA')}]]
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="table-light">
+                                    <tr>
+                                        <td class="table-active">매출 합계</td>
+                                        <td colspan="3" class="text-end">추후 수정 예정</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 이용권 판매현황 -->
+                    <div class="col-6 layer-div">
+                        <div class="month1"></div>
+                        <table class="table caption-top">
+                            <caption>&ensp;판매된 이용권</caption>
+                            <colgroup>
+                                <col width="28%">
+                                <col width="16%">
+                                <col width="28%">
+                                <col width="28%">
+                            </colgroup>
+                            <thead class="table-success">
+                                <tr>
+                                    <td class="table-active" style="font-size: small;">[[${#lists.size(monthCharge)}]]
+                                        종류</td>
                                     <td class="text-center">판매량</td>
                                     <td class="text-end">판매가</td>
                                     <td class="text-end">총 매출</td>
@@ -133,18 +265,24 @@
                                             [[${month.cnt}]]EA
                                         </td>
                                         <td class="text-end">
-                                            [[${#numbers.formatCurrency(month.chargeVOList[0].chargeFee)}]]
+                                            [[${#numbers.formatInteger(month.chargeVOList[0].chargeFee, 1, 'COMMA')}]]
                                         </td>
                                         <td class="text-end">
-                                            [[${#numbers.formatCurrency(month.salesFee)}]]
+                                            [[${#numbers.formatInteger(month.salesFee, 1, 'COMMA')}]]
                                         </td>
                                     </tr>
                                 </tbody>
+                                <tfoot class="table-light">
+                                    <tr>
+                                        <td class="table-active">매출 합계</td>
+                                        <td colspan="3" class="text-end">추후 수정 예정</td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </body>

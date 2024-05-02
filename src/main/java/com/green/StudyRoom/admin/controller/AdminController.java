@@ -241,6 +241,8 @@ public class AdminController {
     public String adminSales(Model model){
         model.addAttribute("yearCharge",salesService.chargeYearSales());
         model.addAttribute("monthCharge",salesService.chargeMonthSales());
+        model.addAttribute("yearAgo",salesService.chargeYearAgo());
+        model.addAttribute("monthAgo",salesService.chargeMonthAgo());
 //        model.addAttribute("salesCharge",salesService.chargeSalesList());
 //        model.addAttribute("chargeList", chargeService.selectCharge());
         return "content/admin/admin_sales";
@@ -277,12 +279,13 @@ public class AdminController {
         //현재 월 기준 이전 1년치 월 데이터
         List<String> monthList = salesService.selectOneYearMonth();
 
-        //
+        //매출 표
         List<String> chargeNameList = new ArrayList<>();
         for(ChargeVO e : chargeList){
             chargeNameList.add(e.getChargeName());
         }
-
+        
+        //Map에 담기
         Map<String, Object> finalData = new HashMap<>();
         finalData.put("chargeNameList", chargeNameList);
         finalData.put("mapList", mapList);

@@ -24,12 +24,18 @@ public interface SalesService {
     //올해 이용권 매출
     List<SalesInfoVO> chargeYearSales();
 
+    //작년 이용권 매출
+    List<SalesInfoVO> chargeYearAgo();
+
     //이번달 이용권 매출
     List<SalesInfoVO> chargeMonthSales();
+
+    //저번달 이용권 매출
+    List<SalesInfoVO> chargeMonthAgo();
 
     //표 통계 데이터 조회
     List<Map<String, Object>> selectTableList(List<ChargeVO> chargeList);
 
-    //
+    //표 통계 날짜 조회
     List<String> selectOneYearMonth();
 }

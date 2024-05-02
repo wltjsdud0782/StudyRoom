@@ -29,11 +29,41 @@ function getYearChart() {
             //let month = date.getMonth() + 1;
             const year1 = document.querySelector('.year1');
             year1.innerHTML = '';
-            let str = '';
-            str += `
-                <h4>올해 (${year}년)</h4>
+            let str_1 = '';
+            str_1 += `
+                <h4>&nbsp;올해 (${year}년)</h4>
             `;
-            year1.insertAdjacentHTML('afterbegin', str);
+            year1.insertAdjacentHTML('afterbegin', str_1);
+            const year2 = document.querySelector('.year2');
+            year2.innerHTML = '';
+            let str_2 = '';
+            str_2 += `
+                <h4>&nbsp;작년 (${year - 1}년)</h4>
+            `;
+            year2.insertAdjacentHTML('afterbegin', str_2);
+            /////////////////////////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////////////////////////
+            const totalSumY = document.querySelector('.salesY_SUM');
+            const sumY = document.querySelectorAll('.salesY');
+            let sum_1 = 0;
+            for (let i = 0; i < sumY.length; i++) {
+                sum_1 += parseInt(sumY[i].textContent.replace(/,/g, ""));
+            }
+            totalSumY.innerHTML = '';
+            let str_3 = '';
+            str_3 += `<div>${sum_1.toLocaleString('ko-KR')}</div>`;
+            totalSumY.insertAdjacentHTML('afterbegin', str_3);
+            const totalSumYA = document.querySelector('.salesYA_SUM');
+            const sumYA = document.querySelectorAll('.salesYA');
+            let sum_2 = 0;
+            for (let i = 0; i < sumYA.length; i++) {
+                sum_2 += parseInt(sumYA[i].textContent.replace(/,/g, ""));
+            }
+            totalSumYA.innerHTML = '';
+            let str_4 = '';
+            str_4 += `<div>${sum_2.toLocaleString('ko-KR')}</div>`;
+            totalSumYA.insertAdjacentHTML('afterbegin', str_4);
             /////////////////////////////////////////////////////////////////////
 
             //리스트 만들기
@@ -109,11 +139,18 @@ function getMonthChart() {
             let month = date.getMonth() + 1;
             const month1 = document.querySelector('.month1');
             month1.innerHTML = '';
-            let str = '';
-            str += `
-                <h4>이번 달 (${month}월)</h4>
+            let str_1 = '';
+            str_1 += `
+                <h4>&nbsp;이번 달 (${month}월)</h4>
             `;
-            month1.insertAdjacentHTML('afterbegin', str);
+            month1.insertAdjacentHTML('afterbegin', str_1);
+            const month2 = document.querySelector('.month2');
+            month2.innerHTML = '';
+            let str_2 = '';
+            str_2 += `
+                <h4>&nbsp;지난 달 (${month - 1}월)</h4>
+            `;
+            month2.insertAdjacentHTML('afterbegin', str_2);
             /////////////////////////////////////////////////////////////////////
 
             //리스트 만들기
@@ -219,7 +256,7 @@ function getTableData() {
                 }
                 element['sumFee'] = sum;
             });
-            console.log(tableData);
+            // console.log(tableData);
 
             /////////////////////////////////////////////////////////////////////////////////////////////////// 
 
@@ -235,7 +272,6 @@ function getTableData() {
                             cnt = each.CNT;
                         }
                     });
-                    // console.log("m : " + m + "i : " + i +  " cnt" + cnt);
                     totalCnt[data.chargeNameList[i]] = cnt;
                 });
                 cntData.push(totalCnt);
@@ -275,12 +311,11 @@ function getTableData() {
                             monthFee = each.SUM_FEE;
                         }
                     });
-                    // console.log("m : " + m + "i : " + i +  " cnt" + cnt);
                     totalCnt[data.chargeNameList[i]] = monthFee;
                 });
                 feeData.push(totalCnt);
             });
-            console.log(feeData);
+            // console.log(feeData);
 
             //개수의 최종 합계 넣기
             feeData.forEach((element, idx) => {
@@ -302,7 +337,14 @@ function getTableData() {
             totalfee = sumfee;
 
             /////////////////////////////////////////////////////////////////////////////////////////////////// 
-
+            const date = new Date();
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            const title = document.querySelector('.sales12')
+            title.innerHTML = '';
+            let str = ``;
+            str += `<h4>&nbsp;${year - 1}년 ${month}월 ~ ${year}년 ${month}월</h4>`;
+            title.insertAdjacentHTML('afterbegin', str);
 
             // T-HEAD
             ////////////////////////////////////////////////////////////////////
@@ -319,12 +361,12 @@ function getTableData() {
                 `;
             });
             str_1 += `
-                    <td class="table-active">합계</td>
+                    <td class="table-active left">합계</td>
                 </tr>
                 `;
             str_1 += `
                 <tr>
-                    <td class="table-active">개수</td>
+                    <td class="table-active left">개수</td>
                 `;
             for (let i = 0; i < data.monthList.length; i++) {
                 str_1 += `     
@@ -368,14 +410,14 @@ function getTableData() {
             let str_3 = '';
             str_3 += `
                 <tr>
-                    <td class="table-active">합계</td>
+                    <td class="table-active left">합계</td>
                 `;
             for (let i = 0; i < data.monthList.length; i++) {
                 str_3 += `
                     <td class="right">${feeData[i].monthFee.toLocaleString('ko-KR')}</td>
                 `;
             }
-                str_3 += `
+            str_3 += `
                     <td class="table-active right">${totalfee.toLocaleString('ko-KR')}</td>
                 </tr>
             `;

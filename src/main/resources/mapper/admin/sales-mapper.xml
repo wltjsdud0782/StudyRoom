@@ -61,6 +61,21 @@
         ORDER BY CHARGE_FEE DESC;
     </select>
 
+    <!-- 이용권 매출리스트 (지난달)-->
+    <select id="chargeMonthAgo" resultMap="seatMapper.salesInfo">
+        SELECT COUNT(SALES_CODE) CNT
+        , SALE.CHARGE_CODE
+        , SUM(SALES_FEE) SALES_FEE
+        , CHARGE_NAME
+        , CHARGE_FEE
+        FROM SALES_INFO SALE
+        INNER JOIN STUDYROOM_CHARGE CHARG
+        ON SALE.CHARGE_CODE = CHARG.CHARGE_CODE
+        WHERE DATE_FORMAT(SALES_DATE, '%Y%m') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%Y%m')
+        GROUP BY CHARGE_CODE
+        ORDER BY CHARGE_FEE DESC;
+    </select>
+
     <!-- 이용권 매출리스트 (올해)-->
     <select id="chargeYearSales" resultMap="seatMapper.salesInfo">
         SELECT COUNT(SALES_CODE) CNT
@@ -72,6 +87,21 @@
         INNER JOIN STUDYROOM_CHARGE CHARG
         ON SALE.CHARGE_CODE = CHARG.CHARGE_CODE
         WHERE DATE_FORMAT(SALES_DATE, '%Y') = DATE_FORMAT(NOW(), '%Y')
+        GROUP BY CHARGE_CODE
+        ORDER BY CHARGE_FEE DESC;
+    </select>
+
+    <!-- 이용권 매출리스트 (작년) -->
+    <select id="chargeYearAgo" resultMap="seatMapper.salesInfo">
+        SELECT COUNT(SALES_CODE) CNT
+        , SALE.CHARGE_CODE
+        , SUM(SALES_FEE) SALES_FEE
+        , CHARGE_NAME
+        , CHARGE_FEE
+        FROM SALES_INFO SALE
+        INNER JOIN STUDYROOM_CHARGE CHARG
+        ON SALE.CHARGE_CODE = CHARG.CHARGE_CODE
+        WHERE DATE_FORMAT(SALES_DATE, '%Y') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 YEAR), '%Y')
         GROUP BY CHARGE_CODE
         ORDER BY CHARGE_FEE DESC;
     </select>
