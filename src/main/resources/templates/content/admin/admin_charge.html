@@ -17,7 +17,7 @@
             <div style="padding: 2.5vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
-                    <h4>&nbsp;이용권</h4>
+                    <h4>&nbsp;등록된 이용권</h4>
                     <table class="table table-hover adminContainer-table">
                         <tbody class="adminContainer-table-tbody5 scroll-table">
                             <th:block th:if="${#lists.isEmpty(chargeList)}">
@@ -26,15 +26,26 @@
                                 </tr>
                             </th:block>
                             <th:block th:unless="${#lists.isEmpty(chargeList)}">
-                                <tr th:each="charge : ${chargeList}">
-                                    <!-- 클릭하면 해당 요금의 chargeCode 보내기 -->
-                                    <td th:onclick="changeCharge([[${charge.chargeCode}]])">
-                                        <div>[[${charge.chargeName}]]
-                                            <div style="float: right;">
-                                                [[${charge.chargeDate}]]일
-                                            </div>
+                                <tr th:each="charge, state : ${chargeList}"
+                                    th:onclick="changeCharge([[${charge.chargeCode}]])">
+                                    <td class="text-center" width="6%"
+                                        style="background-color: #8bc0ae; color: white; vertical-align: middle;">
+                                        <span style="font-size: small;">
+                                            [[${#lists.size(chargeList) - state.index}]].
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            [[${charge.chargeName}]]
                                         </div>
-                                        <div style="font-size: larger;">&ensp;[[${charge.chargeFee}]]원
+                                        <div style="font-size: larger;">
+                                            &ensp;[[${charge.chargeFee}]]원
+                                        </div>
+                                    </td>
+                                    <td class="text-center" width="20%"
+                                        style="vertical-align: middle; border-left: 1px solid #dee2e6;">
+                                        <div>
+                                            [[${charge.chargeDate}]]일 이용권
                                         </div>
                                     </td>
                                 </tr>
@@ -44,8 +55,8 @@
                 </div>
                 <div class="col">
                     <div>
-                        <h4>&nbsp;쿠폰</h4>
-                    </div>           
+                        <h4>&nbsp;등록된 쿠폰</h4>
+                    </div>
                     <table class="table table-hover adminContainer-table">
                         <tbody class="adminContainer-table-tbody5 scroll-table">
                             <th:block th:if="${#lists.isEmpty(couponList)}">
@@ -54,7 +65,13 @@
                                 </tr>
                             </th:block>
                             <th:block th:unless="${#lists.isEmpty(couponList)}">
-                                <tr th:each="coupon : ${couponList}">
+                                <tr th:each="coupon, state : ${couponList}">
+                                    <td class="text-center" width="6%"
+                                        style="background-color: #8bc0ae; color: white; vertical-align: middle;">
+                                        <span style="font-size: small;">
+                                            [[${#lists.size(couponList) - state.index}]].
+                                        </span>
+                                    </td>
                                     <td th:onclick="changeCoupon([[${coupon.couponCode}]])">
                                         <div>[[${coupon.couponName}]]</div>
                                         <div style="font-size: larger;">&ensp;[[${coupon.discountPercent}]]% 할인
@@ -72,14 +89,9 @@
                 <form action="/admin/setCharge" method="post" class="sendCharge">
                     <table class="adminContainer-table">
                         <colgroup>
-                            <col width="11%">
-                            <col width="6%">
-                            <col width="16%">
-                            <col width="7%">
-                            <col width="16%">
-                            <col width="7%">
-                            <col width="16%">
+                            <col width="9%">
                             <col width="*">
+                            <col width="9%">
                         </colgroup>
                         <tbody class="enrollBody">
                             <tr>
@@ -89,60 +101,44 @@
                                         <option value="COUPON-option">쿠폰</option>
                                     </select>
                                 </td>
-                                <!-- 이용권 -->
                                 <td>
-                                    <div class="row">
-                                        <div class="col text-end charge-title">
-                                            이용권
-                                        </div>
+                                    <div class="input-group">
+                                        <span class="input-group-text"
+                                            style="width: 80px; height: 40px; justify-content: center;">이름</span>
+                                        <input type="text" class="form-control enInput" name="chargeName"
+                                            placeholder="이용권 이름">
+                                        <span class="input-group-text"
+                                            style="width: 80px; height: 40px; justify-content: center;">기간</span>
+                                        <input type="text" class="form-control enInput" name="chargeDate"
+                                            placeholder="이용 기간">
+                                        <span class="input-group-text"
+                                            style="width: 80px; height: 40px; justify-content: center;">가격</span>
+                                        <input type="text" class="form-control enInput" name="chargeFee"
+                                            placeholder="판매 가격">
+                                        <button type="button" class="btn" onclick="enroll()"
+                                            style="width: 120px; background-color: #8bc0ae; color: white;">이용권
+                                            등록</button>
+                                        <button type="reset" class="btn btn-light" style="width: 120px;">취소</button>
                                     </div>
-                                </td>
-                                <td class="charge-td">
-                                    <input type="text" name="chargeName" class="form-control enInput" placeholder="이름을 입력해주세요."
-                                        style="font-style: oblique; border: 1px solid #ccc;">
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col text-end charge-title">
-                                            기간(일)
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="charge-td">
-                                    <input type="text" name="chargeDate" class="form-control enInput" placeholder="기간을 입력해주세요."
-                                        style="font-style: oblique; border: 1px solid #ccc;">
                                 </td>
                                 <td>
                                     <div class="row">
-                                        <div class="col text-end charge-title">
-                                            가격(원)
+                                        <div class="col">
+                                            <button type="button" class="btn btn-secondary" style="width: 120px;"
+                                                disabled>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                    fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                                                </svg>
+                                                &ensp;삭제
+                                            </button>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="charge-td">
-                                    <input type="text" name="chargeFee" class="form-control enInput" placeholder="가격을 입력해주세요."
-                                        style="font-style: oblique; border: 1px solid #ccc;">
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col text-end">
-                                            <div class="btnDiv">
-                                                <input type="button" value="이용권 등록" class="btn btn-light btn-origin" onclick="enroll()">&nbsp;
-                                                <input type="reset" value="취소" class="btn btn-light btn-origin">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <!--  -->
                             </tr>
                         </tbody>
                     </table>
-                    <div style="padding: 1vh;"></div> <!-- 띄어쓰기 -->
-                    <div>
-                        <div class="btn-origin" style="padding-left: 10px;">
-                            <input type="button" value="삭제" class="btn btn-outline-dark" disabled>
-                        </div>
-                    </div>
                 </form>
             </div>
         </div>

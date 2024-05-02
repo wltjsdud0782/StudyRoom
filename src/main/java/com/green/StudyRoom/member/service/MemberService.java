@@ -8,4 +8,7 @@ public interface MemberService {
 
     //로그인
     MemberVO login(MemberVO memberVO);
+
+    //아이디 찾기
+    MemberVO idFindSelect(MemberVO memberVO);
 }

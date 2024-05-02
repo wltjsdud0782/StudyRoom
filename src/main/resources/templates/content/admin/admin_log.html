@@ -12,152 +12,157 @@
     <body>
         <div class="adminContainer">
             <div class="title">
-                <h3>타임로그</h3>
+                <h3>기록 조회</h3>
             </div>
             <div style="padding: 2.5vh;"></div> <!-- 띄어쓰기 -->
             <div class="row">
                 <div class="col">
                     <div class="row">
-                        <!-- 왼쪽 -->
-                        <div class="col-6">
-                            <div class="row">
-                                <div class="col">
-                                    <h4>&nbsp;결제 내역</h4>
-                                    <table class="table table-hover adminContainer-table">
-                                        <tbody class="adminContainer-table-tbody4 scroll-table">
-                                            <tr th:each="app : ${appList}">
-                                                <td>
-                                                    <div>
-                                                        <span>[[${app.memberVO.memberName}]]
-                                                            ([[${app.memberVO.memberId}]])</span> 님이
-                                                        <span style="text-decoration: underline;">
-                                                            [[${app.chargeVO.chargeName}]]
-                                                        </span>
-                                                        이용권을
-                                                        <span>[[${app.approvalFee}]]</span>원에 결제하였습니다.
-                                                        <!-- coupon이랑 approvalFee 다 만들어지면 바꾸기 -->
-                                                    </div>
-                                                    <div>
-                                                        <span class="logDate text-end">
-                                                            [[${app.approvalDate}]]&nbsp;
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div style="padding: 2vh;"></div>
-                            <div class="row">
-                                <div class="col">
-                                    <h4>&nbsp;입퇴실 기록</h4>
-                                    <table class="table table-hover adminContainer-table">
-                                        <tbody class="adminContainer-table-tbody4 scroll-table">
-                                            <tr th:each="inot, state : ${inotList}">
-                                                <td>
-                                                    <div>
-                                                        <span>
-                                                            [[${inot.memberVO.memberName}]]
-                                                            ([[${inot.memberVO.memberId}]])
-                                                        </span> 님이
-                                                        <span>
-                                                            [[${inot.inOut}]]
-                                                        </span>하셨습니다.
-                                                    </div>
-                                                    <div>
-                                                        <span class="logDate">
-                                                            [[${inot.inOutTime}]]&nbsp;
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div style="padding: 2vh;"></div>
-                            <div class="row">
-                                <div class="col">
-                                    <h4>&nbsp;이용권 시간 얼마 안남은 회원들 ~</h4>
-                                    <table class="table table-hover adminContainer-table">
-                                        <tbody class="adminContainer-table-tbody4 scroll-table">
-                                            <tr th:each="res : ${resList}">
-                                                <td>
-                                                    <div>
-                                                        <span>
-                                                            [[${res.memberVO.memberName}]]
-                                                            ([[${res.memberVO.memberId}]])
-                                                        </span> 님이
-                                                        <span style="text-decoration: underline;">
-                                                            [[${res.chargeVO.chargeName}]]
-                                                        </span>이용권으로
-                                                        <span>
-                                                            [[${res.seatVO.seatNum}]]번 좌석을 예약하셨습니다.
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="logDate">
-                                                            [[${res.reservationDate}]]&nbsp;
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                        <div class="col-7">
+                            <h4>&nbsp;결제 내역</h4>
+                            <table class="table table-hover adminContainer-table">
+                                <tbody class="adminContainer-table-tbody4 scroll-table">
+                                    <tr th:each="app : ${appList}">
+                                        <td class="text-center" width="2%"
+                                            style="background-color: #8bc0ae; color: white;">
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <span>[[${app.memberVO.memberName}]]
+                                                    ([[${app.memberVO.memberId}]])
+                                                </span>
+                                                님이
+                                                <span style="color: rgb(237, 125, 040);">
+                                                    [[${app.chargeVO.chargeName}]]
+                                                </span>
+                                                이용권을
+                                                <span style="color: rgb(216, 086, 051);">
+                                                    [[${app.approvalFee}]]원
+                                                </span>
+                                                에 결제하였습니다.
+                                                <!-- coupon이랑 approvalFee 다 만들어지면 바꾸기 -->
+                                            </div>
+                                            <div>
+                                                <span class="logDate text-end">
+                                                    [[${app.approvalDate}]]&nbsp;
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <!-- 오른쪽 -->
+                        <div class="col-5">
+                            <h4>&nbsp;입퇴실 기록</h4>
+                            <table class="table table-hover adminContainer-table">
+                                <tbody class="adminContainer-table-tbody4 scroll-table">
+                                    <tr th:each="inot, state : ${inotList}">
+                                        <td class="text-center" width="2%"
+                                            style="background-color: #8bc0ae; color: white;">
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <span>
+                                                    [[${inot.memberVO.memberName}]]
+                                                    ([[${inot.memberVO.memberId}]])
+                                                </span> 님이
+                                                <span style="color: rgb(216, 086, 051);">
+                                                    [[${inot.inOut}]]
+                                                </span>하셨습니다.
+                                            </div>
+                                            <div>
+                                                <span class="logDate">
+                                                    [[${inot.inOutTime}]]&nbsp;
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div style="padding: 2vh;"></div>
+                    <div class="row">
                         <div class="col-6">
-                            <div class="row">
-                                <div class="col">
-                                    <h4>&nbsp;입실 회원</h4>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <table class="table" style="text-align: center;">
-                                    <colgroup>
-                                        <col width="20%">
-                                        <col width="20%">
-                                        <col width="20%">
-                                        <col width="20%">
-                                        <col width="*">
-                                    </colgroup>
-                                    <thead class="table-success">
-                                        <tr>
-                                            <td>좌석 정보</td>
-                                            <td>좌석 상태</td>
-                                            <td>점등 상태</td>
-                                            <td>사용자</td>
-                                            <td>아이디</td>
-                                        </tr>
-                                    </thead>
-                                </table>
-                                <table class="table table-hover"
-                                    style="text-align: center; margin-top: -16px; border-bottom: 1px solid #dee2e6; 
-                                    border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6;">
-                                    <tbody class="adminContainer-table-tbody44 scroll-table">
-                                        <tr th:each="status : ${statusList}">
-                                            <td style="width: 20%;">
-                                                [[${status.seatFloor}]]층&ensp;[[${status.seatNum}]]번석</td>
-                                            <td style="width: 20%;">[[${status.seatStatusVO.statusName}]]</td>
-                                            <th:block th:if="${status.seatPower == '켜짐'}">
-                                                <td style="width: 20%;">
-                                                    <font color="orange">[[${status.seatPower}]]</font>
-                                                </td>
-                                            </th:block>
-                                            <th:block th:unless="${status.seatPower == '켜짐'}">
-                                                <td style="width: 20%;">
-                                                    <font color="gray">[[${status.seatPower}]]</font>
-                                                </td>
-                                            </th:block>
-                                            <td style="width: 20%;">[[${status.memberVO.memberName}]]</td>
-                                            <td style="width: 20%;">[[${status.memberVO.memberId}]]</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <h4>&nbsp;지급된 쿠폰</h4>
+                            <table class="table text-center">
+                                <colgroup>
+                                    <col width="40%">
+                                    <col width="30%">
+                                    <col width="*">
+                                </colgroup>
+                                <thead class="table-success">
+                                    <tr>
+                                        <td>쿠폰</td>
+                                        <td>할인율</td>
+                                        <td>지급 수량</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <table class="table table-hover logTable">
+                                <tbody class="adminContainer-table-tbody44 scroll-table">
+                                    <tr th:each="coupon : ${couponList}">
+                                        <td width="40%">
+                                            [[${coupon.couponVOList[0].couponName}]]
+                                        </td>
+                                        <td width="30%" style="border-left: 1px solid #dee2e6;">
+                                            [[${coupon.couponVOList[0].discountPercent}]]% 할인
+                                        </td>
+                                        <td width="30%" style="border-left: 1px solid #dee2e6;">
+                                            [[${coupon.couponVOList[0].cnt}]]EA
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot></tfoot>
+                            </table>
+                        </div>
+                        <div class="col-6">
+                            <h4>&nbsp;입실 회원</h4>
+                            <table class="table text-center">
+                                <colgroup>
+                                    <col width="18%">
+                                    <col width="18%">
+                                    <col width="18%">
+                                    <col width="18%">
+                                    <col width="28%">
+                                </colgroup>
+                                <thead class="table-success">
+                                    <tr>
+                                        <td>좌석 정보</td>
+                                        <td>점등 상태</td>
+                                        <td>회원</td>
+                                        <td>아이디</td>
+                                        <td>전화번호</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <table class="table table-hover logTable">
+                                <tbody class="adminContainer-table-tbody44 scroll-table">
+                                    <tr th:each="status : ${statusList}">
+                                        <td style="width: 18%; text-align: left; padding-left: 25px;">
+                                            [[${status.seatFloor}]]층&ensp;[[${status.seatNum}]]번석</td>
+                                        <th:block th:if="${status.seatPower == '켜짐'}">
+                                            <td style="width: 18%; border-left: 1px solid #dee2e6;">
+                                                <font color="orange">[[${status.seatPower}]]</font>
+                                            </td>
+                                        </th:block>
+                                        <th:block th:unless="${status.seatPower == '켜짐'}">
+                                            <td style="width: 18%; border-left: 1px solid #dee2e6;">
+                                                <font color="gray">[[${status.seatPower}]]</font>
+                                            </td>
+                                        </th:block>
+                                        <td style="width: 18%; border-left: 1px solid #dee2e6;">
+                                            [[${status.memberVO.memberName}]]</td>
+                                        <td style="width: 18%; border-left: 1px solid #dee2e6;">
+                                            [[${status.memberVO.memberId}]]</td>
+                                        <td
+                                            style="width: 28%; letter-spacing: 1px; 
+                                            text-align: left; padding-left: 25px; border-left: 1px solid #dee2e6;">
+                                            [[${status.memberVO.memberTel}]]
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragment/main_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!--html 파일이 열릴때 같이 실행되는 css-->
+    <!-- <link rel="stylesheet" href="/css/common.css"> -->
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <div class="row login_studyRoom" style="text-align: center; height: 500px;">
+    <!--html 코드 작성-->
+
+        <span style="padding-bottom:100px">찾는 아이디는 : [[${idFind.memberId}]]</span>
+    </div>
+</th:block>
+
+
+<th:block layout:fragment="content_js">
+    <!--html 파일이 열릴때 같이 실행되는 js-->
+    <script src="/js/member/login.js"></script>
+</th:block>
+</html>

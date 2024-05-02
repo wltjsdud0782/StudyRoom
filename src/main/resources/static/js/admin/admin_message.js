@@ -9,6 +9,18 @@ function setReceiver() {
 
 }
 
+//submit
+function infoSearch() {
+    const sendCharge = document.querySelector('.infoSearch');
+
+    if (document.querySelector('.searchInput').value == '') {
+        alert('빈칸에 값을 입력해주세요!');
+    }
+    else {
+        sendCharge.submit();
+    }
+}
+
 //멤버 리스트 클릭 시 보낼 사람 호출
 function goChat(memberCode) {
     fetch('/admin/who', { //요청경로
@@ -43,7 +55,6 @@ function goChat(memberCode) {
             oneByone.innerHTML = '';
             let str = '';
             data.chtList.forEach(e => {
-            
             str += `
             <tr>`;
                 if (e.toFrom == 'TO') {
@@ -63,7 +74,7 @@ function goChat(memberCode) {
                     str += `                                   
                 <td>
                     <div class="userMsg">
-                        &ensp;${data.member.memberName} (${data.member.memberId}) 님
+                        &ensp;${data.member.memberName} (${data.member.memberId}) 회원님
                     </div>
                     <div class="fromMsg">
                         <div class="botMsg">
@@ -101,7 +112,7 @@ function StartChat() {
     document.querySelector('#receiver').value = receiverName;
 
     if (document.querySelector('#admin_message_content').value == '') {
-        alert('빈칸에 값을 입력해주세요!');
+        alert('메시지를 입력해주세요!');
     }
     else {
         sendForm.submit();

@@ -7,14 +7,19 @@ body {
     width: 90%;
 }
 
+/* tfoot {
+    background-color: #000000;
+} */
+
 .btnDiv input,
-select {
+select,
+button {
     width: 120px;
     height: 40px;
-    border: 1px solid #ccc;
     border-radius: 7px;
-    background-color: #fff;
+    background-color: white;
     text-align: center;
+    border: 1px solid #dee2e6;
 }
 
 .btn-origin input {
@@ -29,6 +34,7 @@ select {
 
 .adminContainer-table {
     width: 100%;
+    /* 테이블 테두리!!!! */
     border: 1px solid #dee2e6;
 }
 
@@ -36,8 +42,9 @@ select {
     padding: 10px;
 }
 
+/* 테이블 테두리!!!! */
 .table-success {
-    border: 1px solid #a7b9b1;
+    border: 1px solid #dee2e6;
 }
 
 /* 스크롤바 */
@@ -55,8 +62,9 @@ select {
 .scroll-table::-webkit-scrollbar-thumb {
     outline: none;
     border-radius: 8px;
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(to bottom, #edffea, #c0e1bd);
+    /* box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2); */
+    /* background: linear-gradient(to bottom, #edffea, #c0e1bd); */
+    background-color: #8bc0ae;
     cursor: pointer;
 }
 
@@ -64,7 +72,6 @@ select {
 
 .memberInfo-table {
     width: 100%;
-    border: 1px solid #ccc;
 }
 
 .memberInfo-table tr td {
@@ -80,12 +87,13 @@ select {
 .infoIndex {
     background-color: #d1e7dd;
     height: 70px;
-    border: 1px solid #a7b9b1;
+    /* border: 1px solid #a7b9b1; */
+    border: 1px solid #dee2e6;
 }
 
 .adminContainer-table-tbody {
     display: block;
-    height: 269px;
+    height: 440px;
     overflow-y: overlay;
 }
 
@@ -125,10 +133,6 @@ select {
     /* 스크롤바 뒷 배경 색상 */
 }
 
-.adminContainer-table tfoot {
-    border-top: 1px solid #ccc;
-}
-
 .adminContainer-table-tbody22 {
     display: block;
     height: 520px;
@@ -164,7 +168,7 @@ select {
 }
 
 .fromMsg {
-    background-color: #ffffff;
+    background-color: white;
     border-radius: 20px;
     padding: 15px;
 }
@@ -173,7 +177,7 @@ select {
 
 .adminContainer-table-tbody5 {
     display: block;
-    height: 294px;
+    height: 368px;
     overflow-y: overlay;
 }
 
@@ -188,11 +192,23 @@ select {
 
 .enrollBody {
     background-color: #d1e7dd;
-    border: 1px solid #a7b9b1;
+    border: 1px solid #dee2e6;
 }
 
 #selectOption {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
+    width: 120px;
+}
+
+.chartButton {
+    display: flex;
+    justify-content: center;
+}
+
+.chartButton button {
+    width: 120px;
+    height: 40px;
+    border: 1px solid #dee2e6;
 }
 
 /* (Log)----------------------------------------------- */
@@ -202,16 +218,12 @@ select {
     color: #ccc;
     font-size: small;
     float: right;
-    padding-top: 7px;
-}
-
-.logList-form-div {
-    border: 1px solid #ccc;
+    padding-top: 15px;
 }
 
 .adminContainer-table-tbody4 {
     display: flex;
-    height: 143px;
+    height: 239px;
     overflow-y: scroll;
     flex-direction: column-reverse;
 }
@@ -223,13 +235,21 @@ select {
 
 .adminContainer-table-tbody44 {
     display: block;
-    height: 571px;
+    height: 246px;
     overflow-y: overlay;
 }
 
 .adminContainer-table-tbody44 tr {
     display: table;
     width: 100%;
+}
+
+.logTable {
+    text-align: center;
+    margin-top: -17px;
+    border-bottom: 1px solid #dee2e6;
+    border-left: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
 }
 
 /* (Sales)------------------------------------------ */
@@ -244,46 +264,52 @@ select {
     /* box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); */
 }
 
-.layer-first {
+.layer-top {
     background-color: white;
     border: 1px solid #dee2e6;
     border-radius: 15px;
-    padding: 30px;
-    margin-right: 10px;
+    margin-bottom: -10px;
     margin-top: -10px;
+}
+
+.layer-middle {
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 15px;
+    margin-top: 30px;
     margin-bottom: -10px;
 }
 
-.layer-second {
-    background-color: white;
-    border: 1px solid #dee2e6;
-    border-radius: 15px;
+.layer-div {
     padding: 30px;
-    margin-left: 8px;
-    margin-top: -10px;
-    margin-bottom: -10px;
-}
-
-.layer-third {
-    background-color: white;
-    border: 1px solid #dee2e6;
-    border-radius: 15px;
-    padding: 30px;
-    margin-top: 10px;
-    margin-bottom: -10px;
 }
 
 .salesTable {
     /* border: 1px solid #dee2e6; */
-    height: 250px;
+    /* height: 170px; */
     -ms-overflow-style: none;
     /* for Internet Explorer, Edge */
     scrollbar-width: none;
     /* for Firefox */
     overflow-y: scroll;
+    margin-top: -17px;
 }
 
 .salesTable::-webkit-scrollbar {
     display: none;
     /* for Chrome, Safari, and Opera */
+}
+
+.salesTable2 {
+    font-size: 11px;
+    text-align: center; 
+    vertical-align: middle;
+}
+
+.salesTable2 .right {
+    text-align: right; 
+}
+
+.salesTable2 .left {
+    text-align: left; 
 }

@@ -36,22 +36,6 @@
         ORDER BY APPROVAL_DATE DESC LIMIT 100
     </select>
 
-    <!-- 예약 기록 가져오기 (이제 안쓰는 기능) -->
-    <select id="selectReserveList" resultMap="memberMapper.reservation">
-        SELECT RESERVATION_CODE
-            , DATE_FORMAT(RESERVATION_DATE, '%Y-%m-%d ㅤ%p %l:%i') RESERVATION_DATE
-            , MEMBER_NAME
-            , MEMBER_ID
-            , SEAT_NUM
-            , CHARGE_NAME
-        FROM studyroom_reservation RES
-        INNER JOIN studyroom_member MEMBER
-        ON RES.MEMBER_CODE = MEMBER.MEMBER_CODE
-        INNER JOIN studyroom_charge CHARGE
-        ON RES.CHARGE_CODE = CHARGE.CHARGE_CODE
-        ORDER BY RESERVATION_DATE DESC LIMIT 100;
-    </select>
-
     <!-- 입실 퇴실 기록 -->
     <select id="selectInOutList" resultMap="memberMapper.inOut">
         SELECT DAY_INPUT
@@ -71,7 +55,6 @@
     <!-- 좌석 상태 보기 -->
     <select id="selectSeatStatusList" resultMap="seatMapper.seat">
         SELECT SEAT_NUM
-            , STATUS_NAME
             , SEAT_FLOOR
             , CASE
                 WHEN SEAT_POWER = 'ON' THEN '켜짐'
@@ -79,6 +62,7 @@
                 END SEAT_POWER
             , MEMBER_NAME
             , MEMBER_ID
+            , MEMBER_TEL
         FROM studyroom_seat SEAT
         INNER JOIN seat_status STATUS
         ON SEAT.STATUS_NUM = STATUS.STATUS_NUM
@@ -87,6 +71,17 @@
         ORDER BY SEAT_NUM ASC;
     </select>
 
+    <!-- 지급된 쿠폰 갯수 조회 -->
+    <select id="showCoupon" resultMap="seatMapper.memberCoupon">
+        SELECT COUPON_NAME
+            , DISCOUNT_PERCENT
+            , COUNT(*) AS CNT
+        FROM member_coupon MC
+        INNER JOIN coupon C
+        ON MC.COUPON_CODE = C.COUPON_CODE
+        GROUP BY MC.COUPON_CODE HAVING COUNT(*) > 0
+        ORDER BY CNT DESC
+    </select>
 
 </mapper>
 

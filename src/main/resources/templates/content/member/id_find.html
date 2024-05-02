@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragment/main_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!--html 파일이 열릴때 같이 실행되는 css-->
+    <!-- <link rel="stylesheet" href="/css/common.css"> -->
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <!--html 코드 작성-->
+    <div class="row mainContent">
+        <div class="row login_studyRoom" style="text-align: center; height: 500px;">
+            <form action="idFind" method="post" id="idfind-form">
+                <div class="row justify-content-center ">
+                    <div class="idfind-form col-3">
+                        <div class="form-floating mb-3 mt-5">
+                            <input name="memberName" type="text" class="form-control" id="member-Name">
+                            <label for="" style="font-size: 0.8rem;">이름</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input name="memberBirth" type="text" class="form-control" id="member-Birth">
+                            <label for="" style="font-size: 0.8rem;">생년월일</label>
+                        </div>
+                        <div class="d-grid ">
+                            <input type="submit" class="btn btn-success" value="아이디찾기">
+                        </div>
+                        
+                    </div>
+                    <div class="row justify-content-center mt-3">
+                        <div class=" col-1">
+                            <a onclick="location.href='/member/termsUse'">이용약관</a>
+                        </div>
+                        <div class="col-1">
+                            <a onclick="location.href='/member/privacyPolicy'">개인정보처리방침</a>
+                        </div>
+                        <div class="col-1" id="idFind">
+                            <a onclick="location.href='/member/loginForm'">로그인</a>
+                        </div>
+                        <div class="col-1" id="passwordFind">
+                            <a onclick="location.href='/member/passwordFind'">비밀번호찾기</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!--html 파일이 열릴때 같이 실행되는 js-->
+    <script src="/js/member/idFind.js"></script>
+</th:block>
+</html>

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,7 +61,7 @@ public class AdminController {
         map.put("couponList", chargeService.selectCoupon());
         map.put("memberMap", adminService.selectMemberDetailInfo(memberCode));
         map.put("seatMap", adminService.selectSeatDetailInfo(memberCode));
-        map.put("couponMap", seatService.ownCoupon(memberCode));
+        map.put("couponMap", adminService.eachCoupon(memberCode));
 
         map.put("charName", seatService.haveCharge(memberCode));
         if (!seatService.haveCharge(memberCode).isEmpty()){
@@ -225,30 +226,26 @@ public class AdminController {
     public String adminLog(Model model){
         //결재 기록
         model.addAttribute("appList", timeLogService.selectBuyList());
-        //예약 기록 (안쓸 기능)
-        model.addAttribute("resList", timeLogService.selectReserveList());
         //입퇴실 기록
         model.addAttribute("inotList", timeLogService.selectInOutList());
         //좌석상태 조회
         model.addAttribute("statusList", timeLogService.selectSeatStatusList());
+        //보유 쿠폰 조회
+        model.addAttribute("couponList", timeLogService.showCoupon());
+        System.out.println(timeLogService.showCoupon());
         return "content/admin/admin_log";
     }
 
     //(매출 관리)///////////////////////////////////////////// //
     @RequestMapping("/sales")
     public String adminSales(Model model){
-        model.addAttribute("chargeList",salesService.chargeSalesList());
-        System.out.println(salesService.chargeSalesList());
+        model.addAttribute("yearCharge",salesService.chargeYearSales());
+        model.addAttribute("monthCharge",salesService.chargeMonthSales());
+        model.addAttribute("yearAgo",salesService.chargeYearAgo());
+        model.addAttribute("monthAgo",salesService.chargeMonthAgo());
+//        model.addAttribute("salesCharge",salesService.chargeSalesList());
+//        model.addAttribute("chargeList", chargeService.selectCharge());
         return "content/admin/admin_sales";
-    }
-
-    //월 매출 막대 그래프
-    @ResponseBody
-    @PostMapping("/getMonthChart")
-    public List<SalesInfoVO> getMonthChart(){
-        //월별 매출
-        List<SalesInfoVO> monthData =  salesService.monthSales();
-        return monthData;
     }
 
     //연 매출 막대 그래프
@@ -260,6 +257,42 @@ public class AdminController {
         return yearData;
     }
 
+    //종합 매출 막대 그래프
+    @ResponseBody
+    @PostMapping("/getMonthChart")
+    public List<SalesInfoVO> getMonthChart(){
+        //월별 매출
+        List<SalesInfoVO> monthData = salesService.monthSales();
+        return monthData;
+    }
+
+    //표 데이터
+    @ResponseBody
+    @PostMapping("/getTableData")
+    public Map<String, Object> getTableData(){
+        //요금 목록 조회
+        List<ChargeVO> chargeList = chargeService.selectCharge();
+
+        //실제 데이터
+        List<Map<String, Object>> mapList = salesService.selectTableList(chargeList);
+
+        //현재 월 기준 이전 1년치 월 데이터
+        List<String> monthList = salesService.selectOneYearMonth();
+
+        //매출 표
+        List<String> chargeNameList = new ArrayList<>();
+        for(ChargeVO e : chargeList){
+            chargeNameList.add(e.getChargeName());
+        }
+        
+        //Map에 담기
+        Map<String, Object> finalData = new HashMap<>();
+        finalData.put("chargeNameList", chargeNameList);
+        finalData.put("mapList", mapList);
+        finalData.put("monthList", monthList);
+
+        return finalData;
+    }
 
 
 }

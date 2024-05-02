@@ -4,38 +4,323 @@
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="salesMapper">
 
-    <!-- 이용권 매출 리스트 -->
-    <select id="chargeSalesList" resultMap="seatMapper.salesInfo">
+    <!-- 이용권 매출 리스트(올해) -->
+<!--    <select id="chargeSalesList" resultMap="seatMapper.salesInfo">-->
+<!--        SELECT C.CHARGE_CODE-->
+<!--        , CHARGE_NAME-->
+<!--        , COALESCE(SUM(SALES_FEE), 0) AS sales_fee-->
+<!--        , DATE_FORMAT(months.month, '%y년 %c월') AS MONTH_SALES-->
+<!--        FROM (-->
+<!--        FROM (-->
+<!--        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 12 MONTH), '%Y-%m-01') AS month-->
+<!--        UNION ALL-->
+<!--        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 11 MONTH), '%Y-%m-01')-->
+<!--        UNION ALL-->
+<!--        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 10 MONTH), '%Y-%m-01')-->
+<!--        UNION ALL-->
+<!--        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 9 MONTH), '%Y-%m-01')-->
+<!--        UNION ALL-->
+<!--        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 8 MONTH), '%Y-%m-01')-->
+<!--        UNION ALL-->
+<!--        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 7 MONTH), '%Y-%m-01')-->
+<!--        UNION ALL-->
+<!--        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 6 MONTH), '%Y-%m-01')-->
+<!--        UNION ALL-->
+<!--        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 5 MONTH), '%Y-%m-01')-->
+<!--        UNION ALL-->
+<!--        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 4 MONTH), '%Y-%m-01')-->
+<!--        UNION ALL-->
+<!--        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 MONTH), '%Y-%m-01')-->
+<!--        UNION ALL-->
+<!--        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 2 MONTH), '%Y-%m-01')-->
+<!--        UNION ALL-->
+<!--        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%Y-%m-01')-->
+<!--        UNION ALL-->
+<!--        SELECT DATE_FORMAT(NOW(), '%Y-%m-01')-->
+<!--        ) AS months-->
+<!--        LEFT JOIN sales_info S-->
+<!--        ON DATE_FORMAT(SALES_DATE, '%Y-%m-01') = months.month-->
+<!--        INNER JOIN studyroom_charge C-->
+<!--        ON S.CHARGE_CODE = C.CHARGE_CODE-->
+<!--        GROUP BY CHARGE_CODE, DATE_FORMAT(months.month, '%y년 %c월')-->
+<!--        ORDER BY CHARGE_FEE DESC;-->
+<!--    </select>-->
+
+    <!-- 이용권 매출리스트 (이번달)-->
+    <select id="chargeMonthSales" resultMap="seatMapper.salesInfo">
         SELECT COUNT(SALES_CODE) CNT
-            , SALE.CHARGE_CODE
-            , SUM(SALES_FEE) SALES_FEE
-            , CHARGE_NAME
-            , CHARGE_FEE
+        , SALE.CHARGE_CODE
+        , SUM(SALES_FEE) SALES_FEE
+        , CHARGE_NAME
+        , CHARGE_FEE
         FROM SALES_INFO SALE
         INNER JOIN STUDYROOM_CHARGE CHARG
         ON SALE.CHARGE_CODE = CHARG.CHARGE_CODE
+        WHERE DATE_FORMAT(SALES_DATE, '%Y%m') = DATE_FORMAT(NOW(), '%Y%m')
         GROUP BY CHARGE_CODE
-        ORDER BY CNT DESC;
+        ORDER BY CHARGE_FEE DESC;
+    </select>
+
+    <!-- 이용권 매출리스트 (지난달)-->
+    <select id="chargeMonthAgo" resultMap="seatMapper.salesInfo">
+        SELECT COUNT(SALES_CODE) CNT
+        , SALE.CHARGE_CODE
+        , SUM(SALES_FEE) SALES_FEE
+        , CHARGE_NAME
+        , CHARGE_FEE
+        FROM SALES_INFO SALE
+        INNER JOIN STUDYROOM_CHARGE CHARG
+        ON SALE.CHARGE_CODE = CHARG.CHARGE_CODE
+        WHERE DATE_FORMAT(SALES_DATE, '%Y%m') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%Y%m')
+        GROUP BY CHARGE_CODE
+        ORDER BY CHARGE_FEE DESC;
+    </select>
+
+    <!-- 이용권 매출리스트 (올해)-->
+    <select id="chargeYearSales" resultMap="seatMapper.salesInfo">
+        SELECT COUNT(SALES_CODE) CNT
+        , SALE.CHARGE_CODE
+        , SUM(SALES_FEE) SALES_FEE
+        , CHARGE_NAME
+        , CHARGE_FEE
+        FROM SALES_INFO SALE
+        INNER JOIN STUDYROOM_CHARGE CHARG
+        ON SALE.CHARGE_CODE = CHARG.CHARGE_CODE
+        WHERE DATE_FORMAT(SALES_DATE, '%Y') = DATE_FORMAT(NOW(), '%Y')
+        GROUP BY CHARGE_CODE
+        ORDER BY CHARGE_FEE DESC;
+    </select>
+
+    <!-- 이용권 매출리스트 (작년) -->
+    <select id="chargeYearAgo" resultMap="seatMapper.salesInfo">
+        SELECT COUNT(SALES_CODE) CNT
+        , SALE.CHARGE_CODE
+        , SUM(SALES_FEE) SALES_FEE
+        , CHARGE_NAME
+        , CHARGE_FEE
+        FROM SALES_INFO SALE
+        INNER JOIN STUDYROOM_CHARGE CHARG
+        ON SALE.CHARGE_CODE = CHARG.CHARGE_CODE
+        WHERE DATE_FORMAT(SALES_DATE, '%Y') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 YEAR), '%Y')
+        GROUP BY CHARGE_CODE
+        ORDER BY CHARGE_FEE DESC;
     </select>
 
     <!-- 올해 기준으로 연간 매출 -->
     <select id="yearSales" resultMap="seatMapper.salesInfo">
-        SELECT YEAR(SALES_DATE) YEAR_SALES
-            , SUM(SALES_FEE) SALES_FEE
+        SELECT
+        COALESCE(SUM(sales_fee), 0) AS sales_fee,
+        DATE_FORMAT(months.month, '%Y년') AS YEAR_SALES
+        FROM (
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 5 YEAR), '%Y-01-01') AS month
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 4 YEAR), '%Y-01-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 YEAR), '%Y-01-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 2 YEAR), '%Y-01-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 YEAR), '%Y-01-01')
+        UNION ALL
+        SELECT DATE_FORMAT(NOW(), '%Y-01-01')
+        ) AS months
+        LEFT JOIN (
+        SELECT DATE_FORMAT(SALES_DATE, '%Y-01-01') AS month, SALES_FEE
         FROM SALES_INFO
-        GROUP BY YEAR(SALES_DATE)
-        ORDER BY YEAR(SALES_DATE) DESC;
+        ) AS sales_info ON months.month = sales_info.month
+        GROUP BY YEAR(months.month)
+        ORDER BY YEAR(months.month);
     </select>
 
-    <!-- 올해의 월별 매출 -->
-    <select id="monthSales" resultMap="seatMapper.salesInfo">
-        SELECT MONTH(SALES_DATE) MONTH_SALES
-            , SUM(SALES_FEE) SALES_FEE
-        FROM SALES_INFO
-        WHERE YEAR(SALES_DATE) = YEAR(NOW())
-        GROUP BY MONTH(SALES_DATE)
-        ORDER BY MONTH(SALES_DATE) ASC;
+    <!-- 종합리스트 -->
+    <select id="selectTableList" resultType="HashMap">
+        SELECT MONTH, COALESCE(SUM_FEE, 0) SUM_FEE, TYPE_NAME, MAX(TYPE_CODE) TYPE_CODE, SUM(SUM_CNT) CNT
+        FROM
+        (
+        <foreach collection="list" item="charge" separator="UNION ALL">
+            SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 12 MONTH), '%y년 %c월') AS MONTH , SUM(SALES_FEE) SUM_FEE, #{charge.chargeName} TYPE_NAME, #{charge.chargeCode} TYPE_CODE, COUNT(SALES_FEE) SUM_CNT
+            FROM sales_info
+            WHERE DATE_FORMAT(SALES_DATE, '%y년 %c월') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 12 MONTH), '%y년 %c월')
+            AND CHARGE_CODE = #{charge.chargeCode}
+            UNION ALL
+
+            SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 11 MONTH), '%y년 %c월') AS MONTH , SUM(SALES_FEE) SUM_FEE, #{charge.chargeName} TYPE_NAME, #{charge.chargeCode} TYPE_CODE, COUNT(SALES_FEE) SUM_CNT
+            FROM sales_info
+            WHERE DATE_FORMAT(SALES_DATE, '%y년 %c월') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 11 MONTH), '%y년 %c월')
+            AND CHARGE_CODE = #{charge.chargeCode}
+            UNION ALL
+
+            SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 10 MONTH), '%y년 %c월') AS MONTH , SUM(SALES_FEE) SUM_FEE, #{charge.chargeName} TYPE_NAME, #{charge.chargeCode} TYPE_CODE, COUNT(SALES_FEE) SUM_CNT
+            FROM sales_info
+            WHERE DATE_FORMAT(SALES_DATE, '%y년 %c월') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 10 MONTH), '%y년 %c월')
+            AND CHARGE_CODE = #{charge.chargeCode}
+            UNION ALL
+
+            SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 9 MONTH), '%y년 %c월') AS MONTH , SUM(SALES_FEE) SUM_FEE, #{charge.chargeName} TYPE_NAME, #{charge.chargeCode} TYPE_CODE, COUNT(SALES_FEE) SUM_CNT
+            FROM sales_info
+            WHERE DATE_FORMAT(SALES_DATE, '%y년 %c월') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 9 MONTH), '%y년 %c월')
+            AND CHARGE_CODE = #{charge.chargeCode}
+            UNION ALL
+
+            SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 8 MONTH), '%y년 %c월') AS MONTH , SUM(SALES_FEE) SUM_FEE, #{charge.chargeName} TYPE_NAME, #{charge.chargeCode} TYPE_CODE, COUNT(SALES_FEE) SUM_CNT
+            FROM sales_info
+            WHERE DATE_FORMAT(SALES_DATE, '%y년 %c월') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 8 MONTH), '%y년 %c월')
+            AND CHARGE_CODE = #{charge.chargeCode}
+            UNION ALL
+
+            SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 7 MONTH), '%y년 %c월') AS MONTH , SUM(SALES_FEE) SUM_FEE, #{charge.chargeName} TYPE_NAME, #{charge.chargeCode} TYPE_CODE, COUNT(SALES_FEE) SUM_CNT
+            FROM sales_info
+            WHERE DATE_FORMAT(SALES_DATE, '%y년 %c월') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 7 MONTH), '%y년 %c월')
+            AND CHARGE_CODE = #{charge.chargeCode}
+            UNION ALL
+
+            SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 6 MONTH), '%y년 %c월') AS MONTH , SUM(SALES_FEE) SUM_FEE, #{charge.chargeName} TYPE_NAME, #{charge.chargeCode} TYPE_CODE, COUNT(SALES_FEE) SUM_CNT
+            FROM sales_info
+            WHERE DATE_FORMAT(SALES_DATE, '%y년 %c월') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 6 MONTH), '%y년 %c월')
+            AND CHARGE_CODE = #{charge.chargeCode}
+            UNION ALL
+
+            SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 5 MONTH), '%y년 %c월') AS MONTH , SUM(SALES_FEE) SUM_FEE, #{charge.chargeName} TYPE_NAME, #{charge.chargeCode} TYPE_CODE, COUNT(SALES_FEE) SUM_CNT
+            FROM sales_info
+            WHERE DATE_FORMAT(SALES_DATE, '%y년 %c월') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 5 MONTH), '%y년 %c월')
+            AND CHARGE_CODE = #{charge.chargeCode}
+            UNION ALL
+
+            SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 4 MONTH), '%y년 %c월') AS MONTH , SUM(SALES_FEE) SUM_FEE, #{charge.chargeName} TYPE_NAME, #{charge.chargeCode} TYPE_CODE, COUNT(SALES_FEE) SUM_CNT
+            FROM sales_info
+            WHERE DATE_FORMAT(SALES_DATE, '%y년 %c월') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 4 MONTH), '%y년 %c월')
+            AND CHARGE_CODE = #{charge.chargeCode}
+            UNION ALL
+
+            SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 MONTH), '%y년 %c월') AS MONTH , SUM(SALES_FEE) SUM_FEE, #{charge.chargeName} TYPE_NAME, #{charge.chargeCode} TYPE_CODE, COUNT(SALES_FEE) SUM_CNT
+            FROM sales_info
+            WHERE DATE_FORMAT(SALES_DATE, '%y년 %c월') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 MONTH), '%y년 %c월')
+            AND CHARGE_CODE = #{charge.chargeCode}
+            UNION ALL
+
+            SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 2 MONTH), '%y년 %c월') AS MONTH , SUM(SALES_FEE) SUM_FEE, #{charge.chargeName} TYPE_NAME, #{charge.chargeCode} TYPE_CODE, COUNT(SALES_FEE) SUM_CNT
+            FROM sales_info
+            WHERE DATE_FORMAT(SALES_DATE, '%y년 %c월') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 2 MONTH), '%y년 %c월')
+            AND CHARGE_CODE = #{charge.chargeCode}
+            UNION ALL
+
+            SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%y년 %c월') AS MONTH , SUM(SALES_FEE) SUM_FEE, #{charge.chargeName} TYPE_NAME, #{charge.chargeCode} TYPE_CODE, COUNT(SALES_FEE) SUM_CNT
+            FROM sales_info
+            WHERE DATE_FORMAT(SALES_DATE, '%y년 %c월') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%y년 %c월')
+            AND CHARGE_CODE = #{charge.chargeCode}
+            UNION ALL
+
+            SELECT DATE_FORMAT(NOW(), '%y년 %c월') AS MONTH , SUM(SALES_FEE) SUM_FEE, #{charge.chargeName} TYPE_NAME, #{charge.chargeCode} TYPE_CODE, COUNT(SALES_FEE) SUM_CNT
+            FROM sales_info
+            WHERE DATE_FORMAT(SALES_DATE, '%y년 %c월') = DATE_FORMAT(NOW(), '%y년 %c월')
+            AND CHARGE_CODE = #{charge.chargeCode}
+        </foreach>
+        ) RESULT
+        GROUP BY MONTH, TYPE_NAME
     </select>
+
+    <select id="selectOneYearMonth" resultType="String">
+        SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 12 MONTH), '%y년 %c월') AS MONTH
+        UNION ALL
+        SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 11 MONTH), '%y년 %c월') AS MONTH
+        UNION ALL
+        SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 10 MONTH), '%y년 %c월') AS MONTH
+        UNION ALL
+        SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 9 MONTH), '%y년 %c월') AS MONTH
+        UNION ALL
+        SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 8 MONTH), '%y년 %c월') AS MONTH
+        UNION ALL
+        SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 7 MONTH), '%y년 %c월') AS MONTH
+        UNION ALL
+        SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 6 MONTH), '%y년 %c월') AS MONTH
+        UNION ALL
+        SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 5 MONTH), '%y년 %c월') AS MONTH
+        UNION ALL
+        SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 4 MONTH), '%y년 %c월') AS MONTH
+        UNION ALL
+        SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 MONTH), '%y년 %c월') AS MONTH
+        UNION ALL
+        SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 2 MONTH), '%y년 %c월') AS MONTH
+        UNION ALL
+        SELECT  DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%y년 %c월') AS MONTH
+        UNION ALL
+        SELECT DATE_FORMAT(NOW(), '%y년 %c월') AS MONTH
+    </select>
+
+    <!-- 향상된 종합 월별 매출 -->
+<!--    <select id="monthSales" resultMap="seatMapper.salesInfo">-->
+<!--        WITH RECURSIVE YEAR_DATE AS (-->
+<!--        SELECT *-->
+<!--        FROM-->
+<!--        (-->
+<!--            WITH RECURSIVE CUR_DATE AS (-->
+<!--            SELECT MONTH(NOW()) AS MONTH-->
+<!--            UNION ALL-->
+<!--            SELECT MONTH + 1 FROM CUR_DATE-->
+<!--            WHERE MONTH &lt; 12-->
+<!--        )-->
+<!--        SELECT CONCAT(DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 YEAR), '%Y년 '), MONTH, '월') AS MONTH_SALES FROM CUR_DATE-->
+<!--        ) A-->
+<!--            UNION ALL-->
+<!--            SELECT *-->
+<!--            FROM-->
+<!--        (-->
+<!--            WITH RECURSIVE PRE_DATE AS (-->
+<!--            SELECT 1 AS MONTH-->
+<!--            UNION ALL-->
+<!--            SELECT MONTH + 1 FROM PRE_DATE-->
+<!--            WHERE MONTH &lt; MONTH(NOW())-->
+<!--        )-->
+<!--            SELECT CONCAT(DATE_FORMAT(NOW(), '%Y년 '), MONTH, '월') AS MONTH_SALES FROM PRE_DATE-->
+<!--        ) B-->
+<!--        )-->
+<!--        SELECT MONTH_SALES-->
+<!--            , IFNULL(SUM(SALES_FEE), 0) SALES_FEE-->
+<!--        FROM  YEAR_DATE A-->
+<!--        LEFT OUTER JOIN-->
+<!--        SALES_INFO B-->
+<!--        ON A.MONTH_SALES = DATE_FORMAT(SALES_DATE, '%Y년 %c월')-->
+<!--        GROUP BY MONTH_SALES-->
+<!--        ORDER BY SALES_CODE ASC;-->
+<!--    </select>-->
+
+    <!-- 향상된 종합 월별 매출 -->
+    <select id="monthSales" resultMap="seatMapper.salesInfo">
+        SELECT
+        COALESCE(SUM(SALES_FEE), 0) AS sales_fee,
+        DATE_FORMAT(months.month, '%y년 %c월') AS MONTH_SALES
+        FROM (
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 12 MONTH), '%Y-%m-01') AS month
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 11 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 10 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 9 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 8 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 7 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 6 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 5 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 4 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 2 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%Y-%m-01')
+        UNION ALL
+        SELECT DATE_FORMAT(NOW(), '%Y-%m-01')
+        ) AS months
+        LEFT JOIN SALES_INFO ON DATE_FORMAT(SALES_DATE, '%Y-%m-01') = months.month
+        GROUP BY DATE_FORMAT(months.month, '%y년%c월')
+        ORDER BY months.month;
+    </select>
+
 
 </mapper>
 

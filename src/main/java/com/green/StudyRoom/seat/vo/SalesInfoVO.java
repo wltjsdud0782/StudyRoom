@@ -15,7 +15,6 @@ public class SalesInfoVO {
 
     private List<ChargeVO> chargeVOList;
 
-    private String weekSales;
     private String monthSales;
     private String yearSales;
 }

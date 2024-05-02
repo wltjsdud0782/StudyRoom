@@ -11,18 +11,54 @@
 <th:block layout:fragment="contentFragment">
     <!--html 코드 작성-->
     <div class="row justify-content-center" id="loginInfo" style="height: 550px;">
-        <div class="col-4">
-            <div class="form-floating mb-3" style="margin-top: 250px;">
-                <input name="memberId" type="text" class="form-control" id="memberId" placeholder="아이디">
-                <label for="memberId" style="font-size: 0.8rem;">I.D.</label>
+        <form action="login" method="post" >
+            <div class="row justify-content-center " id="">
+                <div class="col-3">
+                    <div class="form-floating mb-3 mt-5">
+                        <input name="memberId" type="text" class="form-control" id="memberId">
+                        <label for="memberId" style="font-size: 0.8rem;">아이디</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input name="memberPw" type="password" class="form-control" id="memberPw">
+                        <label for="memberPw" style="font-size: 0.8rem;">Password</label>
+                    </div>
+                    <div th:if="${errorMsg != 'success'}" class="mt-3" style="color: rgb(202, 10, 10); font-size: 0.8rem;">
+                        [[${errorMsg}]]
+                    </div>
+                    <div class="d-grid" style="margin-bottom: -200px;">
+                        <input type="submit" class="btn btn-success" value="로그인">
+                    </div>
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <input name="memberPw" type="password" class="form-control" id="memberPw" placeholder="비밀번호">
-                <label for="memberPw" style="font-size: 0.8rem;">Password</label>
+        </form>
+
+
+<!--        <div class="col-3">-->
+<!--            <div class="form-floating mb-3" style="margin-top: 150px;">-->
+<!--                <input name="memberId" type="text" class="form-control" id="memberId" placeholder="아이디">-->
+<!--                <label for="memberId" style="font-size: 0.8rem;">I.D.</label>-->
+<!--            </div>-->
+<!--            <div class="form-floating mb-3">-->
+<!--                <input name="memberPw" type="password" class="form-control" id="memberPw" placeholder="비밀번호">-->
+<!--                <label for="memberPw" style="font-size: 0.8rem;">Password</label>-->
+<!--            </div>-->
+<!--            <div class="d-grid">-->
+<!--                <input type="button" class="btn btn-success" value="로그인" onclick="login()">-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="row justify-content-center">
+            <div class=" col-1">
+                <a onclick="location.href='/member/termsUse'">이용약관</a>
             </div>
-            <div class="d-grid">
-                <input type="button" class="btn btn-success" value="로그인" onclick="login()">
+            <div class="col-1">
+                <a onclick="location.href='/member/privacyPolicy'">개인정보처리방침</a>
             </div>
+            <!-- <div class="col-1" id="idFind">
+                <a onclick="location.href='/member/idFindForm'">아이디 찾기</a>
+            </div> -->
+            <!-- <div class="col-1" id="passwordFind">
+                <a onclick="location.href='/member/passwordFind'">비밀번호찾기</a>
+            </div> -->
         </div>
     </div>
 </th:block>
