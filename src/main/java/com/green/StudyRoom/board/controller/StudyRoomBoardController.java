@@ -63,7 +63,7 @@ public class StudyRoomBoardController {
 
     //메인 홈페이지
     @GetMapping("/mainHomepage")
-    public String studyRoomBoard(HttpSession session){
+    public String studyRoomBoard(HttpSession session,Model model){
         if (session.getAttribute("loginInfo") != null) {
             MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
             int memberCode = loginInfo.getMemberCode();
@@ -81,7 +81,8 @@ public class StudyRoomBoardController {
                 }
             }
         }
-
+        int fp = 1;
+        model.addAttribute("firstPage",fp);
         return "content/homepage/main_homepage" ;
 
     }
@@ -89,7 +90,8 @@ public class StudyRoomBoardController {
 
     //문의 홈페이지
     @RequestMapping("/inquiry")
-    public String studyRoomInquiry(Model model, SearchVO searchVO,@RequestParam(name = "isSearch", required = false ,defaultValue = "0")int isSearch){
+    public String studyRoomInquiry(Model model, SearchVO searchVO,@RequestParam(name = "isSearch", required = false ,defaultValue = "0")int isSearch
+                                                                ,@RequestParam(name = "pageNo", required = false, defaultValue = "5") int pageNo){
 
         //페이징처리 interface
         PagingService page = () -> sqlSession.selectOne("boardMapper.selectBoardCnt");
@@ -116,7 +118,7 @@ public class StudyRoomBoardController {
 
 
         model.addAttribute("boardList", boardList);
-
+        model.addAttribute("pageNo",pageNo);
         return "content/homepage/inquiry_page";
     }
 
@@ -242,8 +244,8 @@ public class StudyRoomBoardController {
 
     // 매장 소개
     @GetMapping("/studyInfo")
-    public String studyInfo(Model model){
-
+    public String studyInfo(Model model,@RequestParam(name = "pageNo", required = false, defaultValue = "2") int pageNo){
+//
         List<ChargeVO> chargeList = chargeService.selectCharge();
         model.addAttribute("chargeList", chargeList);
 
@@ -251,6 +253,7 @@ public class StudyRoomBoardController {
         model.addAttribute("boardList", boardList);
 
         model.addAttribute("reviewList", reviewService.selectReviewPage());
+        model.addAttribute("pageNo",pageNo);
         return "content/homepage/studyInfo";
     }
 

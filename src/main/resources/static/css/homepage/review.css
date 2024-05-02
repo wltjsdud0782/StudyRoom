@@ -1,42 +1,88 @@
-.review-main{
-    display: flex;
-    position: relative;
+@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
+.review-main{
+    display: flex;
+    /* position: relative; */
+    background-color: #6b6b6bb4;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-left: 80px;
+    width: 60%;
+    backdrop-filter: blur(10px);
+    /* justify-content: center;
+    align-items: center; */
+}
+.reivew-container{
+    font-family: 'GowunBatang-Regular';
+    margin-top: 120px;
+    display: flex;
+}
 .review-header {
-    width: 81.5%;
-    text-align: start;
-    margin-top: 12px;
-    margin-left: 190px;
-    border-bottom: 3px solid black;
+    width: 40%;
+    z-index: 1;
+    /* margin-top: 12px;
+    margin-left: 190px; */
+    color: #fff;
+    /* width: 150px; */
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* position: absolute; */
+    font-family: '국립박물관문화재단클래식B';
+    color: #fff;
+    /* border-bottom: 2px solid #929292;
+    background-color: #ffffff81;
+    border-radius: 3px;
+    top: 13%;
+    left: 2.9%; */
+    /* border-bottom: 3px solid black; */
+}
+.review-header h3{
+    font-size: 55px;
+    font-weight: bold;
 }
 .review-body{
     margin-right: 30px;
     background-color: #ffff99;
     border: 1px;
-    width: 270px;
+    width: 220px;
     height: 250px;
-    /* 회전 */
     transform: rotate(5deg);
     padding: 10px;
+    font-weight: bold;
     text-align: center;
-    position: relative;
+    /* position: relative; */
+    margin-left: 20px;
+    margin-top: 20px;
+    -webkit-user-select:all;
+    -moz-user-select:all;
+    -ms-user-select:all;
+    user-select:all;
+    
 }
 .review-body h6{
     position: absolute;
     top: 30%;
     margin-top: 5px;
-    font-size: 20px;
+    font-size: 17px;
     width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    font-weight: bold;
 }
 .review-main{
     width: 100%;
     padding: 10px;
     height: 500px;
 }
+
 .review-body::before{
     content: '';
     display: block;
@@ -55,30 +101,39 @@
 }
 .review-date span{
     padding: 10px;
-    font-size: 15px;
+    font-size: 13px;
 }
 .review-footer{
+    font-family: 'GowunBatang-Regular';
     text-align: right;
     width: 100%;
     height: 200px;
+    /* position: absolute; */
+    /* right: 5%;
+    bottom: -10%; */
 }
 .review-footer input{
     border-radius: 15px;
-    margin-top: 20px;
+    margin-top: 70px;
     width: 120px;
     height: 40px;
     background-color: #000;
     color: #fff;
-    
     border: 2px solid #000;
+    position: absolute;
+    bottom: 10%;
+    right: 28%;
+    font-weight: bold;
 }
 .review-footer input:hover{
     background-color: #fff;
     color: #000;
+    border: 2px solid #fff;
 }
 
 
 .review-pop{
+    font-family: 'GowunBatang-Regular';
     display: none;
     text-align: center;
     width: 350px;
@@ -145,7 +200,7 @@
 
 
 
-/* 별점 */
+/* 
 .starpoint_wrap{
     display:inline-block;
 }
@@ -196,4 +251,4 @@
 .starpoint_box .star_radio:nth-of-type(10):hover ~ .starpoint_bg,
 .starpoint_box .star_radio:nth-of-type(10):checked ~ .starpoint_bg{width:100%;}
 
-.blind{position:absolute;clip:rect(0 0 0 0);margin:-1px;width:1px;height: 1px;overflow:hidden;}
+.blind{position:absolute;clip:rect(0 0 0 0);margin:-1px;width:1px;height: 1px;overflow:hidden;} */

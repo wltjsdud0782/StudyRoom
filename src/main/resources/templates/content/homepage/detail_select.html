@@ -9,47 +9,53 @@
 </th:block>
 
 <th:block layout:fragment="contentFragment">
-    <div class="row justify-content-center" style="height: 900px;">
-        <div class="col-10">
-            <div class="detail_select_header">
-                <h3>
-                    문의
-                </h3>
-            </div>
-            <div class="detail_select_Main">
 
-                <table class="table">
-                    <colgroup>
-                        <col width="8%">
-                        <col width="70%">
-                        <col width="8%">
-                        <col width="*">
-                    </colgroup>
-                    <tr>
-                        <td>아이디</td>
-                        <td>[[${boardList.boardWriter}]]</td>
-                        <td>작성일</td>
-                        <td>[[${boardList.boardDate}]]</td>
-                    </tr>
-                    <tr>
-                        <td>제목</td>
-                        <td colspan="3">[[${boardList.boardTitle}]]</td>
-                    </tr>
-                    <tr>
-                        <td>내용</td>
-                        <td colspan="3" style="height: 200px;">[[${boardList.boardContent}]]
-                            <div style="margin-top: 20px;">
-                                <th:block th:if="${#lists.isEmpty(boardList.imgList)}">
-                                    <th:block th:each="img : ${boardList.imgList}">
-                                        <img th:src="@{'/upload/'+ ${img.attachedFileName}}"
-                                        style=" width: 150px; height: 150px; margin-right: 0;">
-                                    </th:block>
-                                </th:if>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+    <div class="detail-select-container">
+        <div class="detail_select_header">
+            <h3>
+                Inquiry
+            </h3>
+        </div>
+
+        <div class="detail_select_Main">
+
+            <table class="detail-table" style="margin-top: 40px;">
+                <colgroup>
+                    <col width="13%">
+                    <col width="50%">
+                    <col width="8%">
+                    <col width="*">
+                </colgroup>
+                <tr>
+                    <td>아이디</td>
+                    <td>[[${boardList.boardWriter}]]</td>
+                    <td>작성일</td>
+                    <td>[[${boardList.boardDate}]]</td>
+                </tr>
+                <tr>
+                    <td>제목</td>
+                    <td colspan="3">[[${boardList.boardTitle}]]</td>
+                </tr>
+                <tr>
+                    <td>내용</td>
+                    <td style="height: 200px;" colspan="3">
+                        [[${boardList.boardContent}]]
+                    </td>
+                </tr>
+                <tr>
+                    <td>첨부 이미지</td>
+                    <td colspan="3">
+                        <div style="margin-top: 20px;">
+                            <th:block th:unless="${#lists.isEmpty(boardList.imgList)}">
+                                <th:block th:each="img : ${boardList.imgList}">
+                                    <img th:src="@{'/upload/'+ ${img.attachedFileName}}"
+                                    style=" width: 150px; height: 150px; margin-right: 0;">
+                                </th:block>
+                            </th:if>
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
             <th:block th:if="${session.loginInfo != null}">
                 <th:block th:if="${session.loginInfo.isAdmin != 'ADMIN'}">
@@ -62,7 +68,7 @@
                         </div>
                     </th:block>
                 </th:block>
-
+    
                 <th:block th:unless="${#lists.isEmpty(commentList)}">
                     <th:block th:each="comment : ${commentList}">
                             <div class="yes-answer">
@@ -84,10 +90,10 @@
                     </th:block>
                 </th:block>
             </th:block>    
-
+    
             
-
-
+    
+    
             <th:block th:if="${session.loginInfo != null}">
                 <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
                     <div class="detail_select_footer">
@@ -100,7 +106,10 @@
                 </th:block>
             </th:block>   
         </div>
+
+       
     </div>
+        
     <!-- html 코드 작성 -->
 </th:block>
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="sideMenuFragment">
+
+<div class="aside bi bi-x">
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-x side-close" viewBox="0 0 16 16">
+        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+    </svg>
+    <div class="aside-logo">
+       
+    </div>
+    <ul class="aside-subMenu">
+        <th:block th:if="${session.loginInfo != null}">
+            <div class="mypage" style="cursor: pointer;">
+                <a onclick="location.href='/board/personalInfo'">마이페이지</a>
+                <a onclick="logout()">로그아웃</a> 
+            </div>
+        </th:block>
+        <li><a onclick="location.href='/board/mainHomepage?pageNo=1'" class="page1">홈</a></li>
+        <li><a onclick="location.href='/board/studyInfo?pageNo=2'" class="page2">매장소개</a></li>
+        <li><a onclick="location.href='/seat/seatLive?pageNo=3'" class="page2">좌석선택</a></li>
+        <li><a onclick="location.href='/review/review?pageNo=4'" class="page2">리뷰</a></li>
+        <li><a onclick="location.href='/board/inquiry?pageNo=5'" class="page2">문의</a></li>
+        <li><a onclick="location.href='/board/wayToCome?pageNo=6'" class="page2">오시는길</a></li>
+        <th:block th:if="${session.loginInfo != null}">
+            <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
+                <li><a onclick="location.href='/admin/info'">관리자메뉴</a></li>
+            </th:block>
+        </th:block>
+    </ul>
+    <input type="hidden" th:value="${pageNo}" id="page-no">
+</div>
+
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/js/studyRoom.js"></script>
+</th:block>

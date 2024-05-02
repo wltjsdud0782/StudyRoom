@@ -2,7 +2,80 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="menuFragment">
-    <div class="row">
+
+<div class="header">
+    <div class="subMenu">
+        <div class="subMenu-icon bi bi-justify">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-justify submenu-on" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+            </svg>
+        </div>
+    </div>
+    <div class="mainLogo">
+        <h3 class="text-flicker-in-glow" >Green StudyRoom</h3>
+    </div>
+
+    <th:block th:if="${session.loginInfo == null}">
+        <div class="spotMenu" id="loginlogin">
+            <a class="login-popup" style="cursor: pointer;">로그인</a>
+        </div>
+    </th:block>
+
+    <th:block th:if="${session.loginInfo != null}">
+        <div class="spotMenu" style="cursor: pointer;">
+            <a>[[${session.loginInfo.memberId}]]님</a>  
+        </div>
+    </th:block>
+
+
+    <div class="login-modal">
+        <div class="login-header bi bi-x bi bi-person-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-person-circle login-icon" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+              </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-x login-close" viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+            </svg>
+        </div>
+        
+        <div class="login-content">
+            <input type="text" class="memberId" placeholder="   아이디">
+            <input type="password" class="memberPw" placeholder="   비밀번호">
+        </div>
+        <div class="login-footer">
+            <input type="submit" onclick="login()" value="로그인">
+            <ul>
+                <li><a href="#">아이디찾기</a></li>
+                <li><a href="#">비밀번호찾기</a></li>
+                <li><a href="#">회원가입</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/js/studyRoom.js"></script>
+</th:block>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="row">
         <div class="col-2 menu">
             <ul>
                 <li style="margin-right: 20px; 
@@ -50,16 +123,16 @@
                 </th:block>
             </ul>
         </div>
-    </div>
+    </div> -->
 
 
-    <div class="modal fade" id="join-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="join-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <!-- 모달 바디 -->
+    
                 <div class="modal-body">
                     <form id="join-form" class="row g-3" action="/member/join" method="post">  
-                        <!-- 기본적으로 BOOTSTRAP은 한 줄에 col이 12개. -->
+                    
                         <div class="col-12">
                             <label for="" class="form-label">아이디</label>
                             <input type="text" name="memberId" class="form-control" id="memberId">
@@ -129,9 +202,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="/js/member/join.js"></script>
-</th:block>
-
+    </div> -->
 </html>

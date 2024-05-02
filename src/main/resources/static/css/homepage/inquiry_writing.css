@@ -1,12 +1,53 @@
 textarea{
     resize: none;
 }
+@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.writing-main{
+    display: flex;
+    font-family: 'GowunBatang-Regular';
+}
+.writing_container{
+    width: 70%;
+    padding: 20px;
+    margin-top: 150px;
+    border-radius: 2px;
+    background-color: #6b6b6bb4;
+    backdrop-filter: blur(5px);
+    color: #fff;
+    border-radius: 10px;  
+}
 .writing_title{
-    margin-top: 80px;
+    width: 25%;
+    margin-top: 50px;
+    margin-bottom:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-top: 80px;
     margin-bottom:20px;
     border-bottom:1px solid #ccc ;
     width: 100%;
-    height: 30px;
+    height: 30px; */
+    color: #fff;
+    font-family: '국립박물관문화재단클래식B';
+}
+.writing_table {
+    width: 80%;
+    margin-top: 150px;
+    margin: 0 auto;
+    /* background-color: #c4c4c4; */
+}
+.writing_table tr{
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+}
+.writing_table td{
+    padding: 20px;
 }
 .writing_table span {
     font-size: 18px;
@@ -16,14 +57,32 @@ textarea{
 }
 
 .writing_title h5 {
-    margin-left: 20px;
+    font-size: 55px;
 }
 .writing_table [type=text]{
+    border-radius: 10px;
     width: 100%;
+    border: none;
+    outline: none;
+    padding: 6px;
+    padding-left: 10px;
+}
+.writing_table [type=text]:focus {
+    outline: 3px solid rgb(122, 173, 211);
+    box-sizing: border-box;
 }
 .writing_table textarea {
+    border-radius: 10px;
+    padding-left: 10px;
     width: 100%;
     height: 100%;
+    border: none;
+    outline: none;
+    padding: 6px;
+}
+.writing_table textarea:focus{
+    outline: 3px solid rgb(122, 173, 211);
+    box-sizing: border-box;
 }
 .img_file{
     display: flex;
@@ -31,7 +90,6 @@ textarea{
     justify-content: center;
     width: 180px;
     height: 180px;
-    margin-left: 20px;
     background-color: #fff;
     box-shadow: 1px 1px 1px 1px #ccc;
 }
@@ -49,16 +107,25 @@ textarea{
     display: none;
 }
 .writing_btn {
-    margin-top: 20px;
+    margin-top: 50px;
+    height: 100px;
     float: right;
+    padding-right: 80px;
 }
 .writing_btn input{
     width: 100px;
     height: 40px;
-    border: 1px solid #ccc;
-    background-color: #fff;
+    border: 1px solid rgb(217, 232, 243);
+    background-color: rgb(236, 241, 245);
+    border-radius: 5px;
     color: #000;
+    font-weight: bold;
     margin-bottom: 80px;
+}
+.writing_btn input:hover{
+    color: #fff;
+    background-color: #184207;
+    border: none;
 }
 .tdTag{
     position: relative;
@@ -83,6 +150,7 @@ textarea{
 }
 .popUp h6{
     margin-top: 40px;
+    font-weight: bold;
 }
 .popUp button {
     margin-top: 30px;
@@ -113,6 +181,7 @@ textarea{
 
 .popUp-2 h6{
     margin-top: 40px;
+    font-weight: bold;
 }
 .popUp-2 button {
     margin-top: 30px;
@@ -143,6 +212,7 @@ textarea{
 
 .popUp-3 h6{
     margin-top: 40px;
+    font-weight: bold;
 }
 .popUp-3 button {
     margin-top: 30px;
@@ -173,6 +243,7 @@ textarea{
 
 .popUp_4 h6{
     margin-top: 40px;
+    font-weight: bold;
 }
 .popUp_4 button {
     margin-top: 30px;
@@ -181,7 +252,7 @@ textarea{
     border: 1px solid;
     border-radius: 3px;
     background-color: #3c993c;
-    color: #fff;
+    color: #000;
 }
 .popUp_4 button:hover{
     cursor: pointer;

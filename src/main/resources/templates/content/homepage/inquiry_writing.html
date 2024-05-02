@@ -11,88 +11,86 @@
 <th:block layout:fragment="contentFragment">
     <!-- html 코드 작성 -->
     <form action="/board/inquiryWriting" class="writingForm" method="post" enctype="multipart/form-data">
-        <div class="row justify-content-center">
-            <div class="col-10">
-                <div class="writing_container">
-                    <div class="writing_title">
-                        <h5>문의</h5>
-                    </div>
-                    <table class="table writing_table">
-                        <colgroup>
-                            <col width="20%">
-                            <col width="*">
-                        </colgroup>
-                        <tr>
-                            <td>이름</td>
-                            <td>[[${session.loginInfo.memberId}]]</td>
-                        </tr>
-                        <tr>
-                            <td>비밀글</td>
-                            <td>
-                                <input type="checkbox" name="boardSecret" value="YES" class="boardSecret">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>제목<span class="writing_table_span">*</span>
-                            </td>
-                            <td><input type="text" name="boardTitle" class="boardTitle"></td>
-                        </tr>
-                        <tr>
-                            <td>내용<span class="writing_table_span">*</span></td>
-                            <td><textarea name="boardContent" id="" cols="30" rows="10" class="boardContent"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td>사진</td>
-                            <td class="tdTag">
-                               <label for="file" class="file_one">
-                                    <div class="bi bi-file-earmark-richtext img_file">
-                                        <div class="img_file2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-file-earmark-richtext" viewBox="0 0 16 16" style="margin-top: 25px;">
-                                                <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
-                                                <path d="M4.5 12.5A.5.5 0 0 1 5 12h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5m0-2A.5.5 0 0 1 5 10h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5m1.639-3.708 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V8.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V8s1.54-1.274 1.639-1.208M6.25 6a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5"/>
-                                              </svg>
-                                            <h6 class="img_text">이미지를 넣어주세요</h6>
-                                        </div>
-                                    </div>
-                                    <span style="color: #686767; font-size: 12px; margin-top: 10px;">* 사진은 최대 3장까지 첨부할 수 있습니다.</span>
-                               </label>
-                               <input type="file" name="file" id="file" accept="image/*" onchange="readURL(this)" multiple>
-                               <!-- <button class="btnClear"></button> -->
-                               <!-- <img class="preview" style="border: 1px solid #000"> -->
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="popUp">
-                    <h6>이미지는 최대 3장까지 첨부할 수 있습니다.</h6>
-                    <button type="button" class="popClose">확인</button>
-                </div>
-
-                <div class="popUp-2">
-                    <h6>이미지를 전체 삭제 하시겠습니까?</h6>
-                    <button type="button" class="popDelet" >확인</button>
-                    <button type="button" class="popClose" onclick="popReset()">취소</button>
-                </div>
-
-                <div class="popUp-3">
-                    <h6>제목은 필수 입력 사항입니다.</h6>
-                    <button type="button" class="pop_up_close">확인</button>
-                </div>
-
-                <div class="popUp_4">
-                    <h6>내용은 필수 입력 사항입니다.</h6>
-                    <button type="button" class="close">확인</button>
-                </div>
+        <div class="writing-main">
+            <div class="writing_title">
+                <h5>Inquiry</h5>
             </div>
-        </div>
-    
-        <div class="row justify-content-center">
-            <div class="col-10">
+            <div class="writing_container">
+                <table class=" writing_table">
+                    <colgroup>
+                        <col width="20%">
+                        <col width="*">
+                    </colgroup>
+                    <tr>
+                        <td>이름</td>
+                        <td style="font-weight: bold;">[[${session.loginInfo.memberId}]]</td>
+                    </tr>
+                    <tr>
+                        <td>비밀글</td>
+                        <td>
+                            <input type="checkbox" name="boardSecret" value="YES" class="boardSecret">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>제목<span class="writing_table_span">*</span>
+                        </td>
+                        <td><input type="text" name="boardTitle" class="boardTitle" ></td>
+                    </tr>
+                    <tr>
+                        <td>내용<span class="writing_table_span">*</span></td>
+                        <td><textarea name="boardContent" id="" cols="30" rows="10" class="boardContent"></textarea></td>
+                    </tr>
+                    <tr style="height: 200px;">
+                        <td>사진
+                            <!-- <span style="color: #fff; font-size: 12px; margin-top: 10px; font-weight: bold;">*최대 3장까지 첨부할 수 있습니다.</span> -->
+                        </td>
+                        <td class="tdTag">
+                            <label for="file" class="file_one">
+                                <div class="bi bi-file-earmark-richtext img_file">
+                                    <div class="img_file2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-file-earmark-richtext" viewBox="0 0 16 16" style="margin-top: 25px; color:#000;">
+                                            <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                                            <path d="M4.5 12.5A.5.5 0 0 1 5 12h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5m0-2A.5.5 0 0 1 5 10h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5m1.639-3.708 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V8.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V8s1.54-1.274 1.639-1.208M6.25 6a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5"/>
+                                            </svg>
+                                        <h6 class="img_text" style="font-weight: bold; color: #000;">이미지를 넣어주세요 <br> (최대 3장) </h6>
+                                    </div>
+                                </div>
+                                
+                            </label>
+                            <input type="file" name="file" id="file" accept="image/*" onchange="readURL(this)" multiple>
+                            <!-- <button class="btnClear"></button> -->
+                            <!-- <img class="preview" style="border: 1px solid #000"> -->
+                        </td>
+                    </tr>
+                </table>
                 <div class="writing_btn">
                     <input type="button" value="글쓰기" onclick="goWriting()">
                 </div>
             </div>
+    
+            <div class="popUp">
+                <h6>이미지는 최대 3장까지 첨부할 수 있습니다.</h6>
+                <button type="button" class="popClose">확인</button>
+            </div>
+    
+            <div class="popUp-2">
+                <h6>이미지를 전체 삭제 하시겠습니까?</h6>
+                <button type="button" class="popDelet" >확인</button>
+                <button type="button" class="popClose" onclick="popReset()">취소</button>
+            </div>
+    
+            <div class="popUp-3">
+                <h6>제목은 필수 입력 사항입니다.</h6>
+                <button type="button" class="pop_up_close">확인</button>
+            </div>
+    
+            <div class="popUp_4">
+                <h6>내용은 필수 입력 사항입니다.</h6>
+                <button type="button" class="close">확인</button>
+            </div>
         </div>
+        
+       
     </form>
 </th:block>
 

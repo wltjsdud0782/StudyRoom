@@ -19,7 +19,7 @@ public class PageVO {
 
     public PageVO(){
         nowPage = 1;
-        displayDateCnt = 5;
+        displayDateCnt = 7;
         displayPageCnt = 5;
     }
 

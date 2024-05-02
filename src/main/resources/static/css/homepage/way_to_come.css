@@ -1,15 +1,51 @@
 
+@font-face {
+    font-family: '국립박물관문화재단클래식B';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/국립박물관문화재단클래식B.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 .map-header{
-    margin-left: 30px;
+    /* margin-left: 30px;
     margin-top: 60px;
-    border-bottom: 3px solid #000;
+    border-bottom: 3px solid #000; */
+    display: flex;
+    height: 200px;
+    margin-top: 100px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.map-header h3 {
+    font-size: 40px;
+    font-family: '국립박물관문화재단클래식B';
+    color: #ffffff;
 }
 .map-container{
+    font-family: 'GowunBatang-Regular';
     margin-top: 60px;
-    display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 15px;
+    
+    /* background-color: #ffffff81; */
+    border-radius: 10px;
+    background-color: #6b6b6bb4;
+    backdrop-filter: blur(5px);
+    color: #fff;
+}
+.map-main{
+    display: flex;
+    justify-content: center;
 }
 .map-footer {
     height: 500px;
@@ -29,8 +65,10 @@
     width: 74%;
     height: 120px;
 }
-.map-table tr, td{
-    border: none;
+.map-table td{
+    padding: 10px;
+    text-align: left;
+    font-size: 18px;
 }
 .map-tel {
     margin-top: 20px;
@@ -39,6 +77,9 @@
     width: 74%;
     height: 120px;
 }
-.map-tel tr, td{
-    border: none;
+
+.map-tel td{
+    font-size: 18px;
+    padding-top: 30px;
+    text-align: left;
 }

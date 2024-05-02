@@ -1,6 +1,351 @@
+
+@font-face {
+    font-family: '국립박물관문화재단클래식B';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/국립박물관문화재단클래식B.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'KyoboHandwriting2023wsa';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404-2@1.0/KyoboHandwriting2023wsa.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ChosunGu';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGu.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.std-container{
+    width: 100%;
+    margin: 0 auto;
+}
 .study_infomation{
+    margin-top: 100px;
+    height: 600px;
+    display: flex;
+}
+.study_info_header_text{
+    width: 35%;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    animation-timeline: scroll();
+    animation-range : 0px 150px;
+    justify-content: center;
+}
+.study_info_header_text h3{
+    font-size: 55px;
+    font-family: '국립박물관문화재단클래식B';
+    color: #fff;
+}
+.study_info_content{
+    margin-right: 20px;
+    padding: 15px;
+    width: 60%;
+    margin-top: 20px;
+    border-radius: 2px;
+    background-color: #6b6b6bb4;
+    backdrop-filter: blur(5px);
+    font-family: 'GowunBatang-Regular';
+}
+.con1_text{
+    margin-left: 20px;
+    margin-top: 10px;
+    color: #fff;
+    font-family: 'GowunBatang-Regular';
+}
+.img_con img{
+    width: 550px;
+    height: 420px;
+    padding: 15px;
+}
+.seat_infomation{
+    margin-top: 150px;
+    height: 620px;
+    display: flex;
+}
+.seat_info_content{
+    text-align: center;
+    padding: 15px;
+    width: 60%;
+    margin-top: 100px;
+    background-color: #6b6b6bb4;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+.seat_info_header{
+    width: 40%;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.seat_info_text{
+    margin-top: 50px;
+    font-size: 55px;
+    font-family: '국립박물관문화재단클래식B';
+    color: #fff;
+    animation: fade-in-header linear forwards;
+    scale: 0.7; opacity: 0;
+    animation-timeline: view();
+    animation-range : 150px 500px;
+}
+.con2_text{
+    margin-left: 20px;
+    margin-top: 10px;
+    color: #fff;
+    font-family: 'GowunBatang-Regular';
+    text-align: left;
+    
+}
+
+.price_infomation{
+    margin-top: 150px;
+    height: 600px;
+    display: flex;
+}
+
+.price_info_header{
+    width: 35%;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.price_info_content{
+    padding: 15px;
+    width: 60%;
+    margin-top: 100px;
+    background-color: #ffffff81;
+    border-radius: 10px;
+    animation: fade-in-content linear forwards;
+    scale: 0.9; opacity
+    : 0;
+    animation-duration: 5s;
+    animation-timeline: scroll();
+    animation-range : 700px 1200px; 
+    background-color: #6b6b6bb4;
+    backdrop-filter: blur(5px);
+}
+.price_info_text {
+    margin-top: 50px;
+    font-size: 55px;
+    font-family: '국립박물관문화재단클래식B';
+    color: #ffffff;
+    animation: fade-in-header linear forwards;
+    scale: 0.7; opacity: 0;
+    animation-timeline: view();
+    animation-range : 150px 500px;
+}
+
+.reivew_infomation{
+    margin-top: 150px;
+    height: 600px;
+    display: flex;
+}
+
+.review_info_content{
+    padding: 15px;
+    width: 60%;
+    margin-top: 100px;
+    /* background-color: #ffffff81; */
+    border-radius: 10px;
+    animation: fade-in-content linear forwards;
+    scale: 0.9; opacity
+    : 0;
+    animation-duration: 5s;
+    animation-timeline: scroll();
+    animation-range : 1600px 2000px;
+    background-color: #6b6b6bb4;
+    backdrop-filter: blur(5px);  
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.review_info_header{
+    width: 35%;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.review_info_text{
+    margin-top: 50px;
+    font-size: 55px;
+    font-family: '국립박물관문화재단클래식B';
+    color: #ffffff;
+    animation: fade-in-header linear forwards;
+    scale: 0.7; opacity: 0;
+    animation-timeline: view();
+    animation-range : 200px 550px;
+}
+.inquiry_infomation{
+    margin-top: 150px;
+    height: 600px;
+    display: flex;
+}
+.inquiry_info_header{
+    width: 35%;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.inquiry_info_text{
+    margin-top: 50px;
+    font-size: 55px;
+    font-family: '국립박물관문화재단클래식B';
+    color: #ffffff;
+    animation: fade-in-header linear forwards;
+    scale: 0.7; opacity: 0;
+    animation-timeline: view();
+    animation-range : 250px 600px;
+}
+.inquiry_info_content{
+    padding: 15px;
+    width: 60%;
+    margin-top: 100px;
+    background-color: #ffffff81;
+    border-radius: 10px;
+    animation: fade-in-content linear forwards;
+    scale: 0.9; opacity
+    : 0;
+    animation-duration: 5s;
+    animation-timeline: scroll();
+    animation-range : 2100px 2400px;
+    background-color: #6b6b6bb4;
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.wayToCome_infomation{
+    margin-top: 250px;
+    width: 100%;
+    height: 1200px;
+    text-align: center;
+    margin: 0 auto;
+    /* display: flex; */
+}
+.wayToCome_info_header{
+    display: flex;
+    height: 200px;
+    margin-top: 150px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.wayToCome_info_text{
+    margin-top: 50px;
+    font-size: 55px;
+    font-family: '국립박물관문화재단클래식B';
+    color: #ffffff;
+    animation: fade-in-header linear forwards;
+    scale: 0.7; opacity: 0;
+    animation-timeline: view();
+    animation-range : 150px 550px;
+}
+.wayToCome_info_content{
+    margin: 0 auto;
+    text-align: center;
+    padding: 15px;
+    width: 60%;
+    margin-top: 50px;
+    /* background-color: #ffffff81; */
+    border-radius: 10px;
+    background-color: #ffffff81;
+    animation: fade-in-content linear forwards;
+    scale: 0.9; opacity: 0;
+    animation-duration: 5s;
+    animation-timeline: scroll();
+    animation-range : 2000px 2300px;
+    background-color: #6b6b6bb4;
+    backdrop-filter: blur(5px);
+}
+@keyframes fade-in-header {
+    to {scale: 1; opacity: 100%;}
+}
+@keyframes fade-in-content{
+    to {scale: 1; opacity: 100%;}
+}
+.con3_text {
+    margin-left: 20px;
+    margin-top: 70px;
+    color: #fff;
+    font-family: 'GowunBatang-Regular';
+    text-align: left;
+}
+.con4_text{
+    margin-left: 20px;
+    margin-top: 10px;
+    color: #fff;
+    font-family: 'GowunBatang-Regular';
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.con3_text td {
+    padding: 30px;
+    font-size: 20px;
+}
+.no_reviw{
+    font-size: 35px;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50% ,-50%);
+}
+.con5_text{
+    margin-top: 20px;
+    margin-left: 80px;
+    width: 450px;
+    height: 300px;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    font-family: 'GowunBatang-Regular';
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.con5_header{
+    width: 180px;
+    font-size: 30px;
+}
+.con5_content {
+    font-size: 15px;
+    display: inline-block;
+    position: absolute;
+    left: 20%;
+    top: 59%;
+    width: 250px;
+}
+.con5_content span {
+    padding-right: 20px;
+    border-right: 1px solid #000;
+    margin-right: 25px;
+}
+/* .study_infomation{
     margin: 0 auto;
     width: 100%;
+    background-color: #ffffffbe;
 }
 .study_info_header_text{
     width: 100%;
@@ -87,26 +432,30 @@
     padding-right: 20px;
     border-right: 1px solid #000;
     margin-right: 25px;
-}
+/* }  */
 
 
-.map-container{
+/* .map-container{
     margin-top: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-}
+} 
 .map-footer {
     height: 500px;
     margin-top: 40px;
     width: 100%;
-}
+    color: #fff;
+} */
+
 .map-title {
     border-bottom: 1px solid #ccc;
     margin-left: 140px;
     width: 74%;
     height: 120px;
+    color: #fff;
+    font-family: 'GowunBatang-Regular';
 }
 .map-info {
     margin-top: 20px;
@@ -114,30 +463,38 @@
     margin-left: 140px;
     width: 74%;
     height: 120px;
+    color: #fff;
+    font-family: 'GowunBatang-Regular';
 }
 .map-table tr, td{
     border: none;
+    padding: 10px;
+    text-align: left;
 }
+/* .map-table tr {
+    
+} */
 .map-tel {
-    margin-top: 20px;
+    margin-top: 35px;
     border-bottom: 1px solid #ccc;
     margin-left: 140px;
     width: 74%;
-    height: 120px;
+    height: 80px;
+    color: #fff;
+    font-family: 'GowunBatang-Regular';
 }
-.map-tel tr, td{
-    border: none;
+.map-tel td {
+    text-align: left;
 }
-
 /* 리뷰 */
-
 .review-body{
+    color: #000;
     margin-right: 50px;
-    background-color: #ffff99;
+    background-color: #f7f7a6;
+    /* background-color: #042222; */
     border: 1px;
     width: 270px;
     height: 250px;
-    /* 회전 */
     transform: rotate(5deg);
     padding: 10px;
     text-align: center;
@@ -162,7 +519,7 @@
     background-color: #ffffc7;
     border-width: 0 0 30px 50px;
     border-style: solid;
-    border-color: transparent transparent rgba(255, 255, 255, 0.9);
+    border-color: transparent transparent rgba(173, 173, 173, 0.377);
 }
 .review-date {
     text-align: left;

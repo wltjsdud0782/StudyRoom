@@ -24,11 +24,15 @@ public class ReviewController {
     public String review(Model model, StudyRoomInOutVO inOutVO, HttpSession session){
 
         MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-
-        inOutVO.setMemberCode(loginInfo.getMemberCode());
-
         model.addAttribute("reviewList", reviewService.selectReview());
-        model.addAttribute("inoutList", reviewService.selectInout(inOutVO.getMemberCode()));
+
+
+
+        if(loginInfo != null){
+            inOutVO.setMemberCode(loginInfo.getMemberCode());
+            model.addAttribute("inoutList", reviewService.selectInout(inOutVO.getMemberCode()));
+        }
+
 
         return "content/homepage/review";
     }

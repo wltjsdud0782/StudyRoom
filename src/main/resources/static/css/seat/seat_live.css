@@ -1,63 +1,256 @@
 .seatLive {
-    font-size: 11pt;
+    /* font-size: 11pt; */
+    /* color: #fff; */
+    /* font-family: 'GowunBatang-Regular'; */
+}
+.seat-container{
+    background-color: #a0a0a0b4;
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 30px;
+    margin-top: 20px;
+    position: relative;
+    margin-top: 150px;
+    width: 71%;
+} 
+.seat-Main{
+    display: flex;
+    /* height: 900px; */
+    width: 100%;
 }
 
-.seat-header {
-    width: 81.5%;
-    text-align: start;
-    margin-top: 12px;
-    margin-left: 190px;
-    border-bottom: 3px solid black;
+/*.diagonal4 {
+    width: 2px;
+    height: 80px;
+    background-color: #221803;
+    transform: rotate(-45deg);
+    position: absolute;
+    left: 14.5%;
+    top: 7.6%;
+    animation-name: shake-line2;
+    animation-duration: 1s;
 }
+.diagonal5 {
+    width: 2px;
+    height: 80px;
+    background-color: #221803;
+    transform: rotate(45deg);
+    position: absolute;
+    left: 11.5%;
+    top: 7.6%;
+    animation-name: shake-line;
+    animation-duration: 1s;
+}
+.aht{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ccc;
+    position: absolute;
+    top: 8%;
+    left: 12.6%;
+    box-shadow: 2px 2px 2px #464545;
+    
+} */
+.seat-header {
+    width: 25%;
+    /* height: 70px; */
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-left: 250px; */
+    /* font-size: 50px; */
+    font-family: '국립박물관문화재단클래식B';
+    color: #fff;
+    /* border-bottom: 2px solid #929292; */
+    /* border-top:  2px solid #221803; */
+    /* border-bottom: 8px solid #221803; */
+    /* background-color: #8d8872b6;
+    box-shadow: 2px 2px 2px #130e04;
+    animation-name: shake;
+    animation-duration: 1s; */
+    /* animation-iteration-count: infinite; */
+    /* position: absolute;
+    background-color: #ffffff81;
+    border-radius: 3px;
+    top: 9%;
+    left: 3.0%; */
+}
+.seat-header h3{
+    font-size: 55px;
+}
+/* @keyframes shake-line {
+    0% {
+        transform: rotate(45deg)
+    }
+    25% {
+        transform: rotate(35deg);
+    }
+    50% {
+        transform: rotate(48deg);
+    }
+    75% {
+        transform: rotate(35deg);
+    }
+    100% {
+        transform: rotate(45deg);
+    } 
+    
+}
+@keyframes shake-line2{
+    0% {
+        transform: rotate(-45deg)
+    }
+    25% {
+        transform: rotate(-50deg);
+    }
+    50% {
+        transform: rotate(-32deg);
+    }
+    75% {
+        transform: rotate(-50deg);
+    }
+    100% {
+        transform: rotate(-45deg);
+    } 
+}
+@keyframes shake {
+    0% {
+        transform: rotate(0deg)
+    }
+    25% {
+        transform: rotate(-8deg);
+    }
+    50% {
+        transform: rotate(8deg);
+    }
+    75% {
+        transform: rotate(-8deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+} */
 .modal-title{
     text-align: start;
-    font-size: 23pt;
+    font-size: 25pt;
+    /* border: 1px solid black; */
+    background-color: #ffffff80;
+    backdrop-filter: blur(5px);
     margin-left: 20px;
 }
 
 .rest {
-    border: 1px solid black;
+    background-color: #ffffffd7;
+    /* border: 1px solid black; */
+    backdrop-filter: blur(15px);
     height: 650px;
+    color: #000;
 }
 
 .room {
     padding-top: 5px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
-
 .up-room {
     height: 280px;
+    /* background-color: #858484b4; */
+    background-color: #ffffffd7;
+    backdrop-filter: blur(15px);
 }
 
 .down-room {
     height: 330px;
     margin-top: 40px;
+    /* background-color: #858484b4; */
+    background-color: #ffffffd7;
+    backdrop-filter: blur(15px);
 }
 
 .one-seat {
     padding-top: 2px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin: 3px auto;
     width: 105px;
     height: 90px;
     cursor: pointer;
+    border-radius: 20px 20px 0px 0px;
+    font-size: 14.5px;
+   
+    /* background-color: #858484b4; */
+    
 }
 .non-click{
-    background-color:rgb(226, 239, 218);
+    /* background-color:rgb(9, 78, 110); */
+    
+    background-color: #cfeafa;
+    /* background: linear-gradient(to bottom right, #bae6ff , #eaf6fd ); */
+    box-shadow: 3px 3px 3px #92a0a8;  
+    color: #000;
 }
 .click{
-    background-color: rgb(255, 199, 206);
+    /* background-color: rgb(255, 199, 206); */
+    /* background: linear-gradient(to bottom right, rgb(4, 37, 53), #192731 ); */
+    background-color: rgb(4, 37, 53);
+    box-shadow: 3px 3px 3px #8296a1;
+    color: #fff;
+    /* font-weight: bold; */
 }
 
 .floor-title {
     font-size: 20pt;
 }
 
-.floor-btn {
+.floor-btn1 {
     width: 100px;
+    height: 50px;
+    background-color:#a0a0a0b4;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    position: absolute;
+    top: -5%;
+    left: 1%;
+    border-bottom: 2px solid #474747;
+    backdrop-filter: blur(15px);
+    /* background-color:rgb(9, 78, 110); */
+    /* font-family: 'GowunBatang-Regular'; */
+}
+.floor-btn2 {
+    width: 100px;
+    height: 50px;
+    background-color:#a0a0a0b4;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    top: -5%;
+    left: 9%;
+    position: absolute;
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid #474747;
+   
+}
+.floor-btn:hover{
+    background-color: rgb(25, 71, 94);
+    color: #fff;
 }
 
 .line-height {
     line-height: 3;
     font-size: 15pt;
+}
+.seat-btn{
+    width: 120px;
+    height: 50px;
+    background-color:rgb(62, 133, 167);
+    color: #fff;
+    border: none;
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+}
+.seat-btn:hover{
+    /* background-color: #c7b1628e; */
+    background-color: rgb(4, 37, 53);
+    
 }

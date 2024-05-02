@@ -27,12 +27,14 @@ function onefloor() {
             str = `
         <div class="row mb-2">
             <div class="col floor-title">
-            1층
+           
             </div>
         </div>
         <div class="row">
         <div class="col-2">
             <div class="rest" style="padding:280px 0;">
+                1<br>
+                층<br>
                 휴<br>
                 게<br>
                 실
@@ -42,7 +44,7 @@ function onefloor() {
             <div class="row">
                 <div class="offset-1 col-5 room up-room">
                     <div>
-                    제 1열람실
+                   
                     </div>
                     <div class="row">`
             for (let i = 0; i < 4; i++) {
@@ -67,7 +69,7 @@ function onefloor() {
                                 `
                 } else {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -78,10 +80,11 @@ function onefloor() {
             }
             str += `
                     </div>
-                    <div class="row mt-5">`
+                    <div class="row" style="margin-top: 80px;">`
             for (let i = 4; i < 7; i++) {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
+                    //수리중
                     str += `
                             <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
                             <div>${e.seatNum}</div>
@@ -91,6 +94,7 @@ function onefloor() {
                             </div>
                             `
                 } else if (e.memberVO == null) {
+                    //사용가능
                     str += `
                             <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.seatFloor},${e.seatNum})">
                             <div>${e.seatNum}</div>
@@ -100,8 +104,9 @@ function onefloor() {
                             </div>
                             `
                 } else {
+                    //사용중
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -115,7 +120,7 @@ function onefloor() {
                 </div>
                 <div class="offset-1 col-5 room up-room">
                     <div>
-                        제 2열람실
+                      
                     </div>
                     <div class="row">`
             for (let i = 7; i < 11; i++) {
@@ -140,7 +145,7 @@ function onefloor() {
                             `
                 } else {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -150,7 +155,7 @@ function onefloor() {
                 }
             }
             str += `</div>
-                    <div class="row mt-5">
+                    <div class="row" style="margin-top: 80px;">
                         <div class="col-3"></div>`
 
             for (let i = 11; i < 14; i++) {
@@ -175,7 +180,7 @@ function onefloor() {
                                 `
                 } else {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -191,7 +196,7 @@ function onefloor() {
             <div class="row">
                 <div class="offset-1 col room down-room">
                     <div>
-                        제 3열람실
+                      
                     </div>
                     <div class="row">
                         <div class="col-2"></div>
@@ -218,7 +223,7 @@ function onefloor() {
                                 `
                 } else {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -228,7 +233,7 @@ function onefloor() {
                 }
             }
             str += `</div>
-                    <div class="row">`
+                    <div class="row mt-3">`
             for (let i = 20; i < 21; i++) {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
@@ -251,7 +256,7 @@ function onefloor() {
                             `
                 } else {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -283,7 +288,7 @@ function onefloor() {
                                 `
                 } else {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -293,7 +298,7 @@ function onefloor() {
                 }
             }
             str += `</div>
-                    <div class="row">`
+                    <div class="row mt-3">`
             for (let i = 22; i < 30; i++) {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
@@ -316,7 +321,7 @@ function onefloor() {
                             `
                 } else {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -364,12 +369,14 @@ function twofloor() {
             str = `
         <div class="row mb-2">
             <div class="col floor-title">
-            2층
+
             </div>
         </div>
         <div class="row">
         <div class="col-2">
             <div class="rest" style="padding:280px 0;">
+                2<br>
+                층<br>
                 휴<br>
                 게<br>
                 실
@@ -379,7 +386,7 @@ function twofloor() {
             <div class="row">
                 <div class="offset-1 col room down-room" style="margin-top: 0;">
                     <div>
-                        제 4열람실
+                        
                     </div>
                     <div class="row">`
             for (let i = 30; i < 38; i++) {
@@ -404,7 +411,7 @@ function twofloor() {
                             `
                 } else {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -414,7 +421,7 @@ function twofloor() {
                 }
             }
             str += `</div>
-                    <div class="row">`
+                    <div class="row mt-3">`
             for (let i = 38; i < 39; i++) {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
@@ -437,7 +444,7 @@ function twofloor() {
                             `
                 } else {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -469,7 +476,7 @@ function twofloor() {
                                 `
                 } else {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -479,7 +486,7 @@ function twofloor() {
                 }
             }
             str += `</div>
-                    <div class="row">
+                    <div class="row mt-3">
                         <div class="col-2"></div>
                         <div class="col-1"></div>`
             for (let i = 40; i < 46; i++) {
@@ -504,7 +511,7 @@ function twofloor() {
                                 `
                 } else {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -519,7 +526,7 @@ function twofloor() {
             <div class="row" style="margin-top: 40px;">
                 <div class="offset-1 col-5 room up-room">
                     <div>
-                    제 5열람실
+                    
                     </div>
                     <div class="row">`
             for (let i = 46; i < 49; i++) {
@@ -544,7 +551,7 @@ function twofloor() {
                             `
                 } else {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -555,7 +562,7 @@ function twofloor() {
             }
             str += `<div class="col-3"></div>
                     </div>
-                    <div class="row mt-5">`
+                    <div class="row" style="margin-top: 80px;">`
             for (let i = 49; i < 53; i++) {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
@@ -578,7 +585,7 @@ function twofloor() {
                             `
                 } else {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -591,7 +598,7 @@ function twofloor() {
                 </div>
                 <div class="offset-1 col-5 room up-room">
                     <div>
-                        제 6열람실
+                        
                     </div>
                     <div class="row">
                         <div class="col-3"></div>`
@@ -617,7 +624,7 @@ function twofloor() {
                                 `
                 } else {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -627,7 +634,7 @@ function twofloor() {
                 }
             }
             str += `</div>
-                    <div class="row mt-5">`
+                    <div class="row" style="margin-top: 80px;">`
             for (let i = 56; i < 60; i++) {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
@@ -650,7 +657,7 @@ function twofloor() {
                             `
                 } else {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(217, 225, 242); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#eebcbc; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -678,9 +685,19 @@ function twofloor() {
 const modal_open = new bootstrap.Modal('#seat-modal');
 
 function reservation(loginInfo, haveCharge, remainDate, endDate) {
+    const loginModal = document.querySelector(".login-modal")
+    const loginClose = document.querySelector(".login-close")
+
     if (loginInfo == null) { // 로그인 X
         alert("로그인이 필요한 기능입니다.");
-        location.href = "/member/loginForm"
+        // location.href = "/member/loginForm"
+        loginModal.style.display = 'block';
+        loginModal.style.opacity = '1';
+    
+        loginClose.addEventListener("click" , () => {
+            loginModal.style.opacity = '0';
+        })
+
     }
 
     if (loginInfo != null) { // 로그인 O

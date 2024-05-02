@@ -2,8 +2,11 @@
 
 function login(){
 
-    const memberId = document.querySelector('#loginInfo').querySelector('#memberId').value;
-    const memberPw = document.querySelector('#loginInfo').querySelector('#memberPw').value;
+    const memberId = document.querySelector('.memberId');
+    const memberPw = document.querySelector('.memberPw');
+    
+    console.log(memberId)
+    console.log(memberPw)
 
     fetch('/member/loginFetch', { //요청경로
         method: 'POST',
@@ -31,8 +34,8 @@ function login(){
     .then((data) => {//data -> controller에서 리턴되는 데이터!
         if(data == ''){
             alert('ID혹은 PW를 확인하세요.');
-            document.querySelector('#memberId').value='';
-            document.querySelector('#memberPw').value='';
+            document.querySelector('.memberId').value='';
+            document.querySelector('.memberPw').value='';
         }
         else{
             alert(`${data}님 반갑습니다!`);
