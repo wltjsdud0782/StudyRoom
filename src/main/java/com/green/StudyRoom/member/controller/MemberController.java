@@ -30,21 +30,21 @@ public class MemberController {
         return "content/member/login";
     }
 
-    // 로그인
-    @PostMapping("/login")
-    public String login(MemberVO memberVO, HttpSession session, Model model){
-        MemberVO loginInfo=memberService.login(memberVO);
-        String str = "";
-        if(loginInfo != null){
-            session.setAttribute("loginInfo", loginInfo);
-        }
-        else {
-            str="아이디와 password가 틀립니다.";
-            model.addAttribute("str",str);
-            return "redirect:/member/loginForm";
-        }
-        return  "redirect:/board/mainHomepage";
-    }
+//    // 로그인
+//    @PostMapping("/login")
+//    public String login(MemberVO memberVO, HttpSession session, Model model){
+//        MemberVO loginInfo=memberService.login(memberVO);
+//        String str = "";
+//        if(loginInfo != null){
+//            session.setAttribute("loginInfo", loginInfo);
+//        }
+//        else {
+//            str="아이디와 password가 틀립니다.";
+//            model.addAttribute("str",str);
+//            return "redirect:/member/loginForm";
+//        }
+//        return  "redirect:/board/mainHomepage";
+//    }
 
 
     //아이디 찾기 화면
@@ -80,18 +80,18 @@ public class MemberController {
         return "content/member/privacy_policy";
     }
 
-    // 비동기 로그인
-//    @ResponseBody
-//    @PostMapping("/loginFetch")
-//    public String loginFetch(MemberVO memberVO, HttpSession session){
-//        MemberVO loginInfo = memberService.login(memberVO);
-//
-//    //로그인 성공 시 세션에 데이터 저장
-//        if(loginInfo != null){
-//            session.setAttribute("loginInfo", loginInfo);
-//        }
-//        return loginInfo == null ? "" : loginInfo.getMemberId();
-//    }
+     //비동기 로그인
+    @ResponseBody
+    @PostMapping("/loginFetch")
+    public String loginFetch(MemberVO memberVO, HttpSession session){
+        MemberVO loginInfo = memberService.login(memberVO);
+
+    //로그인 성공 시 세션에 데이터 저장
+        if(loginInfo != null){
+            session.setAttribute("loginInfo", loginInfo);
+        }
+        return loginInfo == null ? "" : loginInfo.getMemberId();
+    }
 
     // 로그아웃
     @GetMapping("/logout")
