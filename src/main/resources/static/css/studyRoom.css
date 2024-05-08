@@ -1,20 +1,13 @@
 @font-face {
-<<<<<<< HEAD
-    font-family: 'GongGothicMedium';
-    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-=======
   font-family: 'GongGothicMedium';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
   font-weight: normal;
   font-style: normal;
->>>>>>> a16124754ad3baf130f60834fd04fe5ea606223f
 }
 
 @font-face {
   font-family: '국립박물관문화재단클래식B';
-  src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/국립박물관문화재단클래식B.woff') format('woff');
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/국립박물관문화재단클래식B.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
