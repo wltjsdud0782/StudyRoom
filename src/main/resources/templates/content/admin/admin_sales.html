@@ -213,7 +213,7 @@
                                         <td class="text-end">
                                             [[${#numbers.formatInteger(monthA.chargeVOList[0].chargeFee, 1, 'COMMA')}]]
                                         </td>
-                                        <td class="text-end">
+                                        <td class="text-end salesMA">
                                             [[${#numbers.formatInteger(monthA.salesFee, 1, 'COMMA')}]]
                                         </td>
                                     </tr>
@@ -221,7 +221,7 @@
                                 <tfoot class="table-light">
                                     <tr>
                                         <td class="table-active">매출 합계</td>
-                                        <td colspan="3" class="text-end">추후 수정 예정</td>
+                                        <td colspan="3" class="text-end salesMA_SUM">추후 수정 예정</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -267,7 +267,7 @@
                                         <td class="text-end">
                                             [[${#numbers.formatInteger(month.chargeVOList[0].chargeFee, 1, 'COMMA')}]]
                                         </td>
-                                        <td class="text-end">
+                                        <td class="text-end salesM">
                                             [[${#numbers.formatInteger(month.salesFee, 1, 'COMMA')}]]
                                         </td>
                                     </tr>
@@ -275,7 +275,7 @@
                                 <tfoot class="table-light">
                                     <tr>
                                         <td class="table-active">매출 합계</td>
-                                        <td colspan="3" class="text-end">추후 수정 예정</td>
+                                        <td colspan="3" class="text-end salesM_SUM">추후 수정 예정</td>
                                     </tr>
                                 </tfoot>
                             </table>

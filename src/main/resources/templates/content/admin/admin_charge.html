@@ -39,7 +39,7 @@
                                             [[${charge.chargeName}]]
                                         </div>
                                         <div style="font-size: larger;">
-                                            &ensp;[[${charge.chargeFee}]]원
+                                            &ensp;[[${#numbers.formatInteger(charge.chargeFee, 1, 'COMMA')}]]원
                                         </div>
                                     </td>
                                     <td class="text-center" width="20%"

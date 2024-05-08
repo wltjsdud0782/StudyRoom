@@ -153,6 +153,29 @@ function getMonthChart() {
             month2.insertAdjacentHTML('afterbegin', str_2);
             /////////////////////////////////////////////////////////////////////
 
+            /////////////////////////////////////////////////////////////////////
+            const totalSumM = document.querySelector('.salesM_SUM');
+            const sumM = document.querySelectorAll('.salesM');
+            let sum_1 = 0;
+            for (let i = 0; i < sumM.length; i++) {
+                sum_1 += parseInt(sumM[i].textContent.replace(/,/g, ""));
+            }
+            totalSumM.innerHTML = '';
+            let str_3 = '';
+            str_3 += `<div>${sum_1.toLocaleString('ko-KR')}</div>`;
+            totalSumM.insertAdjacentHTML('afterbegin', str_3);
+            const totalSumMA = document.querySelector('.salesMA_SUM');
+            const sumMA = document.querySelectorAll('.salesMA');
+            let sum_2 = 0;
+            for (let i = 0; i < sumMA.length; i++) {
+                sum_2 += parseInt(sumMA[i].textContent.replace(/,/g, ""));
+            }
+            totalSumMA.innerHTML = '';
+            let str_4 = '';
+            str_4 += `<div>${sum_2.toLocaleString('ko-KR')}</div>`;
+            totalSumMA.insertAdjacentHTML('afterbegin', str_4);
+            /////////////////////////////////////////////////////////////////////
+
             //리스트 만들기
             const monthList = [];
             const salesList = [];
@@ -353,7 +376,7 @@ function getTableData() {
             let str_1 = '';
             str_1 += `              
                 <tr>
-                    <td class="table-active">구분</td>
+                    <td class="table-active left">구분</td>
                     `;
             data.monthList.forEach((element, idx) => {
                 str_1 += `
