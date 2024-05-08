@@ -105,6 +105,7 @@ function login(){
             document.querySelector('#loginlogin').innerHTML='';
             let str = `<a>${data}님</a>`
             document.querySelector('#loginlogin').insertAdjacentHTML("afterbegin",str);
+            location.reload(true);
         }
     })
     //fetch 통신 실패 시 실행 영역
