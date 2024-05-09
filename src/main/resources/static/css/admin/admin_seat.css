@@ -44,6 +44,7 @@
 .one-seat {
     padding-top: 2px;
     border: 1px solid #999999;
+    border-radius: 10px;
     margin: 3px auto;
     width: 105px;
     height: 90px;

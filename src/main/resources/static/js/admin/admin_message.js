@@ -55,7 +55,7 @@ function goChat(memberCode) {
             oneByone.innerHTML = '';
             let str = '';
             data.chtList.forEach(e => {
-            str += `
+                str += `
             <tr>`;
                 if (e.toFrom == 'TO') {
                     str += `
@@ -69,7 +69,8 @@ function goChat(memberCode) {
                     <div class="topMsg" style="float: left;">
                         <span>&ensp;&ensp;${e.messageDate}</span>
                     </div>
-                </td>`;}
+                </td>`;
+                }
                 else {
                     str += `                                   
                 <td>
@@ -87,15 +88,16 @@ function goChat(memberCode) {
                 </td>
                 <td width="60%"></td>
             </tr>
-            `;}
-        })
+            `;
+                }
+            })
             //th:each="chat : ${data.chtList}"
             oneByone.insertAdjacentHTML('afterbegin', str)
         })
 
         //fetch 통신 실패 시 실행 영역
         .catch(err => {
-            alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+            alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요.');
             console.log(err);
         });
 }
@@ -111,8 +113,11 @@ function StartChat() {
     let receiverName = document.querySelector('#send_memberName').value;
     document.querySelector('#receiver').value = receiverName;
 
-    if (document.querySelector('#admin_message_content').value == '') {
-        alert('메시지를 입력해주세요!');
+    if (memberCode == 0) {
+        alert('보낼 사람을 선택해주세요.');
+    }
+    else if (document.querySelector('#admin_message_content').value == '') {
+        alert('메시지를 입력해주세요.');
     }
     else {
         sendForm.submit();

@@ -721,7 +721,7 @@ const modal_open = new bootstrap.Modal('#adminSeat-modal');
 function moveMember() {
 
     if (selected_memberCode == 0) {
-        alert("사용중인 회원을 선택해주세요.")
+        alert("사용 중인 회원을 선택해주세요.")
     }
     else {
 
