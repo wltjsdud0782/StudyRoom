@@ -26,6 +26,11 @@ public class ChargeServiceImpl implements ChargeService{
         return sqlSession.selectList("chargeMapper.selectCharge");
     }
 
+    @Override
+    public List<ChargeVO> setCharge() {
+        return sqlSession.selectList("chargeMapper.setCharge");
+    }
+
     //요금제 조회하기(비동기)
     @Override
     public ChargeVO getCharge(int chargeCode) {
