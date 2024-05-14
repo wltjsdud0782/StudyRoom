@@ -1,8 +1,6 @@
 //submit
 function enroll() {
-
     const sendCharge = document.querySelector('.sendCharge');
-
     if (document.querySelector('.enInput').value == '') {
         alert('빈칸에 내용을 입력해주세요.');
     }

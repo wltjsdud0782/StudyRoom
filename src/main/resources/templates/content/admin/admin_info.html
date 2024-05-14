@@ -43,7 +43,8 @@
                                                         <input type="text" class="form-control searchInput"
                                                             name="searchValue" style="width: 361px;"
                                                             th:value="${infoSearchVO.searchValue}">
-                                                        <button class="btn green-btn" type="button" onclick="infoSearch()">
+                                                        <button class="btn green-btn" type="button"
+                                                            onclick="infoSearch()">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18"
                                                                 height="18" fill="currentColor" class="bi bi-search"
                                                                 viewBox="0 0 16 16">
@@ -69,7 +70,7 @@
                                     </th:block>
                                     <th:block th:unless="${#lists.isEmpty(memberList)}">
                                         <tr th:each="member, state : ${memberList}"
-                                            th:onclick="allInfo([[${member.memberCode}]])" 
+                                            th:onclick="allInfo([[${member.memberCode}]])"
                                             style="height: 4.6rem; vertical-align: middle;">
                                             <td class="text-center" width="5%"
                                                 style="background-color: #8bc0ae; color: white;">
@@ -102,20 +103,71 @@
                             </table>
                         </div>
                         <div class="col-5">
-                            <form action="/admin/sendCoupon" method="post" class="sendCouponForm">
+                            <!-- 관리자 여부 -->
+                            <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
+                                <form action="/admin/sendCoupon" method="post" class="sendCouponForm">
+                                    <table class="table table-hover adminContainer-table">
+                                        <thead class="table-success">
+                                            <tr>
+                                                <td>
+                                                    <div style="float: left;">
+                                                        <label class="input-group-text" style="width: 120px; height: 40px; 
+                                                        justify-content: center;">쿠폰 지급</label>
+                                                    </div>
+                                                    <div class="goCoupon" style="float: right;">
+                                                        <div class="btnDiv">
+                                                            <div class="btn-group" role="group">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    disabled>지급 대상</button>
+                                                                <button type="button" class="btn btn-light"
+                                                                    style="background-color: white;"
+                                                                    disabled>지급하기</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="adminContainer-table-tbody checkCoupon scroll-table">
+                                            <th:block th:if="${#lists.isEmpty(couponList)}">
+                                                <tr>
+                                                    <td>※ 등록된 쿠폰이 없습니다.</td>
+                                                </tr>
+                                            </th:block>
+                                            <th:block th:unless="${#lists.isEmpty(couponList)}">
+                                                <tr th:each="coupon : ${couponList}">
+                                                    <td>
+                                                        <div>[[${coupon.couponName}]]</div>
+                                                        <div style="font-size: larger;">
+                                                            &ensp;[[${coupon.discountPercent}]]%
+                                                            할인
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </th:block>
+                            <!-- 관리자가 아님 -->
+                            <th:block th:unless="${session.loginInfo.isAdmin == 'ADMIN'}">
                                 <table class="table table-hover adminContainer-table">
                                     <thead class="table-success">
                                         <tr>
                                             <td>
                                                 <div style="float: left;">
-                                                    <label class="input-group-text" style="width: 120px; height: 40px; 
-                                                    justify-content: center;">쿠폰 지급</label>
+                                                    <label class="input-group-text" 
+                                                    style="width: 120px; height: 40px;
+                                                    justify-content: center;">지급 권한없음</label>
                                                 </div>
                                                 <div class="goCoupon" style="float: right;">
-                                                    <div class="btnDiv">                                              
+                                                    <div class="btnDiv">
                                                         <div class="btn-group" role="group">
-                                                            <button type="button" class="btn btn-secondary" disabled>지급 대상</button>
-                                                            <button type="button" class="btn btn-light" style="background-color: white;" disabled>지급하기</button>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                disabled>지급 대상</button>
+                                                            <button type="button" class="btn btn-light"
+                                                                style="background-color: white;"
+                                                                disabled>지급하기</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -140,12 +192,11 @@
                                         </th:block>
                                     </tbody>
                                 </table>
-                            </form>
+                            </th:block>
                         </div>
                     </div>
                     <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
                     <div class="changeInfo-div">
-
                     </div>
                 </div>
             </div>

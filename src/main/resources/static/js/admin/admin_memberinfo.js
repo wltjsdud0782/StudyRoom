@@ -897,20 +897,16 @@ function memberInfo(memberCode) {
             if (data.memberMap.isAdmin == '알바생') {
                 str_6 += `
                                             <option value="USER">회원</option>
-                                            <option value="ARBEIT" selected>알바생</option>
-                                            <option value="ADMIN">관리자</option>`;
+                                            <option value="ARBEIT" selected>알바생</option>`;
             }
             else if (data.memberMap.isAdmin == '관리자') {
                 str_6 += `
-                                            <option value="USER">회원</option>
-                                            <option value="ARBEIT">알바생</option>
                                             <option value="ADMIN" selected>관리자</option>`;
             }
             else {
                 str_6 += `
                                             <option value="USER" selected>회원</option>
-                                            <option value="ARBEIT">알바생</option>
-                                            <option value="ADMIN">관리자</option>`;
+                                            <option value="ARBEIT">알바생</option>`;
             }
             str_6 += `</select>`;
             isAdmin_data.insertAdjacentHTML('afterbegin', str_6);
