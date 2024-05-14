@@ -143,10 +143,11 @@ public class StudyRoomBoardController {
 
     // 개인 정보 페이지로 이동
     @GetMapping("/personalInfo")
-    public String myPage(HttpSession session){
-
+    public String myPage(Model model, HttpSession session,
+                         @RequestParam(name = "pageNo", required = false, defaultValue = "1") int pageNo){
         MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-
+        model.addAttribute("pageNo",pageNo);
+        //해당 페이지 유지 시, 사이드 바 빛나도록 수정하고 싶음...
         return "content/homepage/pers_info";
     }
 
@@ -181,14 +182,12 @@ public class StudyRoomBoardController {
     //마이페이지로 이동
     @GetMapping("/mainMyPage")
     public String mainMyPage(){
-
         return "content/homepage/main_myPage";
     }
 
     //개인 정보 수정
     @PostMapping("/updatePersInfo")
     public String updatePersInfo(MemberVO memberVO){
-
         boardService.updateMember(memberVO);
         return "redirect:/board/mainMyPage";
     }

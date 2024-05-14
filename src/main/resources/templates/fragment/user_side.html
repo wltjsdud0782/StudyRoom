@@ -2,60 +2,82 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="sideFragment">
-    <div class="row justify-content-center" style="height: 700px; width: 200px;">
+    <div class="row justify-content-center">
         <div class="col">
-            <div class="sideMenu">
+            <div class="sideMenu-div">
                 <ul>
-                    <li>
-                        <a onclick="location.href='/board/personalInfo'" class="bi bi-person-circle">
-                            &nbsp;
+                    <li style="margin-bottom: 3%;">
+                        <a onclick="location.href='/board/mainHomepage'" style="color: white;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                class="bi bi-person-circle" viewBox="0 0 16 16" style="margin-right: 20px;">
-                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                class="bi bi-arrow-left-circle" viewBox="0 0 16 16" style="margin-right: 10px;">
                                 <path fill-rule="evenodd"
-                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                                    d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
                             </svg>
-                            개인정보수정
+                            뒤로가기
                         </a>
                     </li>
+                    <div style="color: #fff; padding: 20px;">
+                        <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
+                            관리자
+                        </th:block>
+                        <th:block th:if="${session.loginInfo.isAdmin == 'ARBEIT'}">
+                            알바생
+                        </th:block>
+                        <th:block th:if="${session.loginInfo.isAdmin == 'USER'}">
+                            회원
+                        </th:block>
+                        <p style="font-size: 2rem; padding-left: 15px;">
+                            [[${session.loginInfo.memberId}]]
+                        </p>
+                    </div>
                     <li>
-                        <a onclick="location.href='/board/myBuyDetail'" class="bi bi-credit-card">
+                        <a onclick="location.href='/board/personalInfo?pageNo=1'" class="page1">
                             &nbsp;
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                class="bi bi-credit-card" viewBox="0 0 16 16" style="margin-right: 20px;">
-                                <path
-                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z" />
-                                <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor"
+                                class="bi bi-person-fill" viewBox="0 0 16 16" style="margin-right: 15px;">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
                             </svg>
-                            이용권/쿠폰
+                            개인정보 수정
                         </a>
                     </li>
                     <li>
-                        <a onclick="location.href='/board/mySeat'" class="bi bi-calendar-check">
+                        <a onclick="location.href='/board/myWriting?pageNo=2'" class="page2">
                             &nbsp;
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                class="bi bi-calendar-check" viewBox="0 0 16 16" style="margin-right: 20px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-chat-left-text-fill" viewBox="0 0 16 16"
+                                style="margin-right: 21px; margin-left: 3px;">
                                 <path
-                                    d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0" />
-                                <path
-                                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                            </svg> 입실조회
-                        </a>
-                    </li>
-                    <li>
-                        <a onclick="location.href='/board/myWriting'" class="bi bi-chat-left-dots">
-                            &nbsp;
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                class="bi bi-chat-left-dots" viewBox="0 0 16 16" style="margin-right: 20px;">
-                                <path
-                                    d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
-                                <path
-                                    d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                                    d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z" />
                             </svg>
                             내 문의
                         </a>
                     </li>
-                </ul>
+                    <li>
+                        <a onclick="location.href='/board/mySeat?pageNo=3'" class="page3">
+                            &nbsp;
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-door-open-fill" viewBox="0 0 16 16" style="margin-right: 20px;">
+                                <path
+                                    d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15zM11 2h.5a.5.5 0 0 1 .5.5V15h-1zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1" />
+                            </svg>
+                            입실 조회
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="location.href='/board/myBuyDetail?pageNo=4'" class="page4">
+                            &nbsp;
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-person-vcard-fill" viewBox="0 0 16 16" style="margin-right: 20px;">
+                                <path
+                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5M9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8m1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5m-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96q.04-.245.04-.5M7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0" />
+                            </svg>
+                            이용권/쿠폰
+                        </a>
+                    </li>
+                    
+                </ul>     
+                <div class="sideFooter">Green StudyRoom</div>
+                <input type="hidden" th:value="${pageNo}" id="page-no">
             </div>
         </div>
     </div>
