@@ -13,6 +13,9 @@ public interface ChargeService {
     //만든 요금제 보여주기
     List<ChargeVO> selectCharge();
 
+    //만든 요금제 보여주기 top 5
+    List<ChargeVO> setCharge();
+
     //요금제 조회하기(비동기)
     ChargeVO getCharge(int chargeCode);
 

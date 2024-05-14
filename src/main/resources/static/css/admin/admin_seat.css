@@ -22,6 +22,7 @@
 
 .rest {
     border: 1px solid #999999;
+    border-radius: 7px;
     height: 650px;
     background-color: white;
 }
@@ -29,6 +30,7 @@
 .room {
     padding-top: 5px;
     border: 1px solid #999999;
+    border-radius: 7px;
     background-color: white;
 }
 
@@ -44,6 +46,7 @@
 .one-seat {
     padding-top: 2px;
     border: 1px solid #999999;
+    border-radius: 14px;
     margin: 3px auto;
     width: 105px;
     height: 90px;
@@ -51,16 +54,16 @@
 }
 
 .greenSeat {
-    background-color: rgb(226, 239, 218);
+    background-color: #e4eec6;
     cursor: default;
 }
 
 .non-click {
-    background-color: rgb(217, 225, 242);
+    background-color: #facad8;
 }
 
 .click {
-    background-color: rgb(255, 199, 206);
+    background-color: #f5b3b4; 
 }
 
 .floor-title {

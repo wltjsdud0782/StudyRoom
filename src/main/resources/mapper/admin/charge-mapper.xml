@@ -34,6 +34,17 @@
         ORDER BY CHARGE_FEE DESC
     </select>
 
+    <!-- 요금 OUT top 5 -->
+    <select id="setCharge" resultMap="charge">
+        SELECT CHARGE_NAME
+        , CHARGE_FEE
+        , CHARGE_CODE
+        , CHARGE_DATE
+        FROM STUDYROOM_CHARGE
+        ORDER BY CHARGE_FEE ASC
+        LIMIT 5
+    </select>
+
     <!-- 요금제 input 조회하기 / 비동기 조회 -->
     <select id="getCharge" resultMap="charge">
         SELECT CHARGE_NAME

@@ -61,7 +61,7 @@ function onefloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -95,7 +95,7 @@ function onefloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -134,7 +134,7 @@ function onefloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -169,7 +169,7 @@ function onefloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -212,7 +212,7 @@ function onefloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -245,7 +245,7 @@ function onefloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -277,7 +277,7 @@ function onefloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -310,7 +310,7 @@ function onefloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -411,7 +411,7 @@ function twofloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -444,7 +444,7 @@ function twofloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -476,7 +476,7 @@ function twofloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -511,7 +511,7 @@ function twofloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -551,7 +551,7 @@ function twofloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -585,7 +585,7 @@ function twofloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -624,7 +624,7 @@ function twofloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                                <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                                <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                                 <div>${e.seatNum}</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
@@ -657,7 +657,7 @@ function twofloor() {
                 const e = data[i];
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
-                            <div class="col-3 one-seat" style="background-color:rgb(219, 219, 219); cursor:default;">
+                            <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
                             <div>${e.seatNum}</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
@@ -721,7 +721,7 @@ const modal_open = new bootstrap.Modal('#adminSeat-modal');
 function moveMember() {
 
     if (selected_memberCode == 0) {
-        alert("사용중인 회원을 선택해주세요.")
+        alert("사용 중인 회원을 선택해주세요.")
     }
     else {
 
@@ -762,12 +762,12 @@ function moveMember() {
                                 <div class="row">
                                     <div class="col-auto">
                                         <select class="form-select text-center seatFloor" onchange="changeFloor()" style="width: 75px; font-size: 15px;">`
-                                        data.floor.forEach(e => {
-                                        str += `
+                data.floor.forEach(e => {
+                    str += `
                                         <option ${data.resultFloor == e.seatFloor ? 'selected' : ''} value=${e.seatFloor}>${e.seatFloor}</option>
                                         `
-                                        });
-                                        str += `
+                });
+                str += `
                                         </select>
                                     </div>
                                     <div class="col-auto">
@@ -775,12 +775,12 @@ function moveMember() {
                                     </div>
                                     <div class="col-auto">
                                         <select class="form-select text-center seatNum ms-2" style="width: 75px; font-size: 15px;">`
-                                        data.num.forEach(e => {
-                                        str += `
+                data.num.forEach(e => {
+                    str += `
                                         <option value=${e.seatNum}>${e.seatNum}</option>
                                         `
-                                        });
-                                        str += `
+                });
+                str += `
                                         </select>
                                     </div>
                                     <div class="col-auto">
@@ -876,7 +876,6 @@ function moveMember() {
 function oneMore() {
     const result = confirm('선택한 회원의 좌석을 이동시키겠습니까?')
     if (result) {
-
         fetch('/seat/adminSeatMoveSuccess', { //요청경로
             method: 'POST',
             cache: 'no-cache',
@@ -929,7 +928,7 @@ function adminSeatOut() {
         })
             .then((response) => {
                 if (!response.ok) {
-                    alert('fetch error!\n컨트롤러로 통신중에 오류가 발생했습니다.');
+                    alert('오류가 발생하였습니다.');
                     return;
                 }
 
@@ -938,8 +937,13 @@ function adminSeatOut() {
             })
             //fetch 통신 후 실행 영역
             .then((data) => {//data -> controller에서 리턴되는 데이터!
-                alert('퇴실이 완료되었습니다. 감사합니다.')
-                location.href = "/admin/seat"
+                if (data != null) {
+                    alert('퇴실이 완료되었습니다. 감사합니다.')
+                    location.href = "/admin/seat"
+                }
+                else {
+                    alert('퇴실시킬 회원을 선택해 주세요.');
+                }
             })
             //fetch 통신 실패 시 실행 영역
             .catch(err => {

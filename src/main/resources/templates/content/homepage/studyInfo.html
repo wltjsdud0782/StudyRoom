@@ -77,7 +77,7 @@
                             </colgroup>
                             <tr>
                                 <td>[[${charge.chargeName}]]</td>
-                                <td class="text-end">[[${charge.chargeFee}]]</td>
+                                <td class="text-end">[[${#numbers.formatInteger(charge.chargeFee, 1, 'COMMA')}]]</td>
                             </tr>
                         </th:block>
                     </table>

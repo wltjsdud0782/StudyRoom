@@ -248,7 +248,8 @@ public class StudyRoomBoardController {
     @GetMapping("/studyInfo")
     public String studyInfo(Model model,@RequestParam(name = "pageNo", required = false, defaultValue = "2") int pageNo){
 //
-        List<ChargeVO> chargeList = chargeService.selectCharge();
+        //이용권 요금 정보
+        List<ChargeVO> chargeList = chargeService.setCharge();
         model.addAttribute("chargeList", chargeList);
 
         List<BoardVO> boardList = boardService.selectPageInfo();
