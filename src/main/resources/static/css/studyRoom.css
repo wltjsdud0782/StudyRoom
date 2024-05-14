@@ -627,6 +627,8 @@ a {
 .menu > ul > li > a:hover {
     border-bottom: 1px solid #000;
 }
+*/
+
 .sideMenu {
     margin-top: 120px;
     position: fixed;
@@ -634,7 +636,7 @@ a {
     left: 30px;
 }   
 .sideMenu > ul {
-    height: 250px;
+    height: 275px;
     width: 200px;
     border: 1px solid #ccc;
     border-radius: 20px;
@@ -644,7 +646,7 @@ a {
     color: #fff;
 }
 .sideMenu > ul > li {
-    margin-top: 10px;
+    margin-top: 15px;
     width: 95%;
     height: 50px;
     text-align: left;
@@ -656,7 +658,7 @@ a {
     box-sizing: border-box;
     width: 95%;
     height: 50px;
-    padding: 10px 10px;
+    padding: 13px 10px;
     color: #fff;
     border-radius: 20px;
 }
@@ -664,43 +666,8 @@ a {
     background-color: #fff;
     color: #000;
 }
-.sideMenu-second {
-    margin-top: 120px;
-    position: fixed;
-    top: 100px;
-    left: 30px;
-}   
-.sideMenu-second > ul {
-    height: 374px;
-    width: 200px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    margin: 0;
-    padding: 0;
-    background-color: #000;
-    color: #fff;
-}
-.sideMenu-second > ul > li {
-    margin-top: 10px;
-    width: 95%;
-    height: 50px;
-    text-align: left;
-}
-.sideMenu-second > ul > li > a{
-    margin-left: 10px;
-    display: inline-block;
-    box-sizing: border-box;
-    width: 95%;
-    height: 50px;
-    padding: 10px 10px;
-    color: #fff;
-    border-radius: 20px;
-}
-.sideMenu-second > ul > li > a:hover{
-    background-color: #fff;
-    color: #000;
-}
-.row_footer{
+
+/* .row_footer{
     height: 300px;
     position: relative;
     transform: translateY(0%);
@@ -750,7 +717,7 @@ a {
 }
 .pointer{
     cursor: pointer;
-} */
+}  */
 
 .admin-header {
   /* position: relative; */
