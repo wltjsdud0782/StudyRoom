@@ -114,6 +114,8 @@ public class StudyRoomBoardController {
                 isSearch = 2;
             }
             model.addAttribute("isSearch",isSearch);
+            System.out.println(searchVO.getSearchType());
+            model.addAttribute("searchType",searchVO.getSearchType());
         }
 
 

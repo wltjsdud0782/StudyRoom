@@ -30,6 +30,15 @@ public class MemberController {
         return "content/member/login";
     }
 
+    @GetMapping("/idFind")
+    public String idFind(){
+        return "content/member/id_find";
+    }
+
+    @GetMapping("/passwordFind")
+    public String passwordFind(){
+        return "content/member/passwordFind";
+    }
 //    // 로그인
 //    @PostMapping("/login")
 //    public String login(MemberVO memberVO, HttpSession session, Model model){
