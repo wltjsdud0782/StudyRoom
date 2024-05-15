@@ -1,10 +1,8 @@
 //submit
 function enroll() {
-
     const sendCharge = document.querySelector('.sendCharge');
-
     if (document.querySelector('.enInput').value == '') {
-        alert('빈칸에 값을 입력해주세요!');
+        alert('빈칸에 내용을 입력해주세요.');
     }
     else {
         sendCharge.submit();
@@ -51,8 +49,7 @@ function selectService(value) {
                             style="width: 80px; height: 40px; justify-content: center;">가격</span>
                             <input type="text" class="form-control enInput" name="chargeFee"
                             placeholder="판매 가격">
-                            <button type="button" class="btn"
-                            onclick="enroll()" style="width: 120px; background-color: #8bc0ae; color: white;">이용권 등록
+                            <button type="button" class="btn green-btn" onclick="enroll()">이용권 등록
                             </button>
                             <button type="reset" class="btn btn-light"
                             style="width: 120px;">취소
@@ -114,8 +111,8 @@ function selectService(value) {
                             style="width: 80px; height: 40px; justify-content: center;">할인율</span>
                             <input type="text" class="form-control enInput" name="discountPercent"
                             placeholder="할인율(%)">
-                            <button type="button" class="btn"
-                            onclick="enroll()" style="width: 120px; background-color: #8bc0ae; color: white;">쿠폰 등록
+                            <button type="button" class="btn green-btn"
+                            onclick="enroll()">쿠폰 등록
                             </button>
                             <button type="reset" class="btn btn-light"
                             style="width: 120px;">취소
@@ -208,8 +205,8 @@ function changeCharge(chargeCode) {
                                     style="width: 80px; height: 40px; justify-content: center;">가격</span>
                                     <input type="text" class="form-control enInput" name="chargeFee"
                                     placeholder="판매 가격" value="${data.chargeFee}">
-                                    <button type="button" class="btn"
-                                    onclick="enroll()" style="width: 120px; background-color: #8bc0ae; color: white;">이용권 변경
+                                    <button type="button" class="btn green-btn"
+                                    onclick="enroll()">이용권 변경
                                     </button>
                                     <button type="reset" class="btn btn-light"
                                     style="width: 120px;">취소
@@ -322,8 +319,8 @@ function changeCoupon(couponCode) {
                                 style="width: 80px; height: 40px; justify-content: center;">할인율</span>
                                 <input type="text" class="form-control enInput" name="discountPercent"
                                 placeholder="할인율(%)" value="${data.discountPercent}">
-                                <button type="button" class="btn"
-                                onclick="enroll()" style="width: 120px; background-color: #8bc0ae; color: white;">쿠폰 변경
+                                <button type="button" class="btn green-btn"
+                                onclick="enroll()">쿠폰 변경
                                 </button>
                                 <button type="reset" class="btn btn-light"
                                 style="width: 120px;">취소

@@ -68,6 +68,18 @@ button {
     cursor: pointer;
 }
 
+.green-btn {
+    width: 120px;
+    background-color: #8bc0ae;
+    color: white;
+    transition-duration: 0.2s;
+}
+
+.green-btn:hover {
+    background-color: #70998a;
+    color: white;
+}
+
 /* (Info)----------------------------------------------- */
 
 .memberInfo-table {
@@ -106,7 +118,7 @@ button {
 
 .adminContainer-table-tbody2 {
     display: flex;
-    height: 520px;
+    height: 672px;
     overflow-y: overlay;
     flex-direction: column-reverse;
     background-color: #92aac9;
@@ -135,7 +147,7 @@ button {
 
 .adminContainer-table-tbody22 {
     display: block;
-    height: 520px;
+    height: 672px;
     overflow-y: overlay;
 }
 
@@ -177,7 +189,7 @@ button {
 
 .adminContainer-table-tbody5 {
     display: block;
-    height: 368px;
+    height: 442px;
     overflow-y: overlay;
 }
 
@@ -302,14 +314,14 @@ button {
 
 .salesTable2 {
     font-size: 11px;
-    text-align: center; 
+    text-align: center;
     vertical-align: middle;
 }
 
 .salesTable2 .right {
-    text-align: right; 
+    text-align: right;
 }
 
 .salesTable2 .left {
-    text-align: left; 
+    text-align: left;
 }

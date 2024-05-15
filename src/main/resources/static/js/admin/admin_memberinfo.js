@@ -58,7 +58,7 @@ function allInfo(memberCode) {
             `;
             goCoupon.insertAdjacentHTML('afterbegin', str_1);
 
-            //쿠폰 지급창 출력
+            //쿠폰 지급창 출력 sendCouponForm
             const checkCoupon = document.querySelector('.checkCoupon');
             checkCoupon.innerHTML = '';
             let str_2 = '';
@@ -897,20 +897,16 @@ function memberInfo(memberCode) {
             if (data.memberMap.isAdmin == '알바생') {
                 str_6 += `
                                             <option value="USER">회원</option>
-                                            <option value="ARBEIT" selected>알바생</option>
-                                            <option value="ADMIN">관리자</option>`;
+                                            <option value="ARBEIT" selected>알바생</option>`;
             }
             else if (data.memberMap.isAdmin == '관리자') {
                 str_6 += `
-                                            <option value="USER">회원</option>
-                                            <option value="ARBEIT">알바생</option>
                                             <option value="ADMIN" selected>관리자</option>`;
             }
             else {
                 str_6 += `
                                             <option value="USER" selected>회원</option>
-                                            <option value="ARBEIT">알바생</option>
-                                            <option value="ADMIN">관리자</option>`;
+                                            <option value="ARBEIT">알바생</option>`;
             }
             str_6 += `</select>`;
             isAdmin_data.insertAdjacentHTML('afterbegin', str_6);
@@ -1031,7 +1027,7 @@ function yourCoupon() {
 
     const sendCouponForm = document.querySelector('.sendCouponForm');
     const chksValue = []
-
+    
     //체크된 체크박스들
     const chks = document.querySelectorAll('input[name="couponCode"]:checked');
     for (const chk of chks) {
@@ -1040,14 +1036,13 @@ function yourCoupon() {
     }
 
     if (confirm("지급한 쿠폰은 회수할 수 없습니다.\n정말로 지급하시겠습니까?")) {
-        if(sendCouponForm.checked){
+        if(chks.length > 0){
             sendCouponForm.submit();
             alert("쿠폰을 지급했습니다.");
         }
         else {
             alert("지급할 쿠폰을 선택해주세요.")
-        }
-        
+        } 
     } else {
         alert("취소되었습니다.");
     }

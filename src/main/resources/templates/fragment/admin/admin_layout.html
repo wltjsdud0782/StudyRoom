@@ -1,49 +1,147 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
-<meta charset="UTF-8">
-<title>admin</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
-rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
-crossorigin="anonymous">
-<link rel="stylesheet" href="/css/studyRoom.css">
-<th:block layout:fragment="content_css"></th:block>
+    <meta charset="UTF-8">
+    <title>admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/studyRoom.css">
+    <th:block layout:fragment="content_css"></th:block>
+    <style>
+        /* .sideMenu-second {
+            position: fixed;
+            top: 45px;
+            left: 30px;
+            width: 13%;
+        }
+
+        .sideMenu-second>ul {
+            height: 613px;
+            width: 200px;
+            border: 5px solid #fff;
+            border-radius: 20px;
+            margin: 0;
+            padding: 10px;
+            padding-top: 1px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+        }
+
+        .sideMenu-second>ul>li {
+            margin-top: 20px;
+            width: 100%;
+            height: 65px;
+            text-align: left;
+        }
+
+        .sideMenu-second>ul>li>a {
+            display: inline-block;
+            box-sizing: border-box;
+            width: 100%;
+            height: 50px;
+            padding: 10px 10px;
+            color: #fff;
+            border-radius: 20px;
+        }
+
+        .sideMenu-second>ul>li>a>div {
+            padding-left: 12px;
+            padding-top: 3px;
+        }
+
+        .sideMenu-second>ul>li>a:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .adminSideMenu {
+            position: fixed;
+            justify-content: center;
+            align-items: center;
+            width: 13.4%;
+            height: 97vh;
+            background-image: url('../img/homepage/sidemenu.jpg');
+            background-size: cover;
+            border-radius: 25px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            margin-left: 3px;
+        }
+
+        .side-foot {
+            width: 200px;
+            height: 80px;
+            margin-top: 30px;
+            border: 5px solid #fff;
+            border-radius: 20px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .side-foot p {
+            width: 200px;
+            height: 80px;
+            margin-top: 25px;
+            text-align: center;
+            padding-right: 10px;
+            vertical-align: middle;
+        }
+
+        .side-top {
+            width: 200px;
+            height: 80px;
+            margin-bottom: 30px;
+            border: 5px solid #fff;
+            border-radius: 20px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .side-top p {
+            width: 200px;
+            height: 80px;
+            margin-top: 13px;
+            text-align: center;
+            vertical-align: middle;
+        } */
+    </style>
 </head>
+
 <body>
+    <div class="container-fluid">
 
-<div class="container-fluid">
-    <!-- @@@@상단메뉴@@@@ -->
-    <div class="row">
-        <div class="col">
-            <th:block th:replace="~{fragment/top_menu::menuFragment}">
+        <!-- 상단메뉴 -->
+        <!-- <div class="row">
+            <div class="col admin-header">
+                <th:block th:replace="~{fragment/admin/admin_top_menu::adminMenuFragment}">
 
-            </th:block>
+                </th:block>
+            </div>
+        </div> -->
+
+        <!-- 내용 -->
+        <div class="row">
+            <div class="col-2">
+                <th:block th:replace="~{fragment/admin/admin_side_menu::adminSideFragment}">
+
+                </th:block>
+            </div>
+            <div class="col-10">
+                <th:block layout:fragment="contentFragment">
+
+                </th:block>
+                <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
+            </div>
         </div>
     </div>
-    <!-- @@@@밑@@@@ -->
-    <div class="row">
-        <div class="col-2">
-            <th:block th:replace="~{fragment/admin/admin_side_menu::adminSideFragment}">
-
-            </th:block>
-        </div> 
-        <div class="col-10">
-            <th:block layout:fragment="contentFragment">      
-
-            </th:block>
-        </div>
-    </div>
-    <!-- 하단 -->
-    <div style="padding-bottom: 12vh;"></div>
-</div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
-integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
-crossorigin="anonymous">
-</script>
-<th:block layout:fragment="content_js">
-</th:block>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+    <th:block layout:fragment="content_js">
+    </th:block>
 </body>
+
 </html>
