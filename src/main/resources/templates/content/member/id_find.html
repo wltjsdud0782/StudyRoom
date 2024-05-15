@@ -11,10 +11,18 @@
 <th:block layout:fragment="contentFragment">
     <div class="idFind-container">
         <div class="idFind-header">
-            
+            <h3>ID 찾기</h3>
         </div>
-        <div class="idFind-content"></div>
-        <div class="idFind-footer"></div>
+        <form action="/member/idFind" method="post">
+            <div class="idFind-content">
+                <input type="text" name="memberName" placeholder=" 이름">
+                <input type="text" name="memberEmail" placeholder=" 이메일">
+            </div>
+            <div class="idFind-footer">
+                <input type="submit" value="전송" style="margin-left: 150px;">
+            </div>    
+        </form>
+        
     </div>
 
 </th:block>
