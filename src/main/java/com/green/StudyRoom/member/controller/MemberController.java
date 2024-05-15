@@ -35,6 +35,14 @@ public class MemberController {
         return "content/member/id_find";
     }
 
+    @PostMapping("/idFind")
+    public String idFindTo(MemberVO memberVO, Model model){
+        System.out.println(memberVO);
+
+        model.addAttribute("memberList", memberService.idFindSelect(memberVO));
+        return "content/member/idResult";
+    }
+
     @GetMapping("/passwordFind")
     public String passwordFind(){
         return "content/member/passwordFind";

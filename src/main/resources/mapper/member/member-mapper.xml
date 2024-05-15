@@ -11,6 +11,7 @@
         <result column="MEMBER_NAME" property="memberName"/>
         <result column="MEMBER_TEL" property="memberTel"/>
         <result column="MEMBER_BIRTH" property="memberBirth"/>
+        <result column="MEMBER_EMAIL" property="memberEmail"/>
         <result column="POST_CODE" property="postCode"/>
         <result column="MEMBER_ADDR" property="memberAddr"/>
         <result column="ADDR_DETAIL" property="addrDetail"/>
@@ -109,11 +110,10 @@
 
     <select id="idFindSelect" resultMap="member">
         SELECT MEMBER_ID
-        , DATE_FORMAT(MEMBER_BIRTH,'%Y-%m-%d') as BIRTH
         , MEMBER_NAME
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_NAME=#{memberName}
-        AND MEMBER_BIRTH=#{memberBirth}
+        AND MEMBER_EMAIL=#{memberEmail}
     </select>
 
 </mapper>
