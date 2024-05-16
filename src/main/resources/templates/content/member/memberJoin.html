@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragment/main_layout}" >
+
+<th:block layout:fragment="content_css">
+  <!-- html 파일이 열릴 때 같이 실행되는 css -->
+  <link rel="stylesheet" href="/css/member/memberJoin.css">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+  <!-- html 코드 작성 -->
+  <div class="memberJoin-container">
+    <div class="memberJoin-header">
+      <h3>회원가입</h3>
+      <p>고객님이 사용하시는 이메일과 휴대폰번호를 입력해주세요.(비밀찾기등 본인확인용)</p>
+    </div>
+
+    <div class="memberJoin-content">
+
+      <form action="/member/join" method="post" class="memberJoin">
+        <div class="memberJoin-top">
+          <input type="text" name="memberId" class="id-inpu" placeholder=" 아이디">
+        </div>
+        <div class="memberJoin-middle">
+          <input type="password" name="memberPw" class="pw1" placeholder=" 비밀번호">
+        </div>
+        <div class="memberJoin-middle">
+          <input type="password"  placeholder=" 비밀번호확인" class="pw2">
+        </div>
+        <div class="memberJoin-footer">
+          <input type="text" name="memberEmail" class="email-inpu" placeholder=" 이메일주소">
+        </div>
+
+
+        <div class="memberJoin-top">
+          <input type="text" name="memberName" class="name-inpu" placeholder=" 이름">
+        </div>
+        <div class="memberJoin-middle">
+          <input type="date" name="memberBirth">
+        </div>
+        <div class="memberJoin-middle">
+          <input type="radio"  value="남" name="memberGender">남자
+          <input type="radio"  value="여" name="memberGender">여자
+        </div>
+        <div class="memberJoin-middle">
+          <input type="text" id="sample6_postcode" name="postCode" placeholder=" 우편번호" style="width: 60%;">
+          <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width: 30%;">
+        </div>
+        <div class="memberJoin-middle">
+          <input type="text" id="sample6_address" class="addr-inpu" name="memberAddr" placeholder=" 주소">
+        </div>
+        <div class="memberJoin-middle">
+          <input type="text" id="sample6_detailAddress"  name="addrDetail" placeholder=" 상세주소">
+        </div>
+        <div class="memberJoin-footer">
+          <input type="text" id="sample6_detailAddress" class="tel-inpu" name="memberTel" placeholder=" 전화번호">
+        </div>
+
+        <div class="memberJoin-btn">
+          <input type="button" onclick="goJoin()" value="회원가입하기">
+        </div>
+      </form>  
+    </div>
+  </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+  <!-- html 파일이 열릴 때 같이 실행되는 js -->
+  <script src="/js/member/memberJoin.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</th:block>
+</html>

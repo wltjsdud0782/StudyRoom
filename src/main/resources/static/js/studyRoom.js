@@ -21,15 +21,25 @@ window.onload = () =>{
     const loginModal = document.querySelector(".login-modal")
     const loginClose = document.querySelector(".login-close")
 
-    document.querySelector(".login-popup").addEventListener("click", () =>{
-        loginModal.style.display = 'block';
-        loginModal.style.opacity = '1';
+    document.querySelectorAll(".login-popup").forEach((element, idx) => {
+        element.addEventListener("click", () =>{
+            console.log(1);
+            loginModal.style.display = 'block';
+            loginModal.style.opacity = '1';
+        })
     })
+    // document.querySelector(".login-popup").addEventListener("click", () =>{
+    //     loginModal.style.display = 'block';
+    //     loginModal.style.opacity = '1';
+    // })
 
     loginClose.addEventListener("click" , () => {
+        loginModal.style.display = 'none';
         loginModal.style.opacity = '0';
     })
+        
 }
+    
 
 
 

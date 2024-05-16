@@ -19,12 +19,15 @@
         </th:block>
         <li><a onclick="location.href='/board/mainHomepage?pageNo=1'" class="page1">홈</a></li>
         <li><a onclick="location.href='/board/studyInfo?pageNo=2'" class="page2">매장소개</a></li>
-        <li><a onclick="location.href='/seat/seatLive?pageNo=3'" class="page2">좌석선택</a></li>
-        <li><a onclick="location.href='/review/review?pageNo=4'" class="page2">리뷰</a></li>
-        <li><a onclick="location.href='/board/inquiry?pageNo=5'" class="page2">문의</a></li>
-        <li><a onclick="location.href='/board/wayToCome?pageNo=6'" class="page2">오시는길</a></li>
+        <li><a onclick="location.href='/seat/seatLive?pageNo=3'" class="page3">좌석선택</a></li>
+        <li><a onclick="location.href='/review/review?pageNo=4'" class="page4">리뷰</a></li>
+        <li><a onclick="location.href='/board/inquiry?pageNo=5'" class="page5">문의</a></li>
+        <li><a onclick="location.href='/board/wayToCome?pageNo=6'" class="page6">오시는길</a></li>
         <th:block th:if="${session.loginInfo != null}">
-            <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
+            <li><a onclick="location.href='/board/myCounter'" class="page7">채팅</a></li>
+        </th:block>
+        <th:block th:if="${session.loginInfo != null}">
+            <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN' || session.loginInfo.isAdmin == 'ARBEIT'}">
                 <li><a onclick="location.href='/admin/info'">관리자메뉴</a></li>
             </th:block>
         </th:block>

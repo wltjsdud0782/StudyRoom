@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'GowunBatang-Regular';
+  src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.idFind-container{
+  margin: 0 auto;
+  width: 80%;
+  font-family: 'GowunBatang-Regular';
+  height: 100vh;
+}
+.idFind-header{
+  margin-top: 100px;
+  color: #fff;
+  border-bottom: 2px solid #fff;
+}
+.idFind-content{
+  padding: 20px;
+  width: 80%;
+  height: 500px;
+  background-color: #383838b4;
+  backdrop-filter: blur(5px);
+  margin: 0 auto;
+  margin-top: 100px;
+  border-radius: 5px;
+  text-align: center;
+}
+.id-content{
+  margin-top: 100px;
+}
+.id-content input{
+  width: 50%;
+  padding: 20px;
+  height: 50px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  outline: none;
+}
+.email-content input {
+  width: 50%;
+  padding: 20px;
+  height: 50px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  outline: none;
+}
+.idFind-footer{
+  margin-top: 40px;
+}
+.idFind-footer input {
+  width: 50%;
+  background-color: #097918;
+  color: #fff;
+  height: 40px;
+  border: none;
+  margin-left: 42px;
+}

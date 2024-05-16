@@ -42,7 +42,7 @@
             , BOARD_ANSWER
         FROM STUDYROOM_BOARD
         <if test='searchValue != null and !searchValue.equals("")'>
-            WHERE ${searchType} LIKE CONCAT ('%', #{searchValue}, '%')
+            WHERE ${searchType} LIKE CONCAT ('%' , #{searchValue} , '%')
             AND BOARD_SECRET = 'NO'
         </if>
         ORDER BY BOARD_CODE DESC
