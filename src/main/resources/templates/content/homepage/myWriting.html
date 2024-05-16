@@ -22,7 +22,7 @@
             <div class="myWrite-btn">
                 <div class="my_btn">
                     <span>
-                        <input type="button" value="작성한 글">
+                        <input type="button" value="작성한 글" th:onclick="goBoard([[${boardList}]])">
                     </span>
                     <span>
                         <input type="button" value="작성한 리뷰" onclick="goReview()">

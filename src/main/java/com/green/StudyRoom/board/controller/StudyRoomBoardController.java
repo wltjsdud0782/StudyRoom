@@ -5,10 +5,7 @@ import com.green.StudyRoom.admin.service.MessageServiceImpl;
 import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.admin.vo.MessageVO;
 import com.green.StudyRoom.board.service.*;
-import com.green.StudyRoom.board.vo.BoardVO;
-import com.green.StudyRoom.board.vo.CommentVO;
-import com.green.StudyRoom.board.vo.ImgVO;
-import com.green.StudyRoom.board.vo.SearchVO;
+import com.green.StudyRoom.board.vo.*;
 import com.green.StudyRoom.member.service.MemberService;
 import com.green.StudyRoom.member.vo.MemberVO;
 import com.green.StudyRoom.seat.service.SeatService;
@@ -362,5 +359,24 @@ public class StudyRoomBoardController {
         return "redirect:/board/inquiry";
     }
 
+    @ResponseBody
+    @PostMapping("/goReview")
+    public List<ReviewVO> goReview(HttpSession session, ReviewVO reviewVO){
+        MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+
+        reviewVO.setReviewWriter(loginInfo.getMemberId());
+
+        List<ReviewVO> reviewList = reviewService.selectMyReview(reviewVO);
+
+        return reviewList;
+    }
+
+    @GetMapping("/deleteReview")
+    public String deleteReview(@RequestParam(name = "reviewCode") int reviewCode){
+        System.out.println("!!!!!1" + reviewCode);
+        reviewService.deleteReview(reviewCode);
+
+        return "redirect:/board/myWriting";
+    }
 
 }

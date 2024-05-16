@@ -13,6 +13,20 @@
 <!--    <resultMap id="" type="">-->
 <!--        -->
 <!--    </resultMap>-->
+    <select id="selectMyReview" resultMap="review">
+        SELECT REVIEW_CODE
+        ,REVIEW_WRITER
+        ,REVIEW_CONTENT
+        ,DATE_FORMAT(REVIEW_DATE, '%Y-%m-%d') REVIEW_DATE
+        FROM REVIEW
+        WHERE REVIEW_WRITER = #{reviewWriter}
+        ORDER BY REVIEW_CODE DESC
+    </select>
+
+    <delete id="deleteReview">
+        DELETE FROM REVIEW
+        WHERE REVIEW_CODE = #{reviewCode}
+    </delete>
 
     <insert id="insertReview">
         INSERT INTO REVIEW(

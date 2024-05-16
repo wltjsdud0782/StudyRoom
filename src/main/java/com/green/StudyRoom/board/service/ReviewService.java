@@ -13,4 +13,8 @@ public interface ReviewService {
     List<StudyRoomInOutVO> selectInout(int memberCode);
 
     List<StudyRoomInOutVO> selectReviewPage();
+
+    List<ReviewVO> selectMyReview(ReviewVO reviewVO);
+
+    void deleteReview(int reviewCode);
 }
