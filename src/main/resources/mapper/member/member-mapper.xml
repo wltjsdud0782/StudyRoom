@@ -17,6 +17,9 @@
         <result column="ADDR_DETAIL" property="addrDetail"/>
         <result column="MEMBER_GENDER" property="memberGender"/>
         <result column="IS_ADMIN" property="isAdmin"/>
+        <result column="MEMBER_EMAIL" property="memberEmail"/>
+        <result column="SECRET_TEL" property="secretTel"/>
+        <result column="SECRET_EMAIL" property="secretEmail"/>
     </resultMap>
 
 <!-- 결재 -->
@@ -116,6 +119,34 @@
         AND MEMBER_EMAIL=#{memberEmail}
     </select>
 
+
+
+    <select id="idFindResult" resultMap="member">
+        SELECT MEMBER_ID
+        , MEMBER_NAME
+        , MEMBER_CODE
+        , MEMBER_EMAIL
+        FROM STUDYROOM_MEMBER
+        WHERE MEMBER_NAME= #{memberName}
+        AND MEMBER_EMAIL = #{memberEmail}
+    </select>
+
+    <select id="memberIdSelect" resultMap="member">
+        SELECT MEMBER_ID
+        ,MEMBER_CODE
+        ,MEMBER_TEL
+        ,MEMBER_EMAIL
+        ,CONCAT(SUBSTR(MEMBER_TEL, 1 , 3), '-', RPAD(SUBSTR(MEMBER_TEL, 4 , 0 ) , 4 ,'*'), '-', SUBSTR(MEMBER_TEL, 8)) AS SECRET_TEL
+        ,CONCAT(SUBSTR(MEMBER_EMAIL,1 , 2), RPAD(SUBSTR(MEMBER_TEL, 3 , 0 ) , 4 ,'*'), SUBSTR(MEMBER_EMAIL, 8)) SECRET_EMAIL
+        FROM STUDYROOM_MEMBER
+        WHERE MEMBER_ID= #{memberId};
+    </select>
+
+    <update id="resetPassword">
+        UPDATE STUDYROOM_MEMBER
+        SET MEMBER_PW = #{memberPw}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
 </mapper>
 
 

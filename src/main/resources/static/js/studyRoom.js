@@ -37,7 +37,9 @@ window.onload = () =>{
         loginModal.style.display = 'none';
         loginModal.style.opacity = '0';
     })
+        
 }
+    
 
 
 

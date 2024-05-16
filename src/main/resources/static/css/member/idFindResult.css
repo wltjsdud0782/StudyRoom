@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.idFindResult-container{
+    margin: 0 auto;
+    width: 80%;
+    height: 100vh;
+}
+.idFindResult-header{
+    margin-top: 100px;
+    height: 100px;
+    color: #fff;
+    border-bottom: 2px solid #fff;
+    font-family: 'GowunBatang-Regular';
+}
+.idFindResult-header h3{
+    font-size: 30px;
+}
+.idFindResult-content{
+    margin-top: 150px;
+    background-color: #6b6b6bb4;
+    padding: 40px;
+    border-radius: 10px;
+    height: 200px;
+    text-align: center;
+}
+.idFindResult-content span{
+    font-size: 18px;
+    margin-left: 10px;
+}
+.idFindResult-footer{
+    text-align: center;
+    margin-top: 80px;
+}
+.go-login-btn{
+    width: 100px;
+    height: 40px;
+    background-color: #12520f;
+    color: #fff;
+    border: none;
+    margin-right: 20px;
+}
+.go-passwordFind-btn{
+    width: 100px;
+    height: 40px;
+    border: none;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.cursor:hover{
+    font-weight: bold;
+}
