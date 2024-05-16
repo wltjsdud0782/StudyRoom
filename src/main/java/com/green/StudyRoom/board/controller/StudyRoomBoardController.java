@@ -246,7 +246,7 @@ public class StudyRoomBoardController {
     public String studyInfo(Model model,@RequestParam(name = "pageNo", required = false, defaultValue = "2") int pageNo){
 //
         //이용권 요금 정보
-        List<ChargeVO> chargeList = chargeService.setCharge();
+        List<ChargeVO> chargeList = boardService.infoCharge();
         model.addAttribute("chargeList", chargeList);
 
         List<BoardVO> boardList = boardService.selectPageInfo();

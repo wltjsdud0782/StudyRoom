@@ -1,5 +1,6 @@
 package com.green.StudyRoom.board.service;
 
+import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.board.vo.BoardVO;
 import com.green.StudyRoom.board.vo.CommentVO;
 import com.green.StudyRoom.board.vo.SearchVO;
@@ -29,4 +30,7 @@ public interface BoardService {
 
     //내가 쓴 글 삭제
     int deleteBoard(int boardCode);
+
+    // 매장소개 이용권
+    List<ChargeVO> infoCharge();
 }

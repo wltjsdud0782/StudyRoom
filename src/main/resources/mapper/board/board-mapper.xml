@@ -138,6 +138,16 @@
         )
         FROM STUDYROOM_BOARD
     </select>
+
+    <select id="infoCharge" resultMap="chargeMapper.charge">
+        SELECT CHARGE_NAME
+        , CHARGE_FEE
+        , CHARGE_CODE
+        , CHARGE_DATE
+        FROM STUDYROOM_CHARGE
+        ORDER BY CHARGE_FEE DESC
+        LIMIT 5;
+    </select>
 </mapper>
 
 
