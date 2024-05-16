@@ -49,7 +49,7 @@ const goTel = (memberId) =>{
             </div>
             <div class="find-tel-tel">
                 <input type="text" placeholder=" 전화번호" name="memberTel" class="memberTelInfo">`
-        str +=  `<button type="button" onclick='telNumber("${data.memberTel}", "${data.memberId}")'>인증번호받기</button>`     
+        str +=  `<button type="button" onclick='telNumber(${data.memberTel}, "${data.memberId}")'>인증번호받기</button>`     
         str +=  `</div>
             </div>
             <div class="find-tel-footer">
@@ -110,12 +110,12 @@ const goEmail = (memberId) => {
             </div>
             <div class="find-email-email">
                 <input type="text" placeholder=" 이메일" name="memberEmail" class="memberEmailInfo">
-                <button type="button" onclick='emailNumber("${data.memberEmail}")'>인증번호받기</button>
+                <button type="button" onclick='emailNumber("${data.memberEmail}", "${data.memberId}")'>인증번호받기</button>
             </div>
             </div>
             <div class="find-email-footer">
-                <input type="text" placeholder="인증번호 6자리 숫자 입력">
-                <button type="button">다음</button>
+                <input type="text" placeholder="인증번호 6자리 숫자 입력" class="checkNum">
+                <button type="button" class="checkEmail">다음</button>
             </div>
          </div> `
 
@@ -201,7 +201,7 @@ let telNumber = (getTel, getId) =>{
     }
 }
 
-const emailNumber = (getEmail) =>{
+const emailNumber = (getEmail, getId) =>{
 
     console.log("!!!!!" + getEmail)
 
@@ -219,7 +219,7 @@ const emailNumber = (getEmail) =>{
 
     if(memberEmailInfo.value == getEmail){
         alert("인증번호가 전송되었습니다.")
-        fetch('/mailConfirm', { //요청경로
+        fetch('/sendMail', { //요청경로
             method: 'POST',
             cache: 'no-cache',
             headers: {
@@ -244,24 +244,24 @@ const emailNumber = (getEmail) =>{
         .then((data) => {//data -> controller에서 리턴되는 데이터!
             console.log(data)
 
-            // const checkCode = document.querySelector(".checkCode")
-            // const checkTel = document.querySelector(".checkTel")
+            const checkCode = document.querySelector(".checkNum")
+            const checkTel = document.querySelector(".checkEmail")
 
-            // console.log(checkCode.value)
-            // console.log(checkTel)
-            // console.log(getName)
+            console.log(checkCode.value)
+            console.log(checkTel)
+            console.log(getName)
 
 
-            // checkTel.addEventListener("click" , () =>{
+            checkTel.addEventListener("click" , () =>{
 
                
-            //     if(checkCode.value == data){
-            //         alert("인증이 완료되었습니다.")
-            //         location.href=`/member/resetPassword?memberId=${getId}`
-            //     }else{
-            //         alert("입력하신 인증번호가 틀립니다.")
-            //     }
-            // })
+                if(checkCode.value == data){
+                    alert("인증이 완료되었습니다.")
+                    location.href=`/member/resetPassword?memberId=${getId}`
+                }else{
+                    alert("입력하신 인증번호가 틀립니다.")
+                }
+            })
             
         })
         //fetch 통신 실패 시 실행 영역
@@ -274,3 +274,4 @@ const emailNumber = (getEmail) =>{
     }
 
 }
+

@@ -40,13 +40,13 @@ public class MemberController {
         return "content/member/id_find";
     }
 
-    @PostMapping("/idFind")
-    public String idFindTo(MemberVO memberVO, Model model){
-        System.out.println(memberVO);
-
-        model.addAttribute("memberList", memberService.idFindSelect(memberVO));
-        return "content/member/idResult";
-    }
+//    @PostMapping("/idFind")
+//    public String idFindTo(MemberVO memberVO, Model model){
+//        System.out.println(memberVO);
+//
+//        model.addAttribute("memberList", memberService.idFindSelect(memberVO));
+//        return "content/member/idResult";
+//    }
 
     @GetMapping("/passwordFind")
     public String passwordFind(@RequestParam(name = "memberId") String memberId, Model model){
@@ -137,7 +137,7 @@ public class MemberController {
     @PostMapping("/goTel")
     public MemberVO goTel(@RequestParam(name = "memberId") String memberId){
         MemberVO memberList = memberService.memberIdSelect(memberId);
-
+        memberList.setMemberTel(memberList.getMemberTel().replace("-",""));
         return memberList;
     }
 
@@ -195,5 +195,11 @@ public class MemberController {
         memberService.resetPassword(memberVO);
 
         return "redirect:/board/mainHomepage";
+    }
+
+    @GetMapping("/memberJoin")
+    public String memberJoin(){
+
+        return "content/member/memberJoin";
     }
 }

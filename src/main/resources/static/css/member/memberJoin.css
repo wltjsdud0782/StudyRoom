@@ -1,0 +1,90 @@
+@font-face {
+  font-family: 'GowunBatang-Regular';
+  src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.memberJoin-container{
+  margin: 0 auto;
+  width: 80%;
+  height: 100vh;
+  font-family: 'GowunBatang-Regular';
+}
+.memberJoin-header{
+  margin-top: 150px;
+  height: 80px;
+  color: #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.memberJoin-content{
+  margin-top: 80px;
+  padding: 30px;
+  height: auto;
+  background-color: #383838b4;
+  backdrop-filter: blur(5px);
+  border-radius: 15px;
+}
+
+.memberJoin-top{
+  width: 40%;
+  height: 50px;
+  margin: 0 auto;
+  border-radius: 5px 5px 0px 0px;
+  border: 1px solid #ccc; 
+  padding: 10px;
+  background-color: #fff;
+
+}
+.memberJoin-top input{
+  outline: none;
+  border: none;
+}
+.memberJoin-middle{
+  width: 40%;
+  height: 50px;
+  margin: 0 auto;
+  border: 1px solid #ccc; 
+  padding: 10px;
+  background-color: #fff;
+}
+
+.memberJoin-middle input{
+  width: 100%;
+  outline: none;
+  border: none;
+}
+.memberJoin-middle input[type="radio"]{
+  width: 30%;
+}
+
+.memberJoin-footer{
+  width: 40%;
+  height: 50px;
+  margin: 0 auto;
+  border-radius: 0px 0px 5px 5px;
+  border: 1px solid #ccc; 
+  padding: 10px;
+  background-color: #fff;
+  margin-bottom: 30px;
+}
+
+.memberJoin-footer input{
+  width: 100%;
+  outline: none;
+  border: none;
+}
+.memberJoin-btn{
+  margin: 0 auto;
+  width: 40%;
+  text-align: center;
+}
+.memberJoin-btn input {
+  width: 100%;
+  border: none;
+  background-color: #04531f;
+  color: #fff;
+  height: 50px;
+}

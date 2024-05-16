@@ -18,12 +18,12 @@
     </div>
     <div class="idFindResult-content">
         <th:block th:each="member : ${memberList}">
-            <input type="radio" th:value="${member.memberId}"> <span>[[${member.memberId}]]</span> 
+            <input type="radio" th:value="${member.memberId}"> <span style="color: #fff;">[[${member.memberId}]]</span> 
         </th:block>
     </div>
     <div class="idFindResult-footer">
         <button type="button" class="go-login-btn cursor login-popup">로그인하기</button>
-        <button type="button" class="go-passwordFind-btn cursor" onclick="location.href='/member/passwordFind'">비밀번호찾기</button>
+        <button type="button" class="go-passwordFind-btn cursor" onclick="location.href='/member/passwordFindFirst'">비밀번호찾기</button>
     </div>
   </div>
 </th:block>

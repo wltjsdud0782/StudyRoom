@@ -96,10 +96,10 @@
     
             <th:block th:if="${session.loginInfo != null}">
                 <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
-                    <div class="detail_select_footer">
+                    <div class="detail_select_footer" style="width: 80%; margin: 0 auto; margin-top: 30px;">
                         <form action="/board/adminAnswer" method="post">
                             <input type="hidden" th:value="${boardList.boardCode}" name="boardCode">
-                            <input type="text" name="commentContent">
+                            <input type="text" name="commentContent" style="width: 85%;">
                             <input type="submit" value="답변">
                         </form>
                     </div>    

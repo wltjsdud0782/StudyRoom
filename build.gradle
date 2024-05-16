@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-
+	implementation 'org.springframework.boot:spring-boot-starter-mail' // email
 	implementation 'net.nurigo:sdk:4.2.7' //sms
 
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
