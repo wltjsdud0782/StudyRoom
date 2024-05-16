@@ -115,7 +115,7 @@
     height: 38.5px;
     border: 1px solid #ccc;
 }
-.inquiry_serch [type=submit]{
+.searchBtn{
     font-weight: bold;
     width: 90px;
     height: 39.3px;
