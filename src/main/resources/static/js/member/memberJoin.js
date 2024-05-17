@@ -58,36 +58,35 @@ const goJoin = () =>{
     alert("아이디를 입력해주세요")
     return;
   }
-
-  if(memberPw.value != memberPw2.value){
+  else if(memberPw.value != memberPw2.value){
     alert("입력하신 두 비밀번호가 맞지 않습니다.")
     return;
   }
 
-  if(memberPw.value == ''){
+  else if(memberPw.value == ''){
     alert("비밀번호를 입력해주세요.")
     return;
   }
 
-  if(memberEmail.value == ''){
+  else if(memberEmail.value == ''){
     alert("이메일을 입력해주세요.")
     return;
   }
 
-  if(memberName.value == ''){
+  else if(memberName.value == ''){
     alert("이름을 입력해주세요.")
     return;
   }
 
-  if(memberAddr.value == ''){
+  else if(memberAddr.value == ''){
     alert("주소를 입력해주세요.")
     return;
   }
-
-  if(memberTel.value == ''){
+  else if(memberTel.value == ''){
     alert("전화번호를 입력해주세요.")
     return;
-  }else{
+  }
+  else{
     alert("Green StudyRoom 회원이 되어주셔서 감사합니다. 홈으로 이동합니다.")
     document.querySelector(".memberJoin").submit();
   }
