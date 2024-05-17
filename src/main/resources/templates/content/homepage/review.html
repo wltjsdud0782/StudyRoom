@@ -11,8 +11,12 @@
     <!-- html 코드 작성 -->
 
 
-        <div class="reivew-container">
-            <div class="review-main" style="height: 700px;">
+    <div class="reivew-container">
+        <div class="review-main" style="height: 700px;">
+            <th:block th:if="${#lists.isEmpty(reviewList)}">
+                <span class="no_reviw">현재 작성된 리뷰가 없습니다.</span>
+            </th:block>
+            <th:block th:unless="${#lists.isEmpty(reviewList)}">
                 <th:block th:each="review : ${reviewList}">
                     <div class="review-body">
                         <h6>[[${review.reviewContent}]]</h6>
@@ -22,30 +26,31 @@
                         </div>
                     </div>
                 </th:block>
-                
-            </div>
+            </th:block>
 
-        
-            <div class="review-header">
-                <h3>Review</h3>
-            </div>
-
-        </div> 
-
-        <div class="review-footer">
-            <input type="button" th:onclick="writeReview([[${inoutList}]], [[${session.loginInfo}]])" value="리뷰쓰기">
         </div>
-            
-        <div class="review-pop">
-            <div class="pop-header"></div>
-            <div class="pop-con">
-                <div class="pop-con1">
-                    리뷰는 독서실 이용내역이 있으신 분들에 한해<br>
-                    작성할 수 있도록 하였습니다. 
-                </div>
-                <button type="button" class="pop-close">닫기</button>
-            </div>
+
+
+        <div class="review-header">
+            <h3>Review</h3>
         </div>
+
+    </div>
+
+    <div class="review-footer">
+        <input type="button" th:onclick="writeReview([[${inoutList}]], [[${session.loginInfo}]])" value="리뷰쓰기">
+    </div>
+
+    <div class="review-pop">
+        <div class="pop-header"></div>
+        <div class="pop-con">
+            <div class="pop-con1">
+                리뷰는 독서실 이용내역이 있으신 분들에 한해<br>
+                작성할 수 있도록 하였습니다.
+            </div>
+            <button type="button" class="pop-close">닫기</button>
+        </div>
+    </div>
 </th:block>
 
 <th:block layout:fragment="content_js">

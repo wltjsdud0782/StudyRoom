@@ -500,6 +500,7 @@ a {
 .login-icon {
   top: -150%;
   left: 40%;
+  z-index: 1000;
   position: absolute;
 }
 

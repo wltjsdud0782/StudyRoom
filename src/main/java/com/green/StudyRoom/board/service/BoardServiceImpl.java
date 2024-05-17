@@ -1,5 +1,6 @@
 package com.green.StudyRoom.board.service;
 
+import com.green.StudyRoom.admin.vo.ChargeVO;
 import com.green.StudyRoom.board.vo.BoardVO;
 import com.green.StudyRoom.board.vo.CommentVO;
 import com.green.StudyRoom.board.vo.SearchVO;
@@ -61,6 +62,11 @@ public class BoardServiceImpl implements BoardService {
     //내가 쓴글 삭제
     public int deleteBoard(int boardCode) {
         return sqlSession.delete("boardMapper.deleteBoard", boardCode);
+    }
+
+    @Override
+    public List<ChargeVO> infoCharge() {
+        return sqlSession.selectList("boardMapper.infoCharge");
     }
 
     // 글쓰기 답변

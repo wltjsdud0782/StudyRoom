@@ -42,7 +42,7 @@
             , BOARD_ANSWER
         FROM STUDYROOM_BOARD
         <if test='searchValue != null and !searchValue.equals("")'>
-            WHERE ${searchType} LIKE CONCAT ('%', #{searchValue}, '%')
+            WHERE ${searchType} LIKE CONCAT ('%' , #{searchValue} , '%')
             AND BOARD_SECRET = 'NO'
         </if>
         ORDER BY BOARD_CODE DESC
@@ -66,6 +66,7 @@
         , MEMBER_BIRTH = #{memberBirth}
         , MEMBER_ADDR = #{memberAddr}
         , ADDR_DETAIL = #{addrDetail}
+        , MEMBER_EMAIL = #{memberEmail}
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 
@@ -120,6 +121,7 @@
         SELECT BOARD_CODE
             ,BOARD_TITLE
             ,DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') BOARD_DATE
+            ,BOARD_WRITER
             FROM STUDYROOM_BOARD
             WHERE BOARD_WRITER = #{boardWriter}
             ORDER BY BOARD_CODE DESC
@@ -137,6 +139,16 @@
             BOARD_CODE
         )
         FROM STUDYROOM_BOARD
+    </select>
+
+    <select id="infoCharge" resultMap="chargeMapper.charge">
+        SELECT CHARGE_NAME
+        , CHARGE_FEE
+        , CHARGE_CODE
+        , CHARGE_DATE
+        FROM STUDYROOM_CHARGE
+        ORDER BY CHARGE_FEE DESC
+        LIMIT 5;
     </select>
 </mapper>
 

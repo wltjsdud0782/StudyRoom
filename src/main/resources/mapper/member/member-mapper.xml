@@ -11,11 +11,15 @@
         <result column="MEMBER_NAME" property="memberName"/>
         <result column="MEMBER_TEL" property="memberTel"/>
         <result column="MEMBER_BIRTH" property="memberBirth"/>
+        <result column="MEMBER_EMAIL" property="memberEmail"/>
         <result column="POST_CODE" property="postCode"/>
         <result column="MEMBER_ADDR" property="memberAddr"/>
         <result column="ADDR_DETAIL" property="addrDetail"/>
         <result column="MEMBER_GENDER" property="memberGender"/>
         <result column="IS_ADMIN" property="isAdmin"/>
+        <result column="MEMBER_EMAIL" property="memberEmail"/>
+        <result column="SECRET_TEL" property="secretTel"/>
+        <result column="SECRET_EMAIL" property="secretEmail"/>
     </resultMap>
 
 <!-- 결재 -->
@@ -76,6 +80,7 @@
             , MEMBER_ADDR
             , ADDR_DETAIL
             , MEMBER_GENDER
+            , MEMBER_EMAIL
         ) VALUES (
             #{memberCode}
             , #{memberId}
@@ -87,6 +92,7 @@
             , #{memberAddr}
             , #{addrDetail}
             , #{memberGender}
+            , #{memberEmail}
         );
     </insert>
 
@@ -101,6 +107,7 @@
             , IS_ADMIN
             , ADDR_DETAIL
             , MEMBER_ADDR
+            , MEMBER_EMAIL
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_ID=#{memberId}
         AND MEMBER_PW=#{memberPw}
@@ -109,13 +116,49 @@
 
     <select id="idFindSelect" resultMap="member">
         SELECT MEMBER_ID
-        , DATE_FORMAT(MEMBER_BIRTH,'%Y-%m-%d') as BIRTH
         , MEMBER_NAME
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_NAME=#{memberName}
-        AND MEMBER_BIRTH=#{memberBirth}
+        AND MEMBER_EMAIL=#{memberEmail}
     </select>
 
+
+
+    <select id="idFindResult" resultMap="member">
+        SELECT MEMBER_ID
+        , MEMBER_NAME
+        , MEMBER_CODE
+        , MEMBER_EMAIL
+        FROM STUDYROOM_MEMBER
+        WHERE MEMBER_NAME= #{memberName}
+        AND MEMBER_EMAIL = #{memberEmail}
+    </select>
+
+    <select id="memberIdSelect" resultMap="member">
+        SELECT MEMBER_ID
+        ,MEMBER_CODE
+        ,MEMBER_TEL
+        ,MEMBER_EMAIL
+        ,CONCAT(
+        SUBSTRING(MEMBER_TEL, 1, 4),
+        REPEAT('*', 4),
+        SUBSTRING(MEMBER_TEL, 9)
+        ) AS SECRET_TEL
+        ,CONCAT(
+        SUBSTRING(MEMBER_EMAIL, 1, 2),
+        REPEAT('*', LENGTH(SUBSTRING_INDEX(MEMBER_EMAIL, '@', 1)) - 2),
+        '@',
+        SUBSTRING_INDEX(MEMBER_EMAIL, '@', -1)
+        ) AS SECRET_email
+        FROM STUDYROOM_MEMBER
+        WHERE MEMBER_ID = #{memberId};
+    </select>
+
+    <update id="resetPassword">
+        UPDATE STUDYROOM_MEMBER
+        SET MEMBER_PW = #{memberPw}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
 </mapper>
 
 

@@ -33,4 +33,14 @@ public class ReviewServiceImpl implements ReviewService {
     public List<StudyRoomInOutVO> selectReviewPage() {
         return sqlSession.selectList("reviewMapper.selectReviewPage");
     }
+
+    @Override
+    public List<ReviewVO> selectMyReview(ReviewVO reviewVO) {
+        return sqlSession.selectList("reviewMapper.selectMyReview", reviewVO);
+    }
+
+    @Override
+    public void deleteReview(int reviewCode) {
+        sqlSession.delete("reviewMapper.deleteReview", reviewCode);
+    }
 }

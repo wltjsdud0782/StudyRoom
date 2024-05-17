@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragment/main_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!--html 파일이 열릴때 같이 실행되는 css-->
+    <link rel="stylesheet" href="/css/member/idResult.css">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <div class="id-result-container">
+        <div class="id-result-header">
+             <h3>ID 찾기</h3>
+             <P>고객님의 정보와 일치하는 아이디 목록입니다.</P>
+        </div>
+        <div class="id-result-content">
+            <th:block th:each=" member : ${memberList}">
+                <input type="radio" th:value="${member.memberId}"> <span>[[${member.memberId}]]</span>
+            </th:block>
+            
+        </div>
+        <div class="id-result-foooter">
+            <button type="button" class="go-login-btn cursor login-popup">로그인하기</button>
+            <button type="button" class="go-password-btn cursor">비밀번호찾기</button>
+        </div>
+    </div>
+    <!--html 코드 작성-->
+</th:block>
+
+
+<th:block layout:fragment="content_js">
+    <!--html 파일이 열릴때 같이 실행되는 js-->
+    <script src="/js/member/login.js"></script>
+</th:block>
+</html>

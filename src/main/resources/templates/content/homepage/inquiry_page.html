@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{fragment/main_layout}" >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/main_layout}">
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴 때 같이 실행되는 css -->
@@ -10,166 +9,196 @@
 
 <th:block layout:fragment="contentFragment">
     <!-- html 코드 작성 -->
-            <div class="inquiry_container">
-                <div class="inquiry_title">
-                    <h3>Inquiry</h3>
-                </div>
-                
-                <div class="inquiry_content">
-                    <table class="inquiry_table" style="text-align: center; margin-top: 100px;">
-                        <colgroup>
-                            <col width="10%">
-                            <col width="50%">
-                            <col width="20%">
-                            <col width="20%">
-                        </colgroup>
-                        <tr>
-                            <td class="borderLeft">번호</td>
-                            <td>글제목</td>
-                            <td>글쓴이</td>
-                            <td class="borderRight">작성일</td>
-                        </tr>
-                        
-                        <th:block th:if="${#lists.isEmpty(boardList)}"> 
-                            <tr>
-                                <td colspan="4" rowspan="7" style="height: 500px;">
-                                    게시된 게시글이 없습니다.
+    <div class="inquiry_container">
+        <div class="inquiry_title">
+            <h3>Inquiry</h3>
+        </div>
+
+        <div class="inquiry_content">
+            <table class="inquiry_table" style="text-align: center; margin-top: 100px;">
+                <colgroup>
+                    <col width="10%">
+                    <col width="50%">
+                    <col width="20%">
+                    <col width="20%">
+                </colgroup>
+                <tr>
+                    <td class="borderLeft">번호</td>
+                    <td>글제목</td>
+                    <td>글쓴이</td>
+                    <td class="borderRight">작성일</td>
+                </tr>
+
+                <th:block th:if="${#lists.isEmpty(boardList)}">
+                    <tr>
+                        <td colspan="4" rowspan="7" style="height: 500px;">
+                            게시된 게시글이 없습니다.
+                        </td>
+                    </tr>
+                </th:block>
+                <th:block th:each="board , state : ${boardList}">
+                    <tr class="admin-answer">
+
+                        <td>[[${board.boardCode}]]</td>
+                        <th:block th:if="${session.loginInfo != null}">
+                            <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
+                                <td class="bi bi-chat-left-heart pointer"
+                                    th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
+                                    <th:block th:if="${board.boardAnswer == 'Y'}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+                                            fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
+                                            <path
+                                                d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                            <path
+                                                d="M8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                                        </svg>
+                                    </th:block>
                                 </td>
-                            </tr>
-                        </th:block>
-                        <th:block th:each="board , state : ${boardList}">
-                            <tr class="admin-answer">
-                                
-                                <td>[[${board.boardCode}]]</td>
-                                <th:block th:if="${session.loginInfo != null}">
-                                    <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
-                                        <td class="bi bi-chat-left-heart pointer" th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
-                                            <th:block th:if="${board.boardAnswer == 'Y'}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
-                                                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                                                    <path d="M8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
-                                                </svg>
-                                            </th:block>
-                                        </td>
-                                    </th:block>
-    
-                                    <th:block th:unless="${session.loginInfo.isAdmin == 'ADMIN'}">
-                                        <th:block th:if="${board.boardSecret == 'NO'}">
-                                            <td class="bi bi-chat-left-heart pointer" th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
-                                                <th:block th:if="${board.boardAnswer == 'Y'}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
-                                                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                                                    <path d="M8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
-                                                </svg>
-                                                </th:block>
-                                            </td>
+                            </th:block>
+
+                            <th:block th:unless="${session.loginInfo.isAdmin == 'ADMIN'}">
+                                <th:block th:if="${board.boardSecret == 'NO'}">
+                                    <td class="bi bi-chat-left-heart pointer"
+                                        th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
+                                        <th:block th:if="${board.boardAnswer == 'Y'}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+                                                fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                                <path
+                                                    d="M8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                                            </svg>
                                         </th:block>
-    
-                                        <th:block th:unless="${board.boardSecret == 'NO'}">
-                                            <th:block th:if="${session.loginInfo.memberId == board.boardWriter}">
-                                                <td class="bi bi-chat-left-heart pointer" th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
-                                                    <th:block th:if="${board.boardAnswer == 'Y'}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
-                                                            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                                                            <path d="M8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
-                                                        </svg>
-                                                    </th:block>
-                                                </td>
-                                            </th:block>
-    
-                                            <th:block th:unless="${session.loginInfo.memberId == board.boardWriter}">
-                                                <td class="bi bi-chat-left-heart">비밀글입니다.
-                                                    <th:block th:if="${board.boardAnswer == 'Y'}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
-                                                            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                                                            <path d="M8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
-                                                        </svg>
-                                                    </th:block>
-                                                </td>
-                                            </th:block>
-                                        </th:blocK>
-                                    </th:block>
+                                    </td>
                                 </th:block>
-                                
-                                <th:block th:if="${session.loginInfo == null}">
-                                    <th:block th:if="${board.boardSecret == 'NO'}">
-                                        <td class="bi bi-chat-left-heart pointer" th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
+
+                                <th:block th:unless="${board.boardSecret == 'NO'}">
+                                    <th:block th:if="${session.loginInfo.memberId == board.boardWriter}">
+                                        <td class="bi bi-chat-left-heart pointer"
+                                            th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
                                             <th:block th:if="${board.boardAnswer == 'Y'}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
-                                                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                                                    <path d="M8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+                                                    fill="currentColor" class="bi bi-chat-left-heart"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                                    <path
+                                                        d="M8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
                                                 </svg>
                                             </th:block>
                                         </td>
                                     </th:block>
-    
-                                    <th:block th:unless="${board.boardSecret == 'NO'}">
+
+                                    <th:block th:unless="${session.loginInfo.memberId == board.boardWriter}">
                                         <td class="bi bi-chat-left-heart">비밀글입니다.
                                             <th:block th:if="${board.boardAnswer == 'Y'}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
-                                                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                                                    <path d="M8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+                                                    fill="currentColor" class="bi bi-chat-left-heart"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                                    <path
+                                                        d="M8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
                                                 </svg>
                                             </th:block>
                                         </td>
                                     </th:block>
-                                </th:block>
-                                <td>[[${board.boardWriter}]]</td>
-                                <td>[[${board.boardDate}]]</td>
-                            </tr>
+                                </th:blocK>
+                            </th:block>
                         </th:block>
-                    </table>
-                    <!-- th:each="i :${#numbers.sequence(1, 10)}" -->
-                    <div class="row justify-content-center">
-                        <div class="col-10">
-                            <th:bolck th:if="${session.loginInfo != null}">
-                                <div class="inquiry_btn">
-                                    <input type="button"  value="내가 쓴글" onclick="myWriting()">
-                                    <input type="button" style="background-color: rgb(171, 194, 212); border: 1px solid  rgb(171, 194, 212); font-weight: bold;" value="글쓰기" onclick="goWriting()">
-                                </div>
-                            </th:bolck>
-                        </div>
-                    </div>
 
-                    <th:block th:if="${isSearch != 2}">
-                        <div class="paging">
-                            <th:block th:if="${searchVO.prev}">
-                                <a th:href="@{/board/inquiry(nowPage=${searchVO.beginPage - 1})}" style="width: 40px;">이전</a>
+                        <th:block th:if="${session.loginInfo == null}">
+                            <th:block th:if="${board.boardSecret == 'NO'}">
+                                <td class="bi bi-chat-left-heart pointer"
+                                    th:onclick="goDetailSelect([[${board.boardCode}]])">[[${board.boardTitle}]]
+                                    <th:block th:if="${board.boardAnswer == 'Y'}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+                                            fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
+                                            <path
+                                                d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                            <path
+                                                d="M8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                                        </svg>
+                                    </th:block>
+                                </td>
                             </th:block>
-                            <th:block th:each="i :${#numbers.sequence(searchVO.beginPage, searchVO.endPage+1)}">     
-                                <a th:href="@{/board/inquiry(nowPage=${i})}">[[${i}]]</a>
+
+                            <th:block th:unless="${board.boardSecret == 'NO'}">
+                                <td class="bi bi-chat-left-heart">비밀글입니다.
+                                    <th:block th:if="${board.boardAnswer == 'Y'}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+                                            fill="currentColor" class="bi bi-chat-left-heart" viewBox="0 0 16 16">
+                                            <path
+                                                d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                            <path
+                                                d="M8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                                        </svg>
+                                    </th:block>
+                                </td>
                             </th:block>
-                            <th:block th:if="${searchVO.next}">
-                                <a th:href="@{/board/inquiry(nowPage=${searchVO.endPage + 1})}"  style="width: 40px;">다음</a>
-                            </th:block>
+                        </th:block>
+                        <td>[[${board.boardWriter}]]</td>
+                        <td>[[${board.boardDate}]]</td>
+                    </tr>
+                </th:block>
+            </table>
+            <!-- th:each="i :${#numbers.sequence(1, 10)}" -->
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <th:bolck th:if="${session.loginInfo != null}">
+                        <div class="inquiry_btn">
+                            <input type="button" value="내가 쓴글" onclick="myWriting()">
+                            <input type="button"
+                                style="background-color: rgb(171, 194, 212); border: 1px solid  rgb(171, 194, 212); font-weight: bold;"
+                                value="글쓰기" onclick="goWriting()">
                         </div>
-                    </th:block> 
-                
-                    <div class="row justify-content-center" style="height: 150px;">
-                        <div class="col-10">
-                            <div class="inquiry_serch">
-                                <form action="/board/inquiry" method="post">
-                                    <select name="searchType">
-                                        <option value="BOARD_TITLE" th:selected="${searchVO.searchType == null or searchVO.searchType == 'BOARD_TITLE'}" >제목</option>
-                                        <option value="BOARD_WRITER" th:selected="${searchVO.searchType == 'WRITER'}">아이디</option>
-                                    </select>
-                                    <input type="hidden" name="isSearch" value="1">
-                                    <input type="text" name="searchValue" th:value="${searchVO.searchValue}">
-                                    <input type="submit" value="검색">
-                                </form>
-                                
-                            </div>
-                        </div>
+                    </th:bolck>
+                </div>
+            </div>
+
+            <th:block th:if="${isSearch != 2}">
+                <div class="paging">
+                    <th:block th:if="${searchVO.prev}">
+                        <a th:href="@{/board/inquiry(nowPage=${searchVO.beginPage - 1})}" style="width: 40px;">이전</a>
+                    </th:block>
+                    <th:block th:each="i :${#numbers.sequence(searchVO.beginPage, searchVO.endPage+1)}">
+                        <a th:href="@{/board/inquiry(nowPage=${i})}">[[${i}]]</a>
+                    </th:block>
+                    <th:block th:if="${searchVO.next}">
+                        <a th:href="@{/board/inquiry(nowPage=${searchVO.endPage + 1})}" style="width: 40px;">다음</a>
+                    </th:block>
+                </div>
+            </th:block>
+
+            <div class="row justify-content-center" style="height: 150px;">
+                <div class="col-10">
+                    <div class="inquiry_serch">
+                        <form action="/board/inquiry" method="post" class="searchForm">
+                            <select name="searchType">
+                                <option value="BOARD_TITLE"
+                                    th:selected="${searchVO.searchType == null or searchVO.searchType == 'BOARD_TITLE'}">
+                                    제목</option>
+                                <option value="BOARD_WRITER" th:selected="${searchVO.searchType == 'WRITER'}">아이디
+                                </option>
+                            </select>
+                            <input type="hidden" name="isSearch" value="1">
+                            <input type="text" name="searchValue" class="searchValue" th:value="${searchVO.searchValue}">
+                            <button type="button" class="searchBtn" onclick="searchBtn()">검색</button>
+                        </form>
+
                     </div>
                 </div>
-               
             </div>
-        
-            
+        </div>
+
+    </div>
+
+
 </th:block>
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
     <script src="/js/board/inquiry_page.js"></script>
 </th:block>
+
 </html>
