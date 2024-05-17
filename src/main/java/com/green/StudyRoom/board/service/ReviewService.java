@@ -1,5 +1,6 @@
 package com.green.StudyRoom.board.service;
 
+import com.green.StudyRoom.board.vo.ReviewPageVO;
 import com.green.StudyRoom.board.vo.ReviewVO;
 import com.green.StudyRoom.member.vo.StudyRoomInOutVO;
 
@@ -8,7 +9,7 @@ import java.util.List;
 public interface ReviewService {
     void insertReview(ReviewVO reviewVO);
 
-    List<ReviewVO> selectReview();
+    List<ReviewVO> selectReview(ReviewPageVO reviewPageVO);
 
     List<StudyRoomInOutVO> selectInout(int memberCode);
 

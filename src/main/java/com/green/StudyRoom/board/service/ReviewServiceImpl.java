@@ -1,5 +1,6 @@
 package com.green.StudyRoom.board.service;
 
+import com.green.StudyRoom.board.vo.ReviewPageVO;
 import com.green.StudyRoom.board.vo.ReviewVO;
 import com.green.StudyRoom.member.vo.StudyRoomInOutVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,8 +21,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<ReviewVO> selectReview() {
-        return sqlSession.selectList("reviewMapper.selectReview");
+    public List<ReviewVO> selectReview(ReviewPageVO reviewPageVO) {
+        return sqlSession.selectList("reviewMapper.selectReview", reviewPageVO);
     }
 
     @Override

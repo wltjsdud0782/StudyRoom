@@ -27,6 +27,17 @@
                     </div>
                 </th:block>
             </th:block>
+            <div class="paging">
+                <th:block th:if="${reviewPageVO.prev}">
+                    <a th:href="@{/review/review(nowPage=${reviewPageVO.beginPage - 1})}" style="width: 40px;">이전</a>
+                </th:block>
+                <th:block th:each="i : ${#numbers.sequence(reviewPageVO.beginPage, reviewPageVO.endPage)}">
+                    <a th:href="@{/review/review(nowPage=${i})}" style="color: #fff;">[[${i}]]</a>
+                </th:block>
+                <th:block th:if="${reviewPageVO.next}">
+                    <a th:href="@{/review/review(nowPage=${reviewPageVO.endPage + 1})}" style="width: 40px;">다음</a>
+                </th:block>
+            </div>
 
         </div>
 
