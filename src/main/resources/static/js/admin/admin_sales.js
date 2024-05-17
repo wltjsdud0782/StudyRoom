@@ -99,7 +99,7 @@ function getYearChart() {
                     scales: {
                         y: {
                             min: 0,
-                            max: 500000000
+                            max: 50000000
                         }
                     }
                 }
@@ -209,7 +209,7 @@ function getMonthChart() {
                     scales: {
                         y: {
                             min: 0,
-                            max: 100000000
+                            max: 5000000
                             // , ticks: { // y축 줄당 표시 값
                             //     stepSize: 1
                             // }
