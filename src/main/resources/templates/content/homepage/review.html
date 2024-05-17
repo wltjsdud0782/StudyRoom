@@ -18,7 +18,7 @@
             </th:block>
             <th:block th:unless="${#lists.isEmpty(reviewList)}">
                 <th:block th:each="review : ${reviewList}">
-                    <div class="review-body">
+                    <div class="review-body"  th:onclick="location.href=`/review/detailReview?reviewCode=[[${review.reviewCode}]]`">
                         <h6>[[${review.reviewContent}]]</h6>
                         <div class="review-date">
                             <span>[[${review.reviewDate}]]</span>

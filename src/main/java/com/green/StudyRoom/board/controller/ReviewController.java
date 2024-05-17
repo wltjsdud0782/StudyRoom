@@ -90,7 +90,7 @@ public class ReviewController {
         return "redirect:/review/review";
     }
 
-    @GetMapping("detailReview")
+    @GetMapping("/detailReview")
     public String detailReview(@RequestParam(name = "reviewCode")int reviewCode, Model model){
         System.out.println(reviewCode);
         model.addAttribute("reviewVO", reviewService.selectDetailReview(reviewCode));
