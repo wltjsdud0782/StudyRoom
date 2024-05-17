@@ -156,20 +156,6 @@
                 </div>
             </div>
 
-            <th:block th:if="${isSearch != 2}">
-                <div class="paging">
-                    <th:block th:if="${searchVO.prev}">
-                        <a th:href="@{/board/inquiry(nowPage=${searchVO.beginPage - 1})}" style="width: 40px;">이전</a>
-                    </th:block>
-                    <th:block th:each="i :${#numbers.sequence(searchVO.beginPage, searchVO.endPage)}">
-                        <a th:href="@{/board/inquiry(nowPage=${i})}">[[${i}]]</a>
-                    </th:block>
-                    <th:block th:if="${searchVO.next}">
-                        <a th:href="@{/board/inquiry(nowPage=${searchVO.endPage + 1})}" style="width: 40px;">다음</a>
-                    </th:block>
-                </div>
-            </th:block>
-
             <div class="row justify-content-center" style="height: 150px;">
                 <div class="col-10">
                     <div class="inquiry_serch">
@@ -185,10 +171,23 @@
                             <input type="text" name="searchValue" class="searchValue" th:value="${searchVO.searchValue}">
                             <button type="button" class="searchBtn" onclick="searchBtn()">검색</button>
                         </form>
-
                     </div>
                 </div>
             </div>
+
+            <th:block th:if="${isSearch != 2}">
+                <div class="paging">
+                    <th:block th:if="${searchVO.prev}">
+                        <a th:href="@{/board/inquiry(nowPage=${searchVO.beginPage - 1})}" style="width: 40px;">이전</a>
+                    </th:block>
+                    <th:block th:each="i :${#numbers.sequence(searchVO.beginPage, searchVO.endPage)}">
+                        <a th:href="@{/board/inquiry(nowPage=${i})}">[[${i}]]</a>
+                    </th:block>
+                    <th:block th:if="${searchVO.next}">
+                        <a th:href="@{/board/inquiry(nowPage=${searchVO.endPage + 1})}" style="width: 40px;">다음</a>
+                    </th:block>
+                </div>
+            </th:block>
         </div>
 
     </div>

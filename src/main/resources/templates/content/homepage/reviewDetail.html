@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragment/main_layout}" >
+
+<th:block layout:fragment="content_css">
+  <!-- html 파일이 열릴 때 같이 실행되는 css -->
+  <link rel="stylesheet" href="/css/homepage/writeReview.css">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+  <!-- html 코드 작성 -->
+  <div class="row justify-content-center">
+    <div class="col-10">
+        <form action="/review/writeReview" method="post">
+
+            <div class="rev-header">
+                <h3>Review</h3>
+                <div class="rev-text">
+                    Green Study Room 회원님들이 작성해주신 리뷰입니다.
+                </div>
+            </div>
+
+            <div class="review-container" style="text-align: center; height: 700px;">
+                <div class="rev-body" style="text-align: center;">
+                    <div class="rev-body-clock" style="display: flex;">
+                        <h6>작성시간 : </h6> 
+                        <span class="day">[[${reviewVO.reviewDate}]]</span> 
+                        <span class="clock"></span> 
+                    </div>
+                    <div>
+                        <textarea name="reviewContent" cols="60" rows="12" placeholder="📭 리뷰를 작성해주세요.&#10; &#10;리뷰 작성시 유의사항❤&#10;많은 분들이 보시는 리뷰인 만큼&#10;욕설, 비방적인 표현은 삼가해주시길 바랍니다.😢&#10;200자이내"></textarea>
+                    </div>
+                    <div class="rev-footer">
+                        <input type="submit" value="작성하기">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+  <!-- html 파일이 열릴 때 같이 실행되는 js -->
+  <!-- <script src="/"></script> -->
+</th:block>
+</html>

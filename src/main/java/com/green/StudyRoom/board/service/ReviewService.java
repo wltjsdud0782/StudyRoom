@@ -18,4 +18,6 @@ public interface ReviewService {
     List<ReviewVO> selectMyReview(ReviewVO reviewVO);
 
     void deleteReview(int reviewCode);
+
+    ReviewVO selectDetailReview(int reviewCode);
 }

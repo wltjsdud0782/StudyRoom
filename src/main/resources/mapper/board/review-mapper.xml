@@ -48,6 +48,15 @@
         LIMIT #{displayDateCnt} OFFSET ${displayDateCnt * (nowPage-1)}
     </select>
 
+    <select id="selectDetailReview" resultMap="review">
+        SELECT REVIEW_CODE
+        , REVIEW_WRITER
+        , REVIEW_CONTENT
+        , DATE_FORMAT(REVIEW_DATE, '%Y-%m-%d') REVIEW_DATE
+        FROM REVIEW
+        WHERE REVIEW_CODE = #{reviewCode}
+    </select>
+
     <select id="selectReviewPage" resultMap="review">
         SELECT REVIEW_CODE
         , RPAD(SUBSTRING(REVIEW_WRITER,1,2), 5 ,'*') REVIEW_WRITER

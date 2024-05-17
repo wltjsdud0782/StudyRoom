@@ -44,4 +44,9 @@ public class ReviewServiceImpl implements ReviewService {
     public void deleteReview(int reviewCode) {
         sqlSession.delete("reviewMapper.deleteReview", reviewCode);
     }
+
+    @Override
+    public ReviewVO selectDetailReview(int reviewCode) {
+        return sqlSession.selectOne("reviewMapper.selectDetailReview", reviewCode);
+    }
 }

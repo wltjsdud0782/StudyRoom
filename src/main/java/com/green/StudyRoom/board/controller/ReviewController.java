@@ -86,4 +86,12 @@ public class ReviewController {
         reviewService.insertReview(reviewVO);
         return "redirect:/review/review";
     }
+
+    @GetMapping("detailReview")
+    public String detailReview(@RequestParam(name = "reviewCode")int reviewCode, Model model){
+        System.out.println(reviewCode);
+        model.addAttribute("reviewVO", reviewService.selectDetailReview(reviewCode));
+
+        return "content/homepage/reviewDetail";
+    }
 }
