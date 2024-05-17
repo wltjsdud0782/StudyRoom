@@ -24,7 +24,10 @@
         <li><a onclick="location.href='/board/inquiry?pageNo=5'" class="page5">문의</a></li>
         <li><a onclick="location.href='/board/wayToCome?pageNo=6'" class="page6">오시는길</a></li>
         <th:block th:if="${session.loginInfo != null}">
-            <li><a onclick="location.href='/board/myCounter'" class="page7">채팅</a></li>
+            <th:block th:if="${session.loginInfo.isAdmin == 'USER'}">
+                <li><a onclick="location.href='/seat/chargeBuy?pageNo=7'" class="page8">이용권 구매</a></li>
+                <li><a onclick="location.href='/board/myCounter?pageNo=8'" class="page7">채팅</a></li>
+            </th:block>
         </th:block>
         <th:block th:if="${session.loginInfo != null}">
             <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN' || session.loginInfo.isAdmin == 'ARBEIT'}">

@@ -43,13 +43,15 @@ public class AdminController {
 
     //(회원 관리)///////////////////////////////////////////// //
     @RequestMapping("/info")
-    public String adminInfo(Model model, InfoSearchVO infoSearchVO){
+    public String adminInfo(Model model, InfoSearchVO infoSearchVO,
+                            @RequestParam(name = "pageNo", required = false, defaultValue = "2") int pageNo){
         //InfoSearchVO 검색기능
         List<MemberVO> memberList = adminService.selectMemberInfo(infoSearchVO);
         model.addAttribute("memberList", memberList);
         //쿠폰 리스트 보여주기
         List<CouponVO> couponList = chargeService.selectCoupon();
         model.addAttribute("couponList", couponList);
+        model.addAttribute("pageNo", pageNo);
         return "content/admin/admin_Info";
     }
 
@@ -106,7 +108,8 @@ public class AdminController {
     @RequestMapping("/msg")
     public String adminMessage(Model model, InfoSearchVO infoSearchVO,
                                @RequestParam(name="receiver", required=false, defaultValue="") String receiver
-                                , @RequestParam(name="memberCode", required=false, defaultValue="0") int memberCode){
+                                , @RequestParam(name="memberCode", required=false, defaultValue="0") int memberCode,
+                               @RequestParam(name = "pageNo", required = false, defaultValue = "3") int pageNo){
         //InfoSearchVO 검색기능
         model.addAttribute("msgList", messageService.selectWho(infoSearchVO));
         //메세지 보기 (처음엔 안보임)
@@ -116,6 +119,7 @@ public class AdminController {
         //메세지를 받은 사람의 이름
         model.addAttribute("receiver", receiver);
         model.addAttribute("memberCode", memberCode);
+        model.addAttribute("pageNo", pageNo);
         return "content/admin/admin_message";
     }
 
@@ -143,19 +147,23 @@ public class AdminController {
 
     //(좌석 관리)///////////////////////////////////////////// //
     @GetMapping("/seat")
-    public String adminSeat(){
+    public String adminSeat(@RequestParam(name = "pageNo", required = false, defaultValue = "4") int pageNo,
+                            Model model){
+
+        model.addAttribute("pageNo", pageNo);
         return "content/admin/admin_seat";
     }
 
     //(요금 변경)///////////////////////////////////////////// //
     @GetMapping("/charge")
-    public String adminCharge(Model model){
+    public String adminCharge(Model model,@RequestParam(name = "pageNo", required = false, defaultValue = "6") int pageNo){
         //요금제
         List<ChargeVO> chargeList = chargeService.selectCharge();
         model.addAttribute("chargeList", chargeList);
         //쿠폰
         List<CouponVO> couponList = chargeService.selectCoupon();
         model.addAttribute("couponList", couponList);
+        model.addAttribute("pageNo",pageNo);
         return "content/admin/admin_charge";
     }
 
@@ -223,7 +231,8 @@ public class AdminController {
 
     //(로그 확인)///////////////////////////////////////////// //
     @RequestMapping ("/log")
-    public String adminLog(Model model){
+    public String adminLog(@RequestParam(name = "pageNo", required = false, defaultValue = "5") int pageNo,
+                           Model model){
         //결재 기록
         model.addAttribute("appList", timeLogService.selectBuyList());
         //입퇴실 기록
@@ -232,19 +241,22 @@ public class AdminController {
         model.addAttribute("statusList", timeLogService.selectSeatStatusList());
         //보유 쿠폰 조회
         model.addAttribute("couponList", timeLogService.showCoupon());
+        //페이지
+        model.addAttribute("pageNo",pageNo);
         System.out.println(timeLogService.showCoupon());
         return "content/admin/admin_log";
     }
 
     //(매출 관리)///////////////////////////////////////////// //
     @RequestMapping("/sales")
-    public String adminSales(Model model){
+    public String adminSales(Model model,@RequestParam(name = "pageNo", required = false, defaultValue = "7") int pageNo){
         model.addAttribute("yearCharge",salesService.chargeYearSales());
         model.addAttribute("monthCharge",salesService.chargeMonthSales());
         model.addAttribute("yearAgo",salesService.chargeYearAgo());
         model.addAttribute("monthAgo",salesService.chargeMonthAgo());
 //        model.addAttribute("salesCharge",salesService.chargeSalesList());
 //        model.addAttribute("chargeList", chargeService.selectCharge());
+        model.addAttribute("pageNo",pageNo);
         return "content/admin/admin_sales";
     }
 

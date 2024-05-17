@@ -143,7 +143,7 @@ public class StudyRoomBoardController {
     // 개인 정보 페이지로 이동
     @GetMapping("/personalInfo")
     public String myPage(Model model, HttpSession session,
-                         @RequestParam(name = "pageNo", required = false, defaultValue = "1") int pageNo){
+                         @RequestParam(name = "pageNo", required = false, defaultValue = "2") int pageNo){
         MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
         model.addAttribute("pageNo",pageNo);
         //해당 페이지 유지 시, 사이드 바 빛나도록 수정하고 싶음...
@@ -193,8 +193,10 @@ public class StudyRoomBoardController {
 
     //오시는길
     @GetMapping("/wayToCome")
-    public String wayToCome(){
+    public String wayToCome(@RequestParam(name = "pageNo", required = false, defaultValue = "6")int pageNo,
+                            Model model){
 
+        model.addAttribute("pageNo",pageNo);
         return "content/homepage/way_to_come";
     }
 
@@ -258,7 +260,8 @@ public class StudyRoomBoardController {
 
     // 내 이용권/쿠폰
     @GetMapping("/myBuyDetail")
-    public String myBuyDetail(Model model, HttpSession session){
+    public String myBuyDetail(Model model, HttpSession session
+                , @RequestParam(name = "pageNo", required = false, defaultValue = "5") int pageNo){
         MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
         int memberCode = loginInfo.getMemberCode();
 
@@ -269,39 +272,45 @@ public class StudyRoomBoardController {
             model.addAttribute("endDate", seatService.haveChargeEndDate(memberCode));
         }
         model.addAttribute("ownCouponList", seatService.ownCoupon(memberCode));
+        model.addAttribute("pageNo",pageNo);
         return "content/homepage/myBuyDetail";
     }
 
     // 내 입실조회
     @GetMapping("/mySeat")
-    public String mySeat(HttpSession session, Model model){
+    public String mySeat(HttpSession session, Model model,
+                         @RequestParam(name = "pageNo", required = false, defaultValue = "4") int pageNo){
         MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
         int memberCode = loginInfo.getMemberCode();
 
         model.addAttribute("reservationMem", seatService.moveAndOut(memberCode));
         model.addAttribute("inoutTime", seatService.inOutTime(memberCode));
+        model.addAttribute("pageNo", pageNo);
 
         return "content/homepage/mySeat";
     }
 
     //내가 쓴글 확인
     @GetMapping("/myWriting")
-    public String myWriting (HttpSession session, Model model){
+    public String myWriting (HttpSession session, Model model,
+                             @RequestParam(name = "pageNo", required = false, defaultValue = "3") int pageNo){
 
         MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
 
         List<BoardVO> boardList = boardService.selectMyPage(loginInfo.getMemberId());
         model.addAttribute("boardList", boardList);
+        model.addAttribute("pageNo", pageNo);
         System.out.println(boardList);
         return "content/homepage/myWriting";
     }
 
     // 카운터 채팅
     @GetMapping("/myCounter")
-    public String myCounter(HttpSession session, Model model){
+    public String myCounter(HttpSession session, Model model,
+                            @RequestParam(name = "pageNo", required = false, defaultValue = "8") int pageNo){
         MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
         int memberCode = loginInfo.getMemberCode();
-
+        model.addAttribute("pageNo",pageNo);
         model.addAttribute("msgList", seatService.userMsg(memberCode));
         return "content/homepage/my_counter";
     }

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/review")
@@ -21,7 +22,8 @@ public class ReviewController {
 
     //리뷰
     @GetMapping("/review")
-    public String review(Model model, StudyRoomInOutVO inOutVO, HttpSession session){
+    public String review(@RequestParam(name = "pageNo", required = false, defaultValue = "4")int pageNo,
+                        Model model, StudyRoomInOutVO inOutVO, HttpSession session){
 
         MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
         model.addAttribute("reviewList", reviewService.selectReview());
@@ -32,7 +34,7 @@ public class ReviewController {
             inOutVO.setMemberCode(loginInfo.getMemberCode());
             model.addAttribute("inoutList", reviewService.selectInout(inOutVO.getMemberCode()));
         }
-
+        model.addAttribute("pageNo",pageNo);
 
         return "content/homepage/review";
     }

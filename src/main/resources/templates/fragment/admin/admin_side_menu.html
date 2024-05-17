@@ -7,7 +7,7 @@
         <div class="row adminSideMenu">
             <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN' || session.loginInfo.isAdmin == 'ARBEIT'}">
                 <div class="sideMenu-div">
-                    <ul>
+                    <ul class="adminSideMenu">
                         <li style="margin-bottom: 3%;">
                             <a onclick="location.href='/board/mainHomepage'" style="color: white;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -33,7 +33,7 @@
                             </p>
                         </div>
                         <li>
-                            <a onclick="location.href='/admin/info?pageNo=1'" class="page1">
+                            <a onclick="location.href='/admin/info?pageNo=2'" class="page1">
                                 &nbsp;
                                 <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor"
                                     class="bi bi-person-fill" viewBox="0 0 16 16" style="margin-right: 15px;">
@@ -43,7 +43,7 @@
                             </a>
                         </li>
                         <li>
-                            <a onclick="location.href='/admin/msg?pageNo=2'" class="page2">
+                            <a onclick="location.href='/admin/msg?pageNo=3'" class="page2">
                                 &nbsp;
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                     class="bi bi-chat-left-text-fill" viewBox="0 0 16 16"
@@ -55,7 +55,7 @@
                             </a>
                         </li>
                         <li>
-                            <a onclick="location.href='/admin/seat?pageNo=3'" class="page3">
+                            <a onclick="location.href='/admin/seat?pageNo=4'" class="page3">
                                 &nbsp;
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                     class="bi bi-door-open-fill" viewBox="0 0 16 16" style="margin-right: 20px;">
@@ -66,7 +66,7 @@
                             </a>
                         </li>
                         <li>
-                            <a onclick="location.href='/admin/log?pageNo=4'" class="page4">
+                            <a onclick="location.href='/admin/log?pageNo=5'" class="page4">
                                 &nbsp;
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                                     class="bi bi-clock-fill" viewBox="0 0 16 16" style="margin-right: 22px;">
@@ -79,7 +79,7 @@
                         <!-- 관리자만 -->
                         <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
                             <li>
-                                <a onclick="location.href='/admin/charge?pageNo=5'" class="page5">
+                                <a onclick="location.href='/admin/charge?pageNo=6'" class="page5">
                                     &nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                         class="bi bi-person-vcard-fill" viewBox="0 0 16 16" style="margin-right: 20px;">
@@ -90,7 +90,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a onclick="location.href='/admin/sales?pageNo=6'" class="page6">
+                                <a onclick="location.href='/admin/sales?pageNo=7'" class="page6">
                                     &nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                         class="bi bi-bar-chart-fill" viewBox="0 0 16 16" style="margin-right: 20px;">

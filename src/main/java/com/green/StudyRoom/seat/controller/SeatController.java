@@ -27,8 +27,9 @@ public class SeatController {
     private MemberServiceImpl memberService;
 
     @GetMapping("/seatLive") // 좌석선택 눌렀을때
-    public String seatLive(@RequestParam(name = "floor", required = false, defaultValue = "1")int floor
-                        , Model model, HttpSession session){
+    public String seatLive(@RequestParam(name = "floor", required = false, defaultValue = "1")int floor,
+                           @RequestParam(name = "pageNo", required = false, defaultValue = "3")int pageNo,
+                           Model model, HttpSession session){
         model.addAttribute("floor", floor);
 
         if (session.getAttribute("loginInfo") != null){
@@ -43,7 +44,7 @@ public class SeatController {
             }
 
         }
-
+        model.addAttribute("pageNo",pageNo);
         return "content/seat/seat_live";
     }
 
@@ -141,13 +142,14 @@ public class SeatController {
     }
 
     @GetMapping("/chargeBuy") // 이용권구매 눌렀을때
-    public String chargeBuy(HttpSession session, Model model){
+    public String chargeBuy(HttpSession session, Model model,
+                            @RequestParam(name = "pageNo", required = false, defaultValue = "7")int pageNo){
         model.addAttribute("chargeList",seatService.chargeList());
 
         MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
         int memberCode = loginInfo.getMemberCode();
         model.addAttribute("haveCharge", seatService.haveCharge(memberCode));
-
+        model.addAttribute("pageNo",pageNo);
         return "/content/seat/charge_buy";
     }
 

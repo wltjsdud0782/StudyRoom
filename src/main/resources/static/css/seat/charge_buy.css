@@ -1,12 +1,36 @@
+@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+
 .buy-header {
+    color: #fff;
+    font-family: 'GowunBatang-Regular';
     width: 81.5%;
     text-align: start;
     margin-top: 12px;
     margin-left: 190px;
-    border-bottom: 3px solid black;
+    border-bottom: 2px solid #fff;
 }
 
 .line-height {
     line-height: 4;
     font-size: 15pt;
+}
+
+.charge_buy-container{
+    margin-top: 70px;
+    color: #fff;
+    padding: 30px;
+    height: auto;
+    background-color: #383838b4;
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+}
+
+.charge-table{
+    margin-top: 8px;
 }
