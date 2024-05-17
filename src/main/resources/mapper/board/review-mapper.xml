@@ -44,6 +44,8 @@
             , REVIEW_CONTENT
             , DATE_FORMAT(REVIEW_DATE, '%Y-%m-%d') REVIEW_DATE
         FROM REVIEW
+        ORDER BY REVIEW_CODE DESC
+        LIMIT #{displayDateCnt} OFFSET ${displayDateCnt * (nowPage-1)}
     </select>
 
     <select id="selectReviewPage" resultMap="review">
@@ -60,6 +62,14 @@
         ,DAY_INPUT
         FROM STUDYROOM_INOUT
         WHERE MEMBER_CODE = #{memberCode};
+    </select>
+
+    <select id="selectReviewCnt" resultType="int">
+        SELECT
+        COUNT (
+        REVIEW_CODE
+        )
+        FROM REVIEW
     </select>
 
 </mapper>

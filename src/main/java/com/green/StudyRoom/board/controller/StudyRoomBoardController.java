@@ -58,6 +58,7 @@ public class StudyRoomBoardController {
     @Resource(name="reviewService")
     private ReviewService reviewService;
 
+
     //메인 홈페이지
     @GetMapping("/mainHomepage")
     public String studyRoomBoard(HttpSession session,Model model){
@@ -92,7 +93,6 @@ public class StudyRoomBoardController {
 
         //페이징처리 interface
         PagingService page = () -> sqlSession.selectOne("boardMapper.selectBoardCnt");
-
         System.out.println("!!!!!!!" + searchVO);
 
         // 전체 데이터 수
