@@ -59,21 +59,21 @@ function loginCheck(mId){
                         </tr>
                         <tr>
                             <td>이름 <span>*</span></td>
-                            <td><input type="text" name="memberName" value="${data.memberList.memberName}"></td>
+                            <td><input type="text" name="memberName" class="change-name" value="${data.memberList.memberName}"></td>
                         </tr>
 
                         <tr>
                             <td>전화번호</td>
-                            <td><input type="text" name="memberTel" value="${data.memberList.memberTel}"></td>
+                            <td><input type="text" name="memberTel" class="changeTel" value="${data.memberList.memberTel}"></td>
                         </tr>
                         <tr>
                             <td>이메일</td>
-                            <td><input type="text" name="memberDetail" value="${data.memberList.memberEmail}"></td>
+                            <td><input type="text" name="memberEmail" class="changeEmail" value="${data.memberList.memberEmail}"></td>
                         </tr>
                         <tr>
                             <td>생년월일</td>
                             <td>
-                                <input type="date" name="memberBirth" value="${data.memberList.memberBirth}"></td>
+                                <input type="date" name="memberBirth" class="changeBir" value="${data.memberList.memberBirth}"></td>
                         </tr>
                         <tr>
                             <td >
@@ -119,7 +119,37 @@ function loginCheck(mId){
 function updateInfo(){
     
     const pwInputs = document.querySelectorAll('input[type="password"]')
+    const changeName = document.querySelector(".change-name")
+    const addrInpu = document.querySelector(".addr-inpu")
+    const changeBir = document.querySelector(".changeBir")
+    const changeEmail = document.querySelector(".changeEmail")
+    const changeTel = document.querySelector(".changeTel")
 
+    if(changeName.value == ''){
+        alert("이름을 입력해주세요.")
+        return;
+    }
+    if(addrInpu.value == ''){
+        alert("주소를 입력해주세요.")
+        return;
+    }
+    if(changeBir.value == ''){
+        alert("생년월일(8자리)를 입력해주세요.")
+        return;
+    }
+    if(changeEmail.value == ''){
+        alert("이메일을 입력해주세요.")
+        return;
+    }
+    if(changeTel.value == ''){
+        alert("전화번호를 입력해주세요.")
+        return;
+    }
+
+    if(pwInputs[0].value == ''){
+        alert("변경하실 비밀번호를 입력해주세요.")
+        return;
+    }
     if(pwInputs[0].value != pwInputs[1].value){
         // < \n > 한 줄 개행 
         alert('입력한 두 비밀번호가 다릅니다.\n비밀번호를 다시 입력해주세요.')

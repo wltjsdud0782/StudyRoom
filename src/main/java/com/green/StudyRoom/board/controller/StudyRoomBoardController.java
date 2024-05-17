@@ -179,16 +179,16 @@ public class StudyRoomBoardController {
     }
 
     //마이페이지로 이동
-    @GetMapping("/mainMyPage")
-    public String mainMyPage(){
-        return "content/homepage/main_myPage";
-    }
+//    @GetMapping("/mainMyPage")
+//    public String mainMyPage(){
+//        return "content/homepage/main_myPage";
+//    }
 
     //개인 정보 수정
     @PostMapping("/updatePersInfo")
     public String updatePersInfo(MemberVO memberVO){
         boardService.updateMember(memberVO);
-        return "redirect:/board/mainMyPage";
+        return "redirect:/board/personalInfo";
     }
 
     //오시는길
