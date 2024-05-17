@@ -108,6 +108,7 @@
             , ADDR_DETAIL
             , MEMBER_ADDR
             , MEMBER_EMAIL
+            , POST_CODE
         FROM STUDYROOM_MEMBER
         WHERE MEMBER_ID=#{memberId}
         AND MEMBER_PW=#{memberPw}

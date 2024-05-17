@@ -23,7 +23,10 @@ public class MemberController {
     @PostMapping("/join")
     public String joinInsert(MemberVO memberVO){
         //연락처 셋팅
-        memberVO.setMemberTel(memberVO.getMemberTel().replace(",","-"));
+        memberVO.setMemberTel(memberVO.getMemberTel().substring(0, 3) + "-"
+                + memberVO.getMemberTel().substring(3, 7) + "-"
+                + memberVO.getMemberTel().substring(7));
+
         memberService.joinInsert(memberVO);
         System.out.println(memberVO);
         return "redirect:/board/mainHomepage";

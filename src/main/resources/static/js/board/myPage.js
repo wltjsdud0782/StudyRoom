@@ -80,7 +80,7 @@ function loginCheck(mId){
                                 우편번호
                             </td>
                             <td >    
-                                <input type="text" id="sample6_postcode" name="postCode" sytle="width:450px;">
+                                <input type="text" id="sample6_postcode" name="postCode" sytle="width:450px;" value="${data.memberList.postCode}">
                                 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width: 150px;">
                             </td>
                         </tr>

@@ -86,6 +86,10 @@ const goJoin = () =>{
     alert("전화번호를 입력해주세요.")
     return;
   }
+  else if(memberTel.value.length != 11){
+    alert("전화번호는 정확히 11자리여야 합니다.")
+    return;
+  }
   else{
     alert("Green StudyRoom 회원이 되어주셔서 감사합니다. 홈으로 이동합니다.")
     document.querySelector(".memberJoin").submit();

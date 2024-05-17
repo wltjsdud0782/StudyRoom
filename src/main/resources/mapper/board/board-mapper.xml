@@ -66,6 +66,7 @@
         , MEMBER_ADDR = #{memberAddr}
         , ADDR_DETAIL = #{addrDetail}
         , MEMBER_EMAIL = #{memberEmail}
+        , POST_CODE = #{postCode}
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 
