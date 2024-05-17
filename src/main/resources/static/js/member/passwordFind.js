@@ -151,7 +151,8 @@ let telNumber = (getTel, getId) => {
     console.log("!!!!!" + getTel)
 
     const getName = document.querySelector(".getName")
-    const memberTelInfo = document.querySelector(".memberTelInfo")
+    const memberTelInfo = document.querySelector(".memberTelInfo").value
+    const formattedNumber = `${memberTelInfo.substring(0, 3)}-${memberTelInfo.substring(3, 7)}-${memberTelInfo.substring(7)}`;
 
     if (getName.value == '') {
         alert("이름을 입력해주세요.")
@@ -162,7 +163,7 @@ let telNumber = (getTel, getId) => {
         return;
     }
 
-    if (memberTelInfo.value == getTel) {
+    if (formattedNumber == getTel) {
         alert("인증번호가 전송되었습니다.")
         fetch('/sendSms', { //요청경로
             method: 'POST',

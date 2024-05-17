@@ -140,7 +140,7 @@ public class MemberController {
     @PostMapping("/goTel")
     public MemberVO goTel(@RequestParam(name = "memberId") String memberId){
         MemberVO memberList = memberService.memberIdSelect(memberId);
-        memberList.setMemberTel(memberList.getMemberTel().replace("-",""));
+//        memberList.setMemberTel(memberList.getMemberTel().replace("-",""));
         return memberList;
     }
 
