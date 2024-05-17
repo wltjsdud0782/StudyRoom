@@ -11,7 +11,7 @@ function infoSearch() {
 }
 
 //수정 불가능한 info 나오기
-function allInfo(memberCode) {
+function allInfo(memberCode, isAdmin) {
     fetch('/admin/viewInfo', { //요청경로
         method: 'POST',
         cache: 'no-cache',
@@ -50,7 +50,7 @@ function allInfo(memberCode) {
                             disabled>${data.memberMap.memberName}
                         </button>
                         <button type="button" class="btn btn-light enInput" 
-                            onclick="yourCoupon()" style="color: red;">
+                            onclick='yourCoupon("${isAdmin}")' style="color: red;">
                             지급하기
                         </button>
                     </div>                                              
@@ -1023,7 +1023,7 @@ function seatInfo(memberCode) {
 
 
 //쿠폰 지급하기
-function yourCoupon() {
+function yourCoupon(isAdmin) {
 
     const sendCouponForm = document.querySelector('.sendCouponForm');
     const chksValue = []
@@ -1035,15 +1035,21 @@ function yourCoupon() {
         chksValue.push(chk.value);
     }
 
-    if (confirm("지급한 쿠폰은 회수할 수 없습니다.\n정말로 지급하시겠습니까?")) {
-        if(chks.length > 0){
-            sendCouponForm.submit();
-            alert("쿠폰을 지급했습니다.");
+    if (isAdmin === 'ADMIN') {
+        if (confirm("지급한 쿠폰은 회수할 수 없습니다.\n정말로 지급하시겠습니까?")) {
+            if(chks.length > 0){
+                sendCouponForm.submit();
+                alert("쿠폰을 지급했습니다.");
+            }
+            else {
+                alert("지급할 쿠폰을 선택해주세요.")
+            } 
+        } else {
+            alert("취소되었습니다.");
         }
-        else {
-            alert("지급할 쿠폰을 선택해주세요.")
-        } 
-    } else {
-        alert("취소되었습니다.");
     }
+    else{
+        alert('지급할 수 있는 권한이 없습니다.')
+    }
+    
 }
