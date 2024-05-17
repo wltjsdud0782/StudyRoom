@@ -39,7 +39,7 @@
                 <th:block th:each="board , state : ${boardList}">
                     <tr class="admin-answer">
 
-                        <td>[[${board.boardCode}]]</td>
+                        <td>[[${#lists.size(boardList) - state.index}]]</td>
                         <th:block th:if="${session.loginInfo != null}">
                             <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
                                 <td class="bi bi-chat-left-heart pointer"
