@@ -734,8 +734,8 @@ function moveMember() {
             //컨트롤러로 전달할 데이터
             body: JSON.stringify({
                 // 데이터명 : 데이터값
-                memberCode: selected_memberCode
-                , seatFloor: selected_floor
+                memberCode: `${selected_memberCode}`
+                , seatFloor: `${selected_floor}`
 
             })
         })
@@ -745,6 +745,7 @@ function moveMember() {
             })
             //fetch 통신 후 실행 영역
             .then((data) => {//data -> controller에서 리턴되는 데이터!
+                console.log(data);
                 document.querySelector('.adminSeat-modal-body').innerHTML = '';
 
                 let str = '';
