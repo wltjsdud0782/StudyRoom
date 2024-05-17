@@ -70,7 +70,7 @@
                                     </th:block>
                                     <th:block th:unless="${#lists.isEmpty(memberList)}">
                                         <tr th:each="member, state : ${memberList}"
-                                            th:onclick="allInfo([[${member.memberCode}]])"
+                                            th:onclick="allInfo([[${member.memberCode}]],[[${session.loginInfo.isAdmin}]])"
                                             style="height: 4.6rem; vertical-align: middle;">
                                             <td class="text-center" width="5%"
                                                 style="background-color: #8bc0ae; color: white;">
