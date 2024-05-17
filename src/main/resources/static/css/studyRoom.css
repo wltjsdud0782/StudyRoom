@@ -637,29 +637,30 @@ a {
   left: -1px;
 }
 
-.sideMenu-div > ul {
+.sideMenu-div>ul {
   background-color: #000;
   height: 100vh;
   width: 250px;
   padding: 0;
 }
 
-.sideMenu-div > ul > li > a {
+.sideMenu-div>ul>li>a {
   color: #fff;
   display: inline-block;
   padding: 20px;
 }
 
-.sideMenu-div > ul > li:hover {
+.sideMenu-div>ul>li:hover {
   background-color: #f1f1f186;
   cursor: pointer;
-} 
+}
 
 .sideFooter {
   position: fixed;
-  top: 94%;
-  color: #fff; 
-  margin: 0 auto;
+  top: 97%;
+  color: #f1f1f186;
+  font-size: 12px;
+  padding-left: 70px;
 }
 
 
