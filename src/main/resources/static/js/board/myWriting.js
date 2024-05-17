@@ -44,7 +44,7 @@ function goReview(){
                     <td>${data.length - i}</td>
                     <td>${e.reviewContent}</td>
                     <td>${e.reviewDate}</td>
-                    <td><input type="button" value="삭제" onclick='deleteBoard("${e.reviewCode}")'></td>
+                    <td><input type="button" value="삭제" onclick='deleteReview("${e.reviewCode}")'></td>
                 </tr>`
             });    
         str+= `        
