@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{fragment/main_layout}" >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/main_layout}">
 
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴 때 같이 실행되는 css -->
@@ -52,9 +51,9 @@
                             <th:block th:unless="${boardList.imgList[0].attachedFileName == null}">
                                 <th:block th:each="img : ${boardList.imgList}">
                                     <img th:src="@{'/upload/'+ ${img.attachedFileName}}"
-                                    style=" width: 150px; height: 150px; margin-right: 0;">
+                                        style=" width: 150px; height: 150px; margin-right: 0;">
                                 </th:block>
-                            </th:if>
+                                </th:if>
                         </div>
                     </td>
                 </tr>
@@ -71,32 +70,63 @@
                         </div>
                     </th:block>
                 </th:block>
-    
+
                 <th:block th:unless="${#lists.isEmpty(commentList)}">
                     <th:block th:each="comment : ${commentList}">
-                            <div class="yes-answer">
-                                <table class="detail-table2">
-                                    <colgroup>
-                                        <col width="13%">
-                                        <col width="*">
-                                    </colgroup>
-                                    <tr>
-                                        <td>작성일</td>
-                                        <td colspan="3">[[${comment.commentDate}]]</td>
-                                    </tr>
-                                    <tr>
-                                        <td>답변내용</td>
-                                        <td colspan="3">[[${comment.commentContent}]]</td>
-                                    </tr>
-                                </table>
-                            </div>
+                        <div class="yes-answer">
+                            <table class="detail-table2">
+                                <colgroup>
+                                    <col width="13%">
+                                    <col width="*">
+                                </colgroup>
+                                <tr>
+                                    <td>작성일</td>
+                                    <td colspan="3">[[${comment.commentDate}]]</td>
+                                </tr>
+                                <tr>
+                                    <td>답변내용</td>
+                                    <td colspan="3">[[${comment.commentContent}]]</td>
+                                </tr>
+                            </table>
+                        </div>
                     </th:block>
                 </th:block>
-            </th:block>    
-    
-            
-    
-    
+            </th:block>
+
+            <th:block th:if="${session.loginInfo == null}">
+                <th:block th:if="${#lists.isEmpty(commentList)}">
+                    <div class="no-answer">
+                        빠른시일내에 확인하겠습니다.
+                        <p>
+                            조금만 기다려주세요!😊
+                        </p>
+                    </div>
+                </th:block>
+                <th:block th:unless="${#lists.isEmpty(commentList)}">
+                    <th:block th:each="comment : ${commentList}">
+                        <div class="yes-answer">
+                            <table class="detail-table2">
+                                <colgroup>
+                                    <col width="13%">
+                                    <col width="*">
+                                </colgroup>
+                                <tr>
+                                    <td>작성일</td>
+                                    <td colspan="3">[[${comment.commentDate}]]</td>
+                                </tr>
+                                <tr>
+                                    <td>답변내용</td>
+                                    <td colspan="3">[[${comment.commentContent}]]</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </th:block>
+                </th:block>
+            </th:block>
+
+
+
+
             <th:block th:if="${session.loginInfo != null}">
                 <th:block th:if="${session.loginInfo.isAdmin == 'ADMIN'}">
                     <th:block th:if="${#lists.isEmpty(commentList)}">
@@ -109,12 +139,12 @@
                         </div>
                     </th:block>
                 </th:block>
-            </th:block>   
+            </th:block>
         </div>
 
-       
+
     </div>
-        
+
     <!-- html 코드 작성 -->
 </th:block>
 
@@ -122,4 +152,5 @@
     <!-- html 파일이 열릴 때 같이 실행되는 js -->
     <script src="/"></script>
 </th:block>
+
 </html>
