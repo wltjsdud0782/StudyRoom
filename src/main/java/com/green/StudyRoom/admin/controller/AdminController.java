@@ -148,9 +148,14 @@ public class AdminController {
     @GetMapping("/seat")
     public String adminSeat(@RequestParam(name = "pageNo", required = false, defaultValue = "4") int pageNo,
                             Model model){
-
         model.addAttribute("pageNo", pageNo);
         return "content/admin/admin_seat";
+    }
+
+    //좌석 변경
+    @PostMapping("/changeStatus")
+    public void changeStatus(@RequestParam(name = "seatNum") int seatNum, SeatVO seatVO){
+        seatService.adminUpdateSeat(seatVO);
     }
 
     //(요금 변경)///////////////////////////////////////////// //

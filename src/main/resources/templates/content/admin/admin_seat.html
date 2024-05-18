@@ -19,7 +19,18 @@
                 <div class="col">
                     <div class="row">
                         <div class="col">
-                            <div class="input-group" role="group">
+                            <h5 style="text-align: left;">좌석상태 변경하기</h5>
+                            <div class="input-group" role="group" style="width: 360px;">
+                                <input type="number" class="form-control statusNum" min="1" max="60" placeholder="좌석번호">
+                                <!-- 넘버 바꾸면 여기에 해당 좌석의 상태를 띄워줌 -->
+                                <select class="form-select">
+                                    <option value="1">사용중</option>
+                                    <option value="2">사용가능</option>                            
+                                    <option value="3">수리중</option>
+                                </select>
+                                <button class="btn btn-outline-secondary" type="button" onclick="changeStatus()">변경</button>
+                            </div>
+                            <div class="input-group group-button" role="group">
                                 <button type="button" class="btn btn-secondary floor-btn"
                                     onclick="onefloor()">1층</button>
                                 <button type="button" class="btn btn-outline-secondary floor-btn"
