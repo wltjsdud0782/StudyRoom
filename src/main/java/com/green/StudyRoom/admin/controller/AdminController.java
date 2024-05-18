@@ -148,10 +148,18 @@ public class AdminController {
     @GetMapping("/seat")
     public String adminSeat(@RequestParam(name = "pageNo", required = false, defaultValue = "4") int pageNo,
                             Model model){
-
         model.addAttribute("pageNo", pageNo);
         return "content/admin/admin_seat";
     }
+
+    //좌석 변경
+    @PostMapping("/changeStatus")
+    public String changeStatus(SeatVO seatVO){
+        seatService.adminUpdateSeat(seatVO);
+        return "redirect:/admin/seat";
+    }
+
+    // @RequestParam(name = "seatNum") int seatNum,
 
     //(요금 변경)///////////////////////////////////////////// //
     @GetMapping("/charge")
@@ -187,6 +195,7 @@ public class AdminController {
     public String uptCharge(ChargeVO chargeVO){
         //Charge의 List 업데이트
         chargeService.uptCharge(chargeVO);
+        System.out.println(chargeVO);
         return "redirect:/admin/charge";
     }
 

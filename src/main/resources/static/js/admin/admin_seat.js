@@ -22,8 +22,9 @@ function onefloor() {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
+            console.log(data);
 
-            document.querySelector(".input-group").innerHTML = '';
+            document.querySelector(".group-button").innerHTML = '';
             let str_1 = '';
             str_1 += `
                 <button type="button" class="btn btn-light floor-btn" onclick="onefloor()">1층</button>
@@ -32,7 +33,7 @@ function onefloor() {
                 <button type="button" class="btn btn-outline-danger" onclick="moveMember()">회원이동</button>
                 <button type="button" class="btn btn-outline-danger" onclick="adminSeatOut()">회원퇴실</button>
             `;
-            document.querySelector(".input-group").insertAdjacentHTML('afterbegin', str_1);
+            document.querySelector(".group-button").insertAdjacentHTML('afterbegin', str_1);
 
             document.querySelector(".seatLive").innerHTML = '';
             let str = '';
@@ -62,7 +63,7 @@ function onefloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                                 <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -71,7 +72,7 @@ function onefloor() {
                 } else if (e.memberVO == null) {
                     str += `
                                 <div class="col-3 one-seat greenSeat">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -80,7 +81,7 @@ function onefloor() {
                 } else {
                     str += `
                                 <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -96,7 +97,7 @@ function onefloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                             <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -105,7 +106,7 @@ function onefloor() {
                 } else if (e.memberVO == null) {
                     str += `
                             <div class="col-3 one-seat greenSeat">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -114,7 +115,7 @@ function onefloor() {
                 } else {
                     str += `
                             <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -135,7 +136,7 @@ function onefloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                             <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -144,7 +145,7 @@ function onefloor() {
                 } else if (e.memberVO == null) {
                     str += `
                             <div class="col-3 one-seat greenSeat">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -153,7 +154,7 @@ function onefloor() {
                 } else {
                     str += `
                             <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -170,7 +171,7 @@ function onefloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                                 <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -179,7 +180,7 @@ function onefloor() {
                 } else if (e.memberVO == null) {
                     str += `
                                 <div class="col-3 one-seat greenSeat">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -188,7 +189,7 @@ function onefloor() {
                 } else {
                     str += `
                                 <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -213,7 +214,7 @@ function onefloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                                 <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -222,7 +223,7 @@ function onefloor() {
                 } else if (e.memberVO == null) {
                     str += `
                                 <div class="col-3 one-seat greenSeat">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -231,7 +232,7 @@ function onefloor() {
                 } else {
                     str += `
                                 <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -246,7 +247,7 @@ function onefloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                             <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -255,7 +256,7 @@ function onefloor() {
                 } else if (e.memberVO == null) {
                     str += `
                             <div class="col-3 one-seat greenSeat">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -264,7 +265,7 @@ function onefloor() {
                 } else {
                     str += `
                             <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -278,7 +279,7 @@ function onefloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                                 <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -287,7 +288,7 @@ function onefloor() {
                 } else if (e.memberVO == null) {
                     str += `
                                 <div class="col-3 one-seat greenSeat">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -296,7 +297,7 @@ function onefloor() {
                 } else {
                     str += `
                                 <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -311,7 +312,7 @@ function onefloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                             <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -320,7 +321,7 @@ function onefloor() {
                 } else if (e.memberVO == null) {
                     str += `
                             <div class="col-3 one-seat greenSeat">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -329,7 +330,7 @@ function onefloor() {
                 } else {
                     str += `
                             <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -373,7 +374,7 @@ function twofloor() {
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
 
-            document.querySelector(".input-group").innerHTML = '';
+            document.querySelector(".group-button").innerHTML = '';
             let str_2 = '';
             str_2 += `
                 <button type="button" class="btn btn-outline-secondary floor-btn" onclick="onefloor()">1층</button>
@@ -382,7 +383,7 @@ function twofloor() {
                 <button type="button" class="btn btn-outline-danger" onclick="moveMember()">회원이동</button>
                 <button type="button" class="btn btn-outline-danger" onclick="adminSeatOut()">회원퇴실</button>
             `;
-            document.querySelector(".input-group").insertAdjacentHTML('afterbegin', str_2);
+            document.querySelector(".group-button").insertAdjacentHTML('afterbegin', str_2);
 
             document.querySelector(".seatLive").innerHTML = '';
             let str = '';
@@ -412,7 +413,7 @@ function twofloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                             <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -421,7 +422,7 @@ function twofloor() {
                 } else if (e.memberVO == null) {
                     str += `
                             <div class="col-3 one-seat greenSeat">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -430,7 +431,7 @@ function twofloor() {
                 } else {
                     str += `
                             <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -445,7 +446,7 @@ function twofloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                             <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -454,7 +455,7 @@ function twofloor() {
                 } else if (e.memberVO == null) {
                     str += `
                             <div class="col-3 one-seat greenSeat">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -463,7 +464,7 @@ function twofloor() {
                 } else {
                     str += `
                             <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -477,7 +478,7 @@ function twofloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                                 <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -486,7 +487,7 @@ function twofloor() {
                 } else if (e.memberVO == null) {
                     str += `
                                 <div class="col-3 one-seat greenSeat">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -495,7 +496,7 @@ function twofloor() {
                 } else {
                     str += `
                                 <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -512,7 +513,7 @@ function twofloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                                 <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -521,7 +522,7 @@ function twofloor() {
                 } else if (e.memberVO == null) {
                     str += `
                                 <div class="col-3 one-seat greenSeat">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -530,7 +531,7 @@ function twofloor() {
                 } else {
                     str += `
                                 <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -552,7 +553,7 @@ function twofloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                             <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -561,7 +562,7 @@ function twofloor() {
                 } else if (e.memberVO == null) {
                     str += `
                             <div class="col-3 one-seat greenSeat">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -570,7 +571,7 @@ function twofloor() {
                 } else {
                     str += `
                             <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -586,7 +587,7 @@ function twofloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                             <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -595,7 +596,7 @@ function twofloor() {
                 } else if (e.memberVO == null) {
                     str += `
                             <div class="col-3 one-seat greenSeat">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -604,7 +605,7 @@ function twofloor() {
                 } else {
                     str += `
                             <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -625,7 +626,7 @@ function twofloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                                 <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -634,7 +635,7 @@ function twofloor() {
                 } else if (e.memberVO == null) {
                     str += `
                                 <div class="col-3 one-seat greenSeat">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>&nbsp;</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div></div>
@@ -643,7 +644,7 @@ function twofloor() {
                 } else {
                     str += `
                                 <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                                <div>${e.seatNum}</div>
+                                <div>${e.seatNum} (${e.seatPower})</div>
                                 <div>${e.memberVO.memberName}</div>
                                 <div>${e.seatStatusVO.statusName}</div>
                                 <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -658,7 +659,7 @@ function twofloor() {
                 if (e.seatStatusVO.statusNum == 3) {
                     str += `
                             <div class="col-3 one-seat" style="background-color:#dfd3f8; cursor:default;">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -667,7 +668,7 @@ function twofloor() {
                 } else if (e.memberVO == null) {
                     str += `
                             <div class="col-3 one-seat greenSeat">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>&nbsp;</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div></div>
@@ -676,7 +677,7 @@ function twofloor() {
                 } else {
                     str += `
                             <div class="col-3 one-seat non-click" onclick="selectSeat(this, ${e.memberCode})">
-                            <div>${e.seatNum}</div>
+                            <div>${e.seatNum} (${e.seatPower})</div>
                             <div>${e.memberVO.memberName}</div>
                             <div>${e.seatStatusVO.statusName}</div>
                             <div>(${e.memberVO.memberTel.slice(9,)})</div>
@@ -953,5 +954,18 @@ function adminSeatOut() {
     }
     else {
         return;
+    }
+}
+
+
+function changeStatus() {
+    const chStatus = document.querySelector('.changeStatus');
+    const sNum = document.querySelector('.sNum');
+    if (sNum.value != '' && sNum.value <= 60) {
+        chStatus.submit();
+        alert('변경되었습니다.')
+    }
+    else {
+        alert('제대로 입력되지 않았습니다.')
     }
 }

@@ -19,7 +19,7 @@
                 <div class="col">
                     <div class="row">
                         <div class="col">
-                            <div class="input-group" role="group">
+                            <div class="input-group group-button" role="group">
                                 <button type="button" class="btn btn-secondary floor-btn"
                                     onclick="onefloor()">1층</button>
                                 <button type="button" class="btn btn-outline-secondary floor-btn"
@@ -54,6 +54,25 @@
                             </div> -->
                         </div>
                     </div>
+                    <div style="padding: 2vh;"></div> <!-- 띄어쓰기 -->
+                    <form action="/admin/changeStatus" method="post" class="changeStatus">
+                        <div class="input-group changeStatus" role="group" style="float: right; width: 500px;">
+                            <input type="number" class="form-control sNum" min="1" max="60" placeholder="좌석번호 1~60" name="seatNum" style="width: 70px;">
+                            <!-- 넘버 바꾸면 여기에 해당 좌석의 상태를 띄워줌 -->
+                            <select class="form-select" name="statusNum">
+                                <!-- <option value="1">사용중</option> -->
+                                <option value="3">수리중</option>
+                                <option value="2">사용가능</option>      
+                                <option value="1">사용중</option>                         
+                            </select>
+                            <select class="form-select" name="seatPower">
+                                <!-- <option value="1">사용중</option> -->
+                                <option value="OFF">꺼짐</option>
+                                <option value="ON">켜짐</option>
+                            </select>
+                            <button class="btn btn-outline-secondary" type="button" onclick="changeStatus()">변경</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
