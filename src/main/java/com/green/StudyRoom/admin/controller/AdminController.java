@@ -154,9 +154,12 @@ public class AdminController {
 
     //좌석 변경
     @PostMapping("/changeStatus")
-    public void changeStatus(@RequestParam(name = "seatNum") int seatNum, SeatVO seatVO){
+    public String changeStatus(SeatVO seatVO){
         seatService.adminUpdateSeat(seatVO);
+        return "redirect:/admin/seat";
     }
+
+    // @RequestParam(name = "seatNum") int seatNum,
 
     //(요금 변경)///////////////////////////////////////////// //
     @GetMapping("/charge")
@@ -192,6 +195,7 @@ public class AdminController {
     public String uptCharge(ChargeVO chargeVO){
         //Charge의 List 업데이트
         chargeService.uptCharge(chargeVO);
+        System.out.println(chargeVO);
         return "redirect:/admin/charge";
     }
 
