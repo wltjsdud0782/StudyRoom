@@ -13,7 +13,6 @@
 
 //     currnetDate.insertAdjacentHTML = dateString;
 
-//     console.log(dateString);
 // }
 
 // numberComma()

@@ -43,7 +43,6 @@ public class ImgUploadUtil {
                     imgVO.setOriginFileName(uploadFile.getOriginalFilename());
                     imgList.add(imgVO);
                 } catch (Exception e) {
-                    System.out.println("!!파일 첨부 중 예외 발생!!");
                     e.printStackTrace();
                 }
             }

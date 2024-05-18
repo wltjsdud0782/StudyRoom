@@ -4,8 +4,6 @@ const findPassword = () =>{
 
     const memberIds = document.querySelector(".selectId")
 
-    console.log(memberIds.value)
-
     fetch('/member/selectMemberId', { //요청경로
         method: 'POST',
         cache: 'no-cache',
@@ -29,8 +27,6 @@ const findPassword = () =>{
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
-        console.log(data)
-
         if(data.nullInfo != ''){
             location.href=`/member/passwordFind?memberId=${data.memberList.memberId}`;
 

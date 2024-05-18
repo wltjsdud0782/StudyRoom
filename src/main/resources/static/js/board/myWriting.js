@@ -15,7 +15,6 @@ function goReview(){
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
-        console.log(data)
         const table = document.querySelector(".myPage-table");
         
         let str = '';
@@ -77,8 +76,6 @@ function deleteReview(reviewCode){
 
 
 const goBoard = (boardList) =>{
-    console.log(boardList)
-
     const table = document.querySelector(".myPage-table");
 
     let str = '' 

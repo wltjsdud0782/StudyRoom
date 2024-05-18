@@ -7,9 +7,6 @@ function goWriting(){
    const popUp3 = document.querySelector(".popUp-3")
    const popUp4 = document.querySelector(".popUp_4")
 
-   console.log(checked)
-   console.log(checkBox)
-
    if(checked){
     checkBox.value = 'YES'
    }else(
@@ -49,8 +46,6 @@ function readURL(input){
 
    const popUp = document.querySelector('.popUp');
 
-   console.log(fileTag.files)
-
    if(fileTag.files.length <= 3) {
       const popUp2 = document.querySelector('.popUp-2');
       const popDelete = document.querySelector(".popDelet");
@@ -61,7 +56,6 @@ function readURL(input){
          
          let reader = new FileReader();
 
-         console.log(reader)
          reader.onload = function(e) {
 
             //이미지 태그 만들기
@@ -104,8 +98,6 @@ function readURL(input){
 
 
 
-   // console.log(input.files)
-
    // if(input.files.length <= 3 ){
 
    //    let reader = new FileReader();
@@ -122,22 +114,17 @@ function readURL(input){
    //    alert("사진은 최대 3장까지 첨부할 수 있습니다.")
    // }
 
-   // console.log(input)
-   
    // for(let i = 0; i < input.files.length; i++){
    //    let reader = new FileReader();
 
    //    reader.onload = function(e){
-   //       console.log(e)
    //    }
 
 
    // }
-   // console.log(input.textContent);
    
    // const text = document.querySelector(".img_text")
    // const fileOne =document.querySelector(".file_one")
-   // console.log(text)
 
    // if(input != ''){
    //    text.textContent = '이미지 첨부 완료.';
@@ -159,7 +146,6 @@ function readURL(input){
       // let str = '';
       // reader.onload = function(e){
    
-      //    console.log(111);
       //    for(let i = 0 ; i < input.files.length ; i++){
       //       alert(e.target.result);
       //       str += `

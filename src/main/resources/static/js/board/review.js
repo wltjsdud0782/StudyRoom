@@ -1,5 +1,4 @@
 function writeReview(inoutList, loginInfo){
-    console.log(inoutList)
     const popup = document.querySelector(".review-pop")
     const popClose = document.querySelector(".pop-close")
 
@@ -15,8 +14,6 @@ function writeReview(inoutList, loginInfo){
     else if(loginInfo != null){
         if(inoutList.length != 0 || inoutList != ''){
             location.href="/review/writeReview";
-        }else{
-           console.log("!!!")
         }
     }
     
@@ -26,7 +23,6 @@ function writeReview(inoutList, loginInfo){
     //     }else{
     //         alert("!!!!")
     //     }
-    //     console.log(inout.inOut)
     // //    if(inout.inOut == IN || inout.inOut == OUT){
     // //     
     // //    }else(

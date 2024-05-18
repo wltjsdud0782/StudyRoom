@@ -21,9 +21,6 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public MimeMessage creatMessage(String to) throws MessagingException, UnsupportedEncodingException {
-        System.out.println("메일받을 사용자" + to);
-        System.out.println("인증번호" + ePw);
-
         MimeMessage message = emailSender.createMimeMessage();
 
         message.addRecipients(Message.RecipientType.TO, to); // 메일 받을 사용자
@@ -47,9 +44,6 @@ public class MailServiceImpl implements MailService {
         message.setText(msgg, "utf-8", "html"); // 메일 내용, charset타입, subtype
         // 보내는 사람의 이메일 주소, 보내는 사람 이름
         message.setFrom(new InternetAddress("juhee053@naver.com", "GreenStudyRoom_Admin"));
-        System.out.println("********creatMessage 함수에서 생성된 msgg 메시지********" + msgg);
-
-        System.out.println("********creatMessage 함수에서 생성된 리턴 메시지********" + message);
 
         return message;
     }
@@ -69,11 +63,7 @@ public class MailServiceImpl implements MailService {
     @Override
     public String sendSimpleMessage(String to) throws Exception {
         ePw = createKey(); // 랜덤 인증코드 생성
-        System.out.println("********생성된 랜덤 인증코드******** => " + ePw);
-
         MimeMessage message = creatMessage(to); // "to" 로 메일 발송
-
-        System.out.println("********생성된 메시지******** => " + message);
 
         try { // 예외처리
             emailSender.send(message);

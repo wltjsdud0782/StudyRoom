@@ -247,8 +247,6 @@ function getTableData() {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
-            console.log(data);
-
             ///////////////////////////////////////////////////////////////////////////////////////////////////
 
             //데이터 테이블1 - TYPE_NAME과 SUM_FEE(합계) 넣기
@@ -279,8 +277,6 @@ function getTableData() {
                 }
                 element['sumFee'] = sum;
             });
-            // console.log(tableData);
-
             /////////////////////////////////////////////////////////////////////////////////////////////////// 
 
             //갯수 합계 만들기
@@ -310,8 +306,6 @@ function getTableData() {
                 }
                 element['cnt'] = sum;
             });
-            console.log(cntData);
-
             //총 합계 만들어 넣기
             let totalCnt = 0;
             let totalSum = 0;
@@ -338,8 +332,6 @@ function getTableData() {
                 });
                 feeData.push(totalCnt);
             });
-            // console.log(feeData);
-
             //개수의 최종 합계 넣기
             feeData.forEach((element, idx) => {
                 const cntFee = { ...element };

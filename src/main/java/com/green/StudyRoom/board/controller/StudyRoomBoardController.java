@@ -93,15 +93,12 @@ public class StudyRoomBoardController {
 
         //페이징처리 interface
         PagingService page = () -> sqlSession.selectOne("boardMapper.selectBoardCnt");
-        System.out.println("!!!!!!!" + searchVO);
 
         // 전체 데이터 수
         searchVO.setTotalDateCnt(page.selectBoardCnt());
 
         //페이징 정보 세팅
         searchVO.setPageInfo();
-
-        System.out.println("!!!!!!!!!!! " + searchVO.getDisplayDateCnt() + "!!!!!!!!" + page.selectBoardCnt());
 
         List<BoardVO> boardList = boardService.selectBoard(searchVO);
         if(isSearch == 1){
@@ -111,7 +108,6 @@ public class StudyRoomBoardController {
                 isSearch = 2;
             }
             model.addAttribute("isSearch",isSearch);
-            System.out.println(searchVO.getSearchType());
             model.addAttribute("searchType",searchVO.getSearchType());
         }
 
@@ -136,7 +132,6 @@ public class StudyRoomBoardController {
 //
 //        boardVO.setBoardWriter(loginInfo.getMemberId());
 //        boardService.insertBoard(boardVO);
-//        System.out.println(boardVO);
 //        return "redirect:/board/inquiry";
 //    }
 
@@ -208,8 +203,6 @@ public class StudyRoomBoardController {
 
         List<CommentVO> commentList = commentService.selectComment(boardCode);
 
-        System.out.println(boardList);
-
         model.addAttribute("boardList", boardList);
         model.addAttribute("commentList", commentList);
 
@@ -228,8 +221,6 @@ public class StudyRoomBoardController {
 
     @PostMapping("/adminAnswer")
     public String adminAnswer(CommentVO commentVO, HttpSession session){
-
-        System.out.println(commentVO);
 
         MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
 
@@ -300,7 +291,6 @@ public class StudyRoomBoardController {
         List<BoardVO> boardList = boardService.selectMyPage(loginInfo.getMemberId());
         model.addAttribute("boardList", boardList);
         model.addAttribute("pageNo", pageNo);
-        System.out.println(boardList);
         return "content/homepage/myWriting";
     }
 
@@ -318,7 +308,6 @@ public class StudyRoomBoardController {
     @ResponseBody
     @PostMapping("/sendCounter")
     public List<MessageVO> sendCounter(@RequestBody Map<String, String> data){
-        System.out.println(data);
         MessageVO messageVO = new MessageVO();
         messageVO.setMemberCode(Integer.parseInt(data.get("memberCode")));
         messageVO.setMessageContent(data.get("messageContent"));
@@ -382,7 +371,6 @@ public class StudyRoomBoardController {
 
     @GetMapping("/deleteReview")
     public String deleteReview(@RequestParam(name = "reviewCode") int reviewCode){
-        System.out.println("!!!!!1" + reviewCode);
         reviewService.deleteReview(reviewCode);
 
         return "redirect:/board/myWriting";

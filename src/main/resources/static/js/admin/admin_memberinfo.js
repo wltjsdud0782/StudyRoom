@@ -35,8 +35,6 @@ function allInfo(memberCode, isAdmin) {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
-            console.log(data);
-
             //쿠폰 지급
             const goCoupon = document.querySelector('.goCoupon');
             goCoupon.innerHTML = '';
@@ -1031,7 +1029,6 @@ function yourCoupon(isAdmin) {
     //체크된 체크박스들
     const chks = document.querySelectorAll('input[name="couponCode"]:checked');
     for (const chk of chks) {
-        console.log(chk.value);
         chksValue.push(chk.value);
     }
 

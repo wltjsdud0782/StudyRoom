@@ -18,7 +18,6 @@ public class SmsController {
     @ResponseBody
     @PostMapping("/sendSms")
     public String sendRandomSms(MemberVO memberVO){
-        System.out.println(memberVO);
 
         Random random = new Random();
         StringBuffer buffer = new StringBuffer();
@@ -27,8 +26,8 @@ public class SmsController {
             buffer.append(random.nextInt(10));
         }
         String randomCode = buffer.toString();
-        System.out.println("수신자 번호 :" + memberVO.getMemberTel());
-        System.out.println("인증번호 : " + randomCode);
+//        System.out.println("수신자 번호 :" + memberVO.getMemberTel());
+//        System.out.println("인증번호 : " + randomCode);
 
 //        smsService.getMessage(memberVO.getMemberTel(), randomCode);
 

@@ -217,7 +217,6 @@ function buyCard(chargeCode, memberCode) {
                         if (rsp.success) {
                             //서버 검증 요청 부분
                             //imp_178957754537 / 57008833-33006 / 100
-                            console.log(rsp.imp_uid + ' / ' + rsp.merchant_uid + ' / ' + rsp.paid_amount);
                             fetch('/seat/buySuccess', { //요청경로
                                 method: 'POST',
                                 cache: 'no-cache',

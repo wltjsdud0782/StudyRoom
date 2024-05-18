@@ -46,8 +46,6 @@ function goChat(memberCode) {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
-            console.log(data);
-
             document.querySelector('input[name="memberCode"]').value = memberCode;
             document.querySelector('#send_memberName').value = `+${data.member.memberName}`;
 

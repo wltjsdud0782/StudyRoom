@@ -745,7 +745,6 @@ function moveMember() {
             })
             //fetch 통신 후 실행 영역
             .then((data) => {//data -> controller에서 리턴되는 데이터!
-                console.log(data);
                 document.querySelector('.adminSeat-modal-body').innerHTML = '';
 
                 let str = '';

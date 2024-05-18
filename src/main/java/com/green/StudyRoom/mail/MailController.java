@@ -16,7 +16,6 @@ public class MailController {
     @PostMapping("/sendMail")
     public String mailConfirm(@RequestParam(name = "memberEmail")String memberEmail) throws Exception{
         String code = mailService.sendSimpleMessage(memberEmail);
-        System.out.println("사용자에게 발송한 인증 코드 =>" +  code);
 
         return code;
     }

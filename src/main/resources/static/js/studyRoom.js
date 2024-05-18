@@ -23,7 +23,6 @@ window.onload = () =>{
 
     document.querySelectorAll(".login-popup").forEach((element, idx) => {
         element.addEventListener("click", () =>{
-            console.log(1);
             loginModal.style.display = 'block';
             loginModal.style.opacity = '1';
         })
@@ -76,9 +75,6 @@ function login(){
     const memberId = document.querySelector('.memberId').value;
     const memberPw = document.querySelector('.memberPw').value;
     
-    console.log(memberId)
-    console.log(memberPw)
-
     fetch('/member/loginFetch', { //요청경로
         method: 'POST',
         cache: 'no-cache',

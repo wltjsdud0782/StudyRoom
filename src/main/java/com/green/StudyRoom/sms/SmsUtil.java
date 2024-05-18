@@ -25,10 +25,7 @@ public class SmsUtil {
             messageService.send(message);
         } catch (NurigoMessageNotReceivedException exception) {
             // 발송에 실패한 메시지 목록을 확인할 수 있습니다!
-            System.out.println(exception.getFailedMessageList());
-            System.out.println(exception.getMessage());
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
         }
     }
 }

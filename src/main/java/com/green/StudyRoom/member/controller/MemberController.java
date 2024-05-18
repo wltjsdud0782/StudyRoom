@@ -28,7 +28,6 @@ public class MemberController {
                 + memberVO.getMemberTel().substring(7));
 
         memberService.joinInsert(memberVO);
-        System.out.println(memberVO);
         return "redirect:/board/mainHomepage";
     }
 
@@ -45,7 +44,6 @@ public class MemberController {
 
 //    @PostMapping("/idFind")
 //    public String idFindTo(MemberVO memberVO, Model model){
-//        System.out.println(memberVO);
 //
 //        model.addAttribute("memberList", memberService.idFindSelect(memberVO));
 //        return "content/member/idResult";
@@ -53,8 +51,6 @@ public class MemberController {
 
     @GetMapping("/passwordFind")
     public String passwordFind(@RequestParam(name = "memberId") String memberId, Model model){
-        System.out.println(memberId);
-
         model.addAttribute("memberList", memberService.memberIdSelect(memberId));
         return "content/member/passwordFind";
     }
@@ -130,8 +126,6 @@ public class MemberController {
 
     @PostMapping("/idFind")
     public String insertIdFind(MemberVO memberVO, Model model){
-        System.out.println(memberVO);
-
         model.addAttribute("memberList" , memberService.idFindResult(memberVO));
         return "content/member/idFindResult";
     }
@@ -162,13 +156,9 @@ public class MemberController {
     @ResponseBody
     @PostMapping("/selectMemberId")
     public Map<String , Object> selectMemberId(@RequestParam(name = "memberId")String memberId){
-        System.out.println(memberId);
-
         Map<String, Object> map = new HashMap<>();
 
         MemberVO memberList = memberService.memberIdSelect(memberId);
-
-        System.out.println(memberList);
 
         String nullInfo = "FindId";
 
@@ -186,14 +176,11 @@ public class MemberController {
 
     @GetMapping("/resetPassword")
     public String resetPassword(@RequestParam(name = "memberId") String memberId ,Model model){
-        System.out.println(memberId);
         model.addAttribute("memberId", memberId);
         return "content/member/resetPassword";
     }
     @PostMapping("/changePassword")
     public String changePassword(MemberVO memberVO){
-
-        System.out.println(memberVO);
 
         memberService.resetPassword(memberVO);
 

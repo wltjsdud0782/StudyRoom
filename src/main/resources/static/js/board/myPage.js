@@ -25,8 +25,6 @@ function loginCheck(mId){
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
-        console.log(data)
-
         if(data.nullInfo == ""){
             alert("입력하신 비밀번호가 맞지않습니다.")
             checkPw.value = '';

@@ -38,12 +38,7 @@ const goTel = (memberId, secretEmail) => {
             findEmail.insertAdjacentHTML("afterbegin", sr);
 
 
-            console.log(data)
-            console.log(data.memberTel)
-
             const getTel = data.memberTel
-
-            console.log(getTel)
 
             const findTel = document.querySelector(".find-tel")
 
@@ -111,9 +106,6 @@ const goEmail = (memberId, secretTel) => {
                 `
             findTel.insertAdjacentHTML("afterbegin", sr)
 
-            console.log(data)
-
-            console.log("!!!!!")
             let str = ''
 
             str += `
@@ -148,7 +140,6 @@ const goEmail = (memberId, secretTel) => {
 }
 
 let telNumber = (getTel, getId) => {
-    console.log("!!!!!" + getTel)
 
     const getName = document.querySelector(".getName")
     const memberTelInfo = document.querySelector(".memberTelInfo").value
@@ -188,15 +179,8 @@ let telNumber = (getTel, getId) => {
             })
             //fetch 통신 후 실행 영역
             .then((data) => {//data -> controller에서 리턴되는 데이터!
-                console.log(data)
-
                 const checkCode = document.querySelector(".checkCode")
                 const checkTel = document.querySelector(".checkTel")
-
-                console.log(checkCode.value)
-                console.log(checkTel)
-                console.log(getName)
-
 
                 checkTel.addEventListener("click", () => {
 
@@ -221,8 +205,6 @@ let telNumber = (getTel, getId) => {
 }
 
 const emailNumber = (getEmail, getId) => {
-
-    console.log("!!!!!" + getEmail)
 
     const getName = document.querySelector(".getName")
     const memberEmailInfo = document.querySelector(".memberEmailInfo")
@@ -261,15 +243,8 @@ const emailNumber = (getEmail, getId) => {
             })
             //fetch 통신 후 실행 영역
             .then((data) => {//data -> controller에서 리턴되는 데이터!
-                console.log(data)
-
                 const checkCode = document.querySelector(".checkNum")
                 const checkTel = document.querySelector(".checkEmail")
-
-                console.log(checkCode.value)
-                console.log(checkTel)
-                console.log(getName)
-
 
                 checkTel.addEventListener("click", () => {
 

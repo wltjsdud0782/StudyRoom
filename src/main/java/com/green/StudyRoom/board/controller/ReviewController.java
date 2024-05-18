@@ -49,24 +49,18 @@ public class ReviewController {
 
         ReviewPagingService page = () -> sqlSession.selectOne("reviewMapper.selectReviewCnt");
 
-        System.out.println("!!!!!!!" + reviewPageVO);
-        System.out.println("@@@@@@@@@@@@@@@@@@@"+ page.selectReviewCnt());
 
         // 전체 데이터 수
         reviewPageVO.setTotalDateCnt(page.selectReviewCnt());
 
         //페이징 정보 세팅
         reviewPageVO.setPageInfo();
-        System.out.println("#$!$!@#$!@$#!@$" + reviewPageVO.getEndPage());
-
-        System.out.println("!!!!!!!!!!! " + reviewPageVO.getDisplayDateCnt() + "!!!!!!!!" + page.selectReviewCnt());
 
         List<ReviewVO> reviewList =reviewService.selectReview(reviewPageVO);
         reviewPageVO.setTotalDateCnt(reviewList.size());
 //        reviewPageVO.setPageInfo();
         model.addAttribute("reviewList", reviewList);
 
-        System.out.println("!!!!!!!!!!" + reviewList);
         model.addAttribute("pageNo",pageNo);
 //        model.addAttribute("reviewPageVO", reviewPageVO);
 
@@ -81,8 +75,6 @@ public class ReviewController {
 
     @PostMapping("/writeReview")
     public String review(ReviewVO reviewVO, HttpSession session){
-        System.out.println(reviewVO);
-
         MemberVO loginInfo = (MemberVO) session.getAttribute("loginInfo");
         reviewVO.setReviewWriter(loginInfo.getMemberId());
 
@@ -92,7 +84,6 @@ public class ReviewController {
 
     @GetMapping("/detailReview")
     public String detailReview(@RequestParam(name = "reviewCode")int reviewCode, Model model){
-        System.out.println(reviewCode);
         model.addAttribute("reviewVO", reviewService.selectDetailReview(reviewCode));
 
         return "content/homepage/reviewDetail";

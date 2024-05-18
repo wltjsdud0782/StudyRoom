@@ -79,7 +79,6 @@ public class AdminController {
     @PostMapping("/uptMemberInfo")
     public String uptMemberInfo(MemberVO memberVO){
         adminService.uptMemberInfo(memberVO);
-        System.out.println(memberVO);
         return "redirect:/admin/info";
     }
 
@@ -243,7 +242,6 @@ public class AdminController {
         model.addAttribute("couponList", timeLogService.showCoupon());
         //페이지
         model.addAttribute("pageNo",pageNo);
-        System.out.println(timeLogService.showCoupon());
         return "content/admin/admin_log";
     }
 
