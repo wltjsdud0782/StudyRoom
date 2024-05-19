@@ -188,6 +188,12 @@ public class SeatController {
         approvalVO.setCouponUse((String)data.get("couponUse"));
         int result = Integer.parseInt(data.get("ownCouponCode"));
 
+        // 이용권을 이미 가지고 있으면
+        if (!seatService.haveCharge(approvalVO.getMemberCode()).isEmpty()) {
+            // 두번째 이용권 날짜 조정
+            seatService.updateApp(approvalVO.getMemberCode());
+        }
+
         seatService.buyCard(approvalVO);
         if (result != 0){
             seatService.deleteCoupon(result);

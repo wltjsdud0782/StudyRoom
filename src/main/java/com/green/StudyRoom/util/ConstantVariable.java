@@ -5,4 +5,5 @@ public class ConstantVariable {
     //final은 변하지 않는 값에 저장
     public final static String UPLOAD_PATH
             ="D:\\01-STUDY\\dev\\StudyRoom\\src\\main\\resources\\static\\upload\\";
+//            ="C:\\Users\\okkdolmin\\Desktop\\GitHub\\upload";
 }
